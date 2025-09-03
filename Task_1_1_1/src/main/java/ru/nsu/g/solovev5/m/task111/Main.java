@@ -3,11 +3,12 @@ package ru.nsu.g.solovev5.m.task111;
 import java.util.Arrays;
 
 /**
- * <p>Main class of the application</p>
+ * <p>Main class of the application.</p>
  */
 public class Main {
     /**
-     * <p>Program entry point</p>
+     * <p>Program entry point.</p>
+     *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
@@ -18,6 +19,7 @@ public class Main {
 
     /**
      * <p>Heapsort method. Sorts an array in place</p>
+     *
      * @param array The array to be sorted
      */
     public static void heapsort(int[] array) {
@@ -37,7 +39,9 @@ public class Main {
     }
 
     private static void siftUp(int[] array, final int position) {
-        if (position <= 0) return;
+        if (position <= 0) {
+            return;
+        }
 
         final var parentPosition = (position - 1) / 2;
 
@@ -52,7 +56,9 @@ public class Main {
         final var leftChild = position * 2 + 1;
         final var rightChild = position * 2 + 2;
 
-        if (leftChild >= heapLength) return;
+        if (leftChild >= heapLength) {
+            return;
+        }
 
         var childToSwap = rightChild;
         if (rightChild >= heapLength || compare(array[leftChild], array[rightChild])) {
