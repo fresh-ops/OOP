@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.Task_1_1_1;
+package ru.nsu.g.solovev5.m.task111;
 
 import org.junit.jupiter.api.Test;
 
