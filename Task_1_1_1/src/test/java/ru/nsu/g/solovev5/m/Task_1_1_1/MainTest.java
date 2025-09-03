@@ -28,4 +28,9 @@ class MainTest {
         Main.heapsort(duplicates);
         assertArrayEquals(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3}, duplicates);
     }
+
+    @Test
+    void main() {
+        Main.main(new String[]{});
+    }
 }
