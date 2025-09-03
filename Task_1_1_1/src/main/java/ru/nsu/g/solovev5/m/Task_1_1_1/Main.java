@@ -2,13 +2,24 @@ package ru.nsu.g.solovev5.m.Task_1_1_1;
 
 import java.util.Arrays;
 
+/**
+ * <p>Main class of the application</p>
+ */
 public class Main {
+    /**
+     * <p>Program entry point</p>
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         var array = new int[]{1, 2, 3, 10, 5, 6, 8, 11, 9, 16};
         heapsort(array);
         System.out.println(Arrays.toString(array));
     }
 
+    /**
+     * <p>Heapsort method. Sorts an array in place</p>
+     * @param array The array to be sorted
+     */
     public static void heapsort(int[] array) {
         for (var i = 0; i < array.length; i++) {
             siftUp(array, i);
