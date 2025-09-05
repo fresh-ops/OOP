@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * <p>Main class of the application.</p>
  */
-public class Main {
+public class SortingMachine {
     /**
      * <p>Program entry point.</p>
      *
