@@ -3,7 +3,6 @@ package ru.nsu.g.solovev5.m.task111;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.Random;
 
 class SortingMachineTest {
@@ -54,7 +53,7 @@ class SortingMachineTest {
     void checkTimeComplexity() {
         System.out.println("Testing time");
         System.out.println("length\ttime start\ttime end\tduration");
-        for (var i = 1; i <= 33_554_432 ; i *= 2) { //  проверим до длины 2 ** 25
+        for (var i = 1; i <= 33_554_432; i *= 2) { //  проверим до длины 2 ** 25
             var array = generateRandomIntArray(i);
             final var timeStart = System.currentTimeMillis();
 
