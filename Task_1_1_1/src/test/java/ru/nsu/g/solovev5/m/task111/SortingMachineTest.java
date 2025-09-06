@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 class SortingMachineTest {
 
     @Test
@@ -46,6 +48,33 @@ class SortingMachineTest {
         var duplicates = new int[]{1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 3, 1, 1, 1};
         SortingMachine.heapsort(duplicates);
         assertArrayEquals(new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3}, duplicates);
+    }
+
+    @Test
+    void checkTimeComplexity() {
+        System.out.println("Testing time");
+        System.out.println("length\ttime start\ttime end\tduration");
+        for (var i = 1; i <= 33_554_432 ; i *= 2) { //  проверим до длины 2 ** 25
+            var array = generateRandomIntArray(i);
+            final var timeStart = System.currentTimeMillis();
+
+            SortingMachine.heapsort(array);
+
+            final var timeEnd = System.currentTimeMillis();
+            final var duration = timeEnd - timeStart;
+            System.out.println(i + "\t" + timeStart + "\t" + timeEnd + "\t" + duration);
+        }
+    }
+
+    private static int[] generateRandomIntArray(int length) {
+        var array = new int[length];
+        var random = new Random();
+
+        for (var i = 0; i < array.length; i++) {
+            array[i] = random.nextInt();
+        }
+
+        return array;
     }
 
     @Test
