@@ -3,6 +3,7 @@ package ru.nsu.g.solovev5.m.task112;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Deck;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
@@ -134,7 +135,7 @@ public class BlackjackGame {
         }
 
         System.out.println("Посмотрим на таблицу");
-        for (var participant :participants) {
+        for (var participant : participants) {
             System.out.printf("%s: %d\n", participant, participant.getScore());
         }
     }
@@ -169,25 +170,26 @@ public class BlackjackGame {
     }
 
     private static boolean askContinueGame() {
-       while (true) {
-           System.out.print("Сыграть ещё раунд? (1/0) >>> ");
-           try {
-               var input = scanner.nextInt();
+        while (true) {
+            System.out.print("Сыграть ещё раунд? (1/0) >>> ");
+            try {
+                var input = scanner.nextInt();
 
-               switch (input) {
-                   case 1:
-                       return true;
-                   case 0:
-                       return false;
-               }
+                switch (input) {
+                    case 1:
+                        return true;
+                    case 0:
+                        return false;
+                }
 
-               System.out.println("Недоступная опция");
-           } catch (Exception e) {
-               System.out.println("""
-                       Пожалуйста, введите одну цифру:
-                       \t1, чтобы продолжить игру
-                       \t0, чтобы завершить игру""");
-               scanner.next();
-           }       }
+                System.out.println("Недоступная опция");
+            } catch (Exception e) {
+                System.out.println("""
+                        Пожалуйста, введите одну цифру:
+                        \t1, чтобы продолжить игру
+                        \t0, чтобы завершить игру""");
+                scanner.next();
+            }
+        }
     }
 }

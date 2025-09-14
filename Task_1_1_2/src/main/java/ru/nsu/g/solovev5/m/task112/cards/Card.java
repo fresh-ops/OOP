@@ -5,14 +5,14 @@ package ru.nsu.g.solovev5.m.task112.cards;
  * Represents a playing card. While a Card is immutable, it provides methods to
  * hide and unhide the card via creating a new instance.
  *
- * @param suit a card suit
- * @param rank a card rank for calculating the cards cost
+ * @param suit     a card suit
+ * @param rank     a card rank for calculating the cards cost
  * @param isHidden defines whether the card is hidden
  */
 public record Card(CardSuit suit, CardRank rank, boolean isHidden) {
-   public Card(CardSuit suit, CardRank rank) {
-       this(suit, rank, false);
-   }
+    public Card(CardSuit suit, CardRank rank) {
+        this(suit, rank, false);
+    }
 
     /**
      * Hides this card via making a new instance with {@code true}

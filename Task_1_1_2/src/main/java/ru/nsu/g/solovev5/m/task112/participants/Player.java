@@ -39,9 +39,10 @@ public class Player extends Participant {
 
                 System.out.println("Недоступная опция");
             } catch (Exception e) {
-                System.out.println("Пожалуйста, введите одну цифру: \n" +
-                        "\t1, чтобы взять карту\n" +
-                        "\t0, чтобы закончить ход");
+                System.out.println("""
+                        Пожалуйста, введите одну цифру:
+                        \t1, чтобы взять карту
+                        \t0, чтобы закончить ход""");
                 scanner.next();
             }
         }

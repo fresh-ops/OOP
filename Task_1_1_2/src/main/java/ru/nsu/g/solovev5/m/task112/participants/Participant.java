@@ -23,7 +23,7 @@ public abstract class Participant {
     /**
      * Prepares this participant for the next round.
      *
-     * @param firstCard the first card given to this participant
+     * @param firstCard  the first card given to this participant
      * @param secondCard the second card given to this participant
      */
     public abstract void beforeRound(Card firstCard, Card secondCard);
