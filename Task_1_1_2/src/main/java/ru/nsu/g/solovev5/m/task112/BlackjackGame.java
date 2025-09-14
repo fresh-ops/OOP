@@ -1,21 +1,29 @@
 package ru.nsu.g.solovev5.m.task112;
 
-import ru.nsu.g.solovev5.m.task112.cards.*;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import ru.nsu.g.solovev5.m.task112.cards.Card;
+import ru.nsu.g.solovev5.m.task112.cards.Deck;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
 import ru.nsu.g.solovev5.m.task112.participants.Participant;
 import ru.nsu.g.solovev5.m.task112.participants.Player;
 import ru.nsu.g.solovev5.m.task112.participants.TurnIntent;
 
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
+/**
+ * A main game class.
+ */
 public class BlackjackGame {
     private static ArrayList<Participant> participants;
     private static Deck deck;
     private static int roundCount;
     private static Scanner scanner;
 
+    /**
+     * The programs entry point.
+     *
+     * @param args command line args
+     */
     public static void main(String[] args) {
         try {
             scanner = new Scanner(System.in);
