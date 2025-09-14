@@ -74,6 +74,6 @@ public class Deck {
             throw new IllegalStateException("Can not extract card from an empty deck.");
         }
 
-        return cards.removeLast();
+        return cards.remove(0);
     }
 }
