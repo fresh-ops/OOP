@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.g.solovev5.m.task112"},{"l":"ru.nsu.g.solovev5.m.task112.cards"},{"l":"ru.nsu.g.solovev5.m.task112.participants"}];updateSearchResults();
