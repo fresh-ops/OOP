@@ -1,5 +1,8 @@
 package ru.nsu.g.solovev5.m.task112.cards;
 
+/**
+ * Represents default card ranks with names and costs.
+ */
 public enum CardRank {
     TWO("ДВОЙКА", 2),
     THREE("ТРОЙКА", 3),
@@ -23,6 +26,11 @@ public enum CardRank {
         this.cost = cost;
     }
 
+    /**
+     * Returns this ranks cost.
+     *
+     * @return a cost of this rank
+     */
     public int getCost() {
         return cost;
     }
