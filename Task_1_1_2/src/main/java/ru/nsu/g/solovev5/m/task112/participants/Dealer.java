@@ -2,6 +2,9 @@ package ru.nsu.g.solovev5.m.task112.participants;
 
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 
+/**
+ * Represents an automated dealer.
+ */
 public class Dealer extends Participant {
     public Dealer() {
         super("Диллер");

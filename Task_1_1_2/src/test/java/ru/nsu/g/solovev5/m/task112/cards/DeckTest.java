@@ -67,8 +67,8 @@ class DeckTest {
 
         assertEquals(deck.extract(), anotherDeck.extract());
         assertArrayEquals(new Card[]{
-                    new Card(CardSuit.SPADES, CardRank.EIGHT),
-                    new Card(CardSuit.CLUBS, CardRank.ACE)
+                        new Card(CardSuit.SPADES, CardRank.EIGHT),
+                        new Card(CardSuit.CLUBS, CardRank.ACE)
                 },
                 cards);
 

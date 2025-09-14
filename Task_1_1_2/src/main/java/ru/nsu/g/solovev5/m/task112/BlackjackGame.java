@@ -3,6 +3,7 @@ package ru.nsu.g.solovev5.m.task112;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Deck;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
@@ -179,6 +180,8 @@ public class BlackjackGame {
                         return true;
                     case 0:
                         return false;
+                    default:
+                        break;
                 }
 
                 System.out.println("Недоступная опция");

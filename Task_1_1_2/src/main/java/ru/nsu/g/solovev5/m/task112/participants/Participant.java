@@ -13,6 +13,11 @@ public abstract class Participant {
     private final String name;
     private int score;
 
+    /**
+     * Constructs a new participant.
+     *
+     * @param name a name of this participant
+     */
     public Participant(String name) {
         hand = new Hand();
         this.name = name;

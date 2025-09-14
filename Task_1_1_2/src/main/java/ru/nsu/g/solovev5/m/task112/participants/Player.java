@@ -3,9 +3,18 @@ package ru.nsu.g.solovev5.m.task112.participants;
 import java.util.Scanner;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 
+/**
+ * Represents a user-controlled player.
+ */
 public class Player extends Participant {
     private final Scanner scanner;
 
+    /**
+     * Constructs a new player.
+     *
+     * @param name a player name
+     * @param scanner a scanner to provide input
+     */
     public Player(String name, Scanner scanner) {
         super(name);
         this.scanner = scanner;
@@ -34,6 +43,8 @@ public class Player extends Participant {
                         return TurnIntent.TAKE_CARD;
                     case 0:
                         return TurnIntent.END_TURN;
+                    default:
+                        break;
                 }
 
                 System.out.println("Недоступная опция");

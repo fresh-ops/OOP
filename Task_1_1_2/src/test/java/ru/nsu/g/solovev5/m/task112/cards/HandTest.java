@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 
 class HandTest {
     Hand hand;
-    Card card, ace, jack, hiddenCard;
+    Card card;
+    Card ace;
+    Card jack;
+    Card hiddenCard;
 
     @BeforeEach
     void setUp() {
