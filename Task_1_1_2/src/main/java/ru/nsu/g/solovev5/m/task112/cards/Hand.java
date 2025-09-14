@@ -55,6 +55,15 @@ public class Hand {
     }
 
     /**
+     * Returns the cards number in this hand.
+     *
+     * @return the cards number
+     */
+    public int getCardsCount() {
+        return cards.size();
+    }
+
+    /**
      * Puts the given card to this hand.
      *
      * @param card the card to add

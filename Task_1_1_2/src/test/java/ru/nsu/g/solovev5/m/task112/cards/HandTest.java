@@ -21,6 +21,7 @@ class HandTest {
     @Test
     void checkInitState() {
         assertEquals(0, hand.getCost());
+        assertEquals(0, hand.getCardsCount());
     }
 
     @Test
@@ -29,6 +30,7 @@ class HandTest {
         hand.put(jack);
 
         assertEquals(card.cost() + jack.cost(), hand.getCost());
+        assertEquals(2, hand.getCardsCount());
     }
 
     @Test
@@ -38,6 +40,7 @@ class HandTest {
         hand.putHidden(ace);
 
         assertEquals(0, hand.getCost());
+        assertEquals(3, hand.getCardsCount());
     }
 
     @Test
@@ -78,9 +81,11 @@ class HandTest {
         hand.put(hiddenCard);
 
         assertEquals(0, hand.getCost());
+        assertEquals(2, hand.getCardsCount());
 
         hand.unhideAll();
         assertEquals(hiddenCard.unhide().cost() + ace.cost(), hand.getCost());
+        assertEquals(2, hand.getCardsCount());
     }
 
     @Test
@@ -90,5 +95,6 @@ class HandTest {
 
         hand.discard();
         assertEquals(0, hand.getCost());
+        assertEquals(0, hand.getCardsCount());
     }
 }
