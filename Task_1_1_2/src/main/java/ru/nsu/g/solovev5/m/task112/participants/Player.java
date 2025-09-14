@@ -1,8 +1,7 @@
 package ru.nsu.g.solovev5.m.task112.participants;
 
-import ru.nsu.g.solovev5.m.task112.cards.Card;
-
 import java.util.Scanner;
+import ru.nsu.g.solovev5.m.task112.cards.Card;
 
 public class Player extends Participant {
     private final Scanner scanner;

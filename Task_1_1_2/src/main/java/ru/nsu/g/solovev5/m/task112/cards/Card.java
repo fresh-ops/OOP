@@ -1,6 +1,5 @@
 package ru.nsu.g.solovev5.m.task112.cards;
 
-
 /**
  * Represents a playing card. While a Card is immutable, it provides methods to
  * hide and unhide the card via creating a new instance.
@@ -37,8 +36,7 @@ public record Card(CardSuit suit, CardRank rank, boolean isHidden) {
     /**
      * Calculates a cost of this card.
      *
-     * @return the default cost of the card of such rank if
-     * this card is not hidden, {@code 0} otherwise
+     * @return the default cost of the card of such rank if this card is not hidden, {@code 0} otherwise
      */
     public int cost() {
         if (isHidden) {

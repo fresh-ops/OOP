@@ -1,9 +1,9 @@
 package ru.nsu.g.solovev5.m.task112.cards;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class HandTest {
     Hand hand;

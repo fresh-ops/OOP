@@ -1,9 +1,8 @@
 package ru.nsu.g.solovev5.m.task112.participants;
 
+import java.util.function.Supplier;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Hand;
-
-import java.util.function.Supplier;
 
 /**
  * Abstract class represents a participant. Provides functionality for interacting with cards,
