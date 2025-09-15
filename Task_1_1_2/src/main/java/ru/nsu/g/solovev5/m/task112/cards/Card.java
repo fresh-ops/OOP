@@ -34,10 +34,9 @@ public record Card(CardSuit suit, CardRank rank, boolean isHidden) {
     }
 
     /**
-     * Calculates a cost of this card.
+     * Calculates a cost of this card. If this card is hidden return {@code 0}.
      *
-     * @return the default cost of the card of such rank if this card is not hidden,
-     * 0 otherwise
+     * @return the cost of this card
      */
     public int cost() {
         if (isHidden) {
