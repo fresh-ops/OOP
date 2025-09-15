@@ -109,8 +109,6 @@ public class BlackjackGame {
         var player = participants.get(0);
         var dealer = participants.get(1);
 
-        System.out.println(player.hasBust());
-        System.out.println(player.getCost());
         if (player.hasBust()) {
             showBustedMessage(player, dealer);
             player.increaseScore();
