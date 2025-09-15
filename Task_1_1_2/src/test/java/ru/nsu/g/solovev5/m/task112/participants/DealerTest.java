@@ -1,16 +1,20 @@
 package ru.nsu.g.solovev5.m.task112.participants;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.CardRank;
 import ru.nsu.g.solovev5.m.task112.cards.CardSuit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DealerTest {
     Dealer dealer;
-    Card card, ace, jack;
+    Card card;
+    Card ace;
+    Card jack;
 
     @BeforeEach
     void setUp() {

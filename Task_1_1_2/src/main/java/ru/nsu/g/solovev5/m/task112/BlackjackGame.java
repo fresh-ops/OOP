@@ -3,7 +3,6 @@ package ru.nsu.g.solovev5.m.task112;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Deck;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
