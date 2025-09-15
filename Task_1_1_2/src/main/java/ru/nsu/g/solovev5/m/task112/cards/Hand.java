@@ -89,6 +89,7 @@ public class Hand {
 
         hiddenCount++;
     }
+
     /**
      * Unhides all cards in this hand.
      */
