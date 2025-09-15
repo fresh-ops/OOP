@@ -6,6 +6,11 @@ public class Add extends BinaryOperation {
     }
 
     @Override
+    public Expression derivative(String variable) {
+        return new Add(left.derivative(variable), right.derivative(variable));
+    }
+
+    @Override
     public String toString() {
         return String.format("(%s + %s)", left, right);
     }

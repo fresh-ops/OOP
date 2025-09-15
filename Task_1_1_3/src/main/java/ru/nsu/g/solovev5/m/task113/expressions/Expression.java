@@ -6,4 +6,6 @@ public abstract class Expression {
     public void print(PrintStream out) {
         out.println(this);
     }
+
+    public abstract Expression derivative(String variable);
 }

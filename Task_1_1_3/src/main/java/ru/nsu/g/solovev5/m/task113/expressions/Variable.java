@@ -8,6 +8,15 @@ public class Variable extends Expression {
     }
 
     @Override
+    public Expression derivative(String variable) {
+        if (name.equals(variable)) {
+            return new Number(1);
+        }
+
+        return new Number(0);
+    }
+
+    @Override
     public String toString() {
         return name;
     }

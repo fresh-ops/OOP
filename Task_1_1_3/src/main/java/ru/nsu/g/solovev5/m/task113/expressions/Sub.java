@@ -6,6 +6,11 @@ public class Sub extends BinaryOperation {
     }
 
     @Override
+    public Expression derivative(String variable) {
+        return new Sub(left.derivative(variable), right.derivative(variable));
+    }
+
+    @Override
     public String toString() {
         return String.format("(%s - %s)", left, right);
     }

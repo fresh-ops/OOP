@@ -6,6 +6,15 @@ public class Div extends BinaryOperation {
     }
 
     @Override
+    public Expression derivative(String variable) {
+        var firstPart = new Mul(right, left.derivative(variable));
+        var secondPart = new Mul(left, right.derivative(variable));
+        var thirdPart = new Mul(right, right);
+
+        return new Div(new Sub(firstPart, secondPart), thirdPart);
+    }
+
+    @Override
     public String toString() {
         return String.format("(%s / %s)", left, right);
     }
