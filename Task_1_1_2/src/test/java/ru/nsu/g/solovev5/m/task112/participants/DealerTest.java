@@ -33,6 +33,16 @@ class DealerTest {
     }
 
     @Test
+    void checkCardsUnhiding() {
+        dealer.beforeRound(ace, jack);
+        assertEquals(11, dealer.getCost());
+
+        dealer.beforeTurn();
+        assertEquals(21, dealer.getCost());
+        assertTrue(dealer.hasBlackjack());
+    }
+
+    @Test
     void checkBlackjack() {
         dealer.takeCardFrom(() -> ace);
         assertFalse(dealer.hasBlackjack());
