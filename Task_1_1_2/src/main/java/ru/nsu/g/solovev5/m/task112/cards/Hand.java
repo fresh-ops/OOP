@@ -82,7 +82,6 @@ public class Hand {
      *
      * @param card the card to add
      * @see #put(Card)
-     * @see #unhide(int)
      */
     public void putHidden(Card card) {
         cards.add(card.hide());
@@ -90,45 +89,8 @@ public class Hand {
 
         hiddenCount++;
     }
-
-    /**
-     * Hides the card at specified index.
-     *
-     * @param index the index of the card to hide
-     * @see #unhide(int)
-     */
-    public void hide(int index) {
-        var card = cards.get(index);
-        if (!card.isHidden()) {
-            cards.set(index, card.hide());
-
-            cost = -1;
-            hiddenCount++;
-        }
-    }
-
-    /**
-     * Unhides the card at specified index.
-     *
-     * @param index the index of the card to unhide
-     * @see #hide(int)
-     * @see #unhideAll()
-     */
-    public void unhide(int index) {
-        var card = cards.get(index);
-        if (card.isHidden()) {
-            cards.set(index, card.unhide());
-
-            cost = -1;
-            hiddenCount--;
-        }
-    }
-
     /**
      * Unhides all cards in this hand.
-     *
-     * @see #hide(int)
-     * @see #unhide(int)
      */
     public void unhideAll() {
         var iterator = cards.listIterator();

@@ -57,28 +57,6 @@ class HandTest {
     }
 
     @Test
-    void checkHidingCard() {
-        hand.put(ace);
-        hand.put(jack);
-
-        assertEquals(21, hand.getCost());
-
-        hand.hide(0);
-        assertEquals(10, hand.getCost());
-    }
-
-    @Test
-    void checkUnhidingCard() {
-        hand.putHidden(ace);
-        hand.put(hiddenCard);
-
-        assertEquals(0, hand.getCost());
-
-        hand.unhide(1);
-        assertEquals(hiddenCard.unhide().cost(), hand.getCost());
-    }
-
-    @Test
     void checkUnhidingAllCards() {
         hand.putHidden(ace);
         hand.put(hiddenCard);
