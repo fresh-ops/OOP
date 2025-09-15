@@ -20,7 +20,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        scanner = new Scanner("1 0");
+        scanner = new Scanner("word 3 4 42 1 0");
         player = new Player("test", scanner);
         card = new Card(CardSuit.DIAMONDS, CardRank.SEVEN);
         ace = new Card(CardSuit.HEARTS, CardRank.ACE);
