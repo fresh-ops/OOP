@@ -2,10 +2,10 @@ package ru.nsu.g.solovev5.m.task112;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Deck;
 import ru.nsu.g.solovev5.m.task112.game.TextDrawer;
+import ru.nsu.g.solovev5.m.task112.game.TextInput;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
 import ru.nsu.g.solovev5.m.task112.participants.Participant;
 import ru.nsu.g.solovev5.m.task112.participants.Player;
@@ -18,7 +18,7 @@ public class BlackjackGame {
     private static ArrayList<Participant> participants;
     private static Deck deck;
     private static int roundCount;
-    private static Scanner scanner;
+    private static TextInput input;
     private static TextDrawer drawer;
 
     /**
@@ -28,22 +28,21 @@ public class BlackjackGame {
      */
     public static void main(String[] args) {
         try {
-            scanner = new Scanner(System.in);
             drawer = new TextDrawer(System.out);
+            input = new TextInput(System.in, System.out);
 
             drawer.welcome();
-            System.out.print("Пожалуйста, введите своё имя >>> ");
-            var name = scanner.next();
+            var name = input.nextLine("Пожалуйста, введите своё имя");
 
             participants = new ArrayList<>();
-            participants.add(new Player(name, scanner));
+            participants.add(new Player(name, input));
             participants.add(new Dealer());
 
             deck = Deck.full();
             roundCount = 0;
 
             game();
-            scanner.close();
+            input.close();
         } catch (NoSuchElementException e) {
             System.out.println("Внезапное завершение потока ввода");
         } catch (Exception e) {
@@ -149,28 +148,6 @@ public class BlackjackGame {
     }
 
     private static boolean askContinueGame() {
-        while (true) {
-            System.out.print("Сыграть ещё раунд? (1/0) >>> ");
-            try {
-                var input = scanner.nextInt();
-
-                switch (input) {
-                    case 1:
-                        return true;
-                    case 0:
-                        return false;
-                    default:
-                        break;
-                }
-
-                System.out.println("Недоступная опция");
-            } catch (Exception e) {
-                System.out.println("""
-                        Пожалуйста, введите одну цифру:
-                        \t1, чтобы продолжить игру
-                        \t0, чтобы завершить игру""");
-                scanner.next();
-            }
-        }
+        return input.nextBooleanDecision("Сыграть ещё раунд?");
     }
 }

@@ -1,23 +1,23 @@
 package ru.nsu.g.solovev5.m.task112.participants;
 
-import java.util.Scanner;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
+import ru.nsu.g.solovev5.m.task112.game.TextInput;
 
 /**
  * Represents a user-controlled player.
  */
 public class Player extends Participant {
-    private final Scanner scanner;
+    private final TextInput input;
 
     /**
      * Constructs a new player.
      *
      * @param name a player name
-     * @param scanner a scanner to provide input
+     * @param input an input provider
      */
-    public Player(String name, Scanner scanner) {
+    public Player(String name, TextInput input) {
         super(name);
-        this.scanner = scanner;
+        this.input = input;
     }
 
     @Override
@@ -33,28 +33,10 @@ public class Player extends Participant {
 
     @Override
     public TurnIntent decide() {
-        while (true) {
-            System.out.print("Взять карту? (1/0) >>> ");
-            try {
-                var input = scanner.nextInt();
-
-                switch (input) {
-                    case 1:
-                        return TurnIntent.TAKE_CARD;
-                    case 0:
-                        return TurnIntent.END_TURN;
-                    default:
-                        break;
-                }
-
-                System.out.println("Недоступная опция");
-            } catch (Exception e) {
-                System.out.println("""
-                        Пожалуйста, введите одну цифру:
-                        \t1, чтобы взять карту
-                        \t0, чтобы закончить ход""");
-                scanner.next();
-            }
+        var decision = input.nextBooleanDecision("Взять карту?");
+        if (decision) {
+            return TurnIntent.TAKE_CARD;
         }
+        return TurnIntent.END_TURN;
     }
 }
