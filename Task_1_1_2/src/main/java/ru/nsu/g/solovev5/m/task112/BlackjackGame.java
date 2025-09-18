@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Deck;
+import ru.nsu.g.solovev5.m.task112.game.TextDrawer;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
 import ru.nsu.g.solovev5.m.task112.participants.Participant;
 import ru.nsu.g.solovev5.m.task112.participants.Player;
@@ -18,6 +19,7 @@ public class BlackjackGame {
     private static Deck deck;
     private static int roundCount;
     private static Scanner scanner;
+    private static TextDrawer drawer;
 
     /**
      * The programs entry point.
@@ -27,8 +29,10 @@ public class BlackjackGame {
     public static void main(String[] args) {
         try {
             scanner = new Scanner(System.in);
+            drawer = new TextDrawer(System.out);
 
-            System.out.print("Добро пожаловать в Блэкджек\nПожалуйста, введите своё имя >>> ");
+            drawer.welcome();
+            System.out.print("Пожалуйста, введите своё имя >>> ");
             var name = scanner.next();
 
             participants = new ArrayList<>();
@@ -45,22 +49,22 @@ public class BlackjackGame {
         } catch (Exception e) {
             System.out.println("Непредвиденное исключение");
         } finally {
-            System.out.println("Спасибо за игру");
+            drawer.thanks();
         }
     }
 
     private static void game() {
         do {
-            System.out.println("Раунд " + ++roundCount);
+            drawer.startRound(++roundCount);
             dealCards();
 
-            showParticipantsCards();
+            drawer.participantsCards(participants.toArray(new Participant[0]));
 
             round();
 
-            System.out.println("---------------------------");
+            drawer.separator();
             showRoundResults();
-            System.out.println("---------------------------");
+            drawer.separator();
 
             for (var participant : participants) {
                 participant.discard();
@@ -69,7 +73,7 @@ public class BlackjackGame {
     }
 
     private static void dealCards() {
-        System.out.println("Раздача карт...");
+        drawer.dealingCards();
 
         if (!deck.isEmpty()) {
             deck.shuffle();
@@ -84,7 +88,7 @@ public class BlackjackGame {
 
     private static void round() {
         for (var participant : participants) {
-            System.out.println("Сейчас ходит " + participant);
+            drawer.startTurn(participant);
             participant.beforeTurn();
 
             if (participant.hasBlackjack()) {
@@ -92,16 +96,16 @@ public class BlackjackGame {
             }
 
             while (participant.decide() != TurnIntent.END_TURN) {
-                System.out.println(participant + " берёт карту.");
+                drawer.takingCard(participant);
                 participant.takeCardFrom(BlackjackGame::extractCardSafe);
 
-                showParticipantsCards();
+                drawer.participantsCards(participants.toArray(new Participant[0]));
                 if (participant.hasBust()) {
                     return;
                 }
             }
 
-            System.out.println(participant + " закончил свой ход.");
+            drawer.endTurn(participant);
         }
     }
 
@@ -110,55 +114,33 @@ public class BlackjackGame {
         var dealer = participants.get(1);
 
         if (player.hasBust()) {
-            showBustedMessage(player, dealer);
+            drawer.bustedMessage(player);
             player.increaseScore();
         } else if (dealer.hasBust()) {
-            showBustedMessage(dealer, player);
+            drawer.bustedMessage(dealer);
             dealer.increaseScore();
         } else if (player.hasBlackjack()) {
-            showBlackjackMessage(player);
+            drawer.blackjackMessage(player);
             player.increaseScore();
         } else if (dealer.hasBlackjack()) {
-            showBlackjackMessage(dealer);
+            drawer.blackjackMessage(dealer);
             dealer.increaseScore();
         } else if (player.getCost() > dealer.getCost()) {
-            showWinMessage(player);
+            drawer.winMessage(player);
             player.increaseScore();
         } else if (player.getCost() < dealer.getCost()) {
-            showWinMessage(dealer);
+            drawer.winMessage(dealer);
             dealer.increaseScore();
         } else {
-            System.out.println("Ничья");
+            drawer.draw();
         }
 
-        System.out.println("Посмотрим на таблицу");
-        for (var participant : participants) {
-            System.out.printf("%s: %d\n", participant, participant.getScore());
-        }
-    }
-
-    private static void showParticipantsCards() {
-        System.out.println("Карты участников:");
-        for (var participant : participants) {
-            System.out.println("\t" + participant + ": " + participant.listCards());
-        }
-    }
-
-    private static void showBustedMessage(Participant loser, Participant winner) {
-        System.out.println(loser + " перебрал. побеждает " + winner);
-    }
-
-    private static void showBlackjackMessage(Participant participant) {
-        System.out.println(participant + " собрал блэкджек. Поздравляем!");
-    }
-
-    private static void showWinMessage(Participant participant) {
-        System.out.println("Побеждает " + participant);
+        drawer.scoreTable(participants.toArray(new Participant[0]));
     }
 
     private static Card extractCardSafe() {
         if (deck.isEmpty()) {
-            System.out.println("Похоже колода опустела. Достаём новую.");
+            drawer.emptyDeck();
             deck = Deck.full();
             deck.shuffle();
         }
