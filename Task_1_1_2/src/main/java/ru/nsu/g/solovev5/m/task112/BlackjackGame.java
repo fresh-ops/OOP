@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import ru.nsu.g.solovev5.m.task112.cards.Card;
 import ru.nsu.g.solovev5.m.task112.cards.Deck;
+import ru.nsu.g.solovev5.m.task112.game.Round;
 import ru.nsu.g.solovev5.m.task112.game.TextDrawer;
 import ru.nsu.g.solovev5.m.task112.game.TextInput;
 import ru.nsu.g.solovev5.m.task112.participants.Dealer;
@@ -46,6 +47,7 @@ public class BlackjackGame {
         } catch (NoSuchElementException e) {
             System.out.println("Внезапное завершение потока ввода");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             System.out.println("Непредвиденное исключение");
         } finally {
             drawer.thanks();
@@ -59,10 +61,15 @@ public class BlackjackGame {
 
             drawer.participantsCards(participants.toArray(new Participant[0]));
 
-            round();
+            var round = new Round(roundCount,
+                    participants.toArray(new Participant[0]),
+                    drawer, BlackjackGame::extractCardSafe
+            );
+
+            round.run();
 
             drawer.separator();
-            showRoundResults();
+            drawer.scoreTable(participants.toArray(new Participant[0]));
             drawer.separator();
 
             for (var participant : participants) {
@@ -74,67 +81,11 @@ public class BlackjackGame {
     private static void dealCards() {
         drawer.dealingCards();
 
-        if (!deck.isEmpty()) {
-            deck.shuffle();
-        }
-
         for (var participant : participants) {
             var firstCard = extractCardSafe();
             var secondCard = extractCardSafe();
             participant.beforeRound(firstCard, secondCard);
         }
-    }
-
-    private static void round() {
-        for (var participant : participants) {
-            drawer.startTurn(participant);
-            participant.beforeTurn();
-
-            if (participant.hasBlackjack()) {
-                return;
-            }
-
-            while (participant.decide() != TurnIntent.END_TURN) {
-                drawer.takingCard(participant);
-                participant.takeCardFrom(BlackjackGame::extractCardSafe);
-
-                drawer.participantsCards(participants.toArray(new Participant[0]));
-                if (participant.hasBust()) {
-                    return;
-                }
-            }
-
-            drawer.endTurn(participant);
-        }
-    }
-
-    private static void showRoundResults() {
-        var player = participants.get(0);
-        var dealer = participants.get(1);
-
-        if (player.hasBust()) {
-            drawer.bustedMessage(player);
-            player.increaseScore();
-        } else if (dealer.hasBust()) {
-            drawer.bustedMessage(dealer);
-            dealer.increaseScore();
-        } else if (player.hasBlackjack()) {
-            drawer.blackjackMessage(player);
-            player.increaseScore();
-        } else if (dealer.hasBlackjack()) {
-            drawer.blackjackMessage(dealer);
-            dealer.increaseScore();
-        } else if (player.getCost() > dealer.getCost()) {
-            drawer.winMessage(player);
-            player.increaseScore();
-        } else if (player.getCost() < dealer.getCost()) {
-            drawer.winMessage(dealer);
-            dealer.increaseScore();
-        } else {
-            drawer.draw();
-        }
-
-        drawer.scoreTable(participants.toArray(new Participant[0]));
     }
 
     private static Card extractCardSafe() {
