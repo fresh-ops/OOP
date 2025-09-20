@@ -99,7 +99,7 @@ public abstract class Participant {
     }
 
     /**
-     * Returns {@code true} if this participant has a bust, {@code false} otherwise
+     * Returns {@code true} if this participant has a bust, {@code false} otherwise.
      *
      * @return {@code true} if this participant has a bust
      */
