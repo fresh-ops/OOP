@@ -95,16 +95,16 @@ public abstract class Participant {
      * @return {@code true} if this participant has a blackjack
      */
     public boolean hasBlackjack() {
-        return hand.getCost() == 21 && hand.getCardsCount() == 2;
+        return hand.getCost() == Hand.MAX_ACCEPTABLE_HAND && hand.getCardsCount() == 2;
     }
 
     /**
-     * Returns {@code true} if this participant has a bust, {@code false} otherwise.
+     * Returns {@code true} if this participant has a bust, {@code false} otherwise
      *
      * @return {@code true} if this participant has a bust
      */
     public boolean hasBust() {
-        return hand.getCost() > 21;
+        return hand.getCost() > Hand.MAX_ACCEPTABLE_HAND;
     }
 
     /**

@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * adding, hiding cards and calculating total cost.
  */
 public class Hand {
+    public static final int MAX_ACCEPTABLE_HAND = 21;
+
     private final ArrayList<Card> cards;
     private final ArrayList<Integer> effectiveCosts;
     private int cost = 0;
@@ -34,7 +36,7 @@ public class Hand {
                 cost += effectiveCosts.get(i);
             }
 
-            for (var i = 0; cost > 21 && i < cards.size(); i++) {
+            for (var i = 0; cost > MAX_ACCEPTABLE_HAND && i < cards.size(); i++) {
                 if (!cards.get(i).isHidden() && cards.get(i).rank() == CardRank.ACE) {
                     effectiveCosts.set(i, 1);
                     cost -= 10;
