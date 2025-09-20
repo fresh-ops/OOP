@@ -55,7 +55,7 @@ class RoundTest {
         cards.add(three);
         cards.add(ace);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(1, participants[0].getScore());
         assertEquals(13, participants[0].getCost());
@@ -75,7 +75,7 @@ class RoundTest {
         cards.add(jack);
         cards.add(ace);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(0, participants[0].getScore());
         assertEquals(3, participants[0].getCost());
@@ -98,7 +98,7 @@ class RoundTest {
         cards.add(ace);
         cards.add(three);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(1, participants[0].getScore());
         assertEquals(21, participants[0].getCost());
@@ -121,7 +121,7 @@ class RoundTest {
         cards.add(jack);
         cards.add(ace);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round( participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(1, participants[0].getScore());
         assertEquals(21, participants[0].getCost());
@@ -144,7 +144,7 @@ class RoundTest {
         cards.add(jack);
         cards.add(ace);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(0, participants[0].getScore());
         assertEquals(23, participants[0].getCost());
@@ -169,7 +169,7 @@ class RoundTest {
         cards.add(jack);
         cards.add(jack);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(0, participants[0].getScore());
         assertEquals(23, participants[0].getCost());
@@ -190,7 +190,7 @@ class RoundTest {
         cards.add(jack);
         cards.add(jack);
 
-        new Round(0, participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(1, participants[0].getScore());
         assertEquals(10, participants[0].getCost());

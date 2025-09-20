@@ -10,7 +10,6 @@ import ru.nsu.g.solovev5.m.task112.participants.TurnIntent;
  * Represents a game round.
  */
 public class Round {
-    private final int roundNumber;
     private final Participant[] participants;
     private final TextDrawer drawer;
     private final Supplier<Card> cardSupplier;
@@ -18,14 +17,12 @@ public class Round {
     /**
      * Creates a new round.
      *
-     * @param roundNumber  the number of a new round
      * @param participants the array of game participants
      * @param drawer       the interface drawer
      * @param cardSupplier the card supplier
      */
-    public Round(int roundNumber, Participant[] participants,
-                 TextDrawer drawer, Supplier<Card> cardSupplier) {
-        this.roundNumber = roundNumber;
+    public Round(Participant[] participants, TextDrawer drawer,
+                 Supplier<Card> cardSupplier) {
         this.participants = participants;
         this.drawer = drawer;
         this.cardSupplier = cardSupplier;
@@ -35,8 +32,6 @@ public class Round {
      * Runs this round. In the end calculates results and increases winners score.
      */
     public void run() {
-        intro();
-
         for (var participant : participants) {
             beforeTurn(participant);
 
@@ -56,10 +51,6 @@ public class Round {
         }
 
         calculateResults();
-    }
-
-    private void intro() {
-        drawer.startRound(roundNumber);
     }
 
     private void beforeTurn(Participant participant) {
