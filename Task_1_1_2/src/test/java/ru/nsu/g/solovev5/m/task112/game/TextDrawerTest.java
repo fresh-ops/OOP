@@ -32,8 +32,8 @@ class TextDrawerTest {
         participant.takeCardFrom(() -> new Card(CardSuit.HEARTS, CardRank.THREE));
 
         participants = new Participant[]{
-                participant,
-                new Player("player", null),
+            participant,
+            new Player("player", null),
         };
     }
 

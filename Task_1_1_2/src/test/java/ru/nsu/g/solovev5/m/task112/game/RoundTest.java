@@ -121,7 +121,7 @@ class RoundTest {
         cards.add(jack);
         cards.add(ace);
 
-        new Round( participants, drawer, () -> cards.remove(0)).run();
+        new Round(participants, drawer, () -> cards.remove(0)).run();
 
         assertEquals(1, participants[0].getScore());
         assertEquals(21, participants[0].getCost());

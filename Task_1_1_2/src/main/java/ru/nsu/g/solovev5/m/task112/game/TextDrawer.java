@@ -61,7 +61,7 @@ public class TextDrawer {
     }
 
     /**
-     * Shows the turn outro
+     * Shows the turn outro.
      *
      * @param participant the participant making a turn
      */
