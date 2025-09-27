@@ -1,6 +1,17 @@
 package ru.nsu.g.solovev5.m.task113.expressions;
 
+import java.util.HashMap;
+
+/**
+ * A division operation.
+ */
 public class Div extends BinaryOperation {
+    /**
+     * Constructs a new division operation.
+     *
+     * @param left a left operand
+     * @param right a right operand
+     */
     public Div(Expression left, Expression right) {
         super(left, right);
     }
@@ -12,6 +23,11 @@ public class Div extends BinaryOperation {
         var thirdPart = new Mul(right, right);
 
         return new Div(new Sub(firstPart, secondPart), thirdPart);
+    }
+
+    @Override
+    protected int eval(HashMap<String, Integer> assignment) {
+        return left.eval(assignment) / right.eval(assignment);
     }
 
     @Override

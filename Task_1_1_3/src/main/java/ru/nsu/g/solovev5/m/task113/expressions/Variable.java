@@ -1,8 +1,18 @@
 package ru.nsu.g.solovev5.m.task113.expressions;
 
+import java.util.HashMap;
+
+/**
+ * Represents a variable.
+ */
 public class Variable extends Expression {
     private final String name;
 
+    /**
+     * Constructs a new variable with given name.
+     *
+     * @param name a name of this variable
+     */
     public Variable(String name) {
         this.name = name;
     }
@@ -14,6 +24,17 @@ public class Variable extends Expression {
         }
 
         return new Number(0);
+    }
+
+    @Override
+    protected int eval(HashMap<String, Integer> assignment) {
+        var result = assignment.get(name);
+
+        if (result == null) {
+            throw new RuntimeException("No assignment for variable " + name);
+        }
+
+        return result;
     }
 
     @Override
