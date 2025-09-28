@@ -8,7 +8,8 @@ import ru.nsu.g.solovev5.m.task113.parser.Parser;
  */
 public class Main {
     /**
-     * Entry point of the program
+     * Entry point of the program.
+     *
      * @param args command line arguments
      */
     public static void main(String[] args) {
