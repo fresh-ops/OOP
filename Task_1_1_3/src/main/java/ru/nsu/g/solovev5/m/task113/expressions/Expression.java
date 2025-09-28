@@ -50,5 +50,12 @@ public abstract class Expression {
         return eval(map);
     }
 
+    /**
+     * Simplifies this expression. Returns a new instance.
+     *
+     * @return a new simplified expression
+     */
+    public abstract Expression simplify();
+
     protected abstract int eval(Map<String, Integer> assignment);
 }

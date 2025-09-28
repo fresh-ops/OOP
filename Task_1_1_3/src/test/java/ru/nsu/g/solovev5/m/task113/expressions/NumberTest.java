@@ -38,6 +38,14 @@ class NumberTest {
     }
 
     @ParameterizedTest
+    @ValueSource(ints = {984, 23, 76, 99, 31})
+    void checkSimplify(int value) {
+        var number = new Number(value);
+
+        assertEquals(number, number.simplify());
+    }
+
+    @ParameterizedTest
     @ValueSource(ints = {98, 24, 298, 491, 0})
     void checkEval(int value) {
         var number = new Number(value);

@@ -7,7 +7,7 @@ import java.util.Objects;
  * Represents an integer number.
  */
 public class Number extends Expression {
-    private final int value;
+    protected final int value;
 
     /**
      * Constructs a new number of given value.
@@ -22,6 +22,11 @@ public class Number extends Expression {
     @Override
     public Expression derivative(String variable) {
         return new Number(0);
+    }
+
+    @Override
+    public Expression simplify() {
+        return new Number(value);
     }
 
     @Override

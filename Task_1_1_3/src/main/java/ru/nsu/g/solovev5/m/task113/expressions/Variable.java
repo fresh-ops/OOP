@@ -28,6 +28,11 @@ public class Variable extends Expression {
     }
 
     @Override
+    public Expression simplify() {
+        return new Variable(name);
+    }
+
+    @Override
     protected int eval(Map<String, Integer> assignment) {
         var result = assignment.get(name);
 

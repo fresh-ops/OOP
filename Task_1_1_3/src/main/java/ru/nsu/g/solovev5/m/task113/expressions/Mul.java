@@ -25,6 +25,31 @@ public class Mul extends BinaryOperation {
     }
 
     @Override
+    public Expression simplify() {
+        var leftSimplified = left.simplify();
+        var rightSimplified = right.simplify();
+
+        if (leftSimplified instanceof Number a
+            && rightSimplified instanceof Number b) {
+            return new Number(a.value * b.value);
+        } else if (leftSimplified instanceof Number number) {
+            if (number.value == 0) {
+                return new Number(0);
+            } else if (number.value == 1) {
+                return rightSimplified;
+            }
+        } else if (rightSimplified instanceof Number number) {
+            if (number.value == 0) {
+                return new Number(0);
+            } else if (number.value == 1) {
+                return leftSimplified;
+            }
+        }
+
+        return new Mul(leftSimplified, rightSimplified);
+    }
+
+    @Override
     protected int eval(Map<String, Integer> assignment) {
         return left.eval(assignment) * right.eval(assignment);
     }

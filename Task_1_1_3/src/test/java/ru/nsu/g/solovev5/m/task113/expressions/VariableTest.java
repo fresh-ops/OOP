@@ -47,6 +47,14 @@ class VariableTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"x", "xyz", "HeLlO", "Test1ng"})
+    void checkSimplify(String name) {
+        var variable = new Variable(name);
+
+        assertEquals(variable, variable.simplify());
+    }
+
+    @ParameterizedTest
     @CsvSource({
         "x,x=13;y=10,13",
         "x,x=0,0",

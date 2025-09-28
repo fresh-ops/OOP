@@ -22,6 +22,25 @@ public class Add extends BinaryOperation {
     }
 
     @Override
+    public Expression simplify() {
+        var leftSimplified = left.simplify();
+        var rightSimplified = right.simplify();
+
+        if (leftSimplified instanceof Number a
+            && rightSimplified instanceof Number b) {
+            return new Number(a.value + b.value);
+        } else if (leftSimplified instanceof Number number
+            && number.value == 0) {
+            return rightSimplified;
+        } else if (rightSimplified instanceof Number number
+            && number.value == 0) {
+            return leftSimplified;
+        }
+
+        return new Add(leftSimplified, rightSimplified);
+    }
+
+    @Override
     protected int eval(Map<String, Integer> assignment) {
         return left.eval(assignment) + right.eval(assignment);
     }

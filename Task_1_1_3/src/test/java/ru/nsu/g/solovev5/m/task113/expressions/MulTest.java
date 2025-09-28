@@ -40,7 +40,17 @@ class MulTest {
     }
 
     @ParameterizedTest
-    @MethodSource
+    @MethodSource("dataEval")
+    void checkSimplifyAndEval(Expression left, Expression right, String assignment) {
+        var mul = new Mul(left, right);
+        var simplified = mul.simplify();
+
+        assertEquals(mul.eval(assignment), simplified.eval(assignment));
+        assertEquals(simplified, simplified.simplify());
+    }
+
+    @ParameterizedTest
+    @MethodSource("dataEval")
     void checkEval(Expression left, Expression right, String assignment) {
         var mul = new Mul(left, right);
         var expected = left.eval(assignment) * right.eval(assignment);
@@ -48,11 +58,14 @@ class MulTest {
         assertEquals(expected, mul.eval(assignment));
     }
 
-    private static Stream<Arguments> checkEval() {
+    private static Stream<Arguments> dataEval() {
         return Stream.of(
             Arguments.of(new Number(1), new Number(1), "x=0"),
             Arguments.of(new Number(123), new Number(321), "y=1"),
             Arguments.of(new Variable("x"), new Number(0), "x=42"),
+            Arguments.of(new Variable("y"), new Number(1), "y=42"),
+            Arguments.of(new Number(1), new Variable("z"), "z=42"),
+            Arguments.of(new Number(0), new Variable("x"), "x=42"),
             Arguments.of(new Variable("hello"),
                 new Variable("world"),
                 "hello=23;world=46"

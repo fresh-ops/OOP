@@ -35,7 +35,17 @@ class DivTest {
     }
 
     @ParameterizedTest
-    @MethodSource
+    @MethodSource("dataEval")
+    void checkSimplifyAndEval(Expression left, Expression right, String assignment) {
+        var div = new Div(left, right);
+        var simplified = div.simplify();
+
+        assertEquals(div.eval(assignment), simplified.eval(assignment));
+        assertEquals(simplified, simplified.simplify());
+    }
+
+    @ParameterizedTest
+    @MethodSource("dataEval")
     void checkEval(Expression left, Expression right, String assignment) {
         var div = new Div(left, right);
         var expected = left.eval(assignment) / right.eval(assignment);
@@ -43,7 +53,7 @@ class DivTest {
         assertEquals(expected, div.eval(assignment));
     }
 
-    private static Stream<Arguments> checkEval() {
+    private static Stream<Arguments> dataEval() {
         return Stream.of(
             Arguments.of(new Number(1), new Number(1), "x=0"),
             Arguments.of(new Number(123), new Number(321), "y=1"),

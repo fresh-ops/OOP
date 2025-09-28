@@ -22,6 +22,24 @@ public class Sub extends BinaryOperation {
     }
 
     @Override
+    public Expression simplify() {
+        var leftSimplified = left.simplify();
+        var rightSimplified = right.simplify();
+
+        if (leftSimplified.equals(rightSimplified)) {
+            return new Number(0);
+        } else if (leftSimplified instanceof Number a
+            && rightSimplified instanceof Number b) {
+            return new Number(a.value - b.value);
+        } else if (rightSimplified instanceof Number number
+            && number.value == 0) {
+            return leftSimplified;
+        }
+
+        return new Sub(leftSimplified, rightSimplified);
+    }
+
+    @Override
     protected int eval(Map<String, Integer> assignment) {
         return left.eval(assignment) - right.eval(assignment);
     }

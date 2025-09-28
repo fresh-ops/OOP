@@ -26,6 +26,22 @@ public class Div extends BinaryOperation {
     }
 
     @Override
+    public Expression simplify() {
+        var leftSimplified = left.simplify();
+        var rightSimplified = right.simplify();
+
+        if (leftSimplified instanceof Number a
+            && rightSimplified instanceof Number b) {
+            return new Number(a.value / b.value);
+        } else if (leftSimplified instanceof Number number
+            && number.value == 0) {
+            return new Number(0);
+        }
+
+        return new Div(leftSimplified, rightSimplified);
+    }
+
+    @Override
     protected int eval(Map<String, Integer> assignment) {
         return left.eval(assignment) / right.eval(assignment);
     }
