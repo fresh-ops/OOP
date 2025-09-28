@@ -33,8 +33,10 @@ public class Parser {
         var result = precedencedExpression(0);
 
         if (lexer.current().type() != TokenType.EOF) {
-            throw new RuntimeException("Unexpected characters after expression: "
-                    + lexer.current().value());
+            throw new RuntimeException(
+                "Unexpected characters after expression: " +
+                lexer.current().value()
+            );
         }
 
         return result;
@@ -72,8 +74,9 @@ public class Parser {
 
             if (expr == null) {
                 throw new RuntimeException("Unexpected token \"" +
-                        lexer.current().value() +
-                        "\". Expected number, variable or \"(\"");
+                    lexer.current().value() +
+                    "\". Expected number, variable or \"(\""
+                );
             }
 
             return expr;
@@ -85,11 +88,15 @@ public class Parser {
         var expr = precedencedExpression(0);
 
         if (lexer.current().type() == TokenType.EOF) {
-            throw new RuntimeException("Unexpected end of input, expected \")\"");
-
+            throw new RuntimeException(
+                "Unexpected end of input, expected \")\""
+            );
         }
         if (lexer.current().type() != TokenType.RIGHT_PARENTHESIS) {
-            throw new RuntimeException("Expected \")\", got " + lexer.current().type());
+            throw new RuntimeException(
+                "Expected \")\", got " +
+                lexer.current().type()
+            );
         }
 
         lexer.next();
@@ -133,7 +140,11 @@ public class Parser {
             case "-" -> new Sub(left, right);
             case "*" -> new Mul(left, right);
             case "/" -> new Div(left, right);
-            default -> throw  new RuntimeException("Usupported operator \"" + operator + "\"");
+            default -> throw new RuntimeException(
+                "Usupported operator \"" +
+                operator +
+                "\""
+            );
         };
     }
 }

@@ -10,7 +10,7 @@ public abstract class BinaryOperation extends Expression {
     /**
      * Constructs a new binary operation.
      *
-     * @param left a left operand
+     * @param left  a left operand
      * @param right a right operand
      */
     public BinaryOperation(Expression left, Expression right) {

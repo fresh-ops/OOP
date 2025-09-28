@@ -9,7 +9,7 @@ public class Sub extends BinaryOperation {
     /**
      * Constructs a new substraction operation.
      *
-     * @param left a left operand
+     * @param left  a left operand
      * @param right a right operand
      */
     public Sub(Expression left, Expression right) {

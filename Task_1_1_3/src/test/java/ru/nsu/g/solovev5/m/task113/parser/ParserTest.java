@@ -3,6 +3,7 @@ package ru.nsu.g.solovev5.m.task113.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,7 +15,6 @@ import ru.nsu.g.solovev5.m.task113.expressions.Mul;
 import ru.nsu.g.solovev5.m.task113.expressions.Number;
 import ru.nsu.g.solovev5.m.task113.expressions.Sub;
 import ru.nsu.g.solovev5.m.task113.expressions.Variable;
-import java.util.stream.Stream;
 
 class ParserTest {
     @ParameterizedTest

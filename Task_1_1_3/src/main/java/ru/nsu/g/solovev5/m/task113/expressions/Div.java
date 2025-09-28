@@ -9,7 +9,7 @@ public class Div extends BinaryOperation {
     /**
      * Constructs a new division operation.
      *
-     * @param left a left operand
+     * @param left  a left operand
      * @param right a right operand
      */
     public Div(Expression left, Expression right) {

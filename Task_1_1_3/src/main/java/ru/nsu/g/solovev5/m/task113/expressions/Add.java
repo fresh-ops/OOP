@@ -9,7 +9,7 @@ public class Add extends BinaryOperation {
     /**
      * Constructs a new addition operation.
      *
-     * @param left a left operand
+     * @param left  a left operand
      * @param right a right operand
      */
     public Add(Expression left, Expression right) {

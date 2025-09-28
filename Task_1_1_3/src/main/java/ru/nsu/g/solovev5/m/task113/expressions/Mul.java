@@ -9,7 +9,7 @@ public class Mul extends BinaryOperation {
     /**
      * Constructs a new multiplication operation.
      *
-     * @param left a left operand
+     * @param left  a left operand
      * @param right a right operand
      */
     public Mul(Expression left, Expression right) {
