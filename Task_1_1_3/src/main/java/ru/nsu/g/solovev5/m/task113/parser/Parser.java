@@ -34,8 +34,8 @@ public class Parser {
 
         if (lexer.current().type() != TokenType.EOF) {
             throw new RuntimeException(
-                "Unexpected characters after expression: " +
-                lexer.current().value()
+                "Unexpected characters after expression: "
+                + lexer.current().value()
             );
         }
 
@@ -73,9 +73,9 @@ public class Parser {
             var expr = atom();
 
             if (expr == null) {
-                throw new RuntimeException("Unexpected token \"" +
-                    lexer.current().value() +
-                    "\". Expected number, variable or \"(\""
+                throw new RuntimeException("Unexpected token \""
+                    + lexer.current().value()
+                    + "\". Expected number, variable or \"(\""
                 );
             }
 
@@ -87,15 +87,10 @@ public class Parser {
         lexer.next();
         var expr = precedencedExpression(0);
 
-        if (lexer.current().type() == TokenType.EOF) {
-            throw new RuntimeException(
-                "Unexpected end of input, expected \")\""
-            );
-        }
         if (lexer.current().type() != TokenType.RIGHT_PARENTHESIS) {
             throw new RuntimeException(
-                "Expected \")\", got " +
-                lexer.current().type()
+                "Expected \")\", got "
+                + lexer.current().type()
             );
         }
 
@@ -141,9 +136,9 @@ public class Parser {
             case "*" -> new Mul(left, right);
             case "/" -> new Div(left, right);
             default -> throw new RuntimeException(
-                "Usupported operator \"" +
-                operator +
-                "\""
+                "Usupported operator \""
+                + operator
+                + "\""
             );
         };
     }

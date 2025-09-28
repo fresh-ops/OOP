@@ -36,7 +36,10 @@ public class Number extends Expression {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Number number)) return false;
+        if (!(o instanceof Number number)) {
+            return false;
+        }
+
         return value == number.value;
     }
 

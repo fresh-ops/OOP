@@ -45,7 +45,10 @@ public class Variable extends Expression {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Variable variable)) return false;
+        if (!(o instanceof Variable variable)) {
+            return false;
+        }
+
         return Objects.equals(name, variable.name);
     }
 
