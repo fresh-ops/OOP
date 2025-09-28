@@ -34,11 +34,11 @@ class VariableTest {
 
     @ParameterizedTest
     @CsvSource({
-            "x,x,1",
-            "x,y,0",
-            "y, y, 1",
-            "my_best_variable,helloWorld,0",
-            "z1,z1,1"
+        "x,x,1",
+        "x,y,0",
+        "y, y, 1",
+        "my_best_variable,helloWorld,0",
+        "z1,z1,1"
     })
     void checkDerivative(String name, String differential, int expected) {
         var variable = new Variable(name);
@@ -48,11 +48,11 @@ class VariableTest {
 
     @ParameterizedTest
     @CsvSource({
-            "x,x=13;y=10,13",
-            "x,x=0,0",
-            "y,x=4;y=89,89",
-            "my_best_variable,x=12;z=987;my_best_variable=99;test=37,99",
-            "z1,z0=0;z1=1;z2=2;z3=3,1"
+        "x,x=13;y=10,13",
+        "x,x=0,0",
+        "y,x=4;y=89,89",
+        "my_best_variable,x=12;z=987;my_best_variable=99;test=37,99",
+        "z1,z0=0;z1=1;z2=2;z3=3,1"
     })
     void checkEval(String name, String assignments, int expected) {
         var variable = new Variable(name);
@@ -62,11 +62,11 @@ class VariableTest {
 
     @ParameterizedTest
     @CsvSource({
-            "x,xx=12",
-            "x,y=0",
-            "test,tEst=13",
-            "var,VaR=1234",
-            "x,xyz=0"
+        "x,xx=12",
+        "x,y=0",
+        "test,tEst=13",
+        "var,VaR=1234",
+        "x,xyz=0"
     })
     void checkEvalWithMissingAssignment(String name, String assignments) {
         var variable = new Variable(name);
@@ -78,10 +78,10 @@ class VariableTest {
     @ValueSource(strings = {"x", "Hello", "abc_123_cde", "TeStInG"})
     void checkEqualsAndHashCode(String variable) {
         var variable1 = new Variable(variable);
-        var variable2 = new Variable(variable);
-
         assertEquals(variable1, variable1);
         assertEquals(variable1.hashCode(), variable1.hashCode());
+
+        var variable2 = new Variable(variable);
         assertEquals(variable1, variable2);
         assertEquals(variable1.hashCode(), variable2.hashCode());
     }

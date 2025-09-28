@@ -49,10 +49,10 @@ class NumberTest {
     @ValueSource(ints = {123, 298, 0, 87, 1})
     void checkEqualsAndHashCode(int value) {
         var number1 = new Number(value);
-        var number2 = new Number(value);
-
         assertEquals(number1, number1);
         assertEquals(number1.hashCode(), number1.hashCode());
+
+        var number2 = new Number(value);
         assertEquals(number1, number2);
         assertEquals(number1.hashCode(), number2.hashCode());
     }
