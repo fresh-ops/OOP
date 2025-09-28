@@ -1,6 +1,6 @@
 package ru.nsu.g.solovev5.m.task113.expressions;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A multiplication operation.
@@ -25,12 +25,26 @@ public class Mul extends BinaryOperation {
     }
 
     @Override
-    protected int eval(HashMap<String, Integer> assignment) {
+    protected int eval(Map<String, Integer> assignment) {
         return left.eval(assignment) * right.eval(assignment);
     }
 
     @Override
     public String toString() {
         return String.format("(%s * %s)", left, right);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Mul mul)) {
+            return false;
+        }
+
+        return left.equals(mul.left) && right.equals(mul.right);
+    }
+
+    @Override
+    public int hashCode() {
+        return left.hashCode() * 100 + right.hashCode() * 10 + "Mul".hashCode();
     }
 }

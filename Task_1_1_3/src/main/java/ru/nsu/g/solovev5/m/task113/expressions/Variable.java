@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task113.expressions;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Represents a variable.
@@ -27,7 +28,7 @@ public class Variable extends Expression {
     }
 
     @Override
-    protected int eval(HashMap<String, Integer> assignment) {
+    protected int eval(Map<String, Integer> assignment) {
         var result = assignment.get(name);
 
         if (result == null) {
@@ -40,5 +41,16 @@ public class Variable extends Expression {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Variable variable)) return false;
+        return Objects.equals(name, variable.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
     }
 }

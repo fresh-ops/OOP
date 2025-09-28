@@ -2,6 +2,7 @@ package ru.nsu.g.solovev5.m.task113.expressions;
 
 import java.io.PrintStream;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An abstract expression. Provides methods to print this expression,
@@ -49,5 +50,5 @@ public abstract class Expression {
         return eval(map);
     }
 
-    protected abstract int eval(HashMap<String, Integer> assignment);
+    protected abstract int eval(Map<String, Integer> assignment);
 }

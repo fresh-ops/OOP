@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task113.expressions;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Represents an integer number.
@@ -24,12 +25,23 @@ public class Number extends Expression {
     }
 
     @Override
-    protected int eval(HashMap<String, Integer> assignment) {
+    protected int eval(Map<String, Integer> assignment) {
         return value;
     }
 
     @Override
     public String toString() {
         return Integer.toString(value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Number number)) return false;
+        return value == number.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
     }
 }
