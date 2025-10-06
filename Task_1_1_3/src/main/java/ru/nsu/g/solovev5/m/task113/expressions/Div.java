@@ -33,8 +33,7 @@ public class Div extends BinaryOperation {
         if (leftSimplified instanceof Number a
             && rightSimplified instanceof Number b) {
             return new Number(a.value / b.value);
-        } else if (leftSimplified instanceof Number number
-            && number.value == 0) {
+        } else if (leftSimplified.equals(new Number(0))) {
             return new Number(0);
         }
 

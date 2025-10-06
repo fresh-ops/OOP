@@ -30,20 +30,14 @@ public class Mul extends BinaryOperation {
         var rightSimplified = right.simplify();
 
         if (leftSimplified instanceof Number a
-            && rightSimplified instanceof Number b) {
+                && rightSimplified instanceof Number b) {
             return new Number(a.value * b.value);
-        } else if (leftSimplified instanceof Number number) {
-            if (number.value == 0) {
-                return new Number(0);
-            } else if (number.value == 1) {
-                return rightSimplified;
-            }
-        } else if (rightSimplified instanceof Number number) {
-            if (number.value == 0) {
-                return new Number(0);
-            } else if (number.value == 1) {
-                return leftSimplified;
-            }
+        } else if (leftSimplified.equals(new Number(0))
+            || rightSimplified.equals(new Number(1))) {
+            return leftSimplified;
+        } else if (leftSimplified.equals(new Number(1))
+            || rightSimplified.equals(new Number(0))) {
+            return rightSimplified;
         }
 
         return new Mul(leftSimplified, rightSimplified);

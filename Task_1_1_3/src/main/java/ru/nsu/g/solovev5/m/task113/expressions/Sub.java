@@ -31,8 +31,7 @@ public class Sub extends BinaryOperation {
         } else if (leftSimplified instanceof Number a
             && rightSimplified instanceof Number b) {
             return new Number(a.value - b.value);
-        } else if (rightSimplified instanceof Number number
-            && number.value == 0) {
+        } else if (rightSimplified.equals(new Number(0))) {
             return leftSimplified;
         }
 
