@@ -1,6 +1,15 @@
 package ru.nsu.g.solovev5.m.task113.parser;
 
+/**
+ * An exception occurred when found an unexpected token.
+ */
 public class UnexpectedTokenException extends ParserException {
+    /**
+     * Constructs a new unexpected token exception.
+     *
+     * @param got a found token
+     * @param expected an expected token type
+     */
     public UnexpectedTokenException(Token got, TokenType expected) {
         super(String.format("Unexpected token %s, expected %s",
             got,
@@ -8,6 +17,12 @@ public class UnexpectedTokenException extends ParserException {
         ));
     }
 
+    /**
+     * Constructs a new unexpected token exception.
+     *
+     * @param got a found token
+     * @param expected an array of expected token types
+     */
     public UnexpectedTokenException(Token got, TokenType[] expected) {
         super(String.format("Unexpected token %s, expected %s",
             got,
