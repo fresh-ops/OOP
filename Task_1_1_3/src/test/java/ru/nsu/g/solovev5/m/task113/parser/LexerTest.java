@@ -58,6 +58,6 @@ class LexerTest {
     void checkUnresolvedSymbol(String input) {
         var lexer = new Lexer(input);
 
-        assertThrows(RuntimeException.class, lexer::next);
+        assertThrows(UnresolvedCharacterException.class, lexer::next);
     }
 }

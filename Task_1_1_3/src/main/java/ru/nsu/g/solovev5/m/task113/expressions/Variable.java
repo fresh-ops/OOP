@@ -37,7 +37,7 @@ public class Variable extends Expression {
         var result = assignment.get(name);
 
         if (result == null) {
-            throw new RuntimeException("No assignment for variable " + name);
+            throw new UnassignedVariableException(name);
         }
 
         return result;

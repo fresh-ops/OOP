@@ -41,7 +41,7 @@ public abstract class Expression {
         for (var entry : entries) {
             var pair = entry.split("\\s*=\\s*");
             if (pair.length != 2) {
-                throw new RuntimeException("Assignment error in \"" + entry + "\"");
+                throw new WrongAssignmentFormatException(entry);
             }
 
             map.put(pair[0], Integer.parseInt(pair[1]));

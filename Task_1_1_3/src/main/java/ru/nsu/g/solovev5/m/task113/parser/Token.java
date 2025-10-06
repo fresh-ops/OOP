@@ -7,4 +7,11 @@ package ru.nsu.g.solovev5.m.task113.parser;
  * @param value a string covered by this token
  */
 public record Token(TokenType type, String value) {
+    @Override
+    public String toString() {
+        if (value.isBlank()) {
+            return type.toString();
+        }
+        return '"' + value + '"';
+    }
 }

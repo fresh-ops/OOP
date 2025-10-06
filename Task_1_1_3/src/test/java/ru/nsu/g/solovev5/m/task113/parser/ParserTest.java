@@ -53,7 +53,7 @@ class ParserTest {
     void checkUnparsedPart(String input) {
         var parser = new Parser(input);
 
-        assertThrows(RuntimeException.class, parser::parse);
+        assertThrows(UnexpectedTokenException.class, parser::parse);
     }
 
     @ParameterizedTest
@@ -61,6 +61,6 @@ class ParserTest {
     void checkUnendedExpression(String input) {
         var parser = new Parser(input);
 
-        assertThrows(RuntimeException.class, parser::parse);
+        assertThrows(UnexpectedTokenException.class, parser::parse);
     }
 }

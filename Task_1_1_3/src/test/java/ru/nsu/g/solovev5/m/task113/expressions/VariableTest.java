@@ -79,7 +79,7 @@ class VariableTest {
     void checkEvalWithMissingAssignment(String name, String assignments) {
         var variable = new Variable(name);
 
-        assertThrows(RuntimeException.class, () -> variable.eval(assignments));
+        assertThrows(UnassignedVariableException.class, () -> variable.eval(assignments));
     }
 
     @ParameterizedTest

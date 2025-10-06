@@ -56,9 +56,6 @@ class Lexer {
             }
         }
 
-        throw new RuntimeException("Unresolved symbol \""
-            + input.charAt(position) + "\" at position "
-            + position
-        );
+        throw new UnresolvedCharacterException(input.charAt(position), position);
     }
 }
