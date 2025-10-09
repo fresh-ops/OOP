@@ -1,4 +1,4 @@
-package graphs;
+package ru.nsu.solovev5.m.task121.graphs;
 
 /**
  * Represents a graph vertex.

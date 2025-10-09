@@ -1,6 +1,6 @@
-package graphs.exceptions;
+package ru.nsu.solovev5.m.task121.graphs.exceptions;
 
-import graphs.Vertex;
+import ru.nsu.solovev5.m.task121.graphs.Vertex;
 
 /**
  * An exception occurred when this graph does not have the specified vertex.

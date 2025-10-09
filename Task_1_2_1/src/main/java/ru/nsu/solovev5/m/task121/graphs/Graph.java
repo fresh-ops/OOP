@@ -1,11 +1,17 @@
-package graphs;
+package ru.nsu.solovev5.m.task121.graphs;
+
+import ru.nsu.solovev5.m.task121.graphs.exceptions.CycleException;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateEdgeException;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateVertexException;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchEdgeException;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchVertexException;
 
 public interface Graph {
     /**
      * Adds a vertex to this graph.
      *
      * @param vertex a vertex to add
-     * @throws graphs.exceptions.DuplicateVertexException
+     * @throws DuplicateVertexException
      * when the given vertex is already in this graph
      */
     void add(Vertex vertex);
@@ -14,7 +20,7 @@ public interface Graph {
      * Removes a vertex from this graph.
      *
      * @param vertex a vertex to remove
-     * @throws graphs.exceptions.NoSuchVertexException
+     * @throws NoSuchVertexException
      * when this graph does not have the given vertex
      */
     void delete(Vertex vertex);
@@ -25,7 +31,7 @@ public interface Graph {
      * they will be added as a side effect.
      *
      * @param edge an edge to add
-     * @throws graphs.exceptions.DuplicateEdgeException
+     * @throws DuplicateEdgeException
      * when the given edge is already in this graph
      */
     void add(Edge edge);
@@ -34,7 +40,9 @@ public interface Graph {
      * Removes an edge from this graph.
      *
      * @param edge an edge to remove
-     * @throws graphs.exceptions.NoSuchEdgeException
+     * @throws NoSuchVertexException
+     * when this graph does not have any vertex of this edge
+     * @throws NoSuchEdgeException
      * when this graph does not have the given edge
      */
     void delete(Edge edge);
@@ -43,7 +51,7 @@ public interface Graph {
      * Sorts vertices in this graph.
      *
      * @return a sorted array of vertices
-     * @throws graphs.exceptions.CycleException
+     * @throws CycleException
      * when this graph has cycles
      */
     Vertex[] topologicalSort();

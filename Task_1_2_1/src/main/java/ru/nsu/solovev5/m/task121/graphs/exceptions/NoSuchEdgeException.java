@@ -1,6 +1,6 @@
-package graphs.exceptions;
+package ru.nsu.solovev5.m.task121.graphs.exceptions;
 
-import graphs.Edge;
+import ru.nsu.solovev5.m.task121.graphs.Edge;
 
 /**
  * An exception occurred when this graph does not have the specified edge.

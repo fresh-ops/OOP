@@ -1,6 +1,6 @@
-package graphs.exceptions;
+package ru.nsu.solovev5.m.task121.graphs.exceptions;
 
-import graphs.Edge;
+import ru.nsu.solovev5.m.task121.graphs.Edge;
 
 /**
  * An exception occurred when trying to add an edge that is already in graph.

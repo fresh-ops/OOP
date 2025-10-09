@@ -1,4 +1,4 @@
-package graphs.exceptions;
+package ru.nsu.solovev5.m.task121.graphs.exceptions;
 
 /**
  * An exception occurred when trying to add an entity that is already in graph.

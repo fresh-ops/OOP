@@ -1,4 +1,4 @@
-package graphs.exceptions;
+package ru.nsu.solovev5.m.task121.graphs.exceptions;
 
 /**
  * A basic graph operation exception.
