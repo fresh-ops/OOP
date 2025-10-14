@@ -1,6 +1,5 @@
 package ru.nsu.solovev5.m.task121.graphs;
 
-import ru.nsu.solovev5.m.task121.graphs.exceptions.CycleException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateEdgeException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateVertexException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchEdgeException;
@@ -48,11 +47,21 @@ public interface Graph {
     void delete(Edge edge);
 
     /**
-     * Sorts vertices in this graph.
+     * Returns vertices of this graph.
+     * The returned array should be independent with the graph state.
      *
-     * @return a sorted array of vertices
-     * @throws CycleException
-     * when this graph has cycles
+     * @return an array of vertices
      */
-    Vertex[] topologicalSort();
+    Vertex[] getVertices();
+
+    /**
+     * Returns neighbours of the vertex.
+     * The returned array should be independent with the graph state.
+     *
+     * @param vertex a vertex to search neighbours of
+     * @return an array of vertices
+     * @throws NoSuchVertexException
+     * when this graph does not have the given vertex
+     */
+    Vertex[] getNeighbours(Vertex vertex);
 }
