@@ -119,6 +119,9 @@ public class IncidenceMatrix implements Graph {
 
     @Override
     public boolean has(Edge edge) {
+        if (!has(edge.from()) || !has(edge.to())) {
+            return false;
+        }
         var fromIndex = vertices.indexOf(edge.from());
         var toIndex = vertices.indexOf(edge.to());
 
