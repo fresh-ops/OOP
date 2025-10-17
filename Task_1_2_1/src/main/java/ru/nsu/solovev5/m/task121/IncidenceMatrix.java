@@ -148,7 +148,7 @@ public class IncidenceMatrix implements Graph {
 
         for (var row = 0; row < matrix.rowsNumber(); row++) {
             var start = matrix.get(row, fromIndex);
-            if (start != null && start == EDGE_START) {
+            if (start == null || start != EDGE_START) {
                 continue;
             }
             for (var toIndex = 0; toIndex < matrix.columnsNumber(); toIndex++) {
