@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.solovev5.m.task121"},{"l":"ru.nsu.solovev5.m.task121.graphs"},{"l":"ru.nsu.solovev5.m.task121.graphs.exceptions"},{"l":"ru.nsu.solovev5.m.task121.matrix"},{"l":"ru.nsu.solovev5.m.task121.matrix.exceptions"}];updateSearchResults();
