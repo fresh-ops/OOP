@@ -1,6 +1,8 @@
 package ru.nsu.solovev5.m.task121;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import ru.nsu.solovev5.m.task121.graphs.Edge;
 import ru.nsu.solovev5.m.task121.graphs.Graph;
 import ru.nsu.solovev5.m.task121.graphs.Vertex;
@@ -191,5 +193,15 @@ public class IncidenceMatrix implements Graph {
         builder.deleteCharAt(builder.length() - 1);
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return equalsTo(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(EDGE_START, EDGE_END, Arrays.hashCode(getVertices()), matrix);
     }
 }

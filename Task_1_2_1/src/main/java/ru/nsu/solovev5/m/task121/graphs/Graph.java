@@ -1,5 +1,7 @@
 package ru.nsu.solovev5.m.task121.graphs;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateEdgeException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateVertexException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchEdgeException;
@@ -80,4 +82,34 @@ public interface Graph {
      * when this graph does not have the given vertex
      */
     Vertex[] getNeighbours(Vertex vertex);
+
+    default boolean equalsTo(Object o) {
+        if (!(o instanceof Graph graph)) {
+            return false;
+        }
+
+        var vertices = new HashSet<>(
+            Arrays.asList(getVertices())
+        );
+        var otherVertices = new HashSet<>(
+            Arrays.asList(graph.getVertices())
+        );
+        if (!vertices.equals(otherVertices)) {
+            return false;
+        }
+
+        for (var vertex : vertices) {
+            var neighboursA = new HashSet<>(
+                Arrays.asList(getNeighbours(vertex))
+            );
+            var neighboursB = new HashSet<>(
+                Arrays.asList(graph.getNeighbours(vertex))
+            );
+            if (!neighboursA.equals(neighboursB)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

@@ -2,6 +2,7 @@ package ru.nsu.solovev5.m.task121;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import ru.nsu.solovev5.m.task121.graphs.Edge;
 import ru.nsu.solovev5.m.task121.graphs.Graph;
@@ -118,5 +119,15 @@ public class AdjacencyList implements Graph {
         )).toList();
 
         return String.join("\n", strings);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return equalsTo(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(list);
     }
 }
