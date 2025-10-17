@@ -47,6 +47,11 @@ public class AdjacencyList implements Graph {
     }
 
     @Override
+    public boolean has(Vertex vertex) {
+        return list.containsKey(vertex);
+    }
+
+    @Override
     public void add(Edge edge) {
         var from = edge.from();
         var fromAdjacency = list.get(from);
@@ -82,6 +87,12 @@ public class AdjacencyList implements Graph {
         if (!fromAdjacency.remove(to)) {
             throw new NoSuchEdgeException(edge);
         }
+    }
+
+    @Override
+    public boolean has(Edge edge) {
+        var neighbours = list.get(edge.from());
+        return neighbours != null && neighbours.contains(edge.to());
     }
 
     @Override

@@ -25,6 +25,14 @@ public interface Graph {
     void delete(Vertex vertex);
 
     /**
+     * Checks whether this graph has the given vertex.
+     *
+     * @param vertex a vertex to check
+     * @return {@code true} if a vertex appears in this graph, {@code false} otherwise
+     */
+    boolean has(Vertex vertex);
+
+    /**
      * Adds an edge to this graph.
      * If this graph does not have vertices of this edge,
      * they will be added as a side effect.
@@ -45,6 +53,14 @@ public interface Graph {
      * when this graph does not have the given edge
      */
     void delete(Edge edge);
+
+    /**
+     * Checks whether this graph has the given edge.
+     *
+     * @param edge an edge to check
+     * @return {@code true} if an edge in this graph, {@code false} otherwise
+     */
+    boolean has(Edge edge);
 
     /**
      * Returns vertices of this graph.

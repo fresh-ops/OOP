@@ -52,6 +52,11 @@ public class IncidenceMatrix implements Graph {
     }
 
     @Override
+    public boolean has(Vertex vertex) {
+        return vertices.contains(vertex);
+    }
+
+    @Override
     public void add(Edge edge) {
         var from = edge.from();
         if (!vertices.contains(from)) {
@@ -108,6 +113,23 @@ public class IncidenceMatrix implements Graph {
         }
 
         throw new NoSuchEdgeException(edge);
+    }
+
+    @Override
+    public boolean has(Edge edge) {
+        var fromIndex = vertices.indexOf(edge.from());
+        var toIndex = vertices.indexOf(edge.to());
+
+        for (var i = 0; i < matrix.rowsNumber(); i++) {
+            var start = matrix.get(i, fromIndex);
+            var end = matrix.get(i, toIndex);
+            if (start != null && start == EDGE_START
+                    && end != null && end == EDGE_END) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

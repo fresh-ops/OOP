@@ -46,6 +46,11 @@ public class AdjacencyMatrix implements Graph {
     }
 
     @Override
+    public boolean has(Vertex vertex) {
+        return vertices.contains(vertex);
+    }
+
+    @Override
     public void add(Edge edge) {
         var from = edge.from();
         if (!vertices.contains(from)) {
@@ -88,6 +93,18 @@ public class AdjacencyMatrix implements Graph {
         }
 
         matrix.set(fromIndex, toIndex, false);
+    }
+
+    @Override
+    public boolean has(Edge edge) {
+        var fromIndex = vertices.indexOf(edge.from());
+        var toIndex = vertices.indexOf(edge.to());
+        if (fromIndex == -1 || toIndex == -1) {
+            return false;
+        }
+
+        var item = matrix.get(fromIndex, toIndex);
+        return item != null && item;
     }
 
     @Override
