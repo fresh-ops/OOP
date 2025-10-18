@@ -1,7 +1,8 @@
 package ru.nsu.solovev5.m.task121.matrix.exceptions;
 
 /**
- * An exception occurred when trying to get access to matrix column with wrong row index.
+ * An exception occurred when trying to get access to matrix column with
+ * wrong row index.
  */
 public class ColumnIndexOutOfBoundsException extends RuntimeException {
     /**

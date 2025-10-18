@@ -27,7 +27,7 @@ class AdjacencyListTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkNormalVertexAdding(String message, Vertex... vertices) {
+    void checkNormalVertexAdding(String message, Vertex[] vertices) {
         for (var vertex : vertices) {
             assertFalse(
                 list.has(vertex),
@@ -65,7 +65,9 @@ class AdjacencyListTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkDuplicateVertexAdding(String message, List<Integer> duplicatePositions, Vertex... vertices) {
+    void checkDuplicateVertexAdding(String message,
+                                    List<Integer> duplicatePositions,
+                                    Vertex[] vertices) {
         for (var i = 0; i < vertices.length; i++) {
             var vertex = vertices[i];
             if (duplicatePositions.contains(i)) {
@@ -76,7 +78,8 @@ class AdjacencyListTest {
                 assertThrows(
                     DuplicateVertexException.class,
                     () -> list.add(vertex),
-                    message + ". A graph should throw an exception on adding a duplicate vertex"
+                    message + ". A graph should throw an exception on adding"
+                        + " a duplicate vertex"
                 );
             } else {
                 assertFalse(
@@ -85,7 +88,8 @@ class AdjacencyListTest {
                 );
                 assertDoesNotThrow(
                     () -> list.add(vertex),
-                    message + ". A graph shouldn't throw an exception on adding non-duplicate vertex"
+                    message + ". A graph shouldn't throw an exception on adding"
+                        + " non-duplicate vertex"
                 );
                 assertTrue(
                     list.has(vertex),
@@ -121,7 +125,7 @@ class AdjacencyListTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkNormalEdgeAdding(String message, Edge... edges) {
+    void checkNormalEdgeAdding(String message, Edge[] edges) {
         for (var edge : edges) {
             assertFalse(
                 list.has(edge),
@@ -134,11 +138,13 @@ class AdjacencyListTest {
             );
             assertTrue(
                 list.has(edge.from()),
-                message + ". A graph should contain starting a vertex of inner edge"
+                message + ". A graph should contain starting a vertex of"
+                    + " inner edge"
             );
             assertTrue(
                 list.has(edge.to()),
-                message + ". A graph should contain ending a vertex of inner edge"
+                message + ". A graph should contain ending a vertex of"
+                    + " inner edge"
             );
         }
 
@@ -169,7 +175,9 @@ class AdjacencyListTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkDuplicateEdgeAdding(String message, List<Integer> duplicatePositions, Edge... edges) {
+    void checkDuplicateEdgeAdding(String message,
+                                  List<Integer> duplicatePositions,
+                                  Edge[] edges) {
         for (var i = 0; i < edges.length; i++) {
             var edge = edges[i];
             if (duplicatePositions.contains(i)) {
@@ -180,7 +188,8 @@ class AdjacencyListTest {
                 assertThrows(
                     DuplicateEdgeException.class,
                     () -> list.add(edge),
-                    message + ". A graph should throw an exception on adding a duplicate edge"
+                    message + ". A graph should throw an exception on adding"
+                        + " a duplicate edge"
                 );
             } else {
                 assertFalse(
@@ -189,19 +198,23 @@ class AdjacencyListTest {
                 );
                 assertDoesNotThrow(
                     () -> list.add(edge),
-                    message + ". A graph shouldn't throw an exception on adding non-duplicate edge"
+                    message + ". A graph shouldn't throw an exception on adding"
+                        + " non-duplicate edge"
                 );
                 assertTrue(
                     list.has(edge),
-                    message + ". A edge should appear after adding"
+                    message
+                        + ". A edge should appear after adding"
                 );
                 assertTrue(
                     list.has(edge.from()),
-                    message + ". A graph should contain starting a vertex of inner edge"
+                    message + ". A graph should contain starting a vertex of"
+                        + " inner edge"
                 );
                 assertTrue(
                     list.has(edge.to()),
-                    message + ". A graph should contain ending a vertex of inner edge"
+                    message + ". A graph should contain ending a vertex of"
+                        + " inner edge"
                 );
             }
         }

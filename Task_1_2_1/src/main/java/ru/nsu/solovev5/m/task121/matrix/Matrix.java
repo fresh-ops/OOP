@@ -100,7 +100,8 @@ public class Matrix<E> {
      *
      * @param row    a row index
      * @param column a column index
-     * @return {@code true} if given index is valid for this matrix, {@code false} otherwise
+     * @return {@code true} if given index is valid for this matrix,
+     * {@code false} otherwise
      */
     public boolean isValidCell(int row, int column) {
         return isValidRow(row) && isValidColumn(column);
@@ -153,7 +154,8 @@ public class Matrix<E> {
      *
      * @param column a column index
      * @return the column that was removed from this matrix
-     * @throws ColumnIndexOutOfBoundsException if the column index is out of range
+     * @throws ColumnIndexOutOfBoundsException if the column index is
+     *                                         out of range
      */
     public ArrayList<E> removeColumn(int column) {
         if (!isValidColumn(column)) {

@@ -9,7 +9,8 @@ import java.util.regex.Pattern;
  * Provides utils for reading a graph from a file.
  */
 public class GraphFileReader {
-    private static final Pattern EDGE_PATTERN = Pattern.compile("^\\((\\w+)\\s*,(\\w+)\\s*\\)$");
+    private static final Pattern EDGE_PATTERN =
+        Pattern.compile("^\\((\\w+)\\s*,(\\w+)\\s*\\)$");
 
     /**
      * Reads a graph from file in format of edges list.
@@ -18,7 +19,8 @@ public class GraphFileReader {
      * @param destination a graph to put edges
      * @throws FileNotFoundException when a file with passed name was not found
      */
-    public static void readEdge(String filename, Graph destination) throws FileNotFoundException {
+    public static void readEdge(String filename, Graph destination)
+        throws FileNotFoundException {
         var scanner = new Scanner(new File(filename));
 
         while (scanner.hasNext()) {

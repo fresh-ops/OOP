@@ -205,6 +205,6 @@ public class IncidenceMatrix implements Graph {
 
     @Override
     public int hashCode() {
-        return Objects.hash(EDGE_START, EDGE_END, Arrays.hashCode(getVertices()), matrix);
+        return Objects.hash(Arrays.hashCode(getVertices()), matrix);
     }
 }

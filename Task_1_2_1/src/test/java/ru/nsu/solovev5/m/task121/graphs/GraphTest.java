@@ -14,7 +14,8 @@ import ru.nsu.solovev5.m.task121.IncidenceMatrix;
 class GraphTest {
     @ParameterizedTest
     @MethodSource
-    void checkEquals(String message, Graph a, Graph b, Vertex[] vertices, Edge[] edges) {
+    void checkEquals(String message, Graph a, Graph b, Vertex[] vertices,
+                     Edge[] edges) {
         for (var vertex : vertices) {
             a.add(vertex);
             b.add(vertex);
@@ -80,7 +81,8 @@ class GraphTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkDifferent(String message, Graph a, Graph b, Edge[] edgesForA, Edge[] edgesForB) {
+    void checkDifferent(String message, Graph a, Graph b, Edge[] edgesForA,
+                        Edge[] edgesForB) {
         for (var edge : edgesForA) {
             a.add(edge);
         }

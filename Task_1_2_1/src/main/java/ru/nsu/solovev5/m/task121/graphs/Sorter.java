@@ -46,7 +46,8 @@ public class Sorter {
         return L.toArray(new Vertex[0]);
     }
 
-    private static HashMap<Vertex, Set<Vertex>> setUpAdjacencyList(Graph graph) {
+    private static HashMap<Vertex, Set<Vertex>> setUpAdjacencyList(
+        Graph graph) {
         var vertices = graph.getVertices();
         var list = new HashMap<Vertex, Set<Vertex>>();
 
