@@ -3,7 +3,6 @@ package ru.nsu.solovev5.m.task121.matrix;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -86,8 +85,8 @@ class MatrixTest {
         );
         assertTrue(
             matrix.isValidCell(itemRow, itemColumn),
-            message + ". If the row and column indexes are valid," +
-                " then the cell address should be valid too"
+            message + ". If the row and column indexes are valid,"
+                + " then the cell address should be valid too"
         );
         assertNull(
             matrix.get(itemRow, itemColumn),
@@ -125,8 +124,8 @@ class MatrixTest {
         );
         assertFalse(
             matrix.isValidCell(itemRow, itemColumn),
-            message + ". If the row or the column index is invalid," +
-                " then the cell address should be invalid too"
+            message + ". If the row or the column index is invalid,"
+                + " then the cell address should be invalid too"
         );
         assertThrows(
             exception,

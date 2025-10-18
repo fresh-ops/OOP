@@ -79,8 +79,7 @@ public class Matrix<E> {
      *
      * @param row    a row index
      * @param column a column index
-     * @return {@code true} if given index is valid for this matrix,
-     * {@code false} otherwise
+     * @return {@code true} if given index is valid for this matrix
      */
     public boolean isValidCell(int row, int column) {
         return isValidRow(row) && isValidColumn(column);

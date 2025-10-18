@@ -118,8 +118,7 @@ public interface Graph {
      * Checks whether this graph has the given vertex.
      *
      * @param vertex a vertex to check
-     * @return {@code true} if a vertex appears in this graph,
-     * {@code false} otherwise
+     * @return {@code true} if a vertex appears in this graph
      */
     boolean has(Vertex vertex);
 }
