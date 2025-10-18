@@ -19,23 +19,23 @@ public class Sorter {
      */
     public static Vertex[] topologicalSort(Graph graph) {
         var adjList = setUpAdjacencyList(graph);
-        var L = new ArrayList<Vertex>();
-        var S = new ArrayList<Vertex>();
+        var l = new ArrayList<Vertex>();
+        var s = new ArrayList<Vertex>();
 
         for (Vertex vertex : adjList.keySet()) {
             if (adjList.get(vertex).isEmpty()) {
-                S.add(vertex);
+                s.add(vertex);
             }
         }
 
-        while (!S.isEmpty()) {
-            var removed = S.remove(0);
-            L.add(removed);
+        while (!s.isEmpty()) {
+            var removed = s.remove(0);
+            l.add(removed);
 
             for (var entry : adjList.entrySet()) {
                 var neighbours = entry.getValue();
                 if (neighbours.remove(removed) && neighbours.isEmpty()) {
-                    S.add(entry.getKey());
+                    s.add(entry.getKey());
                 }
             }
         }
@@ -46,7 +46,7 @@ public class Sorter {
             }
         }
 
-        return L.toArray(new Vertex[0]);
+        return l.toArray(new Vertex[0]);
     }
 
     private static HashMap<Vertex, Set<Vertex>> setUpAdjacencyList(

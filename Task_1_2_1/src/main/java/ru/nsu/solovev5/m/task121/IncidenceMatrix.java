@@ -16,8 +16,8 @@ import ru.nsu.solovev5.m.task121.matrix.Matrix;
  * Represents a graph using an incidence matrix.
  */
 public class IncidenceMatrix implements Graph {
-    private final int EDGE_START = 1;
-    private final int EDGE_END = 2;
+    private static final int EDGE_START = 1;
+    private static final int EDGE_END = 2;
     private final ArrayList<Vertex> vertices;
     private final Matrix<Integer> matrix;
 
