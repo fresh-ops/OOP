@@ -12,8 +12,7 @@ public interface Graph {
      * Adds a vertex to this graph.
      *
      * @param vertex a vertex to add
-     * @throws DuplicateVertexException
-     * when the given vertex is already in this graph
+     * @throws DuplicateVertexException when the given vertex is already in this graph
      */
     void add(Vertex vertex);
 
@@ -21,8 +20,7 @@ public interface Graph {
      * Removes a vertex from this graph.
      *
      * @param vertex a vertex to remove
-     * @throws NoSuchVertexException
-     * when this graph does not have the given vertex
+     * @throws NoSuchVertexException when this graph does not have the given vertex
      */
     void delete(Vertex vertex);
 
@@ -40,8 +38,7 @@ public interface Graph {
      * they will be added as a side effect.
      *
      * @param edge an edge to add
-     * @throws DuplicateEdgeException
-     * when the given edge is already in this graph
+     * @throws DuplicateEdgeException when the given edge is already in this graph
      */
     void add(Edge edge);
 
@@ -49,10 +46,8 @@ public interface Graph {
      * Removes an edge from this graph.
      *
      * @param edge an edge to remove
-     * @throws NoSuchVertexException
-     * when this graph does not have any vertex of this edge
-     * @throws NoSuchEdgeException
-     * when this graph does not have the given edge
+     * @throws NoSuchVertexException when this graph does not have any vertex of this edge
+     * @throws NoSuchEdgeException   when this graph does not have the given edge
      */
     void delete(Edge edge);
 
@@ -78,8 +73,7 @@ public interface Graph {
      *
      * @param vertex a vertex to search neighbours of
      * @return an array of vertices
-     * @throws NoSuchVertexException
-     * when this graph does not have the given vertex
+     * @throws NoSuchVertexException when this graph does not have the given vertex
      */
     Vertex[] getNeighbours(Vertex vertex);
 

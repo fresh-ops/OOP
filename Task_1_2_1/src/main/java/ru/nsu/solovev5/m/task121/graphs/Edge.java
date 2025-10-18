@@ -4,7 +4,7 @@ package ru.nsu.solovev5.m.task121.graphs;
  * Represents a graph edge.
  *
  * @param from a starting vertex
- * @param to an ending vertex
+ * @param to   an ending vertex
  */
 public record Edge(Vertex from, Vertex to) {
     /**

@@ -14,7 +14,7 @@ public class GraphFileReader {
     /**
      * Reads a graph from file in format of edges list.
      *
-     * @param filename a name of file with edges
+     * @param filename    a name of file with edges
      * @param destination a graph to put edges
      * @throws FileNotFoundException when a file with passed name was not found
      */

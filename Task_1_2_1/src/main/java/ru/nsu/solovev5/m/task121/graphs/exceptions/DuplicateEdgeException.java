@@ -13,7 +13,8 @@ public class DuplicateEdgeException extends DuplicateElementException {
      */
     public DuplicateEdgeException(Edge edge) {
         super(String.format(
-                "The edge %s is already in graph",
-                edge
+            "The edge %s is already in graph",
+            edge
         ));
-    }}
+    }
+}

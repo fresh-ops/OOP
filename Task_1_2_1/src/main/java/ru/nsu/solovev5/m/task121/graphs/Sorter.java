@@ -12,8 +12,7 @@ public class Sorter {
      *
      * @param graph a graph to sort
      * @return a sorted array of vertices
-     * @throws CycleException
-     * when this graph has cycles
+     * @throws CycleException when this graph has cycles
      */
     public static Vertex[] topologicalSort(Graph graph) {
         var adjList = setUpAdjacencyList(graph);

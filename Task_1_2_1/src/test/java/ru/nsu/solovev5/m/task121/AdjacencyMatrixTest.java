@@ -1,6 +1,9 @@
 package ru.nsu.solovev5.m.task121;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,11 +33,11 @@ class AdjacencyMatrixTest {
                 matrix.has(vertex),
                 message + ". A vertex shouldn't appear before adding"
             );
-           matrix.add(vertex);
-           assertTrue(
-               matrix.has(vertex),
-               message + ". A vertex should appear after adding"
-           );
+            matrix.add(vertex);
+            assertTrue(
+                matrix.has(vertex),
+                message + ". A vertex should appear after adding"
+            );
         }
 
         for (var vertex : vertices) {
@@ -53,16 +56,16 @@ class AdjacencyMatrixTest {
         var longName = new Vertex("VertexWith_longName");
 
         return Stream.of(
-            Arguments.of("A single vertex", new Vertex[] { a }),
-            Arguments.of("Multiple vertex", new Vertex[] { a, b, c }),
-            Arguments.of("Different cases", new Vertex[] { a, capitalA }),
-            Arguments.of("Long name", new Vertex[]{ longName })
+            Arguments.of("A single vertex", new Vertex[]{a}),
+            Arguments.of("Multiple vertex", new Vertex[]{a, b, c}),
+            Arguments.of("Different cases", new Vertex[]{a, capitalA}),
+            Arguments.of("Long name", new Vertex[]{longName})
         );
     }
 
     @ParameterizedTest
     @MethodSource
-    void checkDuplicateVertexAdding(String message, List<Integer> duplicatePositions, Vertex... vertices) {
+    void checkDuplicateVertexAdding(String message, List<Integer> duplicatePositions, Vertex[] vertices) {
         for (var i = 0; i < vertices.length; i++) {
             var vertex = vertices[i];
             if (duplicatePositions.contains(i)) {
@@ -98,21 +101,21 @@ class AdjacencyMatrixTest {
         var c = new Vertex("c");
 
         return Stream.of(
-                Arguments.of(
-                    "Instant duplicate",
-                    Arrays.asList(1),
-                    new Vertex[] { a, a }
-                ),
-                Arguments.of(
-                    "Long distance between duplicates",
-                    Arrays.asList(3),
-                    new Vertex[] { a, b, c, a }
-                ),
-                Arguments.of(
-                    "Several duplicates",
-                    Arrays.asList(2, 3),
-                    new Vertex[] { a, b, a, a }
-                )
+            Arguments.of(
+                "Instant duplicate",
+                Arrays.asList(1),
+                new Vertex[]{a, a}
+            ),
+            Arguments.of(
+                "Long distance between duplicates",
+                Arrays.asList(3),
+                new Vertex[]{a, b, c, a}
+            ),
+            Arguments.of(
+                "Several duplicates",
+                Arrays.asList(2, 3),
+                new Vertex[]{a, b, a, a}
+            )
         );
     }
 
@@ -121,28 +124,28 @@ class AdjacencyMatrixTest {
     void checkNormalEdgeAdding(String message, Edge... edges) {
         for (var edge : edges) {
             assertFalse(
-                    matrix.has(edge),
-                    message + ". A edge shouldn't appear before adding"
+                matrix.has(edge),
+                message + ". A edge shouldn't appear before adding"
             );
             matrix.add(edge);
             assertTrue(
-                    matrix.has(edge),
-                    message + ". A edge should appear after adding"
+                matrix.has(edge),
+                message + ". A edge should appear after adding"
             );
             assertTrue(
-                    matrix.has(edge.from()),
-                    message + ". A graph should contain starting a vertex of inner edge"
+                matrix.has(edge.from()),
+                message + ". A graph should contain starting a vertex of inner edge"
             );
             assertTrue(
-                    matrix.has(edge.to()),
-                    message + ". A graph should contain ending a vertex of inner edge"
+                matrix.has(edge.to()),
+                message + ". A graph should contain ending a vertex of inner edge"
             );
         }
 
         for (var edge : edges) {
             assertTrue(
-                    matrix.has(edge),
-                    message + ". Every edge should stay in graph"
+                matrix.has(edge),
+                message + ". Every edge should stay in graph"
             );
         }
     }
@@ -158,9 +161,9 @@ class AdjacencyMatrixTest {
         var cb = new Edge(c, b);
 
         return Stream.of(
-                Arguments.of("A single vertex", new Edge[] { ab }),
-                Arguments.of("Reverse edge", new Edge[] { ab, ba }),
-                Arguments.of("Multiple edges", new Edge[] { ab, ba, ac, cb })
+            Arguments.of("A single vertex", new Edge[]{ab}),
+            Arguments.of("Reverse edge", new Edge[]{ab, ba}),
+            Arguments.of("Multiple edges", new Edge[]{ab, ba, ac, cb})
         );
     }
 
@@ -171,34 +174,34 @@ class AdjacencyMatrixTest {
             var edge = edges[i];
             if (duplicatePositions.contains(i)) {
                 assertTrue(
-                        matrix.has(edges[i]),
-                        message + ". A graph should notify if it has the edge"
+                    matrix.has(edges[i]),
+                    message + ". A graph should notify if it has the edge"
                 );
                 assertThrows(
-                        DuplicateEdgeException.class,
-                        () -> matrix.add(edge),
-                        message + ". A graph should throw an exception on adding a duplicate edge"
+                    DuplicateEdgeException.class,
+                    () -> matrix.add(edge),
+                    message + ". A graph should throw an exception on adding a duplicate edge"
                 );
             } else {
                 assertFalse(
-                        matrix.has(edge),
-                        message + ". A edge shouldn't appear before adding"
+                    matrix.has(edge),
+                    message + ". A edge shouldn't appear before adding"
                 );
                 assertDoesNotThrow(
-                        () -> matrix.add(edge),
-                        message + ". A graph shouldn't throw an exception on adding non-duplicate edge"
+                    () -> matrix.add(edge),
+                    message + ". A graph shouldn't throw an exception on adding non-duplicate edge"
                 );
                 assertTrue(
-                        matrix.has(edge),
-                        message + ". A edge should appear after adding"
+                    matrix.has(edge),
+                    message + ". A edge should appear after adding"
                 );
                 assertTrue(
-                        matrix.has(edge.from()),
-                        message + ". A graph should contain starting a vertex of inner edge"
+                    matrix.has(edge.from()),
+                    message + ". A graph should contain starting a vertex of inner edge"
                 );
                 assertTrue(
-                        matrix.has(edge.to()),
-                        message + ". A graph should contain ending a vertex of inner edge"
+                    matrix.has(edge.to()),
+                    message + ". A graph should contain ending a vertex of inner edge"
                 );
             }
         }
@@ -215,21 +218,21 @@ class AdjacencyMatrixTest {
         var cb = new Edge(c, b);
 
         return Stream.of(
-                Arguments.of(
-                        "Instant duplicate",
-                        Arrays.asList(1),
-                        new Edge[] { ab, ab }
-                ),
-                Arguments.of(
-                        "Long distance between duplicates",
-                        Arrays.asList(3),
-                        new Edge[] { ab, ba, cb, ab }
-                ),
-                Arguments.of(
-                        "Several duplicates",
-                        Arrays.asList(2, 3),
-                        new Edge[] { ab, ba, ab, ab }
-                )
+            Arguments.of(
+                "Instant duplicate",
+                Arrays.asList(1),
+                new Edge[]{ab, ab}
+            ),
+            Arguments.of(
+                "Long distance between duplicates",
+                Arrays.asList(3),
+                new Edge[]{ab, ba, cb, ab}
+            ),
+            Arguments.of(
+                "Several duplicates",
+                Arrays.asList(2, 3),
+                new Edge[]{ab, ba, ab, ab}
+            )
         );
     }
 }

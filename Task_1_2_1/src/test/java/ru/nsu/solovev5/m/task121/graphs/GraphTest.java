@@ -26,20 +26,20 @@ class GraphTest {
         }
 
         assertTrue(
-                a.equalsTo(a),
-                message + ". Graph A should be equal to itself"
+            a.equalsTo(a),
+            message + ". Graph A should be equal to itself"
         );
         assertTrue(
-                b.equalsTo(b),
-                message + ". Graph B should be equal to itself"
+            b.equalsTo(b),
+            message + ". Graph B should be equal to itself"
         );
         assertTrue(
-                a.equalsTo(b),
-                message + ". Graph A should be equal to graph B"
+            a.equalsTo(b),
+            message + ". Graph A should be equal to graph B"
         );
         assertTrue(
-                b.equalsTo(a),
-                message + ". Graph B should be equal to graph A"
+            b.equalsTo(a),
+            message + ". Graph B should be equal to graph A"
         );
     }
 
@@ -53,27 +53,27 @@ class GraphTest {
         var cb = new Edge(c, b);
 
         return Stream.of(
-                Arguments.of(
-                        "AdjacencyMatrix and IncidenceMatrix",
-                        new AdjacencyMatrix(),
-                        new IncidenceMatrix(),
-                        new Vertex[]{a, c},
-                        new Edge[]{ab, ba, cb}
-                ),
-                Arguments.of(
-                        "AdjacencyList and IncidenceMatrix",
-                        new AdjacencyList(),
-                        new IncidenceMatrix(),
-                        new Vertex[]{a, c},
-                        new Edge[]{ab, ba, cb}
-                ),
-                Arguments.of(
-                        "AdjacencyMatrix and AdjacencyList",
-                        new AdjacencyMatrix(),
-                        new AdjacencyList(),
-                        new Vertex[]{a, c},
-                        new Edge[]{ab, ba, cb}
-                )
+            Arguments.of(
+                "AdjacencyMatrix and IncidenceMatrix",
+                new AdjacencyMatrix(),
+                new IncidenceMatrix(),
+                new Vertex[]{a, c},
+                new Edge[]{ab, ba, cb}
+            ),
+            Arguments.of(
+                "AdjacencyList and IncidenceMatrix",
+                new AdjacencyList(),
+                new IncidenceMatrix(),
+                new Vertex[]{a, c},
+                new Edge[]{ab, ba, cb}
+            ),
+            Arguments.of(
+                "AdjacencyMatrix and AdjacencyList",
+                new AdjacencyMatrix(),
+                new AdjacencyList(),
+                new Vertex[]{a, c},
+                new Edge[]{ab, ba, cb}
+            )
         );
     }
 
@@ -90,12 +90,12 @@ class GraphTest {
         }
 
         assertFalse(
-                a.equalsTo(b),
-                message + ". Graph A should NOT be equal to graph B"
+            a.equalsTo(b),
+            message + ". Graph A should NOT be equal to graph B"
         );
         assertFalse(
-                b.equalsTo(a),
-                message + ". Graph B should NOT be equal to graph A"
+            b.equalsTo(a),
+            message + ". Graph B should NOT be equal to graph A"
         );
     }
 
@@ -112,41 +112,41 @@ class GraphTest {
         var cd = new Edge(c, d);
 
         return Stream.of(
-                Arguments.of(
-                        "AdjacencyMatrix and IncidenceMatrix - different edges",
-                        new AdjacencyMatrix(),
-                        new IncidenceMatrix(),
-                        new Edge[]{ab, ac},
-                        new Edge[]{ab, bc}
-                ),
-                Arguments.of(
-                        "AdjacencyList and IncidenceMatrix - different structure",
-                        new AdjacencyList(),
-                        new IncidenceMatrix(),
-                        new Edge[]{ab, ba, ac},
-                        new Edge[]{ab, ac, cd}
-                ),
-                Arguments.of(
-                        "AdjacencyMatrix and AdjacencyList - missing vertex",
-                        new AdjacencyMatrix(),
-                        new AdjacencyList(),
-                        new Edge[]{ab, ac, cd},
-                        new Edge[]{ab, ac}
-                ),
-                Arguments.of(
-                        "Same graph types but different edges - AdjacencyList",
-                        new AdjacencyList(),
-                        new AdjacencyList(),
-                        new Edge[]{ab, bc},
-                        new Edge[]{ab, ac}
-                ),
-                Arguments.of(
-                        "Same graph types but different edges - AdjacencyMatrix",
-                        new AdjacencyMatrix(),
-                        new AdjacencyMatrix(),
-                        new Edge[]{ab, ba},
-                        new Edge[]{ab}
-                )
+            Arguments.of(
+                "AdjacencyMatrix and IncidenceMatrix - different edges",
+                new AdjacencyMatrix(),
+                new IncidenceMatrix(),
+                new Edge[]{ab, ac},
+                new Edge[]{ab, bc}
+            ),
+            Arguments.of(
+                "AdjacencyList and IncidenceMatrix - different structure",
+                new AdjacencyList(),
+                new IncidenceMatrix(),
+                new Edge[]{ab, ba, ac},
+                new Edge[]{ab, ac, cd}
+            ),
+            Arguments.of(
+                "AdjacencyMatrix and AdjacencyList - missing vertex",
+                new AdjacencyMatrix(),
+                new AdjacencyList(),
+                new Edge[]{ab, ac, cd},
+                new Edge[]{ab, ac}
+            ),
+            Arguments.of(
+                "Same graph types but different edges - AdjacencyList",
+                new AdjacencyList(),
+                new AdjacencyList(),
+                new Edge[]{ab, bc},
+                new Edge[]{ab, ac}
+            ),
+            Arguments.of(
+                "Same graph types but different edges - AdjacencyMatrix",
+                new AdjacencyMatrix(),
+                new AdjacencyMatrix(),
+                new Edge[]{ab, ba},
+                new Edge[]{ab}
+            )
         );
     }
 }

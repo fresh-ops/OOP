@@ -9,10 +9,10 @@ abstract public class DuplicateElementException extends GraphException {
      *
      * @param message a message about duplicate element
      */
-     public DuplicateElementException(String message) {
-         super(String.format(
-             "%s. Having duplicate elements in a graph is forbidden",
-             message
-         ));
-     }
+    public DuplicateElementException(String message) {
+        super(String.format(
+            "%s. Having duplicate elements in a graph is forbidden",
+            message
+        ));
+    }
 }

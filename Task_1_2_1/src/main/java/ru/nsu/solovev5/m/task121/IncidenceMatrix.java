@@ -129,7 +129,7 @@ public class IncidenceMatrix implements Graph {
             var start = matrix.get(i, fromIndex);
             var end = matrix.get(i, toIndex);
             if (start != null && start == EDGE_START
-                    && end != null && end == EDGE_END) {
+                && end != null && end == EDGE_END) {
                 return true;
             }
         }

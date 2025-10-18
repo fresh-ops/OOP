@@ -7,7 +7,7 @@ public class RowIndexOutOfBoundsException extends RuntimeException {
     /**
      * Constructs a new row index out of bounds exception.
      *
-     * @param index a miss row index
+     * @param index    a miss row index
      * @param rowCount the actual row number of matrix
      */
     public RowIndexOutOfBoundsException(int index, int rowCount) {

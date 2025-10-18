@@ -7,7 +7,7 @@ public class ColumnIndexOutOfBoundsException extends RuntimeException {
     /**
      * Constructs a new column index out of bounds exception.
      *
-     * @param index a miss column index
+     * @param index       a miss column index
      * @param columnCount the actual column number of matrix
      */
     public ColumnIndexOutOfBoundsException(int index, int columnCount) {

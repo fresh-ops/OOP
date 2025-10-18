@@ -30,7 +30,6 @@ public class AdjacencyList implements Graph {
         if (list.get(vertex) != null) {
             throw new DuplicateVertexException(vertex);
         }
-        ;
 
         list.put(vertex, new HashSet<>());
     }

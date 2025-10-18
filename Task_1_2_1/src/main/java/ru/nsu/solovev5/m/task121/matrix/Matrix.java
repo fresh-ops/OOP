@@ -98,7 +98,7 @@ public class Matrix<E> {
     /**
      * Combines {@link #isValidRow(int)} and {@link #isValidColumn(int)}.
      *
-     * @param row a row index
+     * @param row    a row index
      * @param column a column index
      * @return {@code true} if given index is valid for this matrix, {@code false} otherwise
      */
