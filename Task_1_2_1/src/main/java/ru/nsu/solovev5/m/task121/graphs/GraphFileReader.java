@@ -14,6 +14,7 @@ public class GraphFileReader {
 
     /**
      * Reads a graph from file in format of edges list.
+     * Accepts a file in format: (a, b);(c, d);(a, d)
      *
      * @param filename    a name of file with edges
      * @param destination a graph to put edges
