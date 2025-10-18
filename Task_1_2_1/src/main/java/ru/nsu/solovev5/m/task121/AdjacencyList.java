@@ -33,24 +33,6 @@ public class AdjacencyList implements Graph {
 
         list.put(vertex, new HashSet<>());
     }
-
-    @Override
-    public void delete(Vertex vertex) {
-        if (list.get(vertex) == null) {
-            throw new NoSuchVertexException(vertex);
-        }
-
-        list.remove(vertex);
-        list.keySet().forEach((key) -> {
-            list.get(key).remove(vertex);
-        });
-    }
-
-    @Override
-    public boolean has(Vertex vertex) {
-        return list.containsKey(vertex);
-    }
-
     @Override
     public void add(Edge edge) {
         var from = edge.from();
@@ -71,6 +53,17 @@ public class AdjacencyList implements Graph {
     }
 
     @Override
+    public void delete(Vertex vertex) {
+        if (list.get(vertex) == null) {
+            throw new NoSuchVertexException(vertex);
+        }
+
+        list.remove(vertex);
+        list.keySet().forEach((key) -> {
+            list.get(key).remove(vertex);
+        });
+    }
+    @Override
     public void delete(Edge edge) {
         var from = edge.from();
         var fromAdjacency = list.get(from);
@@ -89,17 +82,10 @@ public class AdjacencyList implements Graph {
         }
     }
 
-    @Override
-    public boolean has(Edge edge) {
-        var neighbours = list.get(edge.from());
-        return neighbours != null && neighbours.contains(edge.to());
-    }
-
-    @Override
+        @Override
     public Vertex[] getVertices() {
         return list.keySet().toArray(new Vertex[0]);
     }
-
     @Override
     public Vertex[] getNeighbours(Vertex vertex) {
         if (!list.containsKey(vertex)) {
@@ -110,6 +96,27 @@ public class AdjacencyList implements Graph {
     }
 
     @Override
+    public boolean has(Edge edge) {
+        var neighbours = list.get(edge.from());
+        return neighbours != null && neighbours.contains(edge.to());
+    }
+
+@Override
+    public boolean has(Vertex vertex) {
+        return list.containsKey(vertex);
+    }
+
+@Override
+    public int hashCode() {
+        return Objects.hashCode(list);
+    }
+
+@Override
+    public boolean equals(Object o) {
+        return equalsTo(o);
+    }
+
+@Override
     public String toString() {
         var strings = list.entrySet().stream().map(entry -> String.format(
             "%s -> %s;",
@@ -120,13 +127,9 @@ public class AdjacencyList implements Graph {
         return String.join("\n", strings);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return equalsTo(o);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(list);
-    }
+
+
+
+
 }

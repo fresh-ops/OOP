@@ -37,28 +37,6 @@ public class IncidenceMatrix implements Graph {
     }
 
     @Override
-    public void delete(Vertex vertex) {
-        var vertexIndex = vertices.indexOf(vertex);
-        if (vertexIndex == -1) {
-            throw new NoSuchVertexException(vertex);
-        }
-
-        vertices.remove(vertexIndex);
-        for (var i = 0; i < matrix.rowsNumber(); i++) {
-            if (matrix.get(i, vertexIndex) != null) {
-                matrix.removeRow(i--);
-            }
-        }
-
-        matrix.removeColumn(vertexIndex);
-    }
-
-    @Override
-    public boolean has(Vertex vertex) {
-        return vertices.contains(vertex);
-    }
-
-    @Override
     public void add(Edge edge) {
         var from = edge.from();
         if (!vertices.contains(from)) {
@@ -86,6 +64,23 @@ public class IncidenceMatrix implements Graph {
         matrix.addRow();
         matrix.set(row, fromIndex, EDGE_START);
         matrix.set(row, toIndex, EDGE_END);
+    }
+
+    @Override
+    public void delete(Vertex vertex) {
+        var vertexIndex = vertices.indexOf(vertex);
+        if (vertexIndex == -1) {
+            throw new NoSuchVertexException(vertex);
+        }
+
+        vertices.remove(vertexIndex);
+        for (var i = 0; i < matrix.rowsNumber(); i++) {
+            if (matrix.get(i, vertexIndex) != null) {
+                matrix.removeRow(i--);
+            }
+        }
+
+        matrix.removeColumn(vertexIndex);
     }
 
     @Override
@@ -118,31 +113,6 @@ public class IncidenceMatrix implements Graph {
     }
 
     @Override
-    public boolean has(Edge edge) {
-        if (!has(edge.from()) || !has(edge.to())) {
-            return false;
-        }
-        var fromIndex = vertices.indexOf(edge.from());
-        var toIndex = vertices.indexOf(edge.to());
-
-        for (var i = 0; i < matrix.rowsNumber(); i++) {
-            var start = matrix.get(i, fromIndex);
-            var end = matrix.get(i, toIndex);
-            if (start != null && start == EDGE_START
-                && end != null && end == EDGE_END) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public Vertex[] getVertices() {
-        return vertices.toArray(new Vertex[0]);
-    }
-
-    @Override
     public Vertex[] getNeighbours(Vertex vertex) {
         var fromIndex = vertices.indexOf(vertex);
         if (fromIndex == -1) {
@@ -172,6 +142,46 @@ public class IncidenceMatrix implements Graph {
     }
 
     @Override
+    public Vertex[] getVertices() {
+        return vertices.toArray(new Vertex[0]);
+    }
+
+    @Override
+    public boolean has(Edge edge) {
+        if (!has(edge.from()) || !has(edge.to())) {
+            return false;
+        }
+        var fromIndex = vertices.indexOf(edge.from());
+        var toIndex = vertices.indexOf(edge.to());
+
+        for (var i = 0; i < matrix.rowsNumber(); i++) {
+            var start = matrix.get(i, fromIndex);
+            var end = matrix.get(i, toIndex);
+            if (start != null && start == EDGE_START
+                && end != null && end == EDGE_END) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean has(Vertex vertex) {
+        return vertices.contains(vertex);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.hashCode(getVertices()), matrix);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return equalsTo(o);
+    }
+
+    @Override
     public String toString() {
         final var builder = new StringBuilder();
         builder.append('\t');
@@ -196,15 +206,5 @@ public class IncidenceMatrix implements Graph {
         builder.deleteCharAt(builder.length() - 1);
 
         return builder.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return equalsTo(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(Arrays.hashCode(getVertices()), matrix);
     }
 }

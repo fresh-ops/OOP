@@ -23,21 +23,38 @@ public class Matrix<E> {
     }
 
     /**
-     * Sets a specific cell of this matrix.
-     *
-     * @param row    a row index
-     * @param column a column index
-     * @param item   an item to put in the cell
+     * Adds a column in the end of this matrix. Increases the column number.
+     * A new column is rowNumber length and filled with null by default.
      */
-    public void set(int row, int column, E item) {
-        if (!isValidRow(row)) {
-            throw new RowIndexOutOfBoundsException(row, rowsNumber);
+    public void addColumn() {
+        columnsNumber++;
+
+        for (ArrayList<E> row : matrix) {
+            row.add(null);
         }
-        if (!isValidColumn(column)) {
-            throw new ColumnIndexOutOfBoundsException(column, columnsNumber);
+    }
+
+    /**
+     * Adds a row in the end of this matrix. Increases the row number.
+     * A new row is columnNumber length and filled with null by default.
+     */
+    public void addRow() {
+        matrix.add(new ArrayList<>(columnsNumber));
+
+        for (var i = 0; i < columnsNumber; i++) {
+            matrix.get(rowsNumber).add(null);
         }
 
-        matrix.get(row).set(column, item);
+        rowsNumber++;
+    }
+
+    /**
+     * Returns a columns number in this matrix.
+     *
+     * @return a columns number
+     */
+    public int columnsNumber() {
+        return columnsNumber;
     }
 
     /**
@@ -58,44 +75,6 @@ public class Matrix<E> {
     }
 
     /**
-     * Returns a rows number in this matrix.
-     *
-     * @return a rows number
-     */
-    public int rowsNumber() {
-        return rowsNumber;
-    }
-
-    /**
-     * Returns a columns number in this matrix.
-     *
-     * @return a columns number
-     */
-    public int columnsNumber() {
-        return columnsNumber;
-    }
-
-    /**
-     * Checks if the given row index is valid for this matrix.
-     *
-     * @param row a row index
-     * @return {@code true} if row index is valid, {@code false} otherwise
-     */
-    public boolean isValidRow(int row) {
-        return 0 <= row && row < rowsNumber;
-    }
-
-    /**
-     * Checks if the given column index is valid for this matrix.
-     *
-     * @param column a column index
-     * @return {@code true} if column index is valid, {@code false} otherwise
-     */
-    public boolean isValidColumn(int column) {
-        return 0 <= column && column < columnsNumber;
-    }
-
-    /**
      * Combines {@link #isValidRow(int)} and {@link #isValidColumn(int)}.
      *
      * @param row    a row index
@@ -105,48 +84,6 @@ public class Matrix<E> {
      */
     public boolean isValidCell(int row, int column) {
         return isValidRow(row) && isValidColumn(column);
-    }
-
-    /**
-     * Adds a row in the end of this matrix. Increases the row number.
-     * A new row is columnNumber length and filled with null by default.
-     */
-    public void addRow() {
-        matrix.add(new ArrayList<>(columnsNumber));
-
-        for (var i = 0; i < columnsNumber; i++) {
-            matrix.get(rowsNumber).add(null);
-        }
-
-        rowsNumber++;
-    }
-
-    /**
-     * Adds a column in the end of this matrix. Increases the column number.
-     * A new column is rowNumber length and filled with null by default.
-     */
-    public void addColumn() {
-        columnsNumber++;
-
-        for (ArrayList<E> row : matrix) {
-            row.add(null);
-        }
-    }
-
-    /**
-     * Removes a specific row from this matrix.
-     *
-     * @param row a row index
-     * @return the row that was removed from this matrix
-     * @throws RowIndexOutOfBoundsException if the row index is out of range
-     */
-    public ArrayList<E> removeRow(int row) {
-        if (!isValidRow(row)) {
-            throw new RowIndexOutOfBoundsException(row, rowsNumber);
-        }
-
-        rowsNumber--;
-        return matrix.remove(row);
     }
 
     /**
@@ -169,5 +106,68 @@ public class Matrix<E> {
 
         columnsNumber--;
         return result;
+    }
+
+    /**
+     * Removes a specific row from this matrix.
+     *
+     * @param row a row index
+     * @return the row that was removed from this matrix
+     * @throws RowIndexOutOfBoundsException if the row index is out of range
+     */
+    public ArrayList<E> removeRow(int row) {
+        if (!isValidRow(row)) {
+            throw new RowIndexOutOfBoundsException(row, rowsNumber);
+        }
+
+        rowsNumber--;
+        return matrix.remove(row);
+    }
+
+    /**
+     * Returns a rows number in this matrix.
+     *
+     * @return a rows number
+     */
+    public int rowsNumber() {
+        return rowsNumber;
+    }
+
+    /**
+     * Sets a specific cell of this matrix.
+     *
+     * @param row    a row index
+     * @param column a column index
+     * @param item   an item to put in the cell
+     */
+    public void set(int row, int column, E item) {
+        if (!isValidRow(row)) {
+            throw new RowIndexOutOfBoundsException(row, rowsNumber);
+        }
+        if (!isValidColumn(column)) {
+            throw new ColumnIndexOutOfBoundsException(column, columnsNumber);
+        }
+
+        matrix.get(row).set(column, item);
+    }
+
+    /**
+     * Checks if the given row index is valid for this matrix.
+     *
+     * @param row a row index
+     * @return {@code true} if row index is valid, {@code false} otherwise
+     */
+    public boolean isValidRow(int row) {
+        return 0 <= row && row < rowsNumber;
+    }
+
+    /**
+     * Checks if the given column index is valid for this matrix.
+     *
+     * @param column a column index
+     * @return {@code true} if column index is valid, {@code false} otherwise
+     */
+    public boolean isValidColumn(int column) {
+        return 0 <= column && column < columnsNumber;
     }
 }

@@ -18,24 +18,6 @@ public interface Graph {
     void add(Vertex vertex);
 
     /**
-     * Removes a vertex from this graph.
-     *
-     * @param vertex a vertex to remove
-     * @throws NoSuchVertexException when this graph does not have the
-     *                               given vertex
-     */
-    void delete(Vertex vertex);
-
-    /**
-     * Checks whether this graph has the given vertex.
-     *
-     * @param vertex a vertex to check
-     * @return {@code true} if a vertex appears in this graph,
-     * {@code false} otherwise
-     */
-    boolean has(Vertex vertex);
-
-    /**
      * Adds an edge to this graph.
      * If this graph does not have vertices of this edge,
      * they will be added as a side effect.
@@ -47,6 +29,15 @@ public interface Graph {
     void add(Edge edge);
 
     /**
+     * Removes a vertex from this graph.
+     *
+     * @param vertex a vertex to remove
+     * @throws NoSuchVertexException when this graph does not have the
+     *                               given vertex
+     */
+    void delete(Vertex vertex);
+
+    /**
      * Removes an edge from this graph.
      *
      * @param edge an edge to remove
@@ -56,33 +47,6 @@ public interface Graph {
      *                               the given edge
      */
     void delete(Edge edge);
-
-    /**
-     * Checks whether this graph has the given edge.
-     *
-     * @param edge an edge to check
-     * @return {@code true} if an edge in this graph, {@code false} otherwise
-     */
-    boolean has(Edge edge);
-
-    /**
-     * Returns vertices of this graph.
-     * The returned array should be independent with the graph state.
-     *
-     * @return an array of vertices
-     */
-    Vertex[] getVertices();
-
-    /**
-     * Returns neighbours of the vertex.
-     * The returned array should be independent with the graph state.
-     *
-     * @param vertex a vertex to search neighbours of
-     * @return an array of vertices
-     * @throws NoSuchVertexException when this graph does not have
-     *                               the given vertex
-     */
-    Vertex[] getNeighbours(Vertex vertex);
 
     default boolean equalsTo(Object o) {
         if (!(o instanceof Graph graph)) {
@@ -113,4 +77,40 @@ public interface Graph {
 
         return true;
     }
+
+    /**
+     * Returns neighbours of the vertex.
+     * The returned array should be independent with the graph state.
+     *
+     * @param vertex a vertex to search neighbours of
+     * @return an array of vertices
+     * @throws NoSuchVertexException when this graph does not have
+     *                               the given vertex
+     */
+    Vertex[] getNeighbours(Vertex vertex);
+
+    /**
+     * Returns vertices of this graph.
+     * The returned array should be independent with the graph state.
+     *
+     * @return an array of vertices
+     */
+    Vertex[] getVertices();
+
+    /**
+     * Checks whether this graph has the given edge.
+     *
+     * @param edge an edge to check
+     * @return {@code true} if an edge in this graph, {@code false} otherwise
+     */
+    boolean has(Edge edge);
+
+    /**
+     * Checks whether this graph has the given vertex.
+     *
+     * @param vertex a vertex to check
+     * @return {@code true} if a vertex appears in this graph,
+     * {@code false} otherwise
+     */
+    boolean has(Vertex vertex);
 }

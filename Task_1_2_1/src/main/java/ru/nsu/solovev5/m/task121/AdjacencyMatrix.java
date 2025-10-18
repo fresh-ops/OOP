@@ -36,23 +36,6 @@ public class AdjacencyMatrix implements Graph {
     }
 
     @Override
-    public void delete(Vertex vertex) {
-        var index = vertices.indexOf(vertex);
-        if (index == -1) {
-            throw new NoSuchVertexException(vertex);
-        }
-
-        vertices.remove(index);
-        matrix.removeRow(index);
-        matrix.removeColumn(index);
-    }
-
-    @Override
-    public boolean has(Vertex vertex) {
-        return vertices.contains(vertex);
-    }
-
-    @Override
     public void add(Edge edge) {
         var from = edge.from();
         if (!vertices.contains(from)) {
@@ -73,6 +56,18 @@ public class AdjacencyMatrix implements Graph {
         }
 
         matrix.set(fromIndex, toIndex, true);
+    }
+
+    @Override
+    public void delete(Vertex vertex) {
+        var index = vertices.indexOf(vertex);
+        if (index == -1) {
+            throw new NoSuchVertexException(vertex);
+        }
+
+        vertices.remove(index);
+        matrix.removeRow(index);
+        matrix.removeColumn(index);
     }
 
     @Override
@@ -98,23 +93,6 @@ public class AdjacencyMatrix implements Graph {
     }
 
     @Override
-    public boolean has(Edge edge) {
-        var fromIndex = vertices.indexOf(edge.from());
-        var toIndex = vertices.indexOf(edge.to());
-        if (fromIndex == -1 || toIndex == -1) {
-            return false;
-        }
-
-        var item = matrix.get(fromIndex, toIndex);
-        return item != null && item;
-    }
-
-    @Override
-    public Vertex[] getVertices() {
-        return vertices.toArray(new Vertex[0]);
-    }
-
-    @Override
     public Vertex[] getNeighbours(Vertex vertex) {
         var fromIndex = vertices.indexOf(vertex);
         if (fromIndex == -1) {
@@ -131,6 +109,38 @@ public class AdjacencyMatrix implements Graph {
         }
 
         return neighbours.toArray(new Vertex[0]);
+    }
+
+    @Override
+    public Vertex[] getVertices() {
+        return vertices.toArray(new Vertex[0]);
+    }
+
+    @Override
+    public boolean has(Edge edge) {
+        var fromIndex = vertices.indexOf(edge.from());
+        var toIndex = vertices.indexOf(edge.to());
+        if (fromIndex == -1 || toIndex == -1) {
+            return false;
+        }
+
+        var item = matrix.get(fromIndex, toIndex);
+        return item != null && item;
+    }
+
+    @Override
+    public boolean has(Vertex vertex) {
+        return vertices.contains(vertex);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.hashCode(getVertices()), matrix);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return equalsTo(o);
     }
 
     @Override
@@ -158,15 +168,5 @@ public class AdjacencyMatrix implements Graph {
         builder.deleteCharAt(builder.length() - 1);
 
         return builder.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return equalsTo(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(Arrays.hashCode(getVertices()), matrix);
     }
 }
