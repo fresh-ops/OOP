@@ -88,7 +88,8 @@ public class AdjacencyMatrix implements Graph {
         var fromIndex = vertices.indexOf(from);
         var toIndex = vertices.indexOf(to);
 
-        if (!matrix.get(fromIndex, toIndex)) {
+        var item = matrix.get(fromIndex, toIndex);
+        if (item == null || !item) {
             throw new NoSuchEdgeException(edge);
         }
 

@@ -1,5 +1,6 @@
 package ru.nsu.solovev5.m.task121;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,6 +17,8 @@ import ru.nsu.solovev5.m.task121.graphs.Edge;
 import ru.nsu.solovev5.m.task121.graphs.Vertex;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateEdgeException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateVertexException;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchEdgeException;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchVertexException;
 
 class AdjacencyMatrixTest {
     AdjacencyMatrix matrix;
@@ -46,6 +49,12 @@ class AdjacencyMatrixTest {
                 message + ". Every vertex should stay in graph"
             );
         }
+
+        assertArrayEquals(
+            vertices, matrix.getVertices(),
+            message + ". Inner vertices array should be the same as in"
+                + " the test data"
+        );
     }
 
     static Stream<Arguments> checkNormalVertexAdding() {
@@ -245,6 +254,146 @@ class AdjacencyMatrixTest {
                 Arrays.asList(2, 3),
                 new Edge[]{ab, ba, ab, ab}
             )
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void checkDeletingValidVertex(String message, Vertex[] vertices,
+                                  Vertex removable) {
+        for (var vertex : vertices) {
+            matrix.add(vertex);
+        }
+
+        assertDoesNotThrow(
+            () -> matrix.delete(removable),
+            message + ". Removing a valid vertex shouldn't cause any exception"
+        );
+        assertFalse(
+            matrix.has(removable),
+            message + ". After removing a vertex shouldn't appear in the graph"
+        );
+    }
+
+    static Stream<Arguments> checkDeletingValidVertex() {
+        var a = new Vertex("a");
+        var b = new Vertex("b");
+        var c = new Vertex("c");
+
+        return Stream.of(
+            Arguments.of("A single vertex", new Vertex[]{a}, a),
+            Arguments.of("The last vertex", new Vertex[]{a, b, c}, c),
+            Arguments.of("The first vertex", new Vertex[]{a, b, c}, a),
+            Arguments.of("A vertex in the middle", new Vertex[]{a, b, c}, b)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void checkDeletingInvalidVertex(String message, Vertex[] vertices,
+                                    Vertex removable) {
+        for (var vertex : vertices) {
+            matrix.add(vertex);
+        }
+
+        var before = matrix.getVertices();
+        assertThrows(
+            NoSuchVertexException.class,
+            () -> matrix.delete(removable),
+            message + ". Removing an invalid vertex should cause an exception"
+        );
+        assertArrayEquals(
+            before, matrix.getVertices(),
+            message + ". Failed removing shouldn't change vertices set"
+        );
+    }
+
+    static Stream<Arguments> checkDeletingInvalidVertex() {
+        var a = new Vertex("a");
+        var b = new Vertex("b");
+        var c = new Vertex("c");
+        var d = new Vertex("d");
+
+        return Stream.of(
+            Arguments.of("An empty graph", new Vertex[]{}, a),
+            Arguments.of("A single vertex", new Vertex[]{a}, c),
+            Arguments.of("Multiple vertices", new Vertex[]{a, b, c}, d)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void checkDeletingValidEdge(String message, Edge[] edges, Edge removable) {
+        for (var edge : edges) {
+            matrix.add(edge);
+        }
+
+        assertDoesNotThrow(
+            () -> matrix.delete(removable),
+            message + ". Removing a valid edge shouldn't cause any exception"
+        );
+        assertFalse(
+            matrix.has(removable),
+            message + ". After removing a edge shouldn't appear in the graph"
+        );
+    }
+
+    static Stream<Arguments> checkDeletingValidEdge() {
+        var a = new Vertex("a");
+        var b = new Vertex("b");
+        var c = new Vertex("c");
+
+        var ab = new Edge(a, b);
+        var ba = new Edge(b, a);
+        var ac = new Edge(a, c);
+        var cb = new Edge(c, b);
+
+        return Stream.of(
+            Arguments.of("A single edge", new Edge[]{ab}, ab),
+            Arguments.of("The first edge", new Edge[]{ab, ba, ac}, ab),
+            Arguments.of("The last edge", new Edge[]{ab, ba, ac, cb}, cb),
+            Arguments.of("An edge in the middle", new Edge[]{ab, ba, ac, cb}, ba)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void checkDeletingInvalidEdge(String message, Edge[] edges,
+                                  Edge removable) {
+        for (var edge : edges) {
+            matrix.add(edge);
+        }
+
+        if (matrix.has(removable.from()) && matrix.has(removable.to())) {
+            assertThrows(
+                NoSuchEdgeException.class,
+                () -> matrix.delete(removable),
+                message + ". Removing an invalid edge should cause an exception"
+            );
+        } else {
+            assertThrows(
+                NoSuchVertexException.class,
+                () -> matrix.delete(removable),
+                message + ". Removing an edge in graph without any any vertex"
+                    + " of the edge should cause an exception"
+            );
+        }
+    }
+
+    static Stream<Arguments> checkDeletingInvalidEdge() {
+        var a = new Vertex("a");
+        var b = new Vertex("b");
+        var c = new Vertex("c");
+
+        var ab = new Edge(a, b);
+        var ba = new Edge(b, a);
+        var ac = new Edge(a, c);
+        var cb = new Edge(c, b);
+
+        return Stream.of(
+            Arguments.of("An empty graph", new Edge[]{}, ab),
+            Arguments.of("A single edge", new Edge[]{ab}, ac),
+            Arguments.of("Multiple edges", new Edge[]{ab, ac, cb}, ba)
         );
     }
 }
