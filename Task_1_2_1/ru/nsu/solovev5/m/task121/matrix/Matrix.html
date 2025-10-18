@@ -203,17 +203,29 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="set(int,int,E)">
-<h3 id="set(int,int,java.lang.Object)">set</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;row,
- int&nbsp;column,
- <a href="Matrix.html" title="type parameter in Matrix">E</a>&nbsp;item)</span></div>
-<div class="block">Sets a specific cell of this matrix.</div>
+<section class="detail" id="addColumn()">
+<h3>addColumn</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addColumn</span>()</div>
+<div class="block">Adds a column in the end of this matrix. Increases the column number.
+ A new column is rowNumber length and filled with null by default.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="addRow()">
+<h3>addRow</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addRow</span>()</div>
+<div class="block">Adds a row in the end of this matrix. Increases the row number.
+ A new row is columnNumber length and filled with null by default.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="columnsNumber()">
+<h3>columnsNumber</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">columnsNumber</span>()</div>
+<div class="block">Returns a columns number in this matrix.</div>
 <dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>row</code> - a row index</dd>
-<dd><code>column</code> - a column index</dd>
-<dd><code>item</code> - an item to put in the cell</dd>
+<dt>Returns:</dt>
+<dd>a columns number</dd>
 </dl>
 </section>
 </li>
@@ -233,6 +245,53 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="isValidCell(int,int)">
+<h3>isValidCell</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isValidCell</span><wbr><span class="parameters">(int&nbsp;row,
+ int&nbsp;column)</span></div>
+<div class="block">Combines <a href="#isValidRow(int)"><code>isValidRow(int)</code></a> and <a href="#isValidColumn(int)"><code>isValidColumn(int)</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>row</code> - a row index</dd>
+<dd><code>column</code> - a column index</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if given index is valid for this matrix,
+ <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="removeColumn(int)">
+<h3>removeColumn</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Matrix.html" title="type parameter in Matrix">E</a>&gt;</span>&nbsp;<span class="element-name">removeColumn</span><wbr><span class="parameters">(int&nbsp;column)</span></div>
+<div class="block">Removes a specific column from this matrix.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>column</code> - a column index</dd>
+<dt>Returns:</dt>
+<dd>the column that was removed from this matrix</dd>
+<dt>Throws:</dt>
+<dd><code><a href="exceptions/ColumnIndexOutOfBoundsException.html" title="class in ru.nsu.solovev5.m.task121.matrix.exceptions">ColumnIndexOutOfBoundsException</a></code> - if the column index is
+                                         out of range</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="removeRow(int)">
+<h3>removeRow</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Matrix.html" title="type parameter in Matrix">E</a>&gt;</span>&nbsp;<span class="element-name">removeRow</span><wbr><span class="parameters">(int&nbsp;row)</span></div>
+<div class="block">Removes a specific row from this matrix.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>row</code> - a row index</dd>
+<dt>Returns:</dt>
+<dd>the row that was removed from this matrix</dd>
+<dt>Throws:</dt>
+<dd><code><a href="exceptions/RowIndexOutOfBoundsException.html" title="class in ru.nsu.solovev5.m.task121.matrix.exceptions">RowIndexOutOfBoundsException</a></code> - if the row index is out of range</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="rowsNumber()">
 <h3>rowsNumber</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">rowsNumber</span>()</div>
@@ -244,13 +303,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="columnsNumber()">
-<h3>columnsNumber</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">columnsNumber</span>()</div>
-<div class="block">Returns a columns number in this matrix.</div>
+<section class="detail" id="set(int,int,E)">
+<h3 id="set(int,int,java.lang.Object)">set</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;row,
+ int&nbsp;column,
+ <a href="Matrix.html" title="type parameter in Matrix">E</a>&nbsp;item)</span></div>
+<div class="block">Sets a specific cell of this matrix.</div>
 <dl class="notes">
-<dt>Returns:</dt>
-<dd>a columns number</dd>
+<dt>Parameters:</dt>
+<dd><code>row</code> - a row index</dd>
+<dd><code>column</code> - a column index</dd>
+<dd><code>item</code> - an item to put in the cell</dd>
 </dl>
 </section>
 </li>
@@ -277,69 +340,6 @@ loadScripts(document, 'script');</script>
 <dd><code>column</code> - a column index</dd>
 <dt>Returns:</dt>
 <dd><code>true</code> if column index is valid, <code>false</code> otherwise</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="isValidCell(int,int)">
-<h3>isValidCell</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isValidCell</span><wbr><span class="parameters">(int&nbsp;row,
- int&nbsp;column)</span></div>
-<div class="block">Combines <a href="#isValidRow(int)"><code>isValidRow(int)</code></a> and <a href="#isValidColumn(int)"><code>isValidColumn(int)</code></a>.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>row</code> - a row index</dd>
-<dd><code>column</code> - a column index</dd>
-<dt>Returns:</dt>
-<dd><code>true</code> if given index is valid for this matrix,
- <code>false</code> otherwise</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="addRow()">
-<h3>addRow</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addRow</span>()</div>
-<div class="block">Adds a row in the end of this matrix. Increases the row number.
- A new row is columnNumber length and filled with null by default.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="addColumn()">
-<h3>addColumn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addColumn</span>()</div>
-<div class="block">Adds a column in the end of this matrix. Increases the column number.
- A new column is rowNumber length and filled with null by default.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="removeRow(int)">
-<h3>removeRow</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Matrix.html" title="type parameter in Matrix">E</a>&gt;</span>&nbsp;<span class="element-name">removeRow</span><wbr><span class="parameters">(int&nbsp;row)</span></div>
-<div class="block">Removes a specific row from this matrix.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>row</code> - a row index</dd>
-<dt>Returns:</dt>
-<dd>the row that was removed from this matrix</dd>
-<dt>Throws:</dt>
-<dd><code><a href="exceptions/RowIndexOutOfBoundsException.html" title="class in ru.nsu.solovev5.m.task121.matrix.exceptions">RowIndexOutOfBoundsException</a></code> - if the row index is out of range</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="removeColumn(int)">
-<h3>removeColumn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Matrix.html" title="type parameter in Matrix">E</a>&gt;</span>&nbsp;<span class="element-name">removeColumn</span><wbr><span class="parameters">(int&nbsp;column)</span></div>
-<div class="block">Removes a specific column from this matrix.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>column</code> - a column index</dd>
-<dt>Returns:</dt>
-<dd>the column that was removed from this matrix</dd>
-<dt>Throws:</dt>
-<dd><code><a href="exceptions/ColumnIndexOutOfBoundsException.html" title="class in ru.nsu.solovev5.m.task121.matrix.exceptions">ColumnIndexOutOfBoundsException</a></code> - if the column index is
-                                         out of range</dd>
 </dl>
 </section>
 </li>

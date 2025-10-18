@@ -95,7 +95,9 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">AdjacencyMatrix</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructs a new AdjacencyMatrix.</div>
+</div>
 </div>
 </section>
 </li>
@@ -183,6 +185,7 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 <section class="detail" id="&lt;init&gt;()">
 <h3>AdjacencyMatrix</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AdjacencyMatrix</span>()</div>
+<div class="block">Constructs a new AdjacencyMatrix.</div>
 </section>
 </li>
 </ul>
@@ -208,37 +211,6 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 </section>
 </li>
 <li>
-<section class="detail" id="delete(ru.nsu.solovev5.m.task121.graphs.Vertex)">
-<h3>delete</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(<a href="graphs/Vertex.html" title="class in ru.nsu.solovev5.m.task121.graphs">Vertex</a>&nbsp;vertex)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#delete(ru.nsu.solovev5.m.task121.graphs.Vertex)">Graph</a></code></span></div>
-<div class="block">Removes a vertex from this graph.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="graphs/Graph.html#delete(ru.nsu.solovev5.m.task121.graphs.Vertex)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>vertex</code> - a vertex to remove</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="has(ru.nsu.solovev5.m.task121.graphs.Vertex)">
-<h3>has</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(<a href="graphs/Vertex.html" title="class in ru.nsu.solovev5.m.task121.graphs">Vertex</a>&nbsp;vertex)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Vertex)">Graph</a></code></span></div>
-<div class="block">Checks whether this graph has the given vertex.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Vertex)">has</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>vertex</code> - a vertex to check</dd>
-<dt>Returns:</dt>
-<dd><code>true</code> if a vertex appears in this graph,
- <code>false</code> otherwise</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="add(ru.nsu.solovev5.m.task121.graphs.Edge)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="graphs/Edge.html" title="class in ru.nsu.solovev5.m.task121.graphs">Edge</a>&nbsp;edge)</span></div>
@@ -255,6 +227,20 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 </section>
 </li>
 <li>
+<section class="detail" id="delete(ru.nsu.solovev5.m.task121.graphs.Vertex)">
+<h3>delete</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(<a href="graphs/Vertex.html" title="class in ru.nsu.solovev5.m.task121.graphs">Vertex</a>&nbsp;vertex)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#delete(ru.nsu.solovev5.m.task121.graphs.Vertex)">Graph</a></code></span></div>
+<div class="block">Removes a vertex from this graph.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="graphs/Graph.html#delete(ru.nsu.solovev5.m.task121.graphs.Vertex)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>vertex</code> - a vertex to remove</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="delete(ru.nsu.solovev5.m.task121.graphs.Edge)">
 <h3>delete</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(<a href="graphs/Edge.html" title="class in ru.nsu.solovev5.m.task121.graphs">Edge</a>&nbsp;edge)</span></div>
@@ -265,37 +251,6 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 <dd><code><a href="graphs/Graph.html#delete(ru.nsu.solovev5.m.task121.graphs.Edge)">delete</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>edge</code> - an edge to remove</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="has(ru.nsu.solovev5.m.task121.graphs.Edge)">
-<h3>has</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(<a href="graphs/Edge.html" title="class in ru.nsu.solovev5.m.task121.graphs">Edge</a>&nbsp;edge)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Edge)">Graph</a></code></span></div>
-<div class="block">Checks whether this graph has the given edge.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Edge)">has</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>edge</code> - an edge to check</dd>
-<dt>Returns:</dt>
-<dd><code>true</code> if an edge in this graph, <code>false</code> otherwise</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getVertices()">
-<h3>getVertices</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="graphs/Vertex.html" title="class in ru.nsu.solovev5.m.task121.graphs">Vertex</a>[]</span>&nbsp;<span class="element-name">getVertices</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#getVertices()">Graph</a></code></span></div>
-<div class="block">Returns vertices of this graph.
- The returned array should be independent with the graph state.</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="graphs/Graph.html#getVertices()">getVertices</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
-<dt>Returns:</dt>
-<dd>an array of vertices</dd>
 </dl>
 </section>
 </li>
@@ -317,12 +272,60 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 </section>
 </li>
 <li>
-<section class="detail" id="toString()">
-<h3>toString</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
+<section class="detail" id="getVertices()">
+<h3>getVertices</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="graphs/Vertex.html" title="class in ru.nsu.solovev5.m.task121.graphs">Vertex</a>[]</span>&nbsp;<span class="element-name">getVertices</span>()</div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#getVertices()">Graph</a></code></span></div>
+<div class="block">Returns vertices of this graph.
+ The returned array should be independent with the graph state.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="graphs/Graph.html#getVertices()">getVertices</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
+<dt>Returns:</dt>
+<dd>an array of vertices</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="has(ru.nsu.solovev5.m.task121.graphs.Edge)">
+<h3>has</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(<a href="graphs/Edge.html" title="class in ru.nsu.solovev5.m.task121.graphs">Edge</a>&nbsp;edge)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Edge)">Graph</a></code></span></div>
+<div class="block">Checks whether this graph has the given edge.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Edge)">has</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>edge</code> - an edge to check</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if an edge in this graph, <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="has(ru.nsu.solovev5.m.task121.graphs.Vertex)">
+<h3>has</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">has</span><wbr><span class="parameters">(<a href="graphs/Vertex.html" title="class in ru.nsu.solovev5.m.task121.graphs">Vertex</a>&nbsp;vertex)</span></div>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Vertex)">Graph</a></code></span></div>
+<div class="block">Checks whether this graph has the given vertex.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="graphs/Graph.html#has(ru.nsu.solovev5.m.task121.graphs.Vertex)">has</a></code>&nbsp;in interface&nbsp;<code><a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>vertex</code> - a vertex to check</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if a vertex appears in this graph,
+ <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hashCode()">
+<h3>hashCode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 </dl>
 </section>
 </li>
@@ -337,12 +340,12 @@ implements <a href="graphs/Graph.html" title="interface in ru.nsu.solovev5.m.tas
 </section>
 </li>
 <li>
-<section class="detail" id="hashCode()">
-<h3>hashCode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
+<section class="detail" id="toString()">
+<h3>toString</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 </dl>
 </section>
 </li>
