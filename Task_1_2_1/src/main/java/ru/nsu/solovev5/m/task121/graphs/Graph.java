@@ -7,6 +7,9 @@ import ru.nsu.solovev5.m.task121.graphs.exceptions.DuplicateVertexException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchEdgeException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchVertexException;
 
+/**
+ * Base graph interface
+ */
 public interface Graph {
     /**
      * Adds a vertex to this graph.
@@ -48,6 +51,12 @@ public interface Graph {
      */
     void delete(Edge edge);
 
+    /**
+     * Checks if this graph equals to an object.
+     *
+     * @param o an object to compare
+     * @return {@code true} if both graphs are equal
+     */
     default boolean equalsTo(Object o) {
         if (!(o instanceof Graph graph)) {
             return false;

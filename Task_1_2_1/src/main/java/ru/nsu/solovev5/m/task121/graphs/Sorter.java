@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.CycleException;
 
+/**
+ * Util class for sorting graphs.
+ */
 public class Sorter {
     /**
      * Sorts vertices of the given graph.

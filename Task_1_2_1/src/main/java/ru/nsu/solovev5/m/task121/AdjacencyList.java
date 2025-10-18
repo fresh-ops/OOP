@@ -33,6 +33,7 @@ public class AdjacencyList implements Graph {
 
         list.put(vertex, new HashSet<>());
     }
+
     @Override
     public void add(Edge edge) {
         var from = edge.from();
@@ -63,6 +64,7 @@ public class AdjacencyList implements Graph {
             list.get(key).remove(vertex);
         });
     }
+
     @Override
     public void delete(Edge edge) {
         var from = edge.from();
@@ -82,10 +84,11 @@ public class AdjacencyList implements Graph {
         }
     }
 
-        @Override
+    @Override
     public Vertex[] getVertices() {
         return list.keySet().toArray(new Vertex[0]);
     }
+
     @Override
     public Vertex[] getNeighbours(Vertex vertex) {
         if (!list.containsKey(vertex)) {
@@ -101,22 +104,22 @@ public class AdjacencyList implements Graph {
         return neighbours != null && neighbours.contains(edge.to());
     }
 
-@Override
+    @Override
     public boolean has(Vertex vertex) {
         return list.containsKey(vertex);
     }
 
-@Override
+    @Override
     public int hashCode() {
         return Objects.hashCode(list);
     }
 
-@Override
+    @Override
     public boolean equals(Object o) {
         return equalsTo(o);
     }
 
-@Override
+    @Override
     public String toString() {
         var strings = list.entrySet().stream().map(entry -> String.format(
             "%s -> %s;",
@@ -126,10 +129,4 @@ public class AdjacencyList implements Graph {
 
         return String.join("\n", strings);
     }
-
-
-
-
-
-
 }

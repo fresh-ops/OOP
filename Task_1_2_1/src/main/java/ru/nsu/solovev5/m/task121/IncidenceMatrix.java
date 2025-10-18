@@ -21,6 +21,9 @@ public class IncidenceMatrix implements Graph {
     private final ArrayList<Vertex> vertices;
     private final Matrix<Integer> matrix;
 
+    /**
+     * Constructs a new IncidenceMatrix.
+     */
     public IncidenceMatrix() {
         vertices = new ArrayList<>();
         matrix = new Matrix<>();

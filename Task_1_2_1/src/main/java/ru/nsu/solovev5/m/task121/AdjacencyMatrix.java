@@ -19,6 +19,9 @@ public class AdjacencyMatrix implements Graph {
     private final ArrayList<Vertex> vertices;
     private final Matrix<Boolean> matrix;
 
+    /**
+     * Constructs a new AdjacencyMatrix.
+     */
     public AdjacencyMatrix() {
         vertices = new ArrayList<>();
         matrix = new Matrix<>();
