@@ -3,7 +3,7 @@ package ru.nsu.solovev5.m.task121.graphs.exceptions;
 /**
  * An exception occurred when trying to add an entity that is already in graph.
  */
-abstract public class DuplicateElementException extends GraphException {
+public abstract class DuplicateElementException extends GraphException {
     /**
      * Constructs a new duplicate element exception.
      *

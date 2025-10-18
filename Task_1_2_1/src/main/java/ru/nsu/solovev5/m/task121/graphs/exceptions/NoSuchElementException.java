@@ -3,7 +3,7 @@ package ru.nsu.solovev5.m.task121.graphs.exceptions;
 /**
  * An exception occurred when this does not have the specified element.
  */
-abstract public class NoSuchElementException extends GraphException {
+public abstract class NoSuchElementException extends GraphException {
     /**
      * Constructs a new no such element exception.
      *

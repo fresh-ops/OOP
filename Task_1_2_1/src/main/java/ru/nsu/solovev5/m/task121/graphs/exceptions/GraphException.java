@@ -3,7 +3,7 @@ package ru.nsu.solovev5.m.task121.graphs.exceptions;
 /**
  * A basic graph operation exception.
  */
-abstract public class GraphException extends RuntimeException {
+public abstract class GraphException extends RuntimeException {
     /**
      * Constructs a new graph exception.
      *

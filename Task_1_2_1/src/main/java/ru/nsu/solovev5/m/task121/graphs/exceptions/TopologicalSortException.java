@@ -3,7 +3,7 @@ package ru.nsu.solovev5.m.task121.graphs.exceptions;
 /**
  * A basic exception occurred during the topological sorting of the graph.
  */
-abstract public class TopologicalSortException extends GraphException {
+public abstract class TopologicalSortException extends GraphException {
     /**
      * Constructs a new topological sort exception.
      *

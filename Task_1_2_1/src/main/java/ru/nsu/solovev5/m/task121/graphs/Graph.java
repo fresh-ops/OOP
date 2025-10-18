@@ -8,7 +8,7 @@ import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchEdgeException;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.NoSuchVertexException;
 
 /**
- * Base graph interface
+ * Base graph interface.
  */
 public interface Graph {
     /**

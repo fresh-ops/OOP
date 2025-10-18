@@ -107,12 +107,12 @@ class AdjacencyListTest {
         return Stream.of(
             Arguments.of(
                 "Instant duplicate",
-                Arrays.asList(1),
+                List.of(1),
                 new Vertex[]{a, a}
             ),
             Arguments.of(
                 "Long distance between duplicates",
-                Arrays.asList(3),
+                List.of(3),
                 new Vertex[]{a, b, c, a}
             ),
             Arguments.of(
@@ -233,12 +233,12 @@ class AdjacencyListTest {
         return Stream.of(
             Arguments.of(
                 "Instant duplicate",
-                Arrays.asList(1),
+                List.of(1),
                 new Edge[]{ab, ab}
             ),
             Arguments.of(
                 "Long distance between duplicates",
-                Arrays.asList(3),
+                List.of(3),
                 new Edge[]{ab, ba, cb, ab}
             ),
             Arguments.of(
