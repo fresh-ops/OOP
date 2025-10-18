@@ -46,6 +46,8 @@ public class Sorter {
             }
         }
 
+        l.addAll(s);
+
         return l.toArray(new Vertex[0]);
     }
 
