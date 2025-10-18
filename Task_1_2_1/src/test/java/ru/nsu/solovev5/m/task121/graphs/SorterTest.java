@@ -9,6 +9,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.nsu.solovev5.m.task121.AdjacencyList;
+import ru.nsu.solovev5.m.task121.AdjacencyMatrix;
+import ru.nsu.solovev5.m.task121.IncidenceMatrix;
 import ru.nsu.solovev5.m.task121.graphs.exceptions.CycleException;
 
 class SorterTest {
@@ -56,17 +58,17 @@ class SorterTest {
                 new Vertex[]{a}
             ),
             Arguments.of(
-                "Trivial case", new AdjacencyList(),
+                "Trivial case", new AdjacencyMatrix(),
                 new Vertex[]{a, b, c}, new Edge[]{ab, bc},
                 new Vertex[]{a, b, c}
             ),
             Arguments.of(
-                "Shuffled vertices", new AdjacencyList(),
+                "Shuffled vertices", new AdjacencyMatrix(),
                 new Vertex[]{c, a, b}, new Edge[]{bc, ab},
                 new Vertex[]{a, b, c}
             ),
             Arguments.of(
-                "Unconnected graph", new AdjacencyList(),
+                "Unconnected graph", new IncidenceMatrix(),
                 new Vertex[]{a, b, c, d}, new Edge[]{bc, ad},
                 new Vertex[]{a, b, d, c}
             )
@@ -110,11 +112,11 @@ class SorterTest {
                 new Vertex[]{a}, new Edge[]{aa}
             ),
             Arguments.of(
-                "Simple cycle", new AdjacencyList(),
+                "Simple cycle", new AdjacencyMatrix(),
                 new Vertex[]{a, b}, new Edge[]{ab, ba}
             ),
             Arguments.of(
-                "Loong cycle", new AdjacencyList(),
+                "Loong cycle", new IncidenceMatrix(),
                 new Vertex[]{a, b, c, d}, new Edge[]{ab, bc, cd, da}
             )
         );
