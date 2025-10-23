@@ -106,10 +106,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readEdge(java.lang.String,ru.nsu.solovev5.m.task121.graphs.Graph)" class="member-name-link">readEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#readEdge(java.io.InputStream,ru.nsu.solovev5.m.task121.graphs.Graph)" class="member-name-link">readEdge</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream,
  <a href="Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a>&nbsp;destination)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Reads a graph from file in format of edges list.</div>
+<div class="block">Reads a graph from stream in format of edges list.</div>
 </div>
 </div>
 </div>
@@ -143,19 +143,18 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="readEdge(java.lang.String,ru.nsu.solovev5.m.task121.graphs.Graph)">
+<section class="detail" id="readEdge(java.io.InputStream,ru.nsu.solovev5.m.task121.graphs.Graph)">
 <h3>readEdge</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">readEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- <a href="Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a>&nbsp;destination)</span>
-                     throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html" title="class or interface in java.io" class="external-link">FileNotFoundException</a></span></div>
-<div class="block">Reads a graph from file in format of edges list.
- Accepts a file in format: (a, b);(c, d);(a, d)</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">readEdge</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/InputStream.html" title="class or interface in java.io" class="external-link">InputStream</a>&nbsp;stream,
+ <a href="Graph.html" title="interface in ru.nsu.solovev5.m.task121.graphs">Graph</a>&nbsp;destination)</span></div>
+<div class="block">Reads a graph from stream in format of edges list.
+ Accepts a stream in format: (a, b);(c, d);(a, d)</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>filename</code> - a name of file with edges</dd>
+<dd><code>stream</code> - an input stream with an edges list</dd>
 <dd><code>destination</code> - a graph to put edges</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html" title="class or interface in java.io" class="external-link">FileNotFoundException</a></code> - when a file with passed name was not found</dd>
+<dd><code><a href="exceptions/MismatchFormatException.html" title="class in ru.nsu.solovev5.m.task121.graphs.exceptions">MismatchFormatException</a></code> - when an input has a wrong format</dd>
 </dl>
 </section>
 </li>
