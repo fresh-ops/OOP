@@ -2,6 +2,7 @@ package ru.nsu.solovev5.m.task121;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -394,6 +396,26 @@ class AdjacencyMatrixTest {
             Arguments.of("An empty graph", new Edge[]{}, ab),
             Arguments.of("A single edge", new Edge[]{ab}, ac),
             Arguments.of("Multiple edges", new Edge[]{ab, ac, cb}, ba)
+        );
+    }
+
+    @Test
+    void checkToString() {
+        var a = new Vertex("a");
+        var b = new Vertex("b");
+        var c = new Vertex("c");
+
+        matrix.add(new Edge(a, c));
+        matrix.add(new Edge(c, b));
+        matrix.add(new Edge(b, b));
+
+        assertEquals(
+            """
+                \ta c b
+                a\t0 1 0
+                c\t0 0 1
+                b\t0 0 1""",
+            matrix.toString()
         );
     }
 }

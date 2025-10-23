@@ -205,8 +205,8 @@ public class IncidenceMatrix implements Graph {
 
                 builder.append(' ');
             }
+            builder.deleteCharAt(builder.length() - 1);
         }
-        builder.deleteCharAt(builder.length() - 1);
 
         return builder.toString();
     }
