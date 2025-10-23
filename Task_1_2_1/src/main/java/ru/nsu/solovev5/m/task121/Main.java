@@ -1,6 +1,8 @@
 package ru.nsu.solovev5.m.task121;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import ru.nsu.solovev5.m.task121.graphs.GraphFileReader;
 
@@ -19,12 +21,14 @@ public class Main {
         System.out.print("Enter filename >>> ");
         var filename = scanner.nextLine().trim();
         while (true) {
-            try {
-                GraphFileReader.readEdge(filename, graph);
+            try (var stream = new FileInputStream(filename)) {
+                GraphFileReader.readEdge(stream, graph);
                 break;
             } catch (FileNotFoundException e) {
                 System.out.print("File not found. Try another filename >>> ");
                 filename = scanner.nextLine().trim();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         System.out.println(graph);

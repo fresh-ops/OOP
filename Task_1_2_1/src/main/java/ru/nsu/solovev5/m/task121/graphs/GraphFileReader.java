@@ -1,28 +1,27 @@
 package ru.nsu.solovev5.m.task121.graphs;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import ru.nsu.solovev5.m.task121.graphs.exceptions.MismatchFormatException;
 
 /**
  * Provides utils for reading a graph from a file.
  */
 public class GraphFileReader {
     private static final Pattern EDGE_PATTERN =
-        Pattern.compile("^\\((\\w+)\\s*,(\\w+)\\s*\\)$");
+        Pattern.compile("^\\(\\s*(\\w+)\\s*,\\s*(\\w+)\\s*\\)$");
 
     /**
-     * Reads a graph from file in format of edges list.
-     * Accepts a file in format: (a, b);(c, d);(a, d)
+     * Reads a graph from stream in format of edges list.
+     * Accepts a stream in format: (a, b);(c, d);(a, d)
      *
-     * @param filename    a name of file with edges
+     * @param stream      an input stream with an edges list
      * @param destination a graph to put edges
-     * @throws FileNotFoundException when a file with passed name was not found
+     * @throws MismatchFormatException when an input has a wrong format
      */
-    public static void readEdge(String filename, Graph destination)
-        throws FileNotFoundException {
-        var scanner = new Scanner(new File(filename));
+    public static void readEdge(InputStream stream, Graph destination) {
+        var scanner = new Scanner(stream);
 
         while (scanner.hasNext()) {
             var line = scanner.nextLine();
@@ -34,6 +33,10 @@ public class GraphFileReader {
                     var edge = new Edge(from, to);
 
                     destination.add(edge);
+                } else {
+                    throw new MismatchFormatException(
+                        pair, EDGE_PATTERN.toString()
+                    );
                 }
             }
         }
