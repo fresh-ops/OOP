@@ -21,26 +21,25 @@ public class GraphFileReader {
      * @throws MismatchFormatException when an input has a wrong format
      */
     public static void readEdge(InputStream stream, Graph destination) {
-        var scanner = new Scanner(stream);
+        try (var scanner = new Scanner(stream)) {
 
-        while (scanner.hasNext()) {
-            var line = scanner.nextLine();
-            for (var pair : line.split("\\s*;\\s*")) {
-                var matcher = EDGE_PATTERN.matcher(pair);
-                if (matcher.find()) {
-                    var from = new Vertex(matcher.group(1));
-                    var to = new Vertex(matcher.group(2));
-                    var edge = new Edge(from, to);
+            while (scanner.hasNext()) {
+                var line = scanner.nextLine();
+                for (var pair : line.split("\\s*;\\s*")) {
+                    var matcher = EDGE_PATTERN.matcher(pair);
+                    if (matcher.find()) {
+                        var from = new Vertex(matcher.group(1));
+                        var to = new Vertex(matcher.group(2));
+                        var edge = new Edge(from, to);
 
-                    destination.add(edge);
-                } else {
-                    throw new MismatchFormatException(
-                        pair, EDGE_PATTERN.toString()
-                    );
+                        destination.add(edge);
+                    } else {
+                        throw new MismatchFormatException(
+                            pair, EDGE_PATTERN.toString()
+                        );
+                    }
                 }
             }
         }
-
-        scanner.close();
     }
 }
