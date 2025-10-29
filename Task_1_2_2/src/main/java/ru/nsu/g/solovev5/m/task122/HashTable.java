@@ -33,7 +33,7 @@ public class HashTable<K, V> {
      * Maps a value to given key. If this key already have a mapping,
      * it replaces old value with a new one and returns it.
      *
-     * @param key a key to map
+     * @param key   a key to map
      * @param value a value to hold
      * @return a prior value, or null if no such was
      */
@@ -79,6 +79,26 @@ public class HashTable<K, V> {
     }
 
     /**
+     * Returns {@code true} if this table contains given key.
+     *
+     * @param key a key to check
+     * @return {@code true} if this table contains given key, {@code false} otherwise
+     */
+    public boolean has(K key) {
+        var bucket = buckets[indexOf(key)];
+
+        while (bucket != null) {
+            if (bucket.key.equals(key)) {
+                return true;
+            }
+
+            bucket = bucket.next;
+        }
+
+        return false;
+    }
+
+    /**
      * Removes a value mapped to a given key.
      *
      * @param key a mapped key
@@ -117,7 +137,7 @@ public class HashTable<K, V> {
     /**
      * Adds a new entry into the table.
      *
-     * @param key an entry key
+     * @param key   an entry key
      * @param value an entry value
      * @param index an index to put in
      */
@@ -184,7 +204,7 @@ public class HashTable<K, V> {
         /**
          * Creates a new table entry.
          *
-         * @param key an entry key
+         * @param key   an entry key
          * @param value an entry value
          */
         Entry(K key, V value) {
