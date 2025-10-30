@@ -1,5 +1,8 @@
 package ru.nsu.g.solovev5.m.task122;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Objects;
  * @param <K> a key type
  * @param <V> a value type
  */
-public class HashTable<K, V> {
+public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     private static final int DEFAULT_CAPACITY = 8;
     private static final double LOAD_FACTOR_THRESHOLD = 0.75;
 
@@ -18,6 +21,7 @@ public class HashTable<K, V> {
     private int threshold;
     private int capacity;
     private int size;
+    private int modCount;
     private Entry<K, V>[] buckets;
 
     /**
@@ -28,7 +32,13 @@ public class HashTable<K, V> {
         capacity = DEFAULT_CAPACITY;
         threshold = (int) (capacity * LOAD_FACTOR_THRESHOLD);
         size = 0;
+        modCount = 0;
         buckets = new Entry[capacity];
+    }
+
+    @Override
+    public Iterator<Entry<K, V>> iterator() {
+        return new HashTableIterator();
     }
 
     /**
@@ -51,6 +61,7 @@ public class HashTable<K, V> {
             bucket = bucket.next;
         }
 
+        modCount++;
         if (++size >= threshold) {
             increaseCapacity();
             index = indexOf(key);
@@ -107,6 +118,7 @@ public class HashTable<K, V> {
      * @return a removed value, or null if nothing found
      */
     public V remove(Object key) {
+        modCount++;
         var index = indexOf(key);
         var bucket = buckets[index];
 
@@ -248,6 +260,44 @@ public class HashTable<K, V> {
         @Override
         public String toString() {
             return String.format("(%s, %s)", key, value);
+        }
+    }
+
+    private class HashTableIterator implements Iterator<Entry<K, V>> {
+        private int remaining;
+        private final int knownMod;
+        private int lastIndex;
+        private Entry<K, V> lastBucket;
+
+        HashTableIterator() {
+            this.remaining = size;
+            this.lastIndex = -1;
+            this.knownMod = modCount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return remaining > 0;
+        }
+
+        @Override
+        public Entry<K, V> next() {
+            if (knownMod != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            if (remaining <= 0) {
+                throw new NoSuchElementException();
+            }
+            remaining--;
+
+            if (lastBucket != null) {
+                lastBucket = lastBucket.next;
+            }
+            while (lastBucket == null) {
+                lastBucket = buckets[++lastIndex];
+            }
+
+            return lastBucket;
         }
     }
 }
