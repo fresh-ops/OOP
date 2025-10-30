@@ -1,5 +1,7 @@
 package ru.nsu.g.solovev5.m.task122;
 
+import java.util.Objects;
+
 /**
  * A hash table class. Uses hash-bucket approach to handle hash collisions.
  *
@@ -42,7 +44,7 @@ public class HashTable<K, V> {
         var bucket = buckets[index];
 
         while (bucket != null) {
-            if (bucket.key.equals(key)) {
+            if (Objects.equals(key, bucket.key)) {
                 return bucket.setValue(value);
             }
 
@@ -64,11 +66,11 @@ public class HashTable<K, V> {
      * @param key a mapped key
      * @return a mapped value, or null if no such exists
      */
-    public V get(K key) {
+    public V get(Object key) {
         var bucket = buckets[indexOf(key)];
 
         while (bucket != null) {
-            if (bucket.key.equals(key)) {
+            if (Objects.equals(key, bucket.key)) {
                 return bucket.value;
             }
 
@@ -84,11 +86,11 @@ public class HashTable<K, V> {
      * @param key a key to check
      * @return {@code true} if this table contains given key, {@code false} otherwise
      */
-    public boolean has(K key) {
+    public boolean has(Object key) {
         var bucket = buckets[indexOf(key)];
 
         while (bucket != null) {
-            if (bucket.key.equals(key)) {
+            if (Objects.equals(key, bucket.key)) {
                 return true;
             }
 
@@ -104,13 +106,13 @@ public class HashTable<K, V> {
      * @param key a mapped key
      * @return a removed value, or null if nothing found
      */
-    public V remove(K key) {
+    public V remove(Object key) {
         var index = indexOf(key);
         var bucket = buckets[index];
 
         if (bucket == null) {
             return null;
-        } else if (bucket.key.equals(key)) {
+        } else if (Objects.equals(key, bucket.key)) {
             buckets[index] = bucket.next;
             size--;
 
@@ -119,7 +121,7 @@ public class HashTable<K, V> {
         }
 
         while (bucket.next != null) {
-            if (bucket.next.key.equals(key)) {
+            if (Objects.equals(key, bucket.next.key)) {
                 var removing = bucket.next;
                 bucket.next = removing.next;
                 size--;
@@ -175,7 +177,7 @@ public class HashTable<K, V> {
      * @param key a key to hash
      * @return hashed key that can be used as an index
      */
-    private int indexOf(K key) {
+    private int indexOf(Object key) {
         if (key == null) {
             return 0;
         }
