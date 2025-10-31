@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,6 +77,11 @@ class HashTableTest {
         var nullKey = new HashTable.Entry<String, Number>(null, 0);
         var nullValue = new HashTable.Entry<String, Number>("Null Value", null);
 
+        var manyEntries = new ArrayList<HashTable.Entry<String, Number>>();
+        for (var i = 0; i < 1000; i++) {
+            manyEntries.add(new HashTable.Entry<>(Integer.toString(i), i));
+        }
+
         return Stream.of(
             Arguments.of(
                 "Single item", List.of(one)
@@ -85,6 +91,9 @@ class HashTableTest {
             ),
             Arguments.of(
                 "Null fields", List.of(one, nullKey, two, nullValue)
+            ),
+            Arguments.of(
+                "Large elements number", manyEntries
             )
         );
     }
@@ -183,6 +192,11 @@ class HashTableTest {
         var two = new HashTable.Entry<String, Number>("Two", 2);
         var three = new HashTable.Entry<String, Number>("Three", 3);
 
+        var manyEntries = new ArrayList<HashTable.Entry<String, Number>>();
+        for (var i = 0; i < 1000; i++) {
+            manyEntries.add(new HashTable.Entry<>(Integer.toString(i), i));
+        }
+
         return Stream.of(
             Arguments.of(
                 "Single removing", List.of(one, two, three),
@@ -196,6 +210,9 @@ class HashTableTest {
             Arguments.of(
                 "Removing non-present element", List.of(one, three),
                 List.of(two), 0
+            ),
+            Arguments.of(
+                "Large elements number", manyEntries, manyEntries, manyEntries.size()
             )
         );
     }
@@ -221,6 +238,10 @@ class HashTableTest {
         other.put(e.getKey(), e.getValue());
 
         assertNotEquals(
+            "HashTable", table,
+            "A table can be equal only to another table"
+        );
+        assertNotEquals(
             table, other,
             "Tables with different values at the same key are not equal"
         );
@@ -241,6 +262,33 @@ class HashTableTest {
         assertEquals(
             table, other,
             "Tables with the same keys and mapped values are equal"
+        );
+
+        assertEquals(
+            table.hashCode(), other.hashCode(),
+            "Equal tables should have the same hash code"
+        );
+    }
+
+    @Test
+    void checkToString() {
+        var table = new HashTable<String, Number>();
+        assertEquals(
+            "{}", table.toString(),
+            "Empty table should be represented as {}"
+        );
+
+        table.put("a", 1);
+        assertEquals(
+            "{a=1}", table.toString(),
+            "Single element table"
+        );
+
+        table.put("b", 2);
+        var str = table.toString();
+        assertTrue(
+            str.equals("{a=1, b=2}") || str.equals("{b=2, a=1}"),
+            "Two element table"
         );
     }
 }

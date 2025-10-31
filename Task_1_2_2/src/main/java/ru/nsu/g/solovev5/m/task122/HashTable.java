@@ -259,13 +259,19 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
 
     @Override
     public String toString() {
+        if (size == 0) {
+            return "{}";
+        }
+
         var sb = new StringBuilder().append('{');
         for (var entry : this) {
             sb.append(entry).append(", ");
         }
+
         var length = sb.length();
         sb.delete(length - 2, length);
         sb.append('}');
+
         return sb.toString();
     }
 
