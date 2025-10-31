@@ -37,6 +37,32 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof HashTable<?, ?> hashTable) || size != hashTable.size) {
+            return false;
+        }
+
+        for (var entry : hashTable) {
+            if (!has(entry.key) || !Objects.equals(get(entry.key), entry.value)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        var hash = 0;
+
+        for (var entry : this) {
+            hash += entry.hashCode();
+        }
+
+        return hash;
+    }
+
+    @Override
     public Iterator<Entry<K, V>> iterator() {
         return new HashTableIterator();
     }
@@ -224,6 +250,20 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         Entry(K key, V value) {
             this.key = key;
             this.value = value;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Entry<?, ?> entry)) {
+                return false;
+            }
+
+            return Objects.equals(key, entry.key) && Objects.equals(value, entry.value);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(key, value);
         }
 
         /**
