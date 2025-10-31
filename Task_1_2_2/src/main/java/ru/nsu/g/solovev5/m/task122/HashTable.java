@@ -13,12 +13,12 @@ import java.util.Objects;
  */
 public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     private static final int DEFAULT_CAPACITY = 8;
-    private static final double LOAD_FACTOR_THRESHOLD = 0.75;
+    private static final double INCREASE_LOAD_FACTOR_THRESHOLD = 0.75;
+    private static final double DECREASE_LOAD_FACTOR_THRESHOLD = 0.25;
 
     private static final int HASH_MIXER_A = 0x85EBCA6B;
     private static final int HASH_MIXER_B = 0xC2B2AE35;
 
-    private int threshold;
     private int capacity;
     private int size;
     private int modCount;
@@ -30,7 +30,6 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     @SuppressWarnings("unchecked")
     public HashTable() {
         capacity = DEFAULT_CAPACITY;
-        threshold = (int) (capacity * LOAD_FACTOR_THRESHOLD);
         size = 0;
         modCount = 0;
         buckets = new Entry[capacity];
@@ -88,8 +87,8 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         }
 
         modCount++;
-        if (++size >= threshold) {
-            increaseCapacity();
+        if (++size > capacity * INCREASE_LOAD_FACTOR_THRESHOLD) {
+            resize(true);
             index = indexOf(key);
         }
 
@@ -152,8 +151,10 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
             return null;
         } else if (Objects.equals(key, bucket.key)) {
             buckets[index] = bucket.next;
-            size--;
 
+            if (--size < capacity * DECREASE_LOAD_FACTOR_THRESHOLD) {
+                resize(false);
+            }
             bucket.next = null;
             return bucket.value;
         }
@@ -162,8 +163,10 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
             if (Objects.equals(key, bucket.next.key)) {
                 var removing = bucket.next;
                 bucket.next = removing.next;
-                size--;
 
+                if (--size < capacity * DECREASE_LOAD_FACTOR_THRESHOLD) {
+                    resize(false);
+                }
                 removing.next = null;
                 return removing.value;
             }
@@ -188,12 +191,27 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     }
 
     /**
-     * Increases this table capacity and rehashes entries.
+     * Changes this table capacity and rehashes entries.
+     *
+     * @param increaseSize defines whether to increase this table capacity or to decrease
+     */
+    private void resize(boolean increaseSize) {
+        if (increaseSize && capacity << 1 > 0) {
+            capacity <<= 1;
+        } else if (capacity > DEFAULT_CAPACITY) {
+            capacity >>= 1;
+        } else {
+            return;
+        }
+
+        rehashAll();
+    }
+
+    /**
+     * Rehashes all entries in this table to fit new capacity.
      */
     @SuppressWarnings("unchecked")
-    private void increaseCapacity() {
-        capacity *= 2;
-        threshold = (int) (capacity * LOAD_FACTOR_THRESHOLD);
+    private void rehashAll() {
         var oldBuckets = buckets;
         buckets = new Entry[capacity];
 
