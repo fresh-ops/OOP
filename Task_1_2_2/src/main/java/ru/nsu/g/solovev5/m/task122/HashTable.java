@@ -1,5 +1,6 @@
 package ru.nsu.g.solovev5.m.task122;
 
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -248,6 +249,18 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return hash & (capacity - 1);
     }
 
+    @Override
+    public String toString() {
+        var sb = new StringBuilder().append('{');
+        for (var entry : this) {
+            sb.append(entry).append(", ");
+        }
+        var length = sb.length();
+        sb.delete(length - 2, length);
+        sb.append('}');
+        return sb.toString();
+    }
+
     /**
      * A class to represent an entry of a table.
      *
@@ -317,7 +330,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
 
         @Override
         public String toString() {
-            return String.format("(%s, %s)", key, value);
+            return String.format("%s=%s", key, value);
         }
     }
 
