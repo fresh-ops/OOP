@@ -1,6 +1,5 @@
 package ru.nsu.g.solovev5.m.task122;
 
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -49,6 +48,15 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         }
 
         return true;
+    }
+
+    /**
+     * Returns a number of elements in this table.
+     *
+     * @return a number of elements in this table
+     */
+    public int size() {
+        return size;
     }
 
     @Override
