@@ -27,7 +27,6 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     /**
      * Creates a new HashTable with default capacity.
      */
-    @SuppressWarnings("unchecked")
     public HashTable() {
         capacity = DEFAULT_CAPACITY;
         size = 0;
@@ -219,7 +218,6 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     /**
      * Rehashes all entries in this table to fit new capacity.
      */
-    @SuppressWarnings("unchecked")
     private void rehashAll() {
         var oldBuckets = buckets;
         buckets = new Entry[capacity];
