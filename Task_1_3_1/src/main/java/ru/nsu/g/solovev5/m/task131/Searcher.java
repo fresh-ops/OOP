@@ -20,10 +20,10 @@ public class Searcher {
      * @throws FileNotFoundException if the named file does not exist, is a directory rather
      *     than a regular file, or for some other reason cannot be opened for reading.
      */
-    public static List<Integer> find(String filename, String word) throws FileNotFoundException {
-        var occurrences = new ArrayList<Integer>();
+    public static List<Long> find(String filename, String word) throws FileNotFoundException {
+        var occurrences = new ArrayList<Long>();
         var table = computePartialMatchTable(word);
-        int j = 0;
+        long j = 0;
         int k = 0;
         try (var reader = new BufferedReader(new FileReader(filename))) {
             var code = reader.read();
@@ -63,16 +63,23 @@ public class Searcher {
     private static int[] computePartialMatchTable(String word) {
         var table = new int[word.length() + 1];
         table[0] = -1;
-        for (int pos = 1, cnd = 0; pos < word.length(); pos++, cnd++) {
+        var pos = 1;
+        var cnd = 0;
+        while (pos < word.length()) {
             if (word.charAt(pos) == word.charAt(cnd)) {
-                table[pos] = table[cnd];
+                table[pos] = cnd;
             } else {
                 table[pos] = cnd;
                 while (cnd >= 0 && word.charAt(pos) != word.charAt(cnd)) {
                     cnd = table[cnd];
                 }
             }
+
+            pos++;
+            cnd++;
         }
+
+        table[pos] = cnd;
         return table;
     }
 }
