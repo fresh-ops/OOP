@@ -88,7 +88,8 @@ class SearcherTest {
         );
     }
 
-    static List<Long> generateLargeFile(String filename, String word, int occurrenceNumber, long minLength) {
+    static List<Long> generateLargeFile(String filename, String word, int occurrenceNumber,
+                                        long minLength) {
         var occurrences = new ArrayList<Long>();
         var random = new Random();
         var position = 0L;
@@ -110,7 +111,8 @@ class SearcherTest {
                 position++;
             }
         } catch (IOException e) {
-            System.out.println("An exception occurred while generating a test file: " + e.getMessage());
+            System.out.println("An exception occurred while generating a test file: "
+                + e.getMessage());
             return null;
         }
 
