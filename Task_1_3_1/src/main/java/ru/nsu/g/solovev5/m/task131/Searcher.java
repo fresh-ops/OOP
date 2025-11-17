@@ -19,8 +19,9 @@ public class Searcher {
      * @return a list of occurrence start indices
      * @throws FileNotFoundException if the named file does not exist, is a directory rather
      *     than a regular file, or for some other reason cannot be opened for reading.
+     * @throws IOException when an I/O exception occurred during file reading
      */
-    public static List<Long> find(String filename, String word) throws FileNotFoundException {
+    public static List<Long> find(String filename, String word) throws IOException {
         var occurrences = new ArrayList<Long>();
         var table = computePartialMatchTable(word);
         long j = 0;
@@ -47,8 +48,6 @@ public class Searcher {
                     }
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         return occurrences;
