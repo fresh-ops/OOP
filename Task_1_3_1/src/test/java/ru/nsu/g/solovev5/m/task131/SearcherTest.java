@@ -57,6 +57,16 @@ class SearcherTest {
                 "Collisions", "ababa",
                 "ababababa",
                 List.of(0L, 2L, 4L)
+            ),
+            Arguments.of(
+                "Repeated pattern", "lyalya",
+                "lyalyalyalya",
+                List.of(0L, 3L, 6L)
+            ),
+            Arguments.of(
+                "Chinese character", "中",
+                "Hello 中 world 中 test",
+                List.of(6L, 14L)
             )
         );
     }
