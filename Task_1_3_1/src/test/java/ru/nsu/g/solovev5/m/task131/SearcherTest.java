@@ -1,15 +1,19 @@
 package ru.nsu.g.solovev5.m.task131;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,14 +28,12 @@ class SearcherTest {
             throw new RuntimeException(e);
         }
 
-        try {
-            assertEquals(
+        assertDoesNotThrow(
+            () -> assertEquals(
                 occurrences, Searcher.find("test.txt", word),
                 message
-            );
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+            )
+        );
     }
 
     static Stream<Arguments> checkFind() {
@@ -64,14 +66,12 @@ class SearcherTest {
     void checkLargeFiles(String message, String word, int occurrenceNumber, long minLength) {
         var occ = generateLargeFile("test.txt", word, occurrenceNumber, minLength);
 
-        try {
-            assertEquals(
+        assertDoesNotThrow(
+            () -> assertEquals(
                 occ, Searcher.find("test.txt", word),
                 message
-            );
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+            )
+        );
     }
 
     static Stream<Arguments> checkLargeFiles() {
@@ -117,5 +117,14 @@ class SearcherTest {
         }
 
         return occurrences;
+    }
+
+    @AfterEach
+    void deleteTestFile() {
+        try {
+            Files.deleteIfExists(Path.of("test.txt"));
+        } catch (IOException e) {
+            System.out.println("Failed to delete test file: " + e.getMessage());
+        }
     }
 }
