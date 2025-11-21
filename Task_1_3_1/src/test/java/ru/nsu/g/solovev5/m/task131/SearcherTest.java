@@ -3,9 +3,6 @@ package ru.nsu.g.solovev5.m.task131;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -21,16 +18,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 class SearcherTest {
     @ParameterizedTest
     @MethodSource
-    void checkFind(String message, String word, String fileContent, List<Long> occurrences) {
-        try (var writer = new BufferedWriter(new FileWriter("test.txt"))) {
-            writer.write(fileContent);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void checkFind(String message, String word, String fileContent, List<Long> occurrences, @TempDir Path tempDir) throws IOException {
+        Path testFile = tempDir.resolve("test.txt");
+        Files.writeString(testFile, fileContent);
 
         assertDoesNotThrow(
             () -> assertEquals(
-                occurrences, Searcher.find("test.txt", word),
+                occurrences, Searcher.find(testFile.toString(), word),
                 message
             )
         );
@@ -73,12 +67,13 @@ class SearcherTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkLargeFiles(String message, String word, int occurrenceNumber, long minLength) {
-        var occ = generateLargeFile("test.txt", word, occurrenceNumber, minLength);
+    void checkLargeFiles(String message, String word, int occurrenceNumber, long minLength, @TempDir Path tempDir) throws IOException {
+        var largeTestFile = tempDir.resolve("large-test.txt");
+        var occ = generateLargeFile(largeTestFile, word, occurrenceNumber, minLength);
 
         assertDoesNotThrow(
             () -> assertEquals(
-                occ, Searcher.find("test.txt", word),
+                occ, Searcher.find(largeTestFile.toString(), word),
                 message
             )
         );
@@ -98,12 +93,12 @@ class SearcherTest {
         );
     }
 
-    static List<Long> generateLargeFile(String filename, String word, int occurrenceNumber,
-                                        long minLength) {
+    static List<Long> generateLargeFile(Path file, String word, int occurrenceNumber,
+                                        long minLength) throws IOException {
         var occurrences = new ArrayList<Long>();
         var random = new Random();
         var position = 0L;
-        try (var writer = new BufferedWriter(new FileWriter(filename))) {
+        try (var writer = Files.newBufferedWriter(file)) {
             while (occurrenceNumber > 0) {
                 if (random.nextDouble() > 0.9) {
                     occurrences.add(position);
@@ -120,21 +115,8 @@ class SearcherTest {
                 writer.write(random.nextInt(32, 126));
                 position++;
             }
-        } catch (IOException e) {
-            System.out.println("An exception occurred while generating a test file: "
-                + e.getMessage());
-            return null;
         }
 
         return occurrences;
-    }
-
-    @AfterEach
-    void deleteTestFile() {
-        try {
-            Files.deleteIfExists(Path.of("test.txt"));
-        } catch (IOException e) {
-            System.out.println("Failed to delete test file: " + e.getMessage());
-        }
     }
 }
