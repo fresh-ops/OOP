@@ -18,7 +18,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 class SearcherTest {
     @ParameterizedTest
     @MethodSource
-    void checkFind(String message, String word, String fileContent, List<Long> occurrences, @TempDir Path tempDir) throws IOException {
+    void checkFind(String message, String word, String fileContent, List<Long> occurrences,
+                   @TempDir Path tempDir) throws IOException {
         Path testFile = tempDir.resolve("test.txt");
         Files.writeString(testFile, fileContent);
 
@@ -67,7 +68,8 @@ class SearcherTest {
 
     @ParameterizedTest
     @MethodSource
-    void checkLargeFiles(String message, String word, int occurrenceNumber, long minLength, @TempDir Path tempDir) throws IOException {
+    void checkLargeFiles(String message, String word, int occurrenceNumber, long minLength,
+                         @TempDir Path tempDir) throws IOException {
         var largeTestFile = tempDir.resolve("large-test.txt");
         var occ = generateLargeFile(largeTestFile, word, occurrenceNumber, minLength);
 
