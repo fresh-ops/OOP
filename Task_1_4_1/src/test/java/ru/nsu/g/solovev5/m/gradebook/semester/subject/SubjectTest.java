@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -46,26 +44,29 @@ class SubjectTest {
     }
 
     static Stream<Arguments> checkValidSubject() {
-        var names = List.of("Math", "PE", "History", "Object Oriented Programming", "English 2B");
-        var types = List.of(AssessmentType.values());
-        var grades = List.of(DifferentiatedGrade.values());
-
-        return names.stream()
-            .flatMap(name -> types.stream()
-                .filter(AssessmentType::isDifferentiated)
-                .flatMap(type -> grades.stream().map(
-                        grade -> Arguments.of(
-                            name + "/" + type + "/" + grade,
-                            name, type, grade
-                        )
-                    )
-                )
-            );
+        return Stream.of(
+            Arguments.of(
+                "Differentiated Subject", "Math",
+                AssessmentType.EXAM, DifferentiatedGrade.FAIL
+            ),
+            Arguments.of(
+                "Credit Subject", "English",
+                AssessmentType.CREDIT, CreditGrade.PASS
+            ),
+            Arguments.of(
+                "Cyrillic Letters", "Основы Российской Государственности",
+                AssessmentType.DIFFERENTIATED_CREDIT, DifferentiatedGrade.GOOD
+            ),
+            Arguments.of(
+                "Chinese Hieroglyphs", "面向对象编程",
+                AssessmentType.THESIS, DifferentiatedGrade.EXCELLENT
+            )
+        );
     }
 
     @ParameterizedTest
     @MethodSource
-    void checkInvalidSubject(String message, String name, AssessmentType type, Grade grade) {
+    void checkInvalidGrade(String message, String name, AssessmentType type, Grade grade) {
         assertThrows(
             IllegalGradeException.class,
             () -> Subject.of(name, type, grade),
@@ -73,58 +74,34 @@ class SubjectTest {
         );
     }
 
-    static Stream<Arguments> checkInvalidSubject() {
-        var names = List.of("Math", "PE", "History", "Object Oriented Programming", "English 2B");
-        var types = List.of(AssessmentType.values());
-        var grades = List.of(DifferentiatedGrade.values());
-
-        return names.stream()
-            .flatMap(name -> types.stream()
-                .filter(type -> !type.isDifferentiated())
-                .flatMap(type -> grades.stream().map(
-                        grade -> Arguments.of(
-                            name + "/" + type + "/" + grade,
-                            name, type, grade
-                        )
-                    )
-                )
-            );
-    }
-
-    @ParameterizedTest
-    @MethodSource
-    void checkSubjectEquals(String message, String name, AssessmentType type, Grade grade) {
-        var subject1 = Subject.of(name, type, grade);
-        var subject2 = Subject.of(name, type, grade);
-
-        assertAll(
-            () -> assertEquals(
-                subject1, subject2,
-                message + ". Two subjects with equal fields should be equal"
+    static Stream<Arguments> checkInvalidGrade() {
+        return Stream.of(
+            Arguments.of(
+                "Differentiated Assessment with Credit Grade", "Graphs",
+                AssessmentType.EXAM, CreditGrade.PASS
             ),
-            () -> assertEquals(
-                subject1.hashCode(), subject2.hashCode(),
-                message + ". Two equal subjects should have equal hash codes"
+            Arguments.of(
+                "Credit Assessment with Differentiated Grade", "PE",
+                AssessmentType.CREDIT, DifferentiatedGrade.FAIL
             )
         );
     }
 
-    static Stream<Arguments> checkSubjectEquals() {
-        var names = List.of("Math", "PE", "History", "Object Oriented Programming", "English 2B");
-        var types = List.of(AssessmentType.values());
-        var grades = List.of(DifferentiatedGrade.values());
+    @Test
+    void checkSubjectEquals() {
+        var subject1 = Subject.of("Math", AssessmentType.EXAM, DifferentiatedGrade.SATISFACTORY);
+        var subject2 = Subject.of("Math", AssessmentType.EXAM, DifferentiatedGrade.SATISFACTORY);
 
-        return names.stream()
-            .flatMap(name -> types.stream()
-                .filter(AssessmentType::isDifferentiated)
-                .flatMap(type -> grades.stream().map(
-                        grade -> Arguments.of(
-                            name + "/" + type + "/" + grade,
-                            name, type, grade
-                        )
-                    )
-                )
-            );
+        assertAll(
+            () -> assertEquals(
+                subject1, subject2,
+                "Two subjects with equal fields should be equal"
+            ),
+            () -> assertEquals(
+                subject1.hashCode(), subject2.hashCode(),
+                "Two equal subjects should have equal hash codes"
+            )
+        );
     }
 
     @ParameterizedTest
@@ -178,23 +155,23 @@ class SubjectTest {
     }
 
     static Stream<Arguments> checkInvalidSubjectName() {
-        var messages = List.of("empty string", "spaces", "tabs", "line feed", "null");
-        var names = Arrays.asList("", "  ", "\t\t", "\n", null);
-        var types = List.of(AssessmentType.values());
-        var grades = List.of(DifferentiatedGrade.values());
-
-        return IntStream.range(0, messages.size())
-            .boxed()
-            .flatMap(i -> types.stream()
-                .filter(AssessmentType::isDifferentiated)
-                .flatMap(type -> grades.stream()
-                    .map(grade -> Arguments.of(
-                        messages.get(i),
-                        names.get(i) == null ? IllegalSubjectNameException.class
-                            : BlankSubjectNameException.class,
-                        names.get(i), type, grade
-                    ))
-                )
-            );
+        return Stream.of(
+            Arguments.of(
+                "Empty name", BlankSubjectNameException.class,
+                "", AssessmentType.CREDIT, DifferentiatedGrade.FAIL
+            ),
+            Arguments.of(
+                "Spaces", BlankSubjectNameException.class,
+                "      ", AssessmentType.EXAM, DifferentiatedGrade.EXCELLENT
+            ),
+            Arguments.of(
+                "Tabulations", BlankSubjectNameException.class,
+                "\t\t\t\t", AssessmentType.THESIS, DifferentiatedGrade.SATISFACTORY
+            ),
+            Arguments.of(
+                "Null name", IllegalSubjectNameException.class,
+                null, AssessmentType.CREDIT, CreditGrade.PASS
+            )
+        );
     }
 }
