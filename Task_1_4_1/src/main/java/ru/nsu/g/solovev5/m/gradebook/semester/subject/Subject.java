@@ -4,17 +4,15 @@ import java.util.Objects;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.exceptions.BlankSubjectNameException;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.exceptions.IllegalGradeException;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.exceptions.IllegalSubjectNameException;
-import ru.nsu.g.solovev5.m.gradebook.semester.subject.grades.CreditGrade;
-import ru.nsu.g.solovev5.m.gradebook.semester.subject.grades.DifferentiatedGrade;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.grades.Grade;
 
 /**
  * Represents a study subject.
  */
 public class Subject {
-    public final String name;
-    public final AssessmentType type;
-    public final Grade grade;
+    private final String name;
+    private final AssessmentType type;
+    private final Grade grade;
 
     private Subject(String name, AssessmentType type, Grade grade) {
         this.name = name;
@@ -33,29 +31,9 @@ public class Subject {
      * @throws IllegalGradeException if the given grade does not correspond to the assessment type
      * @throws IllegalSubjectNameException if the name is not valid
      */
-    public static Subject of(String name, AssessmentType type, DifferentiatedGrade grade) {
+    public static Subject of(String name, AssessmentType type, Grade grade) {
         validateName(name);
-        if (!type.isDifferentiated()) {
-            throw new IllegalGradeException(type, grade);
-        }
-
-        return new Subject(name, type, grade);
-    }
-
-    /**
-     * Creates a new study subject with given parameters. Before creating asserts if the grade
-     * corresponds to the assessment type.
-     *
-     * @param name the name of this subject. Should not be null or blank
-     * @param type the assessment type of this subject
-     * @param grade the subjects score. Must match the assessment type
-     * @return a new Subject
-     * @throws IllegalGradeException if the given grade does not correspond to the assessment type
-     * @throws IllegalSubjectNameException if the name is not valid
-     */
-    public static Subject of(String name, AssessmentType type, CreditGrade grade) {
-        validateName(name);
-        if (type.isDifferentiated()) {
+        if (type.isDifferentiated() != grade.isDifferentiated()) {
             throw new IllegalGradeException(type, grade);
         }
 
@@ -81,6 +59,33 @@ public class Subject {
         return Objects.equals(name, subject.name)
             && type == subject.type
             && Objects.equals(grade, subject.grade);
+    }
+
+    /**
+     * Returns the name of this subject.
+     *
+     * @return the name of this subject
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns the assessment type of this subject.
+     *
+     * @return the assessment type of this subject
+     */
+    public AssessmentType getType() {
+        return type;
+    }
+
+    /**
+     * Returns the subject score.
+     *
+     * @return the subject score
+     */
+    public Grade getGrade() {
+        return grade;
     }
 
     @Override

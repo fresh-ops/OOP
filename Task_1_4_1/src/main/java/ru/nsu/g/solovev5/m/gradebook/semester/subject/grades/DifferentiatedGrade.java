@@ -25,6 +25,11 @@ public enum DifferentiatedGrade implements Grade {
         return this != DifferentiatedGrade.FAIL;
     }
 
+    @Override
+    public boolean isDifferentiated() {
+        return true;
+    }
+
     /**
      * Returns the numeric representation of this grade.
      *

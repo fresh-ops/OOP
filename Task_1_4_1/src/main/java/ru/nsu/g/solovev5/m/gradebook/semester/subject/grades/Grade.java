@@ -22,4 +22,11 @@ public sealed interface Grade permits DifferentiatedGrade, CreditGrade {
      * @return {@code true} if this is positive, {@code false} otherwise
      */
     boolean isPositive();
+
+    /**
+     * Determines whether this grade is differentiated or not.
+     *
+     * @return {@code true} if this grade is differentiated, {@code false} otherwise
+     */
+    boolean isDifferentiated();
 }

@@ -21,4 +21,9 @@ public enum CreditGrade implements Grade {
     public boolean isPositive() {
         return this != FAIL;
     }
+
+    @Override
+    public boolean isDifferentiated() {
+        return false;
+    }
 }
