@@ -4,8 +4,22 @@ package ru.nsu.g.solovev5.m.gradebook.semester.subject;
  * Represents different assessments types.
  */
 public enum AssessmentType {
-    EXAM("Экзамен", true), CREDIT("Зачёт", false),
-    DIFFERENTIATED_CREDIT("Дифференцированный зачёт", true), THESIS("Выпускная работа", true);
+    /**
+     * Examined subject.
+     */
+    EXAM("Экзамен", true),
+    /**
+     * Credit subject.
+     */
+    CREDIT("Зачёт", false),
+    /**
+     * Differentiated subject.
+     */
+    DIFFERENTIATED_CREDIT("Дифференцированный зачёт", true),
+    /**
+     * Final thesis work.
+     */
+    THESIS("Выпускная работа", true);
 
     private final String name;
     private final boolean isDifferentiated;
@@ -25,6 +39,11 @@ public enum AssessmentType {
         return isDifferentiated;
     }
 
+    /**
+     * Returns the name of this assessment type.
+     *
+     * @return the name of this assessment type
+     */
     public String getName() {
         return name;
     }

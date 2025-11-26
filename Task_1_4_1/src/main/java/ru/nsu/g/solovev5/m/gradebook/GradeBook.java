@@ -20,7 +20,7 @@ import ru.nsu.g.solovev5.m.gradebook.student.Student;
  * A student grade book class.
  */
 public class GradeBook {
-    public final Student student;
+    private final Student student;
     private final List<Semester> semesters;
 
     /**
@@ -112,15 +112,12 @@ public class GradeBook {
 
     /**
      * Determines if the owner of this grade book can have a diploma with honor.
-     *
-     * <p>
      * Requirements for a diploma with honors:
      * <ul>
      * <li>75% of the grades in the diploma supplement (the final grade) are "excellent";</li>
      * <li>no final grades of "satisfactory" for both differentiated credits and exams;</li>
      * <li>a qualifying work with an "excellent" grade.</li>
      * </ul>
-     * </p>
      *
      * @return {@code true} if the diploma with honor is possible, {@code false} otherwise
      */
