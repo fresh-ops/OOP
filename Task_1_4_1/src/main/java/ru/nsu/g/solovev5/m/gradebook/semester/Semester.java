@@ -16,13 +16,19 @@ import ru.nsu.g.solovev5.m.gradebook.semester.subject.grades.Grade;
  * Represents an academic semester.
  */
 public class Semester implements Iterable<Subject> {
+    /**
+     * The maximum semester number.
+     */
     public static final int UPPER_NUMBER_BOUND = 8;
+    /**
+     * The minimum semester number.
+     */
     public static final int LOWER_NUMBER_BOUND = 1;
 
-    public static final String SEMESTER_HEADER = "Семестр";
-    public static final String SUBJECT_HEADER = "Предмет";
-    public static final String ASSESSMENT_TYPE_HEADER = "Вид контроля";
-    public static final String GRADE_HEADER = "Оценка";
+    private static final String SEMESTER_HEADER = "Семестр";
+    private static final String SUBJECT_HEADER = "Предмет";
+    private static final String ASSESSMENT_TYPE_HEADER = "Вид контроля";
+    private static final String GRADE_HEADER = "Оценка";
 
     private final Set<Subject> subjects;
     private final int number;
@@ -101,6 +107,11 @@ public class Semester implements Iterable<Subject> {
             .average();
     }
 
+    /**
+     * Creates a new stream of subjects.
+     *
+     * @return a stream of subjects
+     */
     public Stream<Subject> stream() {
         return subjects.stream();
     }
