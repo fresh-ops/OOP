@@ -24,4 +24,8 @@ public enum AssessmentType {
     public boolean isDifferentiated() {
         return isDifferentiated;
     }
+
+    public String getName() {
+        return name;
+    }
 }

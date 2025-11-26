@@ -30,11 +30,7 @@ public enum DifferentiatedGrade implements Grade {
         return true;
     }
 
-    /**
-     * Returns the numeric representation of this grade.
-     *
-     * @return the numeric representation.
-     */
+    @Override
     public int getNumeric() {
         return numeric;
     }

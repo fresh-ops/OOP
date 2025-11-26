@@ -29,4 +29,15 @@ public sealed interface Grade permits DifferentiatedGrade, CreditGrade {
      * @return {@code true} if this grade is differentiated, {@code false} otherwise
      */
     boolean isDifferentiated();
+
+    /**
+     * Returns the numeric value of a differentiated grade. If the grade is not differentiated
+     * throws an UnsupportedOperationException.
+     *
+     * @return the numeric value of this grade
+     * @throws UnsupportedOperationException if this grade is not differentiated
+     */
+    default int getNumeric() {
+        throw new UnsupportedOperationException();
+    }
 }

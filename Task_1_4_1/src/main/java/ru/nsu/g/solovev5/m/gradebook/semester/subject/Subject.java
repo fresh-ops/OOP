@@ -42,7 +42,7 @@ public class Subject {
 
     private static void validateName(String name) {
         if (name == null) {
-            throw new IllegalSubjectNameException(name);
+            throw new IllegalSubjectNameException(null);
         }
 
         if (name.isBlank()) {
