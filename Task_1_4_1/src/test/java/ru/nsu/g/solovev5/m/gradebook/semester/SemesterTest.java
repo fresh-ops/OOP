@@ -3,7 +3,9 @@ package ru.nsu.g.solovev5.m.gradebook.semester;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.OptionalDouble;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,7 +13,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.nsu.g.solovev5.m.gradebook.semester.exceptions.DuplicateSemesterSubjectsException;
 import ru.nsu.g.solovev5.m.gradebook.semester.exceptions.IllegalSemesterNumberException;
-import ru.nsu.g.solovev5.m.gradebook.semester.exceptions.NoDifferentiatedSubjectsException;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.AssessmentType;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.Subject;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.grades.CreditGrade;
@@ -45,7 +46,8 @@ class SemesterTest {
         return Stream.of(
             Arguments.of("Ordinary semester", 3, new Subject[]{mathCredit, oop, pe, history}),
             Arguments.of("First semester", Semester.LOWER_NUMBER_BOUND, new Subject[]{english}),
-            Arguments.of("Last semester", Semester.UPPER_NUMBER_BOUND, new Subject[]{pe, mathCredit}),
+            Arguments.of("Last semester", Semester.UPPER_NUMBER_BOUND,
+                new Subject[]{pe, mathCredit}),
             Arguments.of("Empty semester", 6, new Subject[]{})
         );
     }
@@ -106,9 +108,17 @@ class SemesterTest {
     @MethodSource
     void checkAverage(String message, double average, int number, Subject... subjects) {
         var semester = Semester.of(number, subjects);
+        var calculatedAverage = assertDoesNotThrow(
+            semester::average,
+            message + ". Calculating an average should not cause any exception"
+        );
 
+        assertTrue(
+            calculatedAverage.isPresent(),
+            message + ". If the semester has the right state, the value should be present"
+        );
         assertEquals(
-            average, semester.average(),
+            average, calculatedAverage.getAsDouble(),
             message
         );
     }
@@ -124,23 +134,22 @@ class SemesterTest {
 
     @Test
     void checkFailedAverage() {
-        assertThrows(
-            NoDifferentiatedSubjectsException.class,
-            () -> Semester.of(7, pe, history, mathCredit).average(),
-            "If semester has no differentiated subjects the exception should be thrown"
+        assertEquals(
+            OptionalDouble.empty(),
+            Semester.of(7, pe, history, mathCredit).average(),
+            "If semester has no differentiated subjects, the result should be empty"
         );
     }
 
     @Test
     void checkToString() {
-        var semester = Semester.of(3, mathCredit, oop);
+        var semester = Semester.of(3, oop);
 
         assertEquals(
             """
                 Семестр 3
                 Предмет  Вид контроля      Оценка
-                OOP      Выпускная работа  Отлично
-                Math     Зачёт             Зачёт""",
+                OOP      Выпускная работа  Отлично""",
             semester.toString()
         );
     }

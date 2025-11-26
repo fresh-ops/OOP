@@ -2,11 +2,12 @@ package ru.nsu.g.solovev5.m.gradebook.semester;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.OptionalDouble;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import ru.nsu.g.solovev5.m.gradebook.semester.exceptions.DuplicateSemesterSubjectsException;
 import ru.nsu.g.solovev5.m.gradebook.semester.exceptions.IllegalSemesterNumberException;
-import ru.nsu.g.solovev5.m.gradebook.semester.exceptions.NoDifferentiatedSubjectsException;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.AssessmentType;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.Subject;
 import ru.nsu.g.solovev5.m.gradebook.semester.subject.grades.Grade;
@@ -92,12 +93,16 @@ public class Semester implements Iterable<Subject> {
      *
      * @return the average of all differentiated grades
      */
-    public double average() {
+    public OptionalDouble average() {
         return subjects.stream()
             .map(Subject::getGrade)
             .filter(Grade::isDifferentiated)
             .mapToDouble(grade -> (double) grade.getNumeric())
-            .average().orElseThrow(() -> new NoDifferentiatedSubjectsException(number));
+            .average();
+    }
+
+    public Stream<Subject> stream() {
+        return subjects.stream();
     }
 
     @Override
