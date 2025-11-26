@@ -4,9 +4,16 @@ package ru.nsu.g.solovev5.m.gradebook.semester.subject.grades;
  * Represents a binary grade in terms of pass or fail.
  */
 public enum CreditGrade implements Grade {
-    FAIL("Незачёт"), PASS("Зачёт");
+    /**
+     * Failed subject.
+     */
+    FAIL("Незачёт"),
+    /**
+     * Passed subject.
+     */
+    PASS("Зачёт");
 
-    public final String name;
+    private final String name;
 
     CreditGrade(String name) {
         this.name = name;

@@ -7,7 +7,7 @@ public enum AssessmentType {
     EXAM("Экзамен", true), CREDIT("Зачёт", false),
     DIFFERENTIATED_CREDIT("Дифференцированный зачёт", true), THESIS("Выпускная работа", true);
 
-    public final String name;
+    private final String name;
     private final boolean isDifferentiated;
 
     AssessmentType(String name, boolean isDifferentiated) {
