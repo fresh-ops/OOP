@@ -20,6 +20,7 @@ import ru.nsu.g.solovev5.m.gradebook.student.Student;
  * A student grade book class.
  */
 public class GradeBook {
+    private final int supplementSubjectsCount;
     private final Student student;
     private final List<Semester> semesters;
 
@@ -28,7 +29,8 @@ public class GradeBook {
      *
      * @param student an owner of this grade book
      */
-    public GradeBook(Student student) {
+    public GradeBook(Student student, int supplementSubjectsCount) {
+        this.supplementSubjectsCount = supplementSubjectsCount;
         this.student = student;
         this.semesters = new ArrayList<>();
     }
@@ -122,24 +124,25 @@ public class GradeBook {
      * @return {@code true} if the diploma with honor is possible, {@code false} otherwise
      */
     public boolean canBeHonored() {
-        var supplement = getSupplement();
-        var hasSatisfactory = supplement.values().stream()
+        var currentSupplement = getCurrentSupplement();
+        var hasSatisfactory = currentSupplement.values().stream()
             .anyMatch(grade -> grade == DifferentiatedGrade.SATISFACTORY);
-        var excellentCount = supplement.values().stream()
+        var excellentCount = currentSupplement.values().stream()
             .filter(grade -> grade == DifferentiatedGrade.EXCELLENT).count();
         var thesis = getThesis();
+        var subjectsLeft = supplementSubjectsCount - currentSupplement.size();
 
         return thesis.map(subject ->
             subject.getGrade() == DifferentiatedGrade.EXCELLENT
-                && excellentCount * 4 >= 3L * supplement.size()
+                && (excellentCount + subjectsLeft) * 4 >= 3L * supplementSubjectsCount
                 && !hasSatisfactory
         ).orElseGet(() ->
-            excellentCount * 4 >= 3L * supplement.size()
+            excellentCount * 4 >= 3L * currentSupplement.size()
                 && !hasSatisfactory
         );
     }
 
-    private Map<String, Grade> getSupplement() {
+    private Map<String, Grade> getCurrentSupplement() {
         return semesters.stream()
             .flatMap(Semester::stream)
             .filter(subject -> subject.getType().isDifferentiated())

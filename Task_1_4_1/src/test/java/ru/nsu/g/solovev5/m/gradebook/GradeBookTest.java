@@ -54,7 +54,7 @@ class GradeBookTest {
 
     @BeforeEach
     void setUp() {
-        book = new GradeBook(new Student("Митрофан", "Простаков"));
+        book = new GradeBook(new Student("Митрофан", "Простаков"), 35);
     }
 
     @Test
@@ -94,7 +94,10 @@ class GradeBookTest {
 
     @Test
     void checkBudget() {
-        var budgetary = new GradeBook(new Student("Александр", "Чацкий", EducationBasis.BUDGETARY));
+        var budgetary = new GradeBook(
+            new Student("Александр", "Чацкий", EducationBasis.BUDGETARY),
+            35
+        );
         assertTrue(
             budgetary.canBeBudget(),
             "The student already with budgetary-basis stays with it"
@@ -159,7 +162,7 @@ class GradeBookTest {
             "If there are a SATISFACTORY grade, the diploma cannot be with honor"
         );
 
-        var honor = new GradeBook(new Student("Александр", "Чацкий", EducationBasis.BUDGETARY));
+        var honor = new GradeBook(new Student("Александр", "Чацкий", EducationBasis.BUDGETARY), 35);
         honor.add(firstSemester);
         honor.add(excellentSemester);
         honor.add(thirdSemester);
