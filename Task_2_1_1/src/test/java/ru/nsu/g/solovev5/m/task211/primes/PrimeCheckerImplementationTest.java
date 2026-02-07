@@ -11,6 +11,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+/**
+ * A suite of common tests for {@link PrimeChecker} implementations.
+ */
 public abstract class PrimeCheckerImplementationTest {
     PrimeChecker checker;
 
