@@ -68,14 +68,14 @@ public abstract class PrimeCheckerImplementationTest {
 
     @ParameterizedTest
     @MethodSource
-    void shouldReturnTrueWhenThereIsANonPrime(int[] numbers, String message) {
+    void shouldReturnTrueWhenThereIsNonPrime(int[] numbers, String message) {
         assertTrue(
             checker.checkIfContainsNonPrime(numbers),
             "Checker should return true when there is a non-prime." + message
         );
     }
 
-    static Stream<Arguments> shouldReturnTrueWhenThereIsANonPrime() {
+    static Stream<Arguments> shouldReturnTrueWhenThereIsNonPrime() {
         return Stream.of(
             Arguments.of(new int[]{2, 3, 5, 7, 0}, "A non-prime is in the end."),
             Arguments.of(new int[]{-101, 17, 19, 73, 11}, "A non-prime is in the beginning."),
