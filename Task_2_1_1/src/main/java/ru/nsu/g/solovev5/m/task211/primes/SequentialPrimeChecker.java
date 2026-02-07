@@ -5,13 +5,13 @@ package ru.nsu.g.solovev5.m.task211.primes;
  */
 public class SequentialPrimeChecker implements PrimeChecker {
     @Override
-    public boolean checkIfContainsPrime(int[] numbers) {
+    public boolean checkIfContainsNonPrime(int[] numbers) {
         if (numbers == null) {
             return false;
         }
 
         for (var number : numbers) {
-            if (checkIfPrime(number)) {
+            if (!checkIfPrime(number)) {
                 return true;
             }
         }

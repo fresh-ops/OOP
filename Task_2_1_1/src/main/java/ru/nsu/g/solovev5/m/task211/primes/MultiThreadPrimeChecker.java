@@ -18,19 +18,19 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
     }
 
     @Override
-    public boolean checkIfContainsPrime(int[] numbers) {
+    public boolean checkIfContainsNonPrime(int[] numbers) {
         if (numbers ==  null || numbers.length == 0) {
             return false;
         }
 
         var chunkSize = (numbers.length + threadCount - 1) / threadCount;
-        AtomicBoolean result = new AtomicBoolean(false);
+        AtomicBoolean nonPrimeFound = new AtomicBoolean(false);
         var threads = new Thread[threadCount];
 
         for (int i = 0; i < threadCount; i++) {
             var start = i * chunkSize;
             var end = Math.min((i + 1) * chunkSize,  numbers.length);
-            threads[i] = new PrimeCheckerThread(numbers, start, end, result);
+            threads[i] = new PrimeCheckerThread(numbers, start, end, nonPrimeFound);
             threads[i].start();
         }
 
@@ -42,46 +42,46 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
             }
         }
 
-        return result.get();
+        return nonPrimeFound.get();
     }
 
     /**
-     * A thread that searches a prime number in a certain interval in array.
+     * A thread that checks numbers primality in a certain interval in array.
      */
     private class PrimeCheckerThread extends Thread {
         private final int[] numbers;
         private final int start;
         private final int end;
-        private final AtomicBoolean primeFound;
+        private final AtomicBoolean nonPrimeFound;
 
         /**
          * Creates a new PrimeCheckerThread.
          *
-         * @param numbers an array of numbers where to search for a prime number
-         * @param start a position to start search from
-         * @param end a position to stop search at
-         * @param primeFound a flag if a prime number found somewhere
+         * @param numbers an array of numbers where to check numbers
+         * @param start a position to start check from
+         * @param end a position to stop check at
+         * @param nonPrimeFound a flag if a non-prime number found somewhere
          */
-        PrimeCheckerThread(int[] numbers, int start, int end,  AtomicBoolean primeFound) {
+        PrimeCheckerThread(int[] numbers, int start, int end,  AtomicBoolean nonPrimeFound) {
             this.numbers = numbers;
             this.start = start;
             this.end = end;
-            this.primeFound = primeFound;
+            this.nonPrimeFound = nonPrimeFound;
         }
 
         @Override
         public void run() {
-            if (start >= end || primeFound.get()) {
+            if (start >= end || nonPrimeFound.get()) {
                 return;
             }
 
-            for (int i = start; i < end && !primeFound.get(); i++) {
-                if (primeFound.get() || Thread.currentThread().isInterrupted()) {
+            for (int i = start; i < end; i++) {
+                if (nonPrimeFound.get() || Thread.currentThread().isInterrupted()) {
                     return;
                 }
 
-                if (checkIfPrime(numbers[i])) {
-                    primeFound.set(true);
+                if (!checkIfPrime(numbers[i])) {
+                    nonPrimeFound.set(true);
                     return;
                 }
             }

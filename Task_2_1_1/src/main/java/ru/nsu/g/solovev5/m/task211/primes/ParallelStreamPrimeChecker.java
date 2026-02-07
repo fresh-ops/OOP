@@ -7,10 +7,10 @@ import java.util.Arrays;
  */
 public class ParallelStreamPrimeChecker implements PrimeChecker {
     @Override
-    public boolean checkIfContainsPrime(int[] numbers) {
+    public boolean checkIfContainsNonPrime(int[] numbers) {
         if (numbers == null) {
             return false;
         }
-        return Arrays.stream(numbers).parallel().anyMatch(this::checkIfPrime);
+        return Arrays.stream(numbers).parallel().anyMatch(n -> !checkIfPrime(n));
     }
 }

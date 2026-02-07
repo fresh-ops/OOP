@@ -1,17 +1,17 @@
 package ru.nsu.g.solovev5.m.task211.primes;
 
 /**
- * A common interface for searching a prime number in an array.
+ * A common interface for checking numbers primality.
  */
 public interface PrimeChecker {
     /**
-     * Checks if passed numbers contain at least one prime number.
+     * Checks if passed numbers contain at least one non-prime number.
      *
      * @param numbers the numbers to check
-     * @return {@code true} if the sequence of numbers contains a prime number, {@code false}
+     * @return {@code true} if the sequence of numbers contains a non-prime number, {@code false}
      *     otherwise
      */
-    boolean checkIfContainsPrime(int[] numbers);
+    boolean checkIfContainsNonPrime(int[] numbers);
 
     /**
      * Checks if passed number is prime.
