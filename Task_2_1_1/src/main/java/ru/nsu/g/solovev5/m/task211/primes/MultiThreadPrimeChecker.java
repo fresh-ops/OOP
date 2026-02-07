@@ -19,7 +19,7 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
 
     @Override
     public boolean checkIfContainsNonPrime(int[] numbers) {
-        if (numbers ==  null || numbers.length == 0) {
+        if (numbers == null || numbers.length == 0) {
             return false;
         }
 
@@ -29,7 +29,7 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
 
         for (int i = 0; i < threadCount; i++) {
             var start = i * chunkSize;
-            var end = Math.min((i + 1) * chunkSize,  numbers.length);
+            var end = Math.min((i + 1) * chunkSize, numbers.length);
             threads[i] = new PrimeCheckerThread(numbers, start, end, nonPrimeFound);
             threads[i].start();
         }
@@ -45,6 +45,13 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
         return nonPrimeFound.get();
     }
 
+    @Override
+    public String toString() {
+        return "MultiThreadPrimeChecker{"
+            + "threadCount=" + threadCount
+            + '}';
+    }
+
     /**
      * A thread that checks numbers primality in a certain interval in array.
      */
@@ -57,12 +64,12 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
         /**
          * Creates a new PrimeCheckerThread.
          *
-         * @param numbers an array of numbers where to check numbers
-         * @param start a position to start check from
-         * @param end a position to stop check at
+         * @param numbers       an array of numbers where to check numbers
+         * @param start         a position to start check from
+         * @param end           a position to stop check at
          * @param nonPrimeFound a flag if a non-prime number found somewhere
          */
-        PrimeCheckerThread(int[] numbers, int start, int end,  AtomicBoolean nonPrimeFound) {
+        PrimeCheckerThread(int[] numbers, int start, int end, AtomicBoolean nonPrimeFound) {
             this.numbers = numbers;
             this.start = start;
             this.end = end;

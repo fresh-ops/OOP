@@ -18,4 +18,9 @@ public class SequentialPrimeChecker implements PrimeChecker {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "SequentialPrimeChecker{}";
+    }
 }

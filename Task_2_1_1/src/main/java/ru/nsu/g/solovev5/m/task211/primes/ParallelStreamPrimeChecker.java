@@ -13,4 +13,9 @@ public class ParallelStreamPrimeChecker implements PrimeChecker {
         }
         return Arrays.stream(numbers).parallel().anyMatch(n -> !checkIfPrime(n));
     }
+
+    @Override
+    public String toString() {
+        return "ParallelStreamPrimeChecker{}";
+    }
 }
