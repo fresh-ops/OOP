@@ -55,3 +55,5 @@ var duration = averageTime(
     TEST_COUNT
 );
 ```
+## Результаты тестирования
+![](./speedComparison.png)
