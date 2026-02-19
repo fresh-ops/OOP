@@ -15,7 +15,7 @@ class PrimeCheckerTest {
     @ValueSource(ints = {2, 3, 5, 7, 127, Integer.MAX_VALUE})
     void shouldRecognizePrimeNumber(int prime) {
         assertTrue(
-            checker.checkIfPrime(prime),
+            checker.isPrime(prime),
             prime + " should be prime"
         );
     }
@@ -24,7 +24,7 @@ class PrimeCheckerTest {
     @ValueSource(ints = {0, 1, -1, 4, 9, 25, Integer.MIN_VALUE, Integer.MAX_VALUE - 1})
     void shouldRejectNonPrimeNumber(int nonPrime) {
         assertFalse(
-            checker.checkIfPrime(nonPrime),
+            checker.isPrime(nonPrime),
             nonPrime + " should not be prime"
         );
     }
@@ -36,7 +36,7 @@ class PrimeCheckerTest {
     })
     void shouldHandleBigNumber(int number, boolean expected) {
         assertEquals(
-            expected, checker.checkIfPrime(number),
+            expected, checker.isPrime(number),
             number + " handled incorrectly due to overflow"
         );
     }

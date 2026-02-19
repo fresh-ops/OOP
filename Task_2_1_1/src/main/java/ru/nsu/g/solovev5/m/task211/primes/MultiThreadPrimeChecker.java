@@ -18,7 +18,7 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
     }
 
     @Override
-    public boolean checkIfContainsNonPrime(int[] numbers) {
+    public boolean containsNonPrime(int[] numbers) {
         if (numbers == null || numbers.length == 0) {
             return false;
         }
@@ -87,7 +87,7 @@ public class MultiThreadPrimeChecker implements PrimeChecker {
                     return;
                 }
 
-                if (!checkIfPrime(numbers[i])) {
+                if (!isPrime(numbers[i])) {
                     nonPrimeFound.set(true);
                     return;
                 }

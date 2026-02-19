@@ -11,7 +11,7 @@ public interface PrimeChecker {
      * @return {@code true} if the sequence of numbers contains a non-prime number, {@code false}
      *     otherwise
      */
-    boolean checkIfContainsNonPrime(int[] numbers);
+    boolean containsNonPrime(int[] numbers);
 
     /**
      * Checks if passed number is prime.
@@ -19,7 +19,7 @@ public interface PrimeChecker {
      * @param number the number to check
      * @return {@code true} if the number is prime, {@code false} otherwise
      */
-    default boolean checkIfPrime(int number) {
+    default boolean isPrime(int number) {
         if (number <= 1) {
             return false;
         }

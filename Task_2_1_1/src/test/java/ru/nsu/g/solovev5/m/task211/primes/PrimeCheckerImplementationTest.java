@@ -29,7 +29,7 @@ public abstract class PrimeCheckerImplementationTest {
         var numbers = new int[]{2, 3, 5, 7, 11, Integer.MAX_VALUE};
 
         assertFalse(
-            checker.checkIfContainsNonPrime(numbers),
+            checker.containsNonPrime(numbers),
             "Checker should return false when all numbers are prime."
         );
     }
@@ -39,7 +39,7 @@ public abstract class PrimeCheckerImplementationTest {
         var numbers = new int[]{4, 6, 8, 9, 0, Integer.MIN_VALUE};
 
         assertTrue(
-            checker.checkIfContainsNonPrime(numbers),
+            checker.containsNonPrime(numbers),
             "Checker should return true when all numbers are non-prime."
         );
     }
@@ -48,7 +48,7 @@ public abstract class PrimeCheckerImplementationTest {
     void shouldReturnFalseWhenArrayIsNull() {
         assertFalse(
             assertDoesNotThrow(
-                () -> checker.checkIfContainsNonPrime(null),
+                () -> checker.containsNonPrime(null),
                 "Checker should not fail when the array is null."
             ),
             "Checker should return false when the array is null."
@@ -59,7 +59,7 @@ public abstract class PrimeCheckerImplementationTest {
     void shouldReturnFalseWhenArrayIsEmpty() {
         assertFalse(
             assertDoesNotThrow(
-                () -> checker.checkIfContainsNonPrime(new int[0]),
+                () -> checker.containsNonPrime(new int[0]),
                 "Checker should not fail when the array is empty."
             ),
             "Checker should return false when the array is empty."
@@ -70,7 +70,7 @@ public abstract class PrimeCheckerImplementationTest {
     @MethodSource
     void shouldReturnTrueWhenThereIsNonPrime(int[] numbers, String message) {
         assertTrue(
-            checker.checkIfContainsNonPrime(numbers),
+            checker.containsNonPrime(numbers),
             "Checker should return true when there is a non-prime." + message
         );
     }
