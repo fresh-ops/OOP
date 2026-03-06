@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task221;
 
 import com.beust.jcommander.JCommander;
+import ru.nsu.g.solovev5.m.task221.pizzeria.Pizzeria;
 
 /**
  * The program starter.
@@ -18,6 +19,20 @@ public class Main {
             .build()
             .parse(args);
 
-        System.out.println(arguments);
+        var pizzeria = new Pizzeria();
+        pizzeria.work();
+        try {
+            Thread.sleep(1_000);
+        } catch (InterruptedException e) {
+            System.out.println("External interruption. Stopping...");
+        } finally {
+            while (!pizzeria.isStopped()) {
+                try {
+                    pizzeria.stop();
+                } catch (InterruptedException e) {
+                    System.out.println("External interruption. Stopping...");
+                }
+            }
+        }
     }
 }
