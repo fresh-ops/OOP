@@ -1,25 +1,28 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.orders;
 
+import ru.nsu.g.solovev5.m.task221.pizzeria.pizza.Pizza;
 import ru.nsu.g.solovev5.m.task221.pizzeria.pizza.PizzaInMenu;
 
 /**
  * A pizza order.
  */
 public class Order {
-    private final PizzaInMenu pizza;
+    private final PizzaInMenu menuPosition;
     private final int id;
+    private final Pizza pizza;
     private OrderStatus status;
 
     /**
      * Creates a new Order.
      *
-     * @param pizza the ordered pizza
+     * @param menuPosition the ordered pizza
      * @param id the order id
      */
-    public Order(PizzaInMenu pizza, int id) {
-        this.pizza = pizza;
+    public Order(PizzaInMenu menuPosition, int id) {
+        this.menuPosition = menuPosition;
         this.id = id;
         this.status = OrderStatus.NEW;
+        this.pizza = Pizza.fromMenu(menuPosition);
     }
 
     /**
@@ -53,6 +56,15 @@ public class Order {
      * @return the ordered pizza type
      */
     public PizzaInMenu getPizzaType() {
+        return menuPosition;
+    }
+
+    /**
+     * Returns the ordered pizza.
+     *
+     * @return the ordered pizza
+     */
+    public Pizza getPizza() {
         return pizza;
     }
 }
