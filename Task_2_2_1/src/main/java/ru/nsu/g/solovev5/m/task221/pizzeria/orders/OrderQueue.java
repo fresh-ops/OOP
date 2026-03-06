@@ -40,7 +40,7 @@ public class OrderQueue {
      *
      * @return an order from queue
      */
-    public Order poll() throws InterruptedException {
+    public Order take() throws InterruptedException {
         lock.lock();
         try {
             while (queue.isEmpty()) {
