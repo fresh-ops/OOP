@@ -30,6 +30,7 @@ public class Courier implements Runnable {
                 orders = warehouse.takeAtMost(bagCapacity);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                break;
             }
 
             updateStatuses(orders);
