@@ -26,7 +26,7 @@ public class Main {
         var pizzeria = new Pizzeria(config, logger);
         pizzeria.work();
         try {
-            Thread.sleep(1_000);
+            Thread.sleep(config.getWorkingTime());
         } catch (InterruptedException e) {
             System.out.println("External interruption. Stopping...");
         } finally {
