@@ -40,6 +40,7 @@ public class Baker implements Runnable {
                 break;
             }
 
+            order.promoteStatus();
             cook(order);
             order.promoteStatus();
 
@@ -77,7 +78,6 @@ public class Baker implements Runnable {
      * @param order the order to cook
      */
     private void cook(Order order) {
-        order.promoteStatus();
         var pizza = order.getPizza();
 
         while (!pizza.isCooked()) {
