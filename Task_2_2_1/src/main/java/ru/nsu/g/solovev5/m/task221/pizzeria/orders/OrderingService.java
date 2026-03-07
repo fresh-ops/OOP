@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import ru.nsu.g.solovev5.m.task221.logging.OrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.pizza.PizzaInMenu;
 
 /**
@@ -21,6 +22,7 @@ public class OrderingService {
     private final AtomicBoolean running = new AtomicBoolean(false);
     private final Random random = new Random();
     private final OrderQueue orderQueue;
+    private final OrderLogger logger;
 
     private ScheduledExecutorService scheduler;
 
@@ -29,8 +31,9 @@ public class OrderingService {
      *
      * @param orderQueue a queue to put orders
      */
-    public OrderingService(final OrderQueue orderQueue) {
+    public OrderingService(OrderQueue orderQueue, OrderLogger logger) {
         this.orderQueue = orderQueue;
+        this.logger = logger;
         scheduler = createScheduler();
     }
 
@@ -80,6 +83,7 @@ public class OrderingService {
         scheduler.schedule(() -> {
                 var newOrder = createOrder();
                 newOrder.promoteStatus();
+                logger.log(newOrder);
                 orderQueue.put(newOrder);
 
                 scheduleOrder();

@@ -1,5 +1,6 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.actors;
 
+import ru.nsu.g.solovev5.m.task221.logging.OrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.Order;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.OrderQueue;
 import ru.nsu.g.solovev5.m.task221.pizzeria.warehouse.PizzaWarehouse;
@@ -11,6 +12,7 @@ public class Baker implements Runnable {
     private final int cookingSpeed;
     private final OrderQueue orders;
     private final PizzaWarehouse warehouse;
+    private final OrderLogger logger;
 
     private Order interruptedOrder;
 
@@ -20,11 +22,14 @@ public class Baker implements Runnable {
      * @param cookingSpeed the speed of cooking a pizza
      * @param orders       the queue of orders
      * @param warehouse    the pizza warehouse
+     * @param logger       the logger to log actions
      */
-    public Baker(int cookingSpeed, OrderQueue orders, PizzaWarehouse warehouse) {
+    public Baker(int cookingSpeed, OrderQueue orders, PizzaWarehouse warehouse,
+                 OrderLogger logger) {
         this.cookingSpeed = cookingSpeed;
         this.orders = orders;
         this.warehouse = warehouse;
+        this.logger = logger;
     }
 
     @Override
@@ -40,11 +45,13 @@ public class Baker implements Runnable {
                 break;
             }
 
-            order.promoteStatus();
-            cook(order);
-            order.promoteStatus();
-
             try {
+                order.promoteStatus();
+                logger.log(order);
+                cook(order);
+
+                order.promoteStatus();
+                logger.log(order);
                 warehouse.put(order);
             } catch (InterruptedException e) {
                 interruptedOrder = order;
@@ -77,11 +84,12 @@ public class Baker implements Runnable {
      *
      * @param order the order to cook
      */
-    private void cook(Order order) {
+    private void cook(Order order) throws InterruptedException {
         var pizza = order.getPizza();
 
         while (!pizza.isCooked()) {
             pizza.cookFor(cookingSpeed);
+            Thread.sleep(10);
         }
     }
 }
