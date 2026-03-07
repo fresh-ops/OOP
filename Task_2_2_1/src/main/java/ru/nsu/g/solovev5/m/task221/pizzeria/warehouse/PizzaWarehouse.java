@@ -16,7 +16,7 @@ public class PizzaWarehouse {
     private final Condition notEmpty = lock.newCondition();
     private final Condition notFull = lock.newCondition();
     private final int capacity;
-    private final List<Order> orders;
+    protected final List<Order> orders;
 
     /**
      * Creates a new warehouse with {@code capacity} places for pizza.

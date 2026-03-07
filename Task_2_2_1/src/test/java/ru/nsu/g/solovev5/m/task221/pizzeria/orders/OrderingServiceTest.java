@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.g.solovev5.m.task221.pizzeria.DummyOrderLogger;
 
 class OrderingServiceTest {
     @Test
