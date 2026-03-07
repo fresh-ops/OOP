@@ -1,6 +1,9 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.orders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,9 +19,7 @@ class OrderQueueTest {
     void take_should_keepOrder(List<Order> orders) {
         var queue = new OrderQueue();
         for (var order : orders) {
-            assertDoesNotThrow(() -> {
-                queue.put(order);
-            });
+            assertDoesNotThrow(() -> queue.put(order));
         }
 
         for (var order : orders) {
@@ -29,17 +30,15 @@ class OrderQueueTest {
 
     @ParameterizedTest
     @MethodSource("validOrders")
-   void isEmpty_should_returnFalse_whenThereIsElements(List<Order> orders) {
+    void isEmpty_should_returnFalse_whenThereIsElements(List<Order> orders) {
         var queue = new OrderQueue();
 
         for (var order : orders) {
-            assertDoesNotThrow(() -> {
-                queue.put(order);
-            });
+            assertDoesNotThrow(() -> queue.put(order));
         }
 
         assertFalse(queue.isEmpty());
-   }
+    }
 
     static Stream<Arguments> validOrders() {
         return Stream.of(

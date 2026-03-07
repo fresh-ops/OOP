@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.orders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class OrderingServiceTest {
         assertFalse(orders.isEmpty());
         var previousId = orders.take().getId();
         while (!orders.isEmpty()) {
-            var id =  orders.take().getId();
+            var id = orders.take().getId();
             assertEquals(1, id - previousId);
             previousId = id;
         }
