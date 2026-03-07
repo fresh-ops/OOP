@@ -1,7 +1,9 @@
 package ru.nsu.g.solovev5.m.task221;
 
 import com.beust.jcommander.JCommander;
+import ru.nsu.g.solovev5.m.task221.logging.ConsoleOrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.Pizzeria;
+import ru.nsu.g.solovev5.m.task221.pizzeria.config.PizzeriaConfiguration;
 
 /**
  * The program starter.
@@ -19,7 +21,9 @@ public class Main {
             .build()
             .parse(args);
 
-        var pizzeria = new Pizzeria();
+        var config = PizzeriaConfiguration.loadDefault();
+        var logger = new ConsoleOrderLogger();
+        var pizzeria = new Pizzeria(config, logger);
         pizzeria.work();
         try {
             Thread.sleep(1_000);
