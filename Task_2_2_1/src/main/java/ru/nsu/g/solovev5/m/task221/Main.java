@@ -1,6 +1,5 @@
 package ru.nsu.g.solovev5.m.task221;
 
-import com.beust.jcommander.JCommander;
 import java.util.ArrayList;
 import ru.nsu.g.solovev5.m.task221.logging.ConsoleOrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.Pizzeria;
@@ -19,12 +18,7 @@ public class Main {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-        var arguments = new CommandLineArguments();
-        JCommander.newBuilder()
-            .addObject(arguments)
-            .build()
-            .parse(args);
-
+        var arguments = CommandLineArguments.parse(args);
         var config = PizzeriaConfiguration.loadDefault();
 
         var orders = new OrderQueue();
@@ -36,21 +30,13 @@ public class Main {
         employees.addAll(factory.createBakers(config.getBakersCookingSpeeds()));
         employees.addAll(factory.createCouriers(config.getCouriersBagCapacities()));
 
-
         var pizzeria = new Pizzeria(orders, warehouse, logger, employees);
         pizzeria.work();
         try {
             Thread.sleep(config.getWorkingTime());
+            pizzeria.stop();
         } catch (InterruptedException e) {
             System.out.println("External interruption. Stopping...");
-        } finally {
-            while (!pizzeria.isStopped()) {
-                try {
-                    pizzeria.stop();
-                } catch (InterruptedException e) {
-                    System.out.println("External interruption. Stopping...");
-                }
-            }
         }
     }
 }
