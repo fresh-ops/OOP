@@ -6,10 +6,10 @@ import java.util.List;
  * A configuration object that holds information about pizzeria.
  */
 public class PizzeriaConfiguration {
-    private static final int DEFAULT_WORKING_TIME = 1_000;
-    private static final int DEFAULT_WAREHOUSE_CAPACITY = 10;
-    private static final List<Integer> DEFAULT_BAKERS_COOKING_SPEED = List.of(5, 5, 5);
-    private static final List<Integer> DEFAULT_COURIER_BAG_CAPACITIES = List.of(2, 2, 2);
+    public static final int DEFAULT_WORKING_TIME = 1_000;
+    public static final int DEFAULT_WAREHOUSE_CAPACITY = 10;
+    public static final List<Integer> DEFAULT_BAKERS_COOKING_SPEED = List.of(5, 5, 5);
+    public static final List<Integer> DEFAULT_COURIER_BAG_CAPACITIES = List.of(2, 2, 2);
 
     private final int workingTime;
     private final int warehouseCapacity;
