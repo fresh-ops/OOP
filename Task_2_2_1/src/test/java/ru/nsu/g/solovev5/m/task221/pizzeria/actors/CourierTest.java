@@ -37,4 +37,14 @@ class CourierTest {
             assertFalse(warehouse.has(order));
         }
     }
+
+    @Test
+    void getBagCapacity_should_returnSameValueAsPassed() {
+        var warehouse = new DummyPizzaWarehouse(10);
+        var logger = new DummyOrderLogger();
+        var courier = new Courier(warehouse, 10, logger);
+
+        assertEquals(10, courier.getBagCapacity());
+        assertEquals(10, courier.getBagCapacity());
+    }
 }

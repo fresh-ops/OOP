@@ -62,6 +62,15 @@ public class Baker implements Runnable {
     }
 
     /**
+     * Returns the cooking speed of this baker.
+     *
+     * @return the cooking speed of this baker
+     */
+    public int getCookingSpeed() {
+        return cookingSpeed;
+    }
+
+    /**
      * Checks if this baker has interrupted order.
      *
      * @return {@code true} if there is an interrupted order, {@code false} otherwise

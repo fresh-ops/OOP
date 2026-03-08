@@ -1,9 +1,13 @@
 package ru.nsu.g.solovev5.m.task221;
 
 import com.beust.jcommander.JCommander;
+import java.util.ArrayList;
 import ru.nsu.g.solovev5.m.task221.logging.ConsoleOrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.Pizzeria;
+import ru.nsu.g.solovev5.m.task221.pizzeria.actors.ActorsFactory;
 import ru.nsu.g.solovev5.m.task221.pizzeria.config.PizzeriaConfiguration;
+import ru.nsu.g.solovev5.m.task221.pizzeria.orders.OrderQueue;
+import ru.nsu.g.solovev5.m.task221.pizzeria.warehouse.PizzaWarehouse;
 
 /**
  * The program starter.
@@ -22,8 +26,18 @@ public class Main {
             .parse(args);
 
         var config = PizzeriaConfiguration.loadDefault();
+
+        var orders = new OrderQueue();
+        var warehouse = new PizzaWarehouse(config.getWarehouseCapacity());
         var logger = new ConsoleOrderLogger();
-        var pizzeria = new Pizzeria(config, logger);
+        var factory = new ActorsFactory(orders, warehouse, logger);
+
+        var employees = new ArrayList<Runnable>();
+        employees.addAll(factory.createBakers(config.getBakersCookingSpeeds()));
+        employees.addAll(factory.createCouriers(config.getCouriersBagCapacities()));
+
+
+        var pizzeria = new Pizzeria(orders, warehouse, logger, employees);
         pizzeria.work();
         try {
             Thread.sleep(config.getWorkingTime());

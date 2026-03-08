@@ -65,4 +65,15 @@ class BakerTest {
         assertEquals(OrderStatus.IN_WAREHOUSE, order.getStatus());
         assertTrue(warehouse.has(order));
     }
+
+    @Test
+    void getCookingSpeed_should_returnSameValueAsPassed() {
+        var orders = new OrderQueue();
+        var warehouse = new DummyPizzaWarehouse(10);
+        var logger = new DummyOrderLogger();
+        var baker = new Baker(10, orders, warehouse, logger);
+
+        assertEquals(10, baker.getCookingSpeed());
+        assertEquals(10, baker.getCookingSpeed());
+    }
 }

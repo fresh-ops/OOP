@@ -43,6 +43,15 @@ public class Courier implements Runnable {
     }
 
     /**
+     * Returns the bag capacity of this courier.
+     *
+     * @return the bag capacity of this courier
+     */
+    public int getBagCapacity() {
+        return bagCapacity;
+    }
+
+    /**
      * Updates the order statuses.
      *
      * @param orders the orders to promote
