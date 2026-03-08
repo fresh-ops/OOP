@@ -7,6 +7,12 @@ import com.beust.jcommander.Parameter;
  * A program command-line arguments storage.
  */
 public class CommandLineArguments {
+    /**
+     * Parses string args into a new object.
+     *
+     * @param args a string args
+     * @return a new CommandLineArguments
+     */
     public static CommandLineArguments parse(String[] args) {
         var arguments = new CommandLineArguments();
         JCommander.newBuilder()
