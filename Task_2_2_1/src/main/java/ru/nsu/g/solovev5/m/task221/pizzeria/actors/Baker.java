@@ -1,14 +1,16 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.actors;
 
+import java.util.List;
 import ru.nsu.g.solovev5.m.task221.logging.OrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.Order;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.OrderQueue;
+import ru.nsu.g.solovev5.m.task221.pizzeria.reaper.Reapable;
 import ru.nsu.g.solovev5.m.task221.pizzeria.warehouse.PizzaWarehouse;
 
 /**
  * This is a baker, he works three days without a salary.
  */
-public class Baker implements Runnable {
+public class Baker implements Runnable, Reapable {
     private final int cookingSpeed;
     private final OrderQueue orders;
     private final PizzaWarehouse warehouse;
@@ -30,6 +32,17 @@ public class Baker implements Runnable {
         this.orders = orders;
         this.warehouse = warehouse;
         this.logger = logger;
+    }
+
+    @Override
+    public List<Order> collect() {
+        if (interruptedOrder == null) {
+            return List.of();
+        }
+
+        var collected = List.of(interruptedOrder);
+        interruptedOrder = null;
+        return collected;
     }
 
     @Override

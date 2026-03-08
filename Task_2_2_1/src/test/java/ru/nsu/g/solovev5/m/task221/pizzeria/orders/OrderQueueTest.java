@@ -60,4 +60,27 @@ class OrderQueueTest {
         });
         assertTrue(queue.isEmpty());
     }
+
+    @Test
+    void collect_should_emptyTheQueue() {
+        var queue = new OrderQueue();
+        var orders = List.of(
+            new Order(PizzaInMenu.PEPPERONI, 0),
+            new Order(PizzaInMenu.MARGHERITA, 1),
+            new Order(PizzaInMenu.PEPPERONI, 2),
+            new Order(PizzaInMenu.PEPPERONI, 3),
+            new Order(PizzaInMenu.MARGHERITA, 4)
+        );
+
+        for (var order : orders) {
+            queue.put(order);
+        }
+
+        var collected = queue.collect();
+        assertEquals(orders.size(), collected.size());
+        for (var order : orders) {
+            assertTrue(collected.contains(order));
+        }
+        assertTrue(queue.isEmpty());
+    }
 }

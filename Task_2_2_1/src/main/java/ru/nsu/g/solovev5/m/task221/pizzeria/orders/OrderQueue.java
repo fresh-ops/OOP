@@ -1,17 +1,19 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.orders;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import ru.nsu.g.solovev5.m.task221.pizzeria.reaper.Reapable;
 
 /**
  * A queue of pizza orders.
  */
-public class OrderQueue {
+public class OrderQueue implements Reapable {
     private final List<Order> queue;
-    private final Lock lock =  new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
     private final Condition notEmpty = lock.newCondition();
 
     /**
@@ -19,6 +21,21 @@ public class OrderQueue {
      */
     public OrderQueue() {
         queue = new LinkedList<>();
+    }
+
+    @Override
+    public List<Order> collect() {
+        lock.lock();
+        try {
+            var collected = new ArrayList<Order>();
+            while (!queue.isEmpty()) {
+                collected.add(queue.remove(0));
+            }
+
+            return collected;
+        } finally {
+            lock.unlock();
+        }
     }
 
     /**

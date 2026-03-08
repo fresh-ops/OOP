@@ -7,11 +7,12 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.Order;
+import ru.nsu.g.solovev5.m.task221.pizzeria.reaper.Reapable;
 
 /**
  * A limited warehouse for holding pizza before delivery.
  */
-public class PizzaWarehouse {
+public class PizzaWarehouse implements Reapable {
     private final Lock lock = new ReentrantLock();
     private final Condition notEmpty = lock.newCondition();
     private final Condition notFull = lock.newCondition();
@@ -26,6 +27,22 @@ public class PizzaWarehouse {
     public PizzaWarehouse(int capacity) {
         this.capacity = capacity;
         orders = new LinkedList<>();
+    }
+
+    @Override
+    public List<Order> collect() {
+        lock.lock();
+        try {
+            var collected = new ArrayList<Order>();
+            while (!orders.isEmpty()) {
+                collected.add(orders.remove(0));
+            }
+
+            notEmpty.signalAll();
+            return collected;
+        } finally {
+            lock.unlock();
+        }
     }
 
     /**
