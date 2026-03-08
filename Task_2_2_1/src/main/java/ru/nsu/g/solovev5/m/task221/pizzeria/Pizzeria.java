@@ -40,6 +40,9 @@ public class Pizzeria {
      * Begins the pizzeria working.
      */
     public void work() {
+        if (!stopped) {
+            return;
+        }
         orderingService = new OrderingService(orderQueue, logger);
         orderingService.start();
 
@@ -52,6 +55,9 @@ public class Pizzeria {
      * Stops the pizzeria working.
      */
     public void stop() throws InterruptedException {
+        if (stopped) {
+            return;
+        }
         orderingService.stop();
 
         for (var employee : employees) {
