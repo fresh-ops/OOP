@@ -11,19 +11,19 @@ class PizzeriaConfigurationTest {
 
         assertEquals(
             PizzeriaConfiguration.DEFAULT_WORKING_TIME,
-            config.getWorkingTime()
+            config.workingTime()
         );
         assertEquals(
             PizzeriaConfiguration.DEFAULT_WAREHOUSE_CAPACITY,
-            config.getWarehouseCapacity()
+            config.warehouseCapacity()
         );
         assertEquals(
             PizzeriaConfiguration.DEFAULT_BAKERS_COOKING_SPEED,
-            config.getBakersCookingSpeeds()
+            config.bakersCookingSpeeds()
         );
         assertEquals(
             PizzeriaConfiguration.DEFAULT_COURIER_BAG_CAPACITIES,
-            config.getCouriersBagCapacities()
+            config.couriersBagCapacities()
         );
     }
 }
