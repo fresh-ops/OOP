@@ -1,6 +1,6 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.actors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class ActorsFactoryTest {
             new DummyOrderLogger()
         );
 
-        var bakers =  factory.createBakers(cookingSpeeds);
+        var bakers = factory.createBakers(cookingSpeeds);
 
         for (var i = 0; i < cookingSpeeds.size(); i++) {
             assertEquals(cookingSpeeds.get(i), bakers.get(i).getCookingSpeed());
@@ -33,7 +33,7 @@ class ActorsFactoryTest {
             new DummyOrderLogger()
         );
 
-        var couriers =  factory.createCouriers(bagCapacities);
+        var couriers = factory.createCouriers(bagCapacities);
 
         for (var i = 0; i < bagCapacities.size(); i++) {
             assertEquals(bagCapacities.get(i), couriers.get(i).getBagCapacity());
