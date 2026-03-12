@@ -110,7 +110,7 @@ public class Baker implements Runnable, Reapable {
 
         while (!pizza.isCooked()) {
             pizza.cookFor(cookingSpeed);
-            Thread.sleep(10);
+            Thread.sleep(1_000L / Math.max(1, Math.abs(cookingSpeed)));
         }
     }
 }
