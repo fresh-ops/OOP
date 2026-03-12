@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task221.pizzeria.actors;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import ru.nsu.g.solovev5.m.task221.logging.OrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.Order;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.OrderQueue;
@@ -16,7 +17,7 @@ public class Baker implements Runnable, Reapable {
     private final PizzaWarehouse warehouse;
     private final OrderLogger logger;
 
-    private Order interruptedOrder;
+    private final AtomicReference<Order> interruptedOrder = new AtomicReference<>();
 
     /**
      * Creates a new baker with the given cooking speed.
@@ -36,18 +37,16 @@ public class Baker implements Runnable, Reapable {
 
     @Override
     public List<Order> collect() {
-        if (interruptedOrder == null) {
+        var collected = interruptedOrder.getAndSet(null);
+        if (collected == null) {
             return List.of();
         }
-
-        var collected = List.of(interruptedOrder);
-        interruptedOrder = null;
-        return collected;
+        return List.of(collected);
     }
 
     @Override
     public void run() {
-        this.interruptedOrder = null;
+        interruptedOrder.set(null);
 
         Order order;
         while (!Thread.currentThread().isInterrupted()) {
@@ -67,7 +66,7 @@ public class Baker implements Runnable, Reapable {
                 logger.log(order);
                 warehouse.put(order);
             } catch (InterruptedException e) {
-                interruptedOrder = order;
+                interruptedOrder.set(order);
                 Thread.currentThread().interrupt();
                 break;
             }
@@ -89,7 +88,7 @@ public class Baker implements Runnable, Reapable {
      * @return {@code true} if there is an interrupted order, {@code false} otherwise
      */
     public boolean hasInterruptedOrder() {
-        return interruptedOrder != null;
+        return interruptedOrder.get() != null;
     }
 
     /**
@@ -98,7 +97,7 @@ public class Baker implements Runnable, Reapable {
      * @return the interrupted order.
      */
     public Order getInterruptedOrder() {
-        return interruptedOrder;
+        return interruptedOrder.get();
     }
 
     /**
