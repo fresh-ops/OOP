@@ -33,6 +33,7 @@ class BakerTest {
         var baker = new Baker(0, orders, warehouse, logger);
         var order = new Order(PizzaInMenu.PEPPERONI, 0);
 
+        order.promoteStatus();
         orders.put(order);
         var thread = new Thread(baker);
         thread.start();

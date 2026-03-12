@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import ru.nsu.g.solovev5.m.task221.logging.OrderLogger;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.Order;
 import ru.nsu.g.solovev5.m.task221.pizzeria.orders.OrderQueue;
+import ru.nsu.g.solovev5.m.task221.pizzeria.orders.OrderStatus;
 import ru.nsu.g.solovev5.m.task221.pizzeria.reaper.Reapable;
 import ru.nsu.g.solovev5.m.task221.pizzeria.warehouse.PizzaWarehouse;
 
@@ -58,12 +59,18 @@ public class Baker implements Runnable, Reapable {
             }
 
             try {
-                order.promoteStatus();
-                logger.log(order);
-                cook(order);
+                if (order.getStatus() == OrderStatus.PENDING) {
+                    order.promoteStatus();
+                }
 
-                order.promoteStatus();
                 logger.log(order);
+
+                if (order.getStatus() == OrderStatus.COOKING) {
+                    cook(order);
+                    order.promoteStatus();
+                    logger.log(order);
+                }
+
                 warehouse.put(order);
             } catch (InterruptedException e) {
                 interruptedOrder.set(order);
