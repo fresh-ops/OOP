@@ -7,7 +7,7 @@ import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
  * A food item in the game.
  *
  * @param position the position of this food item
- * @param type the type of this food item
+ * @param type     the type of this food item
  */
 public record Food(Point2D position, FoodType type) {
 
@@ -15,7 +15,7 @@ public record Food(Point2D position, FoodType type) {
      * Creates a new Food.
      *
      * @param position the position of this food item
-     * @param type the type of this food item
+     * @param type     the type of this food item
      */
     public Food {
         Objects.requireNonNull(position, "position must not be null");

@@ -40,7 +40,7 @@ public class BoardController {
     /**
      * Resizes canvas to fit the container.
      *
-     * @param width the new width of the container
+     * @param width  the new width of the container
      * @param height the new height of the container
      */
     private synchronized void resizeCanvas(double width, double height) {
@@ -52,7 +52,7 @@ public class BoardController {
     /**
      * Draws the game board.
      *
-     * @param rows the number of rows on the board
+     * @param rows    the number of rows on the board
      * @param columns the number of the columns on the board
      */
     private void drawBoard(int rows, int columns) {
