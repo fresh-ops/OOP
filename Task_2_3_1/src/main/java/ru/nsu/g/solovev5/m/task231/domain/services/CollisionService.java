@@ -1,15 +1,15 @@
-package ru.nsu.g.solovev5.m.task231.domain.collisions;
+package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**
  * Util class to check collisions between points.
  */
-public class CollisionChecker {
-    private CollisionChecker() {
+public class CollisionService {
+    private CollisionService() {
     }
 
     /**

@@ -1,87 +1,86 @@
-package ru.nsu.g.solovev5.m.task231.domain.collisions;
+package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class CollisionCheckerTest {
+class CollisionServiceTest {
     @Test
     void collides_should_returnTrue_when_passedSamePoint() {
         var point = new Point2D(0, 0);
 
-        assertTrue(CollisionChecker.collides(point, point));
+        assertTrue(CollisionService.collides(point, point));
     }
 
     @ParameterizedTest
     @MethodSource("generateEqualPoints")
     void collides_should_returnTrue_when_passedEqualPoints(Point2D a, Point2D b) {
-        assertTrue(CollisionChecker.collides(a, b));
+        assertTrue(CollisionService.collides(a, b));
     }
 
     @ParameterizedTest
     @MethodSource("generateDifferentPoints")
     void collides_should_returnFalse_when_passedDifferentPoints(Point2D a, Point2D b) {
-        assertFalse(CollisionChecker.collides(a, b));
+        assertFalse(CollisionService.collides(a, b));
     }
 
     @ParameterizedTest
     @MethodSource("generateSetAndPointFromIt")
     void collides_should_returnTrue_when_pointIsInSet(List<Point2D> points, Point2D point) {
-        assertTrue(CollisionChecker.collides(points, point));
+        assertTrue(CollisionService.collides(points, point));
     }
 
     @ParameterizedTest
     @MethodSource("generateSetAndPointNotIn")
     void collides_should_returnFalse_when_pointIsNotInSet(List<Point2D> points, Point2D point) {
-        assertFalse(CollisionChecker.collides(points, point));
+        assertFalse(CollisionService.collides(points, point));
     }
 
     @ParameterizedTest
     @MethodSource("generateCollidingSets")
     void collides_should_returnTrue_when_setsColliding(List<Point2D> a, List<Point2D> b) {
-        assertTrue(CollisionChecker.collides(a, b));
+        assertTrue(CollisionService.collides(a, b));
     }
 
     @ParameterizedTest
     @MethodSource("generateNonCollidingSets")
     void collides_should_returnFalse_when_setsNotColliding(List<Point2D> a, List<Point2D> b) {
-        assertFalse(CollisionChecker.collides(a, b));
+        assertFalse(CollisionService.collides(a, b));
     }
 
     @Test
     void collides_should_returnFalse_when_setIsEmpty() {
-        assertFalse(CollisionChecker.collides(List.of(), new Point2D(0, 0)));
+        assertFalse(CollisionService.collides(List.of(), new Point2D(0, 0)));
     }
 
     @Test
     void collides_should_returnFalse_when_firstSetIsEmpty() {
-        assertFalse(CollisionChecker.collides(List.of(), List.of(new Point2D(7, 6))));
+        assertFalse(CollisionService.collides(List.of(), List.of(new Point2D(7, 6))));
     }
 
     @Test
     void collides_should_returnFalse_when_secondSetIsEmpty() {
-        assertFalse(CollisionChecker.collides(List.of(new Point2D(2, 1)), List.of()));
+        assertFalse(CollisionService.collides(List.of(new Point2D(2, 1)), List.of()));
     }
 
     @Test
     void collides_should_returnFalse_when_bothSetsAreEmpty() {
-        assertFalse(CollisionChecker.collides(List.of(), List.of()));
+        assertFalse(CollisionService.collides(List.of(), List.of()));
     }
 
     @Test
     void collides_should_throwException_when_firstPointIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides((Point2D) null, new Point2D(0, 0))
+            () -> CollisionService.collides((Point2D) null, new Point2D(0, 0))
         );
     }
 
@@ -89,7 +88,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_secondPointIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides(new Point2D(0, 0), (Point2D) null)
+            () -> CollisionService.collides(new Point2D(0, 0), (Point2D) null)
         );
     }
 
@@ -97,7 +96,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_bothPointsAreNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides((Point2D) null, null)
+            () -> CollisionService.collides((Point2D) null, null)
         );
     }
 
@@ -105,7 +104,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_SetIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides((List<Point2D>) null, new Point2D(0, 0))
+            () -> CollisionService.collides((List<Point2D>) null, new Point2D(0, 0))
         );
     }
 
@@ -113,7 +112,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_singlePointIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides(List.of(new Point2D(0, 0)), (Point2D) null)
+            () -> CollisionService.collides(List.of(new Point2D(0, 0)), (Point2D) null)
         );
     }
 
@@ -121,7 +120,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_setAndPointAreNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides((List<Point2D>) null, (Point2D) null)
+            () -> CollisionService.collides((List<Point2D>) null, (Point2D) null)
         );
     }
 
@@ -129,7 +128,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_firstSetIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides((List<Point2D>) null, List.of(new Point2D(0, 0)))
+            () -> CollisionService.collides((List<Point2D>) null, List.of(new Point2D(0, 0)))
         );
     }
 
@@ -137,7 +136,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_secondSetIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides(List.of(new Point2D(0, 0)), (List<Point2D>) null)
+            () -> CollisionService.collides(List.of(new Point2D(0, 0)), (List<Point2D>) null)
         );
     }
 
@@ -145,7 +144,7 @@ class CollisionCheckerTest {
     void collides_should_throwException_when_bothSetsAreNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionChecker.collides((List<Point2D>) null, (List<Point2D>) null)
+            () -> CollisionService.collides((List<Point2D>) null, (List<Point2D>) null)
         );
     }
 

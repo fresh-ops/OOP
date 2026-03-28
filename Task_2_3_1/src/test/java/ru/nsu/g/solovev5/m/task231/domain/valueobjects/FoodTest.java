@@ -1,10 +1,10 @@
-package ru.nsu.g.solovev5.m.task231.domain.food;
+package ru.nsu.g.solovev5.m.task231.domain.valueobjects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
+import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 
 class FoodTest {
     @Test

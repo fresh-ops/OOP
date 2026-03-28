@@ -1,7 +1,7 @@
 package ru.nsu.g.solovev5.m.task231.application.transport;
 
 import java.util.List;
-import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**
  * A transferable copy of the snake.

@@ -1,10 +1,11 @@
-package ru.nsu.g.solovev5.m.task231.domain.snake;
+package ru.nsu.g.solovev5.m.task231.domain.entities;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 import java.util.Objects;
-import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
+import ru.nsu.g.solovev5.m.task231.domain.exceptions.SnakeZeroLengthException;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**
  * A model of a snake.

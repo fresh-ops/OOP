@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.domain.food;
+package ru.nsu.g.solovev5.m.task231.domain.valueobjects;
 
 /**
  * A type of food.

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import ru.nsu.g.solovev5.m.task231.application.transport.GameStateRecord;
 import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
-import ru.nsu.g.solovev5.m.task231.domain.snake.Snake;
+import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
 
 /**
  * A game coordinator object.

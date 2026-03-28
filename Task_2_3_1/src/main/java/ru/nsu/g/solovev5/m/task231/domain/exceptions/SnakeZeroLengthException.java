@@ -1,6 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.domain.snake;
-
-import ru.nsu.g.solovev5.m.task231.domain.shared.DomainException;
+package ru.nsu.g.solovev5.m.task231.domain.exceptions;
 
 /**
  * An exception occurred when trying to pop the tail of the snake with only one segment.

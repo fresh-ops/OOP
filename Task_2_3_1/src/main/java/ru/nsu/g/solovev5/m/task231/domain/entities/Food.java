@@ -1,7 +1,8 @@
-package ru.nsu.g.solovev5.m.task231.domain.food;
+package ru.nsu.g.solovev5.m.task231.domain.entities;
 
 import java.util.Objects;
-import ru.nsu.g.solovev5.m.task231.domain.shared.Point2D;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**
  * A food item in the game.

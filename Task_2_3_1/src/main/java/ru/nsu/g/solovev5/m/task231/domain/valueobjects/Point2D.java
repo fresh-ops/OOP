@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.domain.shared;
+package ru.nsu.g.solovev5.m.task231.domain.valueobjects;
 
 /**
  * A pair of two Cartesian coordinates.

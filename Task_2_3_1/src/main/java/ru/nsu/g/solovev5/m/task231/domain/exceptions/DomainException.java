@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.domain.shared;
+package ru.nsu.g.solovev5.m.task231.domain.exceptions;
 
 /**
  * An exception occurred int the domain layer.
