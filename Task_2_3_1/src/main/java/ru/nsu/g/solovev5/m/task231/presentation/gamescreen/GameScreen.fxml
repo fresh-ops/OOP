@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.nsu.g.solovev5.m.task231.presentation.gamescreen.GameScreenController">
+    <center>
+        <fx:include source="../board/BoardView.fxml"
+                    fx:id="board"/>
+    </center>
+</BorderPane>
