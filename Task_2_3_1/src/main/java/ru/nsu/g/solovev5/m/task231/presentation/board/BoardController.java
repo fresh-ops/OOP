@@ -6,6 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import ru.nsu.g.solovev5.m.task231.application.transport.GameStateRecord;
+import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
 
 /**
  * A controller for the game board view.
@@ -35,6 +36,9 @@ public class BoardController {
      */
     public synchronized void render(GameStateRecord state) {
         drawBoard(state.rows(), state.columns());
+        for (var snake : state.snakes()) {
+            drawSnake(snake, state.rows(), state.columns());
+        }
     }
 
     /**
@@ -70,6 +74,29 @@ public class BoardController {
                     cellWidth, cellHeight
                 );
             }
+        }
+    }
+
+    /**
+     * Draws the snake on the board.
+     *
+     * @param snake   the snake to draw
+     * @param rows    the number of rows on the board
+     * @param columns the number of columns on the board
+     */
+    private void drawSnake(SnakeRecord snake, int rows, int columns) {
+        var cellWidth = canvas.getWidth() / columns;
+        var cellHeight = canvas.getHeight() / rows;
+        var segmentSize = Math.min(cellWidth, cellHeight) * 0.75;
+        var horizontalOffset = (cellWidth - segmentSize) / 2;
+        var verticalOffset = (cellHeight - segmentSize) / 2;
+
+        graphicsContext.setFill(Color.BLUE);
+
+        for (var segment : snake.segments()) {
+            var x = horizontalOffset + segment.x() * cellWidth;
+            var y = verticalOffset + segment.y() * cellHeight;
+            graphicsContext.fillRect(x, y, segmentSize, segmentSize);
         }
     }
 }

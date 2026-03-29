@@ -9,7 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import ru.nsu.g.solovev5.m.task231.application.transport.GameStateRecord;
+import ru.nsu.g.solovev5.m.task231.application.GameSession;
+import ru.nsu.g.solovev5.m.task231.application.config.GameSessionConfig;
+import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 import ru.nsu.g.solovev5.m.task231.presentation.gamescreen.GameScreenController;
 
 /**
@@ -38,14 +41,38 @@ public class SnakeGame extends Application {
         var pane = new BorderPane();
         pane.setCenter(gameScreen);
         var scene = new Scene(pane, 640, 480);
+        var session = new GameSession(
+            new GameSessionConfig(
+                8, 8,
+                List.of(
+                    new PlayerConfig(
+                        new Point2D(0, 0), (point) -> new Point2D(point.x(), point.y() + 1)
+                    )
+                )
+            )
+        );
 
-        var loop = new AnimationTimer() {
+        var gameLoop = new AnimationTimer() {
+            private long lastUpdate;
+
             @Override
             public void handle(long now) {
-                controller.render(new GameStateRecord(8, 8, List.of()));
+                if (now - lastUpdate <= 100_0000_000) {
+                    return;
+                }
+                session.tick();
+                lastUpdate = now;
             }
         };
-        loop.start();
+        var animationLoop = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                controller.render(session.getFrozenState());
+            }
+        };
+
+        gameLoop.start();
+        animationLoop.start();
 
         stage.setScene(scene);
         stage.show();
