@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class RandomCellPickingStrategyTest {
+class RandomRectangleShapePickingStrategyTest {
     @Test
     void pick_should_chooseCellFromGiven() {
         var picker = new RandomCellPickingStrategy();

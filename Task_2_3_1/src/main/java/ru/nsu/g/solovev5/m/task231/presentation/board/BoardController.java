@@ -1,5 +1,6 @@
 package ru.nsu.g.solovev5.m.task231.presentation.board;
 
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -37,11 +38,20 @@ public class BoardController {
      */
     public synchronized void render(GameStateRecord state) {
         drawBoard(state.rows(), state.columns());
-        for (var food : state.foods()) {
-            drawFood(food, state.rows(), state.columns());
-        }
+        var rectangles = new ArrayList<>(EntityRenderer.render(
+            state.foods(),
+            state.rows(), state.columns(),
+            canvas.getWidth(), canvas.getHeight()
+        ));
+
         for (var snake : state.snakes()) {
-            drawSnake(snake, state.rows(), state.columns());
+            rectangles.addAll(EntityRenderer.render(
+                snake, state.rows(), state.columns(), canvas.getWidth(), canvas.getHeight()
+            ));
+        }
+
+        for (var rectangle : rectangles) {
+            drawRectangle(rectangle);
         }
     }
 
@@ -81,55 +91,9 @@ public class BoardController {
         }
     }
 
-    /**
-     * Draws the snake on the board.
-     *
-     * @param snake   the snake to draw
-     * @param rows    the number of rows on the board
-     * @param columns the number of columns on the board
-     */
-    private void drawSnake(SnakeRecord snake, int rows, int columns) {
-        var cellWidth = canvas.getWidth() / columns;
-        var cellHeight = canvas.getHeight() / rows;
-        var segmentSize = Math.min(cellWidth, cellHeight) * 0.5;
-        var horizontalOffset = (cellWidth - segmentSize) / 2;
-        var verticalOffset = (cellHeight - segmentSize) / 2;
-
-        graphicsContext.setFill(Color.DARKBLUE);
-
-        for (var segment : snake.segments()) {
-            if (segment.equals(snake.tail())) {
-                continue;
-            }
-            var x = horizontalOffset + segment.x() * cellWidth;
-            var y = verticalOffset + segment.y() * cellHeight;
-            graphicsContext.fillRect(x, y, segmentSize, segmentSize);
-        }
-        var headSize = segmentSize * 1.5;
-        var headHorizontalOffset = (cellWidth - headSize) / 2;
-        var headVerticalOffset = (cellHeight - headSize) / 2;
-        var headX = headHorizontalOffset + snake.head().x() * cellWidth;
-        var headY = headVerticalOffset + snake.head().y() * cellHeight;
-        graphicsContext.fillRect(headX, headY, headSize, headSize);
-
-        var tailSize = segmentSize / 1.5;
-        var tailHorizontalOffset = (cellWidth - tailSize) / 2;
-        var tailVerticalOffset = (cellHeight - tailSize) / 2;
-        var tailX = tailHorizontalOffset + snake.tail().x() * cellWidth;
-        var tailY = tailVerticalOffset + snake.tail().y() * cellHeight;
-        graphicsContext.fillRect(tailX, tailY, tailSize, tailSize);
-    }
-
-    private void drawFood(FoodRecord food, int rows, int columns) {
-        var cellWidth = canvas.getWidth() / columns;
-        var cellHeight = canvas.getHeight() / rows;
-        var foodSize = Math.min(cellWidth, cellHeight) * 0.9;
-        var horizontalOffset = (cellWidth - foodSize) / 2;
-        var verticalOffset = (cellHeight - foodSize) / 2;
-
-        graphicsContext.setFill(Color.RED);
-        var x = horizontalOffset + food.position().x() * cellWidth;
-        var y = verticalOffset + food.position().y() * cellHeight;
-        graphicsContext.fillRect(x, y, foodSize, foodSize);
+    private void drawRectangle(Rectangle rect) {
+        graphicsContext.setFill(rect.paint());
+        var shape = rect.shape();
+        graphicsContext.fillRect(shape.x(), shape.y(), shape.width(), shape.height());
     }
 }
