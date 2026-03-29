@@ -12,6 +12,7 @@ import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
  */
 public class Snake {
     private final Deque<Point2D> segments;
+    private int growthTicks = 0;
 
     /**
      * Create a new snake with given head.
@@ -37,25 +38,20 @@ public class Snake {
      * Moves this snake to the given head.
      *
      * @param head the new head coordinates
-     * @param grow specifies whether to grow or not.
-     * @throws NullPointerException if {@code head} is {@code null}
-     */
-    public void move(Point2D head, boolean grow) {
-        putHead(head);
-
-        if (!grow) {
-            popTail();
-        }
-    }
-
-    /**
-     * Moves this snake to the given head.
-     *
-     * @param head the new head coordinates
      * @throws NullPointerException if {@code head} is {@code null}
      */
     public void move(Point2D head) {
-        move(head, false);
+        putHead(head);
+
+        if (growthTicks <= 0) {
+            popTail();
+        } else {
+            growthTicks--;
+        }
+    }
+
+    public void addGrowthTicks(int growthTicks) {
+        this.growthTicks += growthTicks;
     }
 
     /**
@@ -65,6 +61,16 @@ public class Snake {
      */
     public List<Point2D> getSegments() {
         return List.copyOf(segments);
+    }
+
+    /**
+     * Returns all the snake's segments except the head.
+     *
+     * @return a snake's body segments
+     */
+    public List<Point2D> getBody() {
+        var segments = getSegments();
+        return segments.subList(1, segments.size());
     }
 
     /**

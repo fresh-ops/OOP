@@ -182,12 +182,13 @@ class SnakeTest {
     }
 
     @Test
-    void move_should_increaseBodyLength_when_growIsTrue() {
+    void move_should_increaseBodyLength_when_growthTicksAdded() {
         var snake = new Snake();
         var point = new Point2D(0, 1);
         var oldLength = snake.getLength();
 
-        snake.move(point, true);
+        snake.addGrowthTicks(1);
+        snake.move(point);
         var newLength = snake.getLength();
 
         assertEquals(
@@ -197,12 +198,12 @@ class SnakeTest {
     }
 
     @Test
-    void move_shouldNot_changeBodyLength_when_growIsFalse() {
+    void move_shouldNot_changeBodyLength_when_notGrowthTicks() {
         var snake = new Snake();
         var point = new Point2D(0, 1);
         var oldLength = snake.getLength();
 
-        snake.move(point, false);
+        snake.move(point);
         var newLength = snake.getLength();
 
         assertEquals(

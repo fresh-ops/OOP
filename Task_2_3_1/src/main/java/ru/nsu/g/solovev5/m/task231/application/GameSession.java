@@ -25,6 +25,7 @@ public class GameSession {
     private final MoveSnakeUseCase moveSnakeUseCase;
     private final GetFreeCellsUseCase getFreeCellsUseCase;
     private final GenerateFoodUseCase generateFoodUseCase;
+    private final CheckCollisionsUseCase checkCollisionsUseCase;
 
     /**
      * Creates a new game session with specified parameters.
@@ -54,6 +55,7 @@ public class GameSession {
             config.cellPickingStrategy(),
             config.foodTypePickingStrategy()
         );
+        checkCollisionsUseCase = new CheckCollisionsUseCase();
     }
 
     /**
@@ -63,9 +65,20 @@ public class GameSession {
         while (foods.size() < foodsNumber) {
             foods.add(generateFoodUseCase.invoke(rows, columns, players, foods));
         }
+        var playersToKill = new ArrayList<Player>();
         for (var player : players) {
-            moveSnakeUseCase.invoke(player.snake(), player.strategy(), false);
+            moveSnakeUseCase.invoke(player.snake(), player.strategy());
+            var eatenFood = checkCollisionsUseCase.getFoodCollisions(player, foods);
+            if (!eatenFood.isEmpty()) {
+                foods.removeAll(eatenFood);
+                player.snake().addGrowthTicks(eatenFood.size());
+            }
+            if (checkCollisionsUseCase.isDeadCollision(player, rows, columns, players)) {
+                playersToKill.add(player);
+            }
         }
+        players.removeAll(playersToKill);
+
 
         freezeState();
     }

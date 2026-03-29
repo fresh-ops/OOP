@@ -12,11 +12,10 @@ public class MoveSnakeUseCase {
      *
      * @param snake    the snake to move
      * @param strategy the movement strategy
-     * @param grow     flag defining whether to grow the given snake or not
      */
-    public void invoke(Snake snake, MovementStrategy strategy, boolean grow) {
+    public void invoke(Snake snake, MovementStrategy strategy) {
         var currentHead = snake.getHead();
         var nextHead = strategy.nextHead(currentHead);
-        snake.move(nextHead, grow);
+        snake.move(nextHead);
     }
 }
