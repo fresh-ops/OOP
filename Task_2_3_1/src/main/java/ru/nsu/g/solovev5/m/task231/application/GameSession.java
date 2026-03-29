@@ -97,7 +97,8 @@ public class GameSession {
      */
     private void freezeState() {
         var snakes = this.players.stream()
-            .map(p -> new SnakeRecord(p.snake().getSegments()))
+            .map(Player::snake)
+            .map(s -> new SnakeRecord(s.getHead(), s.getTail(), s.getSegments()))
             .toList();
 
         var foods = this.foods.stream()

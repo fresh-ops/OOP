@@ -91,17 +91,33 @@ public class BoardController {
     private void drawSnake(SnakeRecord snake, int rows, int columns) {
         var cellWidth = canvas.getWidth() / columns;
         var cellHeight = canvas.getHeight() / rows;
-        var segmentSize = Math.min(cellWidth, cellHeight) * 0.75;
+        var segmentSize = Math.min(cellWidth, cellHeight) * 0.5;
         var horizontalOffset = (cellWidth - segmentSize) / 2;
         var verticalOffset = (cellHeight - segmentSize) / 2;
 
         graphicsContext.setFill(Color.DARKBLUE);
 
         for (var segment : snake.segments()) {
+            if (segment.equals(snake.tail())) {
+                continue;
+            }
             var x = horizontalOffset + segment.x() * cellWidth;
             var y = verticalOffset + segment.y() * cellHeight;
             graphicsContext.fillRect(x, y, segmentSize, segmentSize);
         }
+        var headSize = segmentSize * 1.5;
+        var headHorizontalOffset = (cellWidth - headSize) / 2;
+        var headVerticalOffset = (cellHeight - headSize) / 2;
+        var headX = headHorizontalOffset + snake.head().x() * cellWidth;
+        var headY = headVerticalOffset + snake.head().y() * cellHeight;
+        graphicsContext.fillRect(headX, headY, headSize, headSize);
+
+        var tailSize = segmentSize / 1.5;
+        var tailHorizontalOffset = (cellWidth - tailSize) / 2;
+        var tailVerticalOffset = (cellHeight - tailSize) / 2;
+        var tailX = tailHorizontalOffset + snake.tail().x() * cellWidth;
+        var tailY = tailVerticalOffset + snake.tail().y() * cellHeight;
+        graphicsContext.fillRect(tailX, tailY, tailSize, tailSize);
     }
 
     private void drawFood(FoodRecord food, int rows, int columns) {

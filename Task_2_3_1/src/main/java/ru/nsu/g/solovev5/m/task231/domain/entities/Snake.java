@@ -103,6 +103,15 @@ public class Snake {
     }
 
     /**
+     * Returns the tail of this snake.
+     *
+     * @return this snake's tail
+     */
+    public Point2D getTail() {
+        return segments.getLast();
+    }
+
+    /**
      * Removes the tail of this snake.
      *
      * @return the removed tail
