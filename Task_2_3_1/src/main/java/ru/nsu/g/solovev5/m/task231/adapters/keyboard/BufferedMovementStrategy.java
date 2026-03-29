@@ -43,6 +43,10 @@ public class BufferedMovementStrategy implements MovementStrategy {
         if (inputBuffer.size() >= bufferSize) {
             return false;
         }
+        var lastInputted = inputBuffer.isEmpty() ? lastDirection : inputBuffer.getLast();
+        if (lastInputted.opposite().equals(direction)) {
+            return false;
+        }
         inputBuffer.addLast(direction);
         return true;
     }
