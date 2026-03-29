@@ -91,7 +91,7 @@ public class BoardController {
         var horizontalOffset = (cellWidth - segmentSize) / 2;
         var verticalOffset = (cellHeight - segmentSize) / 2;
 
-        graphicsContext.setFill(Color.BLUE);
+        graphicsContext.setFill(Color.DARKBLUE);
 
         for (var segment : snake.segments()) {
             var x = horizontalOffset + segment.x() * cellWidth;

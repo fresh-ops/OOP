@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
 import ru.nsu.g.solovev5.m.task231.application.GameSession;
 import ru.nsu.g.solovev5.m.task231.application.config.GameSessionConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
@@ -38,16 +39,19 @@ public class SnakeGame extends Application {
         Node gameScreen = gameScreenLoader.load();
         GameScreenController controller = gameScreenLoader.getController();
 
+
         var pane = new BorderPane();
         pane.setCenter(gameScreen);
         var scene = new Scene(pane, 640, 480);
+
+        var movement = new KeyboardMovementStrategy(5);
+        scene.setOnKeyPressed(movement::onKeyPressed);
+
         var session = new GameSession(
             new GameSessionConfig(
                 8, 8,
                 List.of(
-                    new PlayerConfig(
-                        new Point2D(0, 0), (point) -> new Point2D(point.x(), point.y() + 1)
-                    )
+                    new PlayerConfig(new Point2D(0, 0), movement)
                 )
             )
         );
@@ -57,7 +61,7 @@ public class SnakeGame extends Application {
 
             @Override
             public void handle(long now) {
-                if (now - lastUpdate <= 100_0000_000) {
+                if (now - lastUpdate <= 25_0000_000) {
                     return;
                 }
                 session.tick();
