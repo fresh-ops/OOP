@@ -69,7 +69,7 @@ public class CheckCollisionsUseCase {
         var head = snake.getHead();
 
         for (var otherPlayer : otherPlayers) {
-            if (otherPlayer.equals(player)) {
+            if (otherPlayer == player) {
                 continue;
             }
             var segments = Set.copyOf(otherPlayer.snake().getSegments());
