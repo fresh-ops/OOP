@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
+import ru.nsu.g.solovev5.m.task231.adapters.picker.RandomCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.application.GameSession;
 import ru.nsu.g.solovev5.m.task231.application.config.GameSessionConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
@@ -50,9 +51,9 @@ public class SnakeGame extends Application {
 
         var session = new GameSession(
             new GameSessionConfig(
-                8, 8, 2,
+                12, 12, 5,
                 List.of(new PlayerConfig(new Point2D(0, 0), movement)),
-                (cells) -> cells.get(0),
+                new RandomCellPickingStrategy(),
                 () -> FoodType.NORMAL
             )
         );
