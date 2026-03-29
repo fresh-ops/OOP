@@ -1,8 +1,8 @@
 package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**
@@ -32,7 +32,7 @@ public class CollisionService {
      * @param point  the point to check
      * @return {@code true} if the point collides the set, {@code false} otherwise
      */
-    public static boolean collides(List<Point2D> points, Point2D point) {
+    public static boolean collides(Set<Point2D> points, Point2D point) {
         Objects.requireNonNull(points);
         Objects.requireNonNull(point);
         return points.contains(point);
@@ -45,7 +45,7 @@ public class CollisionService {
      * @param b the set of points to check
      * @return {@code true} if sets collide each other, {@code false} otherwise
      */
-    public static boolean collides(List<Point2D> a, List<Point2D> b) {
+    public static boolean collides(Set<Point2D> a, Set<Point2D> b) {
         Objects.requireNonNull(a);
         Objects.requireNonNull(b);
         return !Collections.disjoint(a, b);

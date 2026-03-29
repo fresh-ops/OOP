@@ -5,6 +5,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import ru.nsu.g.solovev5.m.task231.application.transport.FoodRecord;
 import ru.nsu.g.solovev5.m.task231.application.transport.GameStateRecord;
 import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
 
@@ -36,6 +37,9 @@ public class BoardController {
      */
     public synchronized void render(GameStateRecord state) {
         drawBoard(state.rows(), state.columns());
+        for (var food : state.foods()) {
+            drawFood(food, state.rows(), state.columns());
+        }
         for (var snake : state.snakes()) {
             drawSnake(snake, state.rows(), state.columns());
         }
@@ -98,5 +102,18 @@ public class BoardController {
             var y = verticalOffset + segment.y() * cellHeight;
             graphicsContext.fillRect(x, y, segmentSize, segmentSize);
         }
+    }
+
+    private void drawFood(FoodRecord food, int rows, int columns) {
+        var cellWidth = canvas.getWidth() / columns;
+        var cellHeight = canvas.getHeight() / rows;
+        var foodSize = Math.min(cellWidth, cellHeight) * 0.9;
+        var horizontalOffset = (cellWidth - foodSize) / 2;
+        var verticalOffset = (cellHeight - foodSize) / 2;
+
+        graphicsContext.setFill(Color.RED);
+        var x = horizontalOffset + food.position().x() * cellWidth;
+        var y = verticalOffset + food.position().y() * cellHeight;
+        graphicsContext.fillRect(x, y, foodSize, foodSize);
     }
 }

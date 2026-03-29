@@ -13,6 +13,7 @@ import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
 import ru.nsu.g.solovev5.m.task231.application.GameSession;
 import ru.nsu.g.solovev5.m.task231.application.config.GameSessionConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
+import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 import ru.nsu.g.solovev5.m.task231.presentation.gamescreen.GameScreenController;
 
@@ -49,10 +50,10 @@ public class SnakeGame extends Application {
 
         var session = new GameSession(
             new GameSessionConfig(
-                8, 8,
-                List.of(
-                    new PlayerConfig(new Point2D(0, 0), movement)
-                )
+                8, 8, 2,
+                List.of(new PlayerConfig(new Point2D(0, 0), movement)),
+                (cells) -> cells.get(0),
+                () -> FoodType.NORMAL
             )
         );
 

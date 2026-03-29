@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,46 +34,46 @@ class CollisionServiceTest {
 
     @ParameterizedTest
     @MethodSource("generateSetAndPointFromIt")
-    void collides_should_returnTrue_when_pointIsInSet(List<Point2D> points, Point2D point) {
+    void collides_should_returnTrue_when_pointIsInSet(Set<Point2D> points, Point2D point) {
         assertTrue(CollisionService.collides(points, point));
     }
 
     @ParameterizedTest
     @MethodSource("generateSetAndPointNotIn")
-    void collides_should_returnFalse_when_pointIsNotInSet(List<Point2D> points, Point2D point) {
+    void collides_should_returnFalse_when_pointIsNotInSet(Set<Point2D> points, Point2D point) {
         assertFalse(CollisionService.collides(points, point));
     }
 
     @ParameterizedTest
     @MethodSource("generateCollidingSets")
-    void collides_should_returnTrue_when_setsColliding(List<Point2D> a, List<Point2D> b) {
+    void collides_should_returnTrue_when_setsColliding(Set<Point2D> a, Set<Point2D> b) {
         assertTrue(CollisionService.collides(a, b));
     }
 
     @ParameterizedTest
     @MethodSource("generateNonCollidingSets")
-    void collides_should_returnFalse_when_setsNotColliding(List<Point2D> a, List<Point2D> b) {
+    void collides_should_returnFalse_when_setsNotColliding(Set<Point2D> a, Set<Point2D> b) {
         assertFalse(CollisionService.collides(a, b));
     }
 
     @Test
     void collides_should_returnFalse_when_setIsEmpty() {
-        assertFalse(CollisionService.collides(List.of(), new Point2D(0, 0)));
+        assertFalse(CollisionService.collides(Set.of(), new Point2D(0, 0)));
     }
 
     @Test
     void collides_should_returnFalse_when_firstSetIsEmpty() {
-        assertFalse(CollisionService.collides(List.of(), List.of(new Point2D(7, 6))));
+        assertFalse(CollisionService.collides(Set.of(), Set.of(new Point2D(7, 6))));
     }
 
     @Test
     void collides_should_returnFalse_when_secondSetIsEmpty() {
-        assertFalse(CollisionService.collides(List.of(new Point2D(2, 1)), List.of()));
+        assertFalse(CollisionService.collides(Set.of(new Point2D(2, 1)), Set.of()));
     }
 
     @Test
     void collides_should_returnFalse_when_bothSetsAreEmpty() {
-        assertFalse(CollisionService.collides(List.of(), List.of()));
+        assertFalse(CollisionService.collides(Set.of(), Set.of()));
     }
 
     @Test
@@ -104,7 +104,7 @@ class CollisionServiceTest {
     void collides_should_throwException_when_SetIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionService.collides((List<Point2D>) null, new Point2D(0, 0))
+            () -> CollisionService.collides((Set<Point2D>) null, new Point2D(0, 0))
         );
     }
 
@@ -112,7 +112,7 @@ class CollisionServiceTest {
     void collides_should_throwException_when_singlePointIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionService.collides(List.of(new Point2D(0, 0)), (Point2D) null)
+            () -> CollisionService.collides(Set.of(new Point2D(0, 0)), (Point2D) null)
         );
     }
 
@@ -120,7 +120,7 @@ class CollisionServiceTest {
     void collides_should_throwException_when_setAndPointAreNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionService.collides((List<Point2D>) null, (Point2D) null)
+            () -> CollisionService.collides((Set<Point2D>) null, (Point2D) null)
         );
     }
 
@@ -128,7 +128,7 @@ class CollisionServiceTest {
     void collides_should_throwException_when_firstSetIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionService.collides((List<Point2D>) null, List.of(new Point2D(0, 0)))
+            () -> CollisionService.collides((Set<Point2D>) null, Set.of(new Point2D(0, 0)))
         );
     }
 
@@ -136,7 +136,7 @@ class CollisionServiceTest {
     void collides_should_throwException_when_secondSetIsNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionService.collides(List.of(new Point2D(0, 0)), (List<Point2D>) null)
+            () -> CollisionService.collides(Set.of(new Point2D(0, 0)), (Set<Point2D>) null)
         );
     }
 
@@ -144,7 +144,7 @@ class CollisionServiceTest {
     void collides_should_throwException_when_bothSetsAreNull() {
         assertThrows(
             NullPointerException.class,
-            () -> CollisionService.collides((List<Point2D>) null, (List<Point2D>) null)
+            () -> CollisionService.collides((Set<Point2D>) null, (Set<Point2D>) null)
         );
     }
 
@@ -173,10 +173,10 @@ class CollisionServiceTest {
         var d = new Point2D(6, 9);
 
         return Stream.of(
-            Arguments.of(List.of(a), a),
-            Arguments.of(List.of(a, b), a),
-            Arguments.of(List.of(a, b, c), c),
-            Arguments.of(List.of(a, b, c, d), b)
+            Arguments.of(Set.of(a), a),
+            Arguments.of(Set.of(a, b), a),
+            Arguments.of(Set.of(a, b, c), c),
+            Arguments.of(Set.of(a, b, c, d), b)
         );
     }
 
@@ -189,42 +189,42 @@ class CollisionServiceTest {
         var out = new Point2D(4, 4);
 
         return Stream.of(
-            Arguments.of(List.of(a), out),
-            Arguments.of(List.of(a, b), out),
-            Arguments.of(List.of(a, b, c), out),
-            Arguments.of(List.of(a, b, c, d), out)
+            Arguments.of(Set.of(a), out),
+            Arguments.of(Set.of(a, b), out),
+            Arguments.of(Set.of(a, b, c), out),
+            Arguments.of(Set.of(a, b, c, d), out)
         );
     }
 
     static Stream<Arguments> generateCollidingSets() {
         return Stream.of(
             Arguments.of(
-                List.of(new Point2D(1, 1), new Point2D(2, 2)),
-                List.of(new Point2D(2, 2), new Point2D(3, 3))
+                Set.of(new Point2D(1, 1), new Point2D(2, 2)),
+                Set.of(new Point2D(2, 2), new Point2D(3, 3))
             ),
             Arguments.of(
-                List.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3)),
-                List.of(new Point2D(2, 2), new Point2D(3, 3), new Point2D(4, 4))
+                Set.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3)),
+                Set.of(new Point2D(2, 2), new Point2D(3, 3), new Point2D(4, 4))
             ),
             Arguments.of(
-                List.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3)),
-                List.of(new Point2D(2, 2))
+                Set.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3)),
+                Set.of(new Point2D(2, 2))
             ),
             Arguments.of(
-                List.of(new Point2D(2, 2)),
-                List.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3))
+                Set.of(new Point2D(2, 2)),
+                Set.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3))
             ),
             Arguments.of(
-                List.of(new Point2D(5, 5), new Point2D(6, 6)),
-                List.of(new Point2D(5, 5), new Point2D(6, 6))
+                Set.of(new Point2D(5, 5), new Point2D(6, 6)),
+                Set.of(new Point2D(5, 5), new Point2D(6, 6))
             ),
             Arguments.of(
-                List.of(new Point2D(-1, -1), new Point2D(0, 0)),
-                List.of(new Point2D(0, 0), new Point2D(1, 1))
+                Set.of(new Point2D(-1, -1), new Point2D(0, 0)),
+                Set.of(new Point2D(0, 0), new Point2D(1, 1))
             ),
             Arguments.of(
-                List.of(new Point2D(1000, 1000), new Point2D(2000, 2000)),
-                List.of(new Point2D(2000, 2000), new Point2D(3000, 3000))
+                Set.of(new Point2D(1000, 1000), new Point2D(2000, 2000)),
+                Set.of(new Point2D(2000, 2000), new Point2D(3000, 3000))
             )
         );
     }
@@ -232,32 +232,32 @@ class CollisionServiceTest {
     static Stream<Arguments> generateNonCollidingSets() {
         return Stream.of(
             Arguments.of(
-                List.of(new Point2D(1, 1), new Point2D(2, 2)),
-                List.of(new Point2D(3, 3), new Point2D(4, 4))
+                Set.of(new Point2D(1, 1), new Point2D(2, 2)),
+                Set.of(new Point2D(3, 3), new Point2D(4, 4))
             ),
             Arguments.of(
-                List.of(new Point2D(1, 1)),
-                List.of(new Point2D(2, 2))
+                Set.of(new Point2D(1, 1)),
+                Set.of(new Point2D(2, 2))
             ),
             Arguments.of(
-                List.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3)),
-                List.of(new Point2D(4, 4), new Point2D(5, 5))
+                Set.of(new Point2D(1, 1), new Point2D(2, 2), new Point2D(3, 3)),
+                Set.of(new Point2D(4, 4), new Point2D(5, 5))
             ),
             Arguments.of(
-                List.of(new Point2D(-5, -5), new Point2D(-4, -4)),
-                List.of(new Point2D(4, 4), new Point2D(5, 5))
+                Set.of(new Point2D(-5, -5), new Point2D(-4, -4)),
+                Set.of(new Point2D(4, 4), new Point2D(5, 5))
             ),
             Arguments.of(
-                List.of(new Point2D(1000, 1000), new Point2D(2000, 2000)),
-                List.of(new Point2D(3000, 3000), new Point2D(4000, 4000))
+                Set.of(new Point2D(1000, 1000), new Point2D(2000, 2000)),
+                Set.of(new Point2D(3000, 3000), new Point2D(4000, 4000))
             ),
             Arguments.of(
-                List.of(new Point2D(5, 1), new Point2D(5, 2)),
-                List.of(new Point2D(5, 3), new Point2D(5, 4))
+                Set.of(new Point2D(5, 1), new Point2D(5, 2)),
+                Set.of(new Point2D(5, 3), new Point2D(5, 4))
             ),
             Arguments.of(
-                List.of(new Point2D(1, 5), new Point2D(2, 5)),
-                List.of(new Point2D(3, 5), new Point2D(4, 5))
+                Set.of(new Point2D(1, 5), new Point2D(2, 5)),
+                Set.of(new Point2D(3, 5), new Point2D(4, 5))
             )
         );
     }
