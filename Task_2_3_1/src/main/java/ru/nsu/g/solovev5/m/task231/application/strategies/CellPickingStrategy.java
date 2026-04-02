@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task231.application.strategies;
 
 import java.util.List;
+import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**
@@ -12,6 +13,7 @@ public interface CellPickingStrategy {
      *
      * @param cells a set of cells
      * @return a picked cell
+     * @throws NoFreeCellsException when there is no cells to pick
      */
     Point2D pick(List<Point2D> cells);
 }

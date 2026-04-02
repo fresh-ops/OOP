@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task231.application;
 
 import java.util.List;
+import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
 import ru.nsu.g.solovev5.m.task231.application.strategies.CellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.application.strategies.FoodTypePickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
@@ -39,6 +40,7 @@ public class GenerateFoodUseCase {
      * @param players the players in this session
      * @param foods   the food items on the board
      * @return a generated food item
+     * @throws NoFreeCellsException when there is no available cells to put a food item
      */
     public Food invoke(int rows, int columns, List<Player> players, List<Food> foods) {
         var freeCells = getFreeCellsUseCase.invoke(rows, columns, players, foods);
