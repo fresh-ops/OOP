@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.nsu.g.solovev5.m.task231.presentation.drawer.figures.FigureShapeCalculator.calculateShape;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.Figure;
+import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.FigureType;
 
 class FigureShapeCalculatorTest {
     @Test

@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.presentation.drawer.figures;
+package ru.nsu.g.solovev5.m.task231.presentation.renderer.figures;
 
 /**
  * A drawable figure shape.

@@ -1,5 +1,8 @@
 package ru.nsu.g.solovev5.m.task231.presentation.drawer.figures;
 
+import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.Figure;
+import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.FigureShape;
+
 /**
  * Util class to calculate figures shapes.
  */

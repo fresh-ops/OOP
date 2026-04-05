@@ -10,8 +10,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import ru.nsu.g.solovev5.m.task231.presentation.drawer.figures.Figure;
-import ru.nsu.g.solovev5.m.task231.presentation.drawer.figures.FigureType;
+import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.Figure;
+import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.FigureType;
 
 /**
  * A view that draws items on the grid.
