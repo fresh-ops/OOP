@@ -92,6 +92,6 @@ public class CheckCollisionsUseCase {
     public boolean isBorderCollision(Player player, int rows, int columns) {
         var head = player.snake().getHead();
 
-        return head.x() < 0 || head.y() < 0 || head.x() >= rows || head.y() >= columns;
+        return head.x() < 0 || head.y() < 0 || head.x() > columns || head.y() > rows;
     }
 }
