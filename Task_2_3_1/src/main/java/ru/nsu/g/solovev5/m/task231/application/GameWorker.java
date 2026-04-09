@@ -42,6 +42,11 @@ public class GameWorker implements Runnable {
         return gameState.get();
     }
 
+    /**
+     * Returns the recorded game state.
+     *
+     * @return the recorded game state
+     */
     public GameStateRecord getStateRecord() {
         var state = gameState.get();
         var food = state.food().stream()

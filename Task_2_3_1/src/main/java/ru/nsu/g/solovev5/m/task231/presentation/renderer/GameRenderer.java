@@ -8,12 +8,22 @@ import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
 import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.Figure;
 import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.FigureType;
 
+/**
+ * Object transforms game entities into drawable figures.
+ */
 public class GameRenderer {
     private static final double SNAKE_HEAD_SCALE = 0.75;
     private static final double SNAKE_BODY_SCALE = 0.55;
     private static final double SNAKE_TAIL_SCALE = 0.4;
     private static final double FOOD_SCALE = 0.8;
 
+    /**
+     * Renders all passed game entities.
+     *
+     * @param snakes alive snakes on the board
+     * @param food food items on the board
+     * @return drawable figures
+     */
     public List<Figure> renderAll(List<SnakeRecord> snakes, List<FoodRecord> food) {
         var figures = new ArrayList<Figure>();
 
@@ -27,6 +37,12 @@ public class GameRenderer {
         return figures;
     }
 
+    /**
+     * Renders the given food item.
+     *
+     * @param foodRecord the food item to render
+     * @return drawable figures
+     */
     public List<Figure> render(FoodRecord foodRecord) {
         return List.of(
             new Figure(
@@ -39,6 +55,12 @@ public class GameRenderer {
         );
     }
 
+    /**
+     * Renders the given snake.
+     *
+     * @param snakeRecord the snake on the board
+     * @return drawable figures
+     */
     public List<Figure> render(SnakeRecord snakeRecord) {
         List<Figure> figures = new ArrayList<>();
         for (var segment : snakeRecord.segments()) {

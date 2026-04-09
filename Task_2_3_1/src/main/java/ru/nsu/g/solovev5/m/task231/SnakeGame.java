@@ -72,11 +72,6 @@ public class SnakeGame extends Application {
             CONFIG
         );
         gameLoopThread = new Thread(gameWorker);
-        var keyedMovement = CONFIG.players().stream()
-            .map(PlayerConfig::strategy)
-            .filter(s -> s instanceof KeyboardMovementStrategy)
-            .map(KeyboardMovementStrategy.class::cast)
-            .toList();
 
         var drawer = new GridDrawer(CONFIG.rows(), CONFIG.columns());
         var renderer = new GameRenderer();
@@ -107,6 +102,12 @@ public class SnakeGame extends Application {
         var scene = new Scene(pane, 640, 480);
         stage.setScene(scene);
         stage.show();
+
+        var keyedMovement = CONFIG.players().stream()
+            .map(PlayerConfig::strategy)
+            .filter(s -> s instanceof KeyboardMovementStrategy)
+            .map(KeyboardMovementStrategy.class::cast)
+            .toList();
 
         scene.setOnKeyPressed(event -> {
             for (var strategy : keyedMovement) {
