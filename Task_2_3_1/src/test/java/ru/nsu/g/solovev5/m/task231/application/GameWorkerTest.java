@@ -13,7 +13,7 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 class GameWorkerTest {
-    final static GameConfig CONFIG = new GameConfig(
+    static final GameConfig CONFIG = new GameConfig(
         12, 15,
         5,
         List.of(
