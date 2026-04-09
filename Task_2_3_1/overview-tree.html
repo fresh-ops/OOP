@@ -55,6 +55,7 @@ loadScripts(document, 'script');</script>
 <li><a href="ru/nsu/g/solovev5/m/task231/adapters/picker/package-tree.html">ru.nsu.g.solovev5.m.task231.adapters.picker</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/application/package-tree.html">ru.nsu.g.solovev5.m.task231.application</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/application/config/package-tree.html">ru.nsu.g.solovev5.m.task231.application.config</a>, </li>
+<li><a href="ru/nsu/g/solovev5/m/task231/application/exceptions/package-tree.html">ru.nsu.g.solovev5.m.task231.application.exceptions</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/application/strategies/package-tree.html">ru.nsu.g.solovev5.m.task231.application.strategies</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/application/transport/package-tree.html">ru.nsu.g.solovev5.m.task231.application.transport</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/domain/entities/package-tree.html">ru.nsu.g.solovev5.m.task231.domain.entities</a>, </li>
@@ -62,8 +63,10 @@ loadScripts(document, 'script');</script>
 <li><a href="ru/nsu/g/solovev5/m/task231/domain/services/package-tree.html">ru.nsu.g.solovev5.m.task231.domain.services</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/domain/strategies/package-tree.html">ru.nsu.g.solovev5.m.task231.domain.strategies</a>, </li>
 <li><a href="ru/nsu/g/solovev5/m/task231/domain/valueobjects/package-tree.html">ru.nsu.g.solovev5.m.task231.domain.valueobjects</a>, </li>
-<li><a href="ru/nsu/g/solovev5/m/task231/presentation/board/package-tree.html">ru.nsu.g.solovev5.m.task231.presentation.board</a>, </li>
-<li><a href="ru/nsu/g/solovev5/m/task231/presentation/gamescreen/package-tree.html">ru.nsu.g.solovev5.m.task231.presentation.gamescreen</a></li>
+<li><a href="ru/nsu/g/solovev5/m/task231/presentation/drawer/package-tree.html">ru.nsu.g.solovev5.m.task231.presentation.drawer</a>, </li>
+<li><a href="ru/nsu/g/solovev5/m/task231/presentation/drawer/figures/package-tree.html">ru.nsu.g.solovev5.m.task231.presentation.drawer.figures</a>, </li>
+<li><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/package-tree.html">ru.nsu.g.solovev5.m.task231.presentation.renderer</a>, </li>
+<li><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/package-tree.html">ru.nsu.g.solovev5.m.task231.presentation.renderer.figures</a></li>
 </ul>
 </div>
 <section class="hierarchy">
@@ -76,36 +79,59 @@ loadScripts(document, 'script');</script>
 <li class="circle">ru.nsu.g.solovev5.m.task231.<a href="ru/nsu/g/solovev5/m/task231/SnakeGame.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231">SnakeGame</a></li>
 </ul>
 </li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.board.<a href="ru/nsu/g/solovev5/m/task231/presentation/board/BoardController.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.board">BoardController</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.adapters.keyboard.<a href="ru/nsu/g/solovev5/m/task231/adapters/keyboard/BufferedMovementStrategy.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.adapters.keyboard">BufferedMovementStrategy</a> (implements ru.nsu.g.solovev5.m.task231.domain.strategies.<a href="ru/nsu/g/solovev5/m/task231/domain/strategies/MovementStrategy.html" title="interface in ru.nsu.g.solovev5.m.task231.domain.strategies">MovementStrategy</a>)
 <ul>
 <li class="circle">ru.nsu.g.solovev5.m.task231.adapters.keyboard.<a href="ru/nsu/g/solovev5/m/task231/adapters/keyboard/KeyboardMovementStrategy.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.adapters.keyboard">KeyboardMovementStrategy</a></li>
 </ul>
 </li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CalculateNextStateUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CalculateNextStateUseCase</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.services.<a href="ru/nsu/g/solovev5/m/task231/domain/services/CollisionService.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.services">CollisionService</a></li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.board.<a href="ru/nsu/g/solovev5/m/task231/presentation/board/EntityRenderer.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.board">EntityRenderer</a></li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.gamescreen.<a href="ru/nsu/g/solovev5/m/task231/presentation/gamescreen/GameScreenController.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.gamescreen">GameScreenController</a></li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GameSession.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GameSession</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CreateGameStateFromConfigUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CreateGameStateFromConfigUseCase</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">EatFoodUseCase</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.drawer.figures.<a href="ru/nsu/g/solovev5/m/task231/presentation/drawer/figures/FigureShapeCalculator.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.drawer.figures">FigureShapeCalculator</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GameWorker.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GameWorker</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>)</li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GenerateFoodUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GenerateFoodUseCase</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GetFreeCellsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GetFreeCellsUseCase</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/MoveSnakeUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">MoveSnakeUseCase</a></li>
+<li class="circle">javafx.scene.Node (implements javafx.event.EventTarget, javafx.css.Styleable)
+<ul>
+<li class="circle">javafx.scene.Parent
+<ul>
+<li class="circle">javafx.scene.layout.Region
+<ul>
+<li class="circle">javafx.scene.layout.Pane
+<ul>
+<li class="circle">javafx.scene.layout.BorderPane
+<ul>
+<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.drawer.<a href="ru/nsu/g/solovev5/m/task231/presentation/drawer/GridDrawer.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.drawer">GridDrawer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.adapters.picker.<a href="ru/nsu/g/solovev5/m/task231/adapters/picker/RandomCellPickingStrategy.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.adapters.picker">RandomCellPickingStrategy</a> (implements ru.nsu.g.solovev5.m.task231.application.strategies.<a href="ru/nsu/g/solovev5/m/task231/application/strategies/CellPickingStrategy.html" title="interface in ru.nsu.g.solovev5.m.task231.application.strategies">CellPickingStrategy</a>)</li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" class="type-name-link external-link" title="class or interface in java.lang">Record</a>
 <ul>
+<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/Figure.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer.figures">Figure</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/FigureShape.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer.figures">FigureShape</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/Food.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Food</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.application.config.<a href="ru/nsu/g/solovev5/m/task231/application/config/GameSessionConfig.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.config">GameSessionConfig</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.config.<a href="ru/nsu/g/solovev5/m/task231/application/config/GameConfig.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.config">GameConfig</a></li>
+<li class="circle">ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/GameState.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">GameState</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/Player.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.config.<a href="ru/nsu/g/solovev5/m/task231/application/config/PlayerConfig.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.config">PlayerConfig</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.valueobjects.<a href="ru/nsu/g/solovev5/m/task231/domain/valueobjects/Point2D.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.valueobjects">Point2D</a></li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.board.<a href="ru/nsu/g/solovev5/m/task231/presentation/board/Rectangle.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.board">Rectangle</a></li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.board.<a href="ru/nsu/g/solovev5/m/task231/presentation/board/RectangleShape.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.board">RectangleShape</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></li>
 </ul>
 </li>
-<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.board.<a href="ru/nsu/g/solovev5/m/task231/presentation/board/RectangleShapeCalculator.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.presentation.board">RectangleShapeCalculator</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/Snake.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Snake</a></li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" class="type-name-link external-link" title="class or interface in java.lang">Throwable</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
 <ul>
@@ -113,6 +139,11 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/RuntimeException.html" class="type-name-link external-link" title="class or interface in java.lang">RuntimeException</a>
 <ul>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.exceptions.<a href="ru/nsu/g/solovev5/m/task231/application/exceptions/ApplicationException.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.exceptions">ApplicationException</a>
+<ul>
+<li class="circle">ru.nsu.g.solovev5.m.task231.application.exceptions.<a href="ru/nsu/g/solovev5/m/task231/application/exceptions/NoFreeCellsException.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.exceptions">NoFreeCellsException</a></li>
+</ul>
+</li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.exceptions.<a href="ru/nsu/g/solovev5/m/task231/domain/exceptions/DomainException.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.exceptions">DomainException</a>
 <ul>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.exceptions.<a href="ru/nsu/g/solovev5/m/task231/domain/exceptions/SnakeZeroLengthException.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.exceptions">SnakeZeroLengthException</a></li>
@@ -143,6 +174,7 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" class="type-name-link external-link" title="class or interface in java.lang">Enum</a>&lt;E&gt; (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;, java.lang.constant.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/constant/Constable.html" title="class or interface in java.lang.constant" class="external-link">Constable</a>, java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
 <ul>
+<li class="circle">ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/FigureType.html" class="type-name-link" title="enum class in ru.nsu.g.solovev5.m.task231.presentation.renderer.figures">FigureType</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.domain.valueobjects.<a href="ru/nsu/g/solovev5/m/task231/domain/valueobjects/FoodType.html" class="type-name-link" title="enum class in ru.nsu.g.solovev5.m.task231.domain.valueobjects">FoodType</a></li>
 <li class="circle">ru.nsu.g.solovev5.m.task231.adapters.keyboard.<a href="ru/nsu/g/solovev5/m/task231/adapters/keyboard/MoveDirection.html" class="type-name-link" title="enum class in ru.nsu.g.solovev5.m.task231.adapters.keyboard">MoveDirection</a></li>
 </ul>
