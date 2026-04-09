@@ -108,7 +108,6 @@ public class Snake {
      * @return this snake's tail
      */
     public Point2D getTail() {
-        System.out.println(segments);
         return segments.getLast();
     }
 

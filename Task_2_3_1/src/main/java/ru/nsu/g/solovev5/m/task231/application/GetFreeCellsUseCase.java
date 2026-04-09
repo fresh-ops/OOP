@@ -26,8 +26,8 @@ public class GetFreeCellsUseCase {
         var freeCells = new ArrayList<Point2D>();
         var occupiedCells = getOccupiedCells(players, foods);
 
-        for (var x = 0; x < rows; x++) {
-            for (var y = 0; y < columns; y++) {
+        for (var x = 0; x < columns; x++) {
+            for (var y = 0; y < rows; y++) {
                 var candidate = new Point2D(x, y);
                 if (!CollisionService.collides(occupiedCells, candidate)) {
                     freeCells.add(new Point2D(x, y));
