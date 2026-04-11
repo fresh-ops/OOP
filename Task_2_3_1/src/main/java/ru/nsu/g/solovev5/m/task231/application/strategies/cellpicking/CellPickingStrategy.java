@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application.strategies;
+package ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking;
 
 import java.util.List;
 import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;

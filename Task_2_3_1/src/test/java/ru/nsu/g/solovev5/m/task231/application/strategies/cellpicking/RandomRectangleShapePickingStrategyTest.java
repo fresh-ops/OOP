@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.adapters.picker;
+package ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

@@ -2,7 +2,7 @@ package ru.nsu.g.solovev5.m.task231.application;
 
 import java.util.List;
 import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
-import ru.nsu.g.solovev5.m.task231.application.strategies.CellPickingStrategy;
+import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.CellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.application.strategies.FoodTypePickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
