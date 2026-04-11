@@ -8,6 +8,7 @@ import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
+import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
 import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 
@@ -17,23 +18,23 @@ import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 public class CalculateNextStateUseCase {
     private final FoodGenerator foodGenerator;
     private final MoveSnakeService moveSnakeService;
-    private final EatFoodUseCase eatFoodUseCase;
+    private final EatFoodService eatFoodService;
 
     /**
      * Creates a new CalculateNextStateUseCase.
      *
      * @param foodGenerator    the use case to generate food
      * @param moveSnakeService the use case to move snake
-     * @param eatFoodUseCase   the use case to eat food
+     * @param eatFoodService   the use case to eat food
      */
     public CalculateNextStateUseCase(
         FoodGenerator foodGenerator,
         MoveSnakeService moveSnakeService,
-        EatFoodUseCase eatFoodUseCase
+        EatFoodService eatFoodService
     ) {
         this.foodGenerator = foodGenerator;
         this.moveSnakeService = moveSnakeService;
-        this.eatFoodUseCase = eatFoodUseCase;
+        this.eatFoodService = eatFoodService;
     }
 
     /**
@@ -94,7 +95,7 @@ public class CalculateNextStateUseCase {
 
         for (var player : players) {
             moveSnakeService.move(player.snake(), player.strategy());
-            var eatenFood = eatFoodUseCase.invoke(player, food);
+            var eatenFood = eatFoodService.eat(player, food);
             food.removeAll(eatenFood);
 
             if (!deadCollision(player, rows, columns, players)) {

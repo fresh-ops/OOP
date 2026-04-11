@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application;
+package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,20 +13,18 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class EatFoodUseCaseTest {
-    EatFoodUseCase eatFoodUseCase;
+class EatFoodServiceTest {
+    EatFoodService eatFoodUseCase;
 
     @BeforeEach
     void setUp() {
-        eatFoodUseCase = new EatFoodUseCase(
-            new GetCollidingFoodUseCase()
-        );
+        eatFoodUseCase = new EatFoodService();
     }
 
     @ParameterizedTest
     @MethodSource("impossibleToEat")
-    void invoke_should_returnEmptyList_when_noFoodWasEaten(Player player, List<Food> food) {
-        var eaten = eatFoodUseCase.invoke(player, food);
+    void eat_should_returnEmptyList_when_noFoodWasEaten(Player player, List<Food> food) {
+        var eaten = eatFoodUseCase.eat(player, food);
 
         assertTrue(eaten.isEmpty());
     }

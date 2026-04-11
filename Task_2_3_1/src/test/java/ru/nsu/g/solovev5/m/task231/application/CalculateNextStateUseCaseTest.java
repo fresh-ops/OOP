@@ -16,6 +16,7 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
+import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
 import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
@@ -31,9 +32,7 @@ class CalculateNextStateUseCaseTest {
                 new NormalFoodTypePickingStrategy()
             ),
             new MoveSnakeService(),
-            new EatFoodUseCase(
-                new GetCollidingFoodUseCase()
-            )
+            new EatFoodService()
         );
     }
 

@@ -9,12 +9,11 @@ import javafx.stage.Stage;
 import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
 import ru.nsu.g.solovev5.m.task231.application.CalculateNextStateUseCase;
 import ru.nsu.g.solovev5.m.task231.application.CreateGameStateFromConfigUseCase;
-import ru.nsu.g.solovev5.m.task231.application.EatFoodUseCase;
 import ru.nsu.g.solovev5.m.task231.application.GameWorker;
-import ru.nsu.g.solovev5.m.task231.application.GetCollidingFoodUseCase;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
 import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
+import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
 import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
@@ -62,9 +61,7 @@ public class SnakeGame extends Application {
                     () -> FoodType.NORMAL
                 ),
                 new MoveSnakeService(),
-                new EatFoodUseCase(
-                    new GetCollidingFoodUseCase()
-                )
+                new EatFoodService()
             ),
             CONFIG
         );
