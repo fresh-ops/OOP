@@ -11,7 +11,7 @@ import ru.nsu.g.solovev5.m.task231.application.GameSession;
 import ru.nsu.g.solovev5.m.task231.application.StartNewGameSessionUseCase;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
-import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
+import ru.nsu.g.solovev5.m.task231.domain.strategies.cellpicking.RandomCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
 import ru.nsu.g.solovev5.m.task231.domain.services.GameTickService;

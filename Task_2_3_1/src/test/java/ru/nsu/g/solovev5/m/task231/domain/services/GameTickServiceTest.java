@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.nsu.g.solovev5.m.task231.application.strategies.NormalFoodTypePickingStrategy;
-import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.FirstFreeCellPickingStrategy;
+import ru.nsu.g.solovev5.m.task231.domain.strategies.cellpicking.FirstFreeCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
-import ru.nsu.g.solovev5.m.task231.application.strategies.FoodTypePickingStrategy;
-import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.CellPickingStrategy;
+import ru.nsu.g.solovev5.m.task231.domain.exceptions.NoFreeCellsException;
+import ru.nsu.g.solovev5.m.task231.domain.strategies.cellpicking.CellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
+import ru.nsu.g.solovev5.m.task231.domain.strategies.FoodTypePickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 /**

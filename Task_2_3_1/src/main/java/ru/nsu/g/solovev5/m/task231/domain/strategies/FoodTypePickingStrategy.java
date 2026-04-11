@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application.strategies;
+package ru.nsu.g.solovev5.m.task231.domain.strategies;
 
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
 
