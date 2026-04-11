@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application;
+package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,17 +16,14 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
-import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
-import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
-import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class CalculateNextStateUseCaseTest {
-    CalculateNextStateUseCase calculateNextStateUseCase;
+class GameTickServiceTest {
+    GameTickService gameTickService;
 
     @BeforeEach
     void setUp() {
-        calculateNextStateUseCase = new CalculateNextStateUseCase(
+        gameTickService = new GameTickService(
             new FoodGenerator(
                 new FirstFreeCellPickingStrategy(),
                 new NormalFoodTypePickingStrategy()
@@ -38,7 +35,7 @@ class CalculateNextStateUseCaseTest {
 
     @ParameterizedTest
     @MethodSource("validFood")
-    void invoke_shouldNot_generateFoodOverLimit(int maxFoodItems, List<Food> food) {
+    void tick_shouldNot_generateFoodOverLimit(int maxFoodItems, List<Food> food) {
         var state = new GameState(
             2, 2,
             maxFoodItems,
@@ -46,13 +43,13 @@ class CalculateNextStateUseCaseTest {
             List.of()
         );
 
-        var newState = calculateNextStateUseCase.invoke(state);
+        var newState = gameTickService.tick(state);
 
         assertTrue(newState.food().size() <= newState.maxFoodItems());
     }
 
     @Test
-    void invoke_shouldNot_changeConfiguration() {
+    void tick_shouldNot_changeConfiguration() {
         var state = new GameState(
             12, 15,
             0,
@@ -60,7 +57,7 @@ class CalculateNextStateUseCaseTest {
             List.of()
         );
 
-        var newState = calculateNextStateUseCase.invoke(state);
+        var newState = gameTickService.tick(state);
 
         assertEquals(state.rows(), newState.rows());
         assertEquals(state.columns(), newState.columns());
@@ -68,7 +65,7 @@ class CalculateNextStateUseCaseTest {
     }
 
     @Test
-    void invoke_should_killPlayers_when_theyHaveDeadCollision() {
+    void tick_should_killPlayers_when_theyHaveDeadCollision() {
         var state = new GameState(
             12, 15,
             0,
@@ -81,13 +78,13 @@ class CalculateNextStateUseCaseTest {
             )
         );
 
-        var newState = calculateNextStateUseCase.invoke(state);
+        var newState = gameTickService.tick(state);
 
         assertTrue(newState.players().isEmpty());
     }
 
     @Test
-    void invoke_should_removeEatenFood() {
+    void tick_should_removeEatenFood() {
         var state = new GameState(
             12, 15,
             1,
@@ -102,7 +99,7 @@ class CalculateNextStateUseCaseTest {
             )
         );
 
-        var newState = calculateNextStateUseCase.invoke(state);
+        var newState = gameTickService.tick(state);
 
         assertTrue(newState.food().isEmpty());
     }

@@ -7,27 +7,28 @@ import ru.nsu.g.solovev5.m.task231.application.dto.GameStateDto;
 import ru.nsu.g.solovev5.m.task231.application.dto.SnakeDto;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
+import ru.nsu.g.solovev5.m.task231.domain.services.GameTickService;
 
 /**
  * A worker that runs game loop.
  */
 public class GameWorker implements Runnable {
-    private final CalculateNextStateUseCase calculateNextStateUseCase;
+    private final GameTickService gameTickService;
     private final AtomicReference<GameState> gameState;
 
     /**
      * Creates a new GameWorker.
      *
      * @param createGameStateFromConfigUseCase the use case to get initial state
-     * @param calculateNextStateUseCase        the use case to change state
+     * @param gameTickService        the use case to change state
      * @param config                           the game configuration
      */
     public GameWorker(
         CreateGameStateFromConfigUseCase createGameStateFromConfigUseCase,
-        CalculateNextStateUseCase calculateNextStateUseCase,
+        GameTickService gameTickService,
         GameConfig config
     ) {
-        this.calculateNextStateUseCase = calculateNextStateUseCase;
+        this.gameTickService = gameTickService;
 
         var state = createGameStateFromConfigUseCase.invoke(config);
         this.gameState = new AtomicReference<>(state);
@@ -68,7 +69,7 @@ public class GameWorker implements Runnable {
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             var oldState = gameState.get();
-            var newState = calculateNextStateUseCase.invoke(oldState);
+            var newState = gameTickService.tick(oldState);
             gameState.set(newState);
             try {
                 Thread.sleep(200);

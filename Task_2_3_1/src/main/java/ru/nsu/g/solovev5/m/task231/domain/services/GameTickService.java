@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application;
+package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import static ru.nsu.g.solovev5.m.task231.domain.services.CollisionService.deadCollision;
 
@@ -8,14 +8,11 @@ import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
-import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
-import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
-import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 
 /**
  * Calculates the next game state.
  */
-public class CalculateNextStateUseCase {
+public class GameTickService {
     private final FoodGenerator foodGenerator;
     private final MoveSnakeService moveSnakeService;
     private final EatFoodService eatFoodService;
@@ -27,7 +24,7 @@ public class CalculateNextStateUseCase {
      * @param moveSnakeService the use case to move snake
      * @param eatFoodService   the use case to eat food
      */
-    public CalculateNextStateUseCase(
+    public GameTickService(
         FoodGenerator foodGenerator,
         MoveSnakeService moveSnakeService,
         EatFoodService eatFoodService
@@ -43,7 +40,7 @@ public class CalculateNextStateUseCase {
      * @param state the previous game state
      * @return a new game state
      */
-    public GameState invoke(GameState state) {
+    public GameState tick(GameState state) {
         var food = generateFood(state);
         var alivePlayers = movePlayersAndHandleCollisions(
             state.rows(), state.columns(), state.players(), food

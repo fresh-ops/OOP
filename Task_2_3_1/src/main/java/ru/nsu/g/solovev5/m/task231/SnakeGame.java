@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
-import ru.nsu.g.solovev5.m.task231.application.CalculateNextStateUseCase;
 import ru.nsu.g.solovev5.m.task231.application.CreateGameStateFromConfigUseCase;
 import ru.nsu.g.solovev5.m.task231.application.GameWorker;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
@@ -15,6 +14,7 @@ import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
 import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.services.EatFoodService;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
+import ru.nsu.g.solovev5.m.task231.domain.services.GameTickService;
 import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
@@ -55,7 +55,7 @@ public class SnakeGame extends Application {
 
         gameWorker = new GameWorker(
             new CreateGameStateFromConfigUseCase(),
-            new CalculateNextStateUseCase(
+            new GameTickService(
                 new FoodGenerator(
                     new RandomCellPickingStrategy(),
                     () -> FoodType.NORMAL
