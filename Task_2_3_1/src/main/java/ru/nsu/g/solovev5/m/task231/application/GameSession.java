@@ -1,7 +1,6 @@
 package ru.nsu.g.solovev5.m.task231.application;
 
 import java.util.concurrent.atomic.AtomicReference;
-import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.dto.FoodDto;
 import ru.nsu.g.solovev5.m.task231.application.dto.GameStateDto;
 import ru.nsu.g.solovev5.m.task231.application.dto.SnakeDto;
@@ -12,26 +11,23 @@ import ru.nsu.g.solovev5.m.task231.domain.services.GameTickService;
 /**
  * A worker that runs game loop.
  */
-public class GameWorker implements Runnable {
+public class GameSession implements Runnable {
     private final GameTickService gameTickService;
     private final AtomicReference<GameState> gameState;
 
     /**
      * Creates a new GameWorker.
      *
-     * @param createGameStateFromConfigUseCase the use case to get initial state
-     * @param gameTickService        the use case to change state
-     * @param config                           the game configuration
+     * @param gameTickService the use case to change state
+     * @param initialState    the initial game state
      */
-    public GameWorker(
-        CreateGameStateFromConfigUseCase createGameStateFromConfigUseCase,
+    public GameSession(
         GameTickService gameTickService,
-        GameConfig config
+        GameState initialState
     ) {
         this.gameTickService = gameTickService;
 
-        var state = createGameStateFromConfigUseCase.invoke(config);
-        this.gameState = new AtomicReference<>(state);
+        this.gameState = new AtomicReference<>(initialState);
     }
 
     /**

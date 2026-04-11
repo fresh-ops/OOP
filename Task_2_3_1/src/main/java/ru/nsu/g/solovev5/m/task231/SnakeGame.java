@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
-import ru.nsu.g.solovev5.m.task231.application.CreateGameStateFromConfigUseCase;
-import ru.nsu.g.solovev5.m.task231.application.GameWorker;
+import ru.nsu.g.solovev5.m.task231.application.GameSession;
+import ru.nsu.g.solovev5.m.task231.application.StartNewGameSessionUseCase;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
 import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
@@ -38,7 +38,7 @@ public class SnakeGame extends Application {
 
     private AnimationTimer animationLoop;
     private Thread gameLoopThread;
-    private GameWorker gameWorker;
+    private GameSession gameSession;
 
     /**
      * The application entry point.
@@ -53,8 +53,9 @@ public class SnakeGame extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Snake Game");
 
-        gameWorker = new GameWorker(
-            new CreateGameStateFromConfigUseCase(),
+        var startSessionUseCase = new StartNewGameSessionUseCase();
+        gameSession = startSessionUseCase.invoke(
+            CONFIG,
             new GameTickService(
                 new FoodGenerator(
                     new RandomCellPickingStrategy(),
@@ -62,10 +63,9 @@ public class SnakeGame extends Application {
                 ),
                 new MoveSnakeService(),
                 new EatFoodService()
-            ),
-            CONFIG
+            )
         );
-        gameLoopThread = new Thread(gameWorker);
+        gameLoopThread = new Thread(gameSession);
 
         var drawer = new GridDrawer(CONFIG.rows(), CONFIG.columns());
         var renderer = new GameRenderer();
@@ -80,7 +80,7 @@ public class SnakeGame extends Application {
 
                 drawer.clearCanvas();
                 drawer.drawBoard();
-                var state = gameWorker.getStateRecord();
+                var state = gameSession.getStateRecord();
                 var figures = renderer.renderAll(state.snakes(), state.foods());
 
                 for (var figure : figures) {

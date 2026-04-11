@@ -10,12 +10,12 @@ import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
 import ru.nsu.g.solovev5.m.task231.domain.strategies.MovementStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class CreateGameStateFromConfigUseCaseTest {
-    CreateGameStateFromConfigUseCase createGameStateFromConfigUseCase;
+class StartNewGameSessionUseCaseTest {
+    StartNewGameSessionUseCase startNewGameSessionUseCase;
 
     @BeforeEach
     void setUp() {
-        createGameStateFromConfigUseCase = new CreateGameStateFromConfigUseCase();
+        startNewGameSessionUseCase = new StartNewGameSessionUseCase();
     }
 
     @Test
@@ -32,7 +32,8 @@ class CreateGameStateFromConfigUseCaseTest {
             )
         );
 
-        var state = createGameStateFromConfigUseCase.invoke(config);
+        var session = startNewGameSessionUseCase.invoke(config, null);
+        var state = session.getGameState();
 
         assertEquals(config.rows(), state.rows());
         assertEquals(config.columns(), state.columns());

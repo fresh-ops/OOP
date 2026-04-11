@@ -6,18 +6,20 @@ import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
+import ru.nsu.g.solovev5.m.task231.domain.services.GameTickService;
 
 /**
- * Creates a game state from configuration object.
+ * Creates a game session from configuration object.
  */
-public class CreateGameStateFromConfigUseCase {
+public class StartNewGameSessionUseCase {
     /**
-     * Creates a new game state from config.
+     * Creates a new game session from config.
      *
-     * @param config the game configuration
-     * @return a new game state
+     * @param config          the game configuration
+     * @param gameTickService the service to calculate new game state
+     * @return a new game session
      */
-    public GameState invoke(GameConfig config) {
+    public GameSession invoke(GameConfig config, GameTickService gameTickService) {
         var players = new ArrayList<Player>();
 
         for (var playerConfig : config.players()) {
@@ -29,12 +31,14 @@ public class CreateGameStateFromConfigUseCase {
             );
         }
 
-        return new GameState(
+        var initialState = new GameState(
             config.rows(),
             config.columns(),
             config.maxFoodItems(),
             List.of(),
             List.copyOf(players)
         );
+
+        return new GameSession(gameTickService, initialState);
     }
 }
