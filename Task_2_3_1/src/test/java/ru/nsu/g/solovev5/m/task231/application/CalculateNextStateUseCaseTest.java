@@ -17,6 +17,7 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
+import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
 class CalculateNextStateUseCaseTest {
@@ -29,7 +30,7 @@ class CalculateNextStateUseCaseTest {
                 new FirstFreeCellPickingStrategy(),
                 new NormalFoodTypePickingStrategy()
             ),
-            new MoveSnakeUseCase(),
+            new MoveSnakeService(),
             new EatFoodUseCase(
                 new GetCollidingFoodUseCase()
             )

@@ -12,11 +12,11 @@ import ru.nsu.g.solovev5.m.task231.application.CreateGameStateFromConfigUseCase;
 import ru.nsu.g.solovev5.m.task231.application.EatFoodUseCase;
 import ru.nsu.g.solovev5.m.task231.application.GameWorker;
 import ru.nsu.g.solovev5.m.task231.application.GetCollidingFoodUseCase;
-import ru.nsu.g.solovev5.m.task231.application.MoveSnakeUseCase;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
 import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
+import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 import ru.nsu.g.solovev5.m.task231.presentation.drawer.GridDrawer;
@@ -61,7 +61,7 @@ public class SnakeGame extends Application {
                     new RandomCellPickingStrategy(),
                     () -> FoodType.NORMAL
                 ),
-                new MoveSnakeUseCase(),
+                new MoveSnakeService(),
                 new EatFoodUseCase(
                     new GetCollidingFoodUseCase()
                 )

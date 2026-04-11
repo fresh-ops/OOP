@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application;
+package ru.nsu.g.solovev5.m.task231.domain.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,15 +11,15 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
 import ru.nsu.g.solovev5.m.task231.domain.strategies.MovementStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class MoveSnakeUseCaseTest {
+class MoveSnakeServiceTest {
     @ParameterizedTest
     @MethodSource("generateStrategies")
-    void invoke_should_moveSnakeBaseOnTheStrategy(MovementStrategy strategy) {
+    void move_should_moveSnakeBaseOnTheStrategy(MovementStrategy strategy) {
         var snake = new Snake();
         var oldHead = snake.getHead();
 
-        var useCase = new MoveSnakeUseCase();
-        useCase.invoke(snake, strategy);
+        var service = new MoveSnakeService();
+        service.move(snake, strategy);
 
         var newHead = snake.getHead();
 

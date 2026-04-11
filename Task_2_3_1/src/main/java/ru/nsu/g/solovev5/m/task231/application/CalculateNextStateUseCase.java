@@ -9,29 +9,30 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
+import ru.nsu.g.solovev5.m.task231.domain.services.MoveSnakeService;
 
 /**
  * Calculates the next game state.
  */
 public class CalculateNextStateUseCase {
     private final FoodGenerator foodGenerator;
-    private final MoveSnakeUseCase moveSnakeUseCase;
+    private final MoveSnakeService moveSnakeService;
     private final EatFoodUseCase eatFoodUseCase;
 
     /**
      * Creates a new CalculateNextStateUseCase.
      *
-     * @param foodGenerator the use case to generate food
-     * @param moveSnakeUseCase    the use case to move snake
-     * @param eatFoodUseCase      the use case to eat food
+     * @param foodGenerator    the use case to generate food
+     * @param moveSnakeService the use case to move snake
+     * @param eatFoodUseCase   the use case to eat food
      */
     public CalculateNextStateUseCase(
         FoodGenerator foodGenerator,
-        MoveSnakeUseCase moveSnakeUseCase,
+        MoveSnakeService moveSnakeService,
         EatFoodUseCase eatFoodUseCase
     ) {
         this.foodGenerator = foodGenerator;
-        this.moveSnakeUseCase = moveSnakeUseCase;
+        this.moveSnakeService = moveSnakeService;
         this.eatFoodUseCase = eatFoodUseCase;
     }
 
@@ -92,7 +93,7 @@ public class CalculateNextStateUseCase {
         var alivePlayers = new ArrayList<Player>();
 
         for (var player : players) {
-            moveSnakeUseCase.invoke(player.snake(), player.strategy());
+            moveSnakeService.move(player.snake(), player.strategy());
             var eatenFood = eatFoodUseCase.invoke(player, food);
             food.removeAll(eatenFood);
 
