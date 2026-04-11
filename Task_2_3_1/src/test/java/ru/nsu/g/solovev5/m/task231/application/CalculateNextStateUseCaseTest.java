@@ -30,11 +30,6 @@ class CalculateNextStateUseCaseTest {
                 new NormalFoodTypePickingStrategy()
             ),
             new MoveSnakeUseCase(),
-            new CheckDeadCollisionsUseCase(
-                new CheckBorderCollisionsUseCase(),
-                new CheckSelfCollisionsUseCase(),
-                new CheckEnemiesCollisions()
-            ),
             new EatFoodUseCase(
                 new GetCollidingFoodUseCase()
             )

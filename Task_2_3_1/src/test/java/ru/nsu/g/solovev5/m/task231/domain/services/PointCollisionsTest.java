@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 
-class CollisionServiceTest {
+class PointCollisionsTest {
     @Test
     void collides_should_returnTrue_when_passedSamePoint() {
         var point = new Point2D(0, 0);

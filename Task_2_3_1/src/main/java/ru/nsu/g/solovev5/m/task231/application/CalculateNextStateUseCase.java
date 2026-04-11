@@ -1,5 +1,7 @@
 package ru.nsu.g.solovev5.m.task231.application;
 
+import static ru.nsu.g.solovev5.m.task231.domain.services.CollisionService.deadCollision;
+
 import java.util.ArrayList;
 import java.util.List;
 import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
@@ -13,26 +15,22 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 public class CalculateNextStateUseCase {
     private final GenerateFoodUseCase generateFoodUseCase;
     private final MoveSnakeUseCase moveSnakeUseCase;
-    private final CheckDeadCollisionsUseCase checkDeadCollisionsUseCase;
     private final EatFoodUseCase eatFoodUseCase;
 
     /**
      * Creates a new CalculateNextStateUseCase.
      *
-     * @param generateFoodUseCase    the use case to generate food
-     * @param moveSnakeUseCase       the use case to move snake
-     * @param checkDeadCollisionsUseCase the use case to check collisions
-     * @param eatFoodUseCase         the use case to eat food
+     * @param generateFoodUseCase the use case to generate food
+     * @param moveSnakeUseCase    the use case to move snake
+     * @param eatFoodUseCase      the use case to eat food
      */
     public CalculateNextStateUseCase(
         GenerateFoodUseCase generateFoodUseCase,
         MoveSnakeUseCase moveSnakeUseCase,
-        CheckDeadCollisionsUseCase checkDeadCollisionsUseCase,
         EatFoodUseCase eatFoodUseCase
     ) {
         this.generateFoodUseCase = generateFoodUseCase;
         this.moveSnakeUseCase = moveSnakeUseCase;
-        this.checkDeadCollisionsUseCase = checkDeadCollisionsUseCase;
         this.eatFoodUseCase = eatFoodUseCase;
     }
 
@@ -97,7 +95,7 @@ public class CalculateNextStateUseCase {
             var eatenFood = eatFoodUseCase.invoke(player, food);
             food.removeAll(eatenFood);
 
-            if (!checkDeadCollisionsUseCase.invoke(player, rows, columns, players)) {
+            if (!deadCollision(player, rows, columns, players)) {
                 alivePlayers.add(player);
             }
         }

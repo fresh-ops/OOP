@@ -8,10 +8,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
 import ru.nsu.g.solovev5.m.task231.application.CalculateNextStateUseCase;
-import ru.nsu.g.solovev5.m.task231.application.CheckBorderCollisionsUseCase;
-import ru.nsu.g.solovev5.m.task231.application.CheckDeadCollisionsUseCase;
-import ru.nsu.g.solovev5.m.task231.application.CheckEnemiesCollisions;
-import ru.nsu.g.solovev5.m.task231.application.CheckSelfCollisionsUseCase;
 import ru.nsu.g.solovev5.m.task231.application.CreateGameStateFromConfigUseCase;
 import ru.nsu.g.solovev5.m.task231.application.EatFoodUseCase;
 import ru.nsu.g.solovev5.m.task231.application.GameWorker;
@@ -68,11 +64,6 @@ public class SnakeGame extends Application {
                     () -> FoodType.NORMAL
                 ),
                 new MoveSnakeUseCase(),
-                new CheckDeadCollisionsUseCase(
-                    new CheckBorderCollisionsUseCase(),
-                    new CheckSelfCollisionsUseCase(),
-                    new CheckEnemiesCollisions()
-                ),
                 new EatFoodUseCase(
                     new GetCollidingFoodUseCase()
                 )
