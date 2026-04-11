@@ -7,17 +7,21 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.nsu.g.solovev5.m.task231.adapters.keyboard.KeyboardMovementStrategy;
-import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.application.CalculateNextStateUseCase;
-import ru.nsu.g.solovev5.m.task231.application.CheckCollisionsUseCase;
+import ru.nsu.g.solovev5.m.task231.application.CheckBorderCollisionsUseCase;
+import ru.nsu.g.solovev5.m.task231.application.CheckDeadCollisionsUseCase;
+import ru.nsu.g.solovev5.m.task231.application.CheckEnemiesCollisions;
+import ru.nsu.g.solovev5.m.task231.application.CheckSelfCollisionsUseCase;
 import ru.nsu.g.solovev5.m.task231.application.CreateGameStateFromConfigUseCase;
 import ru.nsu.g.solovev5.m.task231.application.EatFoodUseCase;
 import ru.nsu.g.solovev5.m.task231.application.GameWorker;
 import ru.nsu.g.solovev5.m.task231.application.GenerateFoodUseCase;
+import ru.nsu.g.solovev5.m.task231.application.GetCollidingFoodUseCase;
 import ru.nsu.g.solovev5.m.task231.application.GetFreeCellsUseCase;
 import ru.nsu.g.solovev5.m.task231.application.MoveSnakeUseCase;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
+import ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.RandomCellPickingStrategy;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
 import ru.nsu.g.solovev5.m.task231.presentation.drawer.GridDrawer;
@@ -64,9 +68,13 @@ public class SnakeGame extends Application {
                     () -> FoodType.NORMAL
                 ),
                 new MoveSnakeUseCase(),
-                new CheckCollisionsUseCase(),
+                new CheckDeadCollisionsUseCase(
+                    new CheckBorderCollisionsUseCase(),
+                    new CheckSelfCollisionsUseCase(),
+                    new CheckEnemiesCollisions()
+                ),
                 new EatFoodUseCase(
-                    new CheckCollisionsUseCase()
+                    new GetCollidingFoodUseCase()
                 )
             ),
             CONFIG

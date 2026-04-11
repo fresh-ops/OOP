@@ -8,15 +8,15 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
  * Handles food eating.
  */
 public class EatFoodUseCase {
-    private final CheckCollisionsUseCase checkCollisionsUseCase;
+    private final GetCollidingFoodUseCase getCollidingFoodUseCase;
 
     /**
      * Creates a new EatFoodUseCase.
      *
-     * @param checkCollisionsUseCase the use case for collision checks
+     * @param getCollidingFoodUseCase the use case for getting colliding food
      */
-    public EatFoodUseCase(CheckCollisionsUseCase checkCollisionsUseCase) {
-        this.checkCollisionsUseCase = checkCollisionsUseCase;
+    public EatFoodUseCase(GetCollidingFoodUseCase getCollidingFoodUseCase) {
+        this.getCollidingFoodUseCase = getCollidingFoodUseCase;
     }
 
     /**
@@ -27,7 +27,7 @@ public class EatFoodUseCase {
      * @return eaten food
      */
     public List<Food> invoke(Player player, List<Food> food) {
-        var eatenFood = checkCollisionsUseCase.getFoodCollisions(player, food);
+        var eatenFood = getCollidingFoodUseCase.invoke(player, food);
         player.snake().addGrowthTicks(eatenFood.size());
 
         return eatenFood;

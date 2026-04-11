@@ -19,7 +19,7 @@ class EatFoodUseCaseTest {
     @BeforeEach
     void setUp() {
         eatFoodUseCase = new EatFoodUseCase(
-            new CheckCollisionsUseCase()
+            new GetCollidingFoodUseCase()
         );
     }
 

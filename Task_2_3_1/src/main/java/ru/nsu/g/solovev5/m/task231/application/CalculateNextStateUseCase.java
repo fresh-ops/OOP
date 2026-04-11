@@ -13,7 +13,7 @@ import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 public class CalculateNextStateUseCase {
     private final GenerateFoodUseCase generateFoodUseCase;
     private final MoveSnakeUseCase moveSnakeUseCase;
-    private final CheckCollisionsUseCase checkCollisionsUseCase;
+    private final CheckDeadCollisionsUseCase checkDeadCollisionsUseCase;
     private final EatFoodUseCase eatFoodUseCase;
 
     /**
@@ -21,18 +21,18 @@ public class CalculateNextStateUseCase {
      *
      * @param generateFoodUseCase    the use case to generate food
      * @param moveSnakeUseCase       the use case to move snake
-     * @param checkCollisionsUseCase the use case to check collisions
+     * @param checkDeadCollisionsUseCase the use case to check collisions
      * @param eatFoodUseCase         the use case to eat food
      */
     public CalculateNextStateUseCase(
         GenerateFoodUseCase generateFoodUseCase,
         MoveSnakeUseCase moveSnakeUseCase,
-        CheckCollisionsUseCase checkCollisionsUseCase,
+        CheckDeadCollisionsUseCase checkDeadCollisionsUseCase,
         EatFoodUseCase eatFoodUseCase
     ) {
         this.generateFoodUseCase = generateFoodUseCase;
         this.moveSnakeUseCase = moveSnakeUseCase;
-        this.checkCollisionsUseCase = checkCollisionsUseCase;
+        this.checkDeadCollisionsUseCase = checkDeadCollisionsUseCase;
         this.eatFoodUseCase = eatFoodUseCase;
     }
 
@@ -97,7 +97,7 @@ public class CalculateNextStateUseCase {
             var eatenFood = eatFoodUseCase.invoke(player, food);
             food.removeAll(eatenFood);
 
-            if (!checkCollisionsUseCase.isDeadCollision(player, rows, columns, players)) {
+            if (!checkDeadCollisionsUseCase.invoke(player, rows, columns, players)) {
                 alivePlayers.add(player);
             }
         }
