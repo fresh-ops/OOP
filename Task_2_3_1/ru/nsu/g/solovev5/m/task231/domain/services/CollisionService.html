@@ -110,6 +110,32 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks if points collide.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#deadCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int,java.util.List)" class="member-name-link">deadCollision</a><wbr>(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player,
+ int&nbsp;rows,
+ int&nbsp;columns,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&gt;&nbsp;enemies)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if there is a dead collision.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#enemyCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)" class="member-name-link">enemyCollision</a><wbr>(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&gt;&nbsp;enemies)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if there is a collision with other snake.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#outOfBounds(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int)" class="member-name-link">outOfBounds</a><wbr>(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player,
+ int&nbsp;rows,
+ int&nbsp;columns)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks if player is out of border bounds.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#selfCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player)" class="member-name-link">selfCollision</a><wbr>(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Check if there is a self collision.</div>
+</div>
 </div>
 </div>
 </div>
@@ -127,6 +153,71 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="deadCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int,java.util.List)">
+<h3>deadCollision</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">deadCollision</span><wbr><span class="parameters">(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player,
+ int&nbsp;rows,
+ int&nbsp;columns,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&gt;&nbsp;enemies)</span></div>
+<div class="block">Checks if there is a dead collision. A dead collision for a snake is a collision with its
+ body, with board boarders or with other snakes.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - the player to check</dd>
+<dd><code>rows</code> - the number of rows on the game board</dd>
+<dd><code>columns</code> - the number of columns on the game board</dd>
+<dd><code>enemies</code> - other players on the board</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if there is a dead collision, <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="outOfBounds(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int)">
+<h3>outOfBounds</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">outOfBounds</span><wbr><span class="parameters">(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player,
+ int&nbsp;rows,
+ int&nbsp;columns)</span></div>
+<div class="block">Checks if player is out of border bounds.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - the player to check</dd>
+<dd><code>rows</code> - the number of rows on the game board</dd>
+<dd><code>columns</code> - the number of columns on the game board</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if player is out of bounds, <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="selfCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player)">
+<h3>selfCollision</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">selfCollision</span><wbr><span class="parameters">(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player)</span></div>
+<div class="block">Check if there is a self collision.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - the player to check</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if there is a self collision, <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="enemyCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)">
+<h3>enemyCollision</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">enemyCollision</span><wbr><span class="parameters">(<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&nbsp;player,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a>&gt;&nbsp;enemies)</span></div>
+<div class="block">Checks if there is a collision with other snake.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>player</code> - the player to check</dd>
+<dd><code>enemies</code> - other players on the board</dd>
+<dt>Returns:</dt>
+<dd><code>true</code> if there is a collision with another snake, <code>false</code> otherwise</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="collides(ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D)">
 <h3>collides</h3>
