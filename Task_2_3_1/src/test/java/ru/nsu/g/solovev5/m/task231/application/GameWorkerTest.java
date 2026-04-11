@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
 import ru.nsu.g.solovev5.m.task231.application.config.PlayerConfig;
-import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
+import ru.nsu.g.solovev5.m.task231.application.dto.SnakeDto;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Snake;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
@@ -80,7 +80,7 @@ class GameWorkerTest {
                 .map(PlayerConfig::snakeHead)
                 .toList(),
             state.snakes().stream()
-                .map(SnakeRecord::head)
+                .map(SnakeDto::head)
                 .toList()
         );
     }

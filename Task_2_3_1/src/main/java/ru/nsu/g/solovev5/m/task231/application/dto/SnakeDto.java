@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application.transport;
+package ru.nsu.g.solovev5.m.task231.application.dto;
 
 import java.util.List;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
@@ -10,7 +10,7 @@ import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
  * @param tail     the snake's tail
  * @param segments the segments of snake's body
  */
-public record SnakeRecord(
+public record SnakeDto(
     Point2D head,
     Point2D tail,
     List<Point2D> segments

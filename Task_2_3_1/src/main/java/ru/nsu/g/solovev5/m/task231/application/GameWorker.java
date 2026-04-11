@@ -2,9 +2,9 @@ package ru.nsu.g.solovev5.m.task231.application;
 
 import java.util.concurrent.atomic.AtomicReference;
 import ru.nsu.g.solovev5.m.task231.application.config.GameConfig;
-import ru.nsu.g.solovev5.m.task231.application.transport.FoodRecord;
-import ru.nsu.g.solovev5.m.task231.application.transport.GameStateRecord;
-import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
+import ru.nsu.g.solovev5.m.task231.application.dto.FoodDto;
+import ru.nsu.g.solovev5.m.task231.application.dto.GameStateDto;
+import ru.nsu.g.solovev5.m.task231.application.dto.SnakeDto;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
 
@@ -47,16 +47,16 @@ public class GameWorker implements Runnable {
      *
      * @return the recorded game state
      */
-    public GameStateRecord getStateRecord() {
+    public GameStateDto getStateRecord() {
         var state = gameState.get();
         var food = state.food().stream()
-            .map(f -> new FoodRecord(f.position(), f.type()))
+            .map(f -> new FoodDto(f.position(), f.type()))
             .toList();
         var snakes = state.players().stream()
             .map(Player::snake)
-            .map(s -> new SnakeRecord(s.getHead(), s.getTail(), s.getBody()))
+            .map(s -> new SnakeDto(s.getHead(), s.getTail(), s.getBody()))
             .toList();
-        return new GameStateRecord(
+        return new GameStateDto(
             state.rows(),
             state.columns(),
             snakes,

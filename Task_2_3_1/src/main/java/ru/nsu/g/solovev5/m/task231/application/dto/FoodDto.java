@@ -1,4 +1,4 @@
-package ru.nsu.g.solovev5.m.task231.application.transport;
+package ru.nsu.g.solovev5.m.task231.application.dto;
 
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType;
 import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
@@ -9,5 +9,5 @@ import ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D;
  * @param position the food position
  * @param foodType the food type
  */
-public record FoodRecord(Point2D position, FoodType foodType) {
+public record FoodDto(Point2D position, FoodType foodType) {
 }

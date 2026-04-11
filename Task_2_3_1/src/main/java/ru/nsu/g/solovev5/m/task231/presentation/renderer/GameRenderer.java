@@ -3,8 +3,8 @@ package ru.nsu.g.solovev5.m.task231.presentation.renderer;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
-import ru.nsu.g.solovev5.m.task231.application.transport.FoodRecord;
-import ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord;
+import ru.nsu.g.solovev5.m.task231.application.dto.FoodDto;
+import ru.nsu.g.solovev5.m.task231.application.dto.SnakeDto;
 import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.Figure;
 import ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.FigureType;
 
@@ -21,10 +21,10 @@ public class GameRenderer {
      * Renders all passed game entities.
      *
      * @param snakes alive snakes on the board
-     * @param food food items on the board
+     * @param food   food items on the board
      * @return drawable figures
      */
-    public List<Figure> renderAll(List<SnakeRecord> snakes, List<FoodRecord> food) {
+    public List<Figure> renderAll(List<SnakeDto> snakes, List<FoodDto> food) {
         var figures = new ArrayList<Figure>();
 
         for (var snake : snakes) {
@@ -40,15 +40,15 @@ public class GameRenderer {
     /**
      * Renders the given food item.
      *
-     * @param foodRecord the food item to render
+     * @param foodDto the food item to render
      * @return drawable figures
      */
-    public List<Figure> render(FoodRecord foodRecord) {
+    public List<Figure> render(FoodDto foodDto) {
         return List.of(
             new Figure(
                 FigureType.CIRCLE,
-                foodRecord.position().y(),
-                foodRecord.position().x(),
+                foodDto.position().y(),
+                foodDto.position().x(),
                 FOOD_SCALE,
                 Color.RED
             )
@@ -58,13 +58,13 @@ public class GameRenderer {
     /**
      * Renders the given snake.
      *
-     * @param snakeRecord the snake on the board
+     * @param snakeDto the snake on the board
      * @return drawable figures
      */
-    public List<Figure> render(SnakeRecord snakeRecord) {
+    public List<Figure> render(SnakeDto snakeDto) {
         List<Figure> figures = new ArrayList<>();
-        for (var segment : snakeRecord.segments()) {
-            if (segment.equals(snakeRecord.head()) || segment.equals(snakeRecord.tail())) {
+        for (var segment : snakeDto.segments()) {
+            if (segment.equals(snakeDto.head()) || segment.equals(snakeDto.tail())) {
                 continue;
             }
 
@@ -79,16 +79,16 @@ public class GameRenderer {
 
         figures.add(new Figure(
             FigureType.SQUARE,
-            snakeRecord.tail().y(),
-            snakeRecord.tail().x(),
+            snakeDto.tail().y(),
+            snakeDto.tail().x(),
             SNAKE_TAIL_SCALE,
             Color.BLUE
         ));
 
         figures.add(new Figure(
             FigureType.SQUARE,
-            snakeRecord.head().y(),
-            snakeRecord.head().x(),
+            snakeDto.head().y(),
+            snakeDto.head().x(),
             SNAKE_HEAD_SCALE,
             Color.DARKBLUE
         ));
