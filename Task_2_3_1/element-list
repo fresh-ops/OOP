@@ -1,11 +1,11 @@
 ru.nsu.g.solovev5.m.task231
 ru.nsu.g.solovev5.m.task231.adapters.keyboard
-ru.nsu.g.solovev5.m.task231.adapters.picker
 ru.nsu.g.solovev5.m.task231.application
 ru.nsu.g.solovev5.m.task231.application.config
+ru.nsu.g.solovev5.m.task231.application.dto
 ru.nsu.g.solovev5.m.task231.application.exceptions
 ru.nsu.g.solovev5.m.task231.application.strategies
-ru.nsu.g.solovev5.m.task231.application.transport
+ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking
 ru.nsu.g.solovev5.m.task231.domain.entities
 ru.nsu.g.solovev5.m.task231.domain.exceptions
 ru.nsu.g.solovev5.m.task231.domain.services

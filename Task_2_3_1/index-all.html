@@ -80,7 +80,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Calculates the next game state.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CalculateNextStateUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.GenerateFoodUseCase,ru.nsu.g.solovev5.m.task231.application.MoveSnakeUseCase,ru.nsu.g.solovev5.m.task231.application.CheckCollisionsUseCase,ru.nsu.g.solovev5.m.task231.application.EatFoodUseCase)" class="member-name-link">CalculateNextStateUseCase(GenerateFoodUseCase, MoveSnakeUseCase, CheckCollisionsUseCase, EatFoodUseCase)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CalculateNextStateUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CalculateNextStateUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CalculateNextStateUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.GenerateFoodUseCase,ru.nsu.g.solovev5.m.task231.application.MoveSnakeUseCase,ru.nsu.g.solovev5.m.task231.application.CheckDeadCollisionsUseCase,ru.nsu.g.solovev5.m.task231.application.EatFoodUseCase)" class="member-name-link">CalculateNextStateUseCase(GenerateFoodUseCase, MoveSnakeUseCase, CheckDeadCollisionsUseCase, EatFoodUseCase)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CalculateNextStateUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CalculateNextStateUseCase</a></dt>
 <dd>
 <div class="block">Creates a new CalculateNextStateUseCase.</div>
 </dd>
@@ -88,15 +88,35 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Calculates the figure shape.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/CellPickingStrategy.html" class="type-name-link" title="interface in ru.nsu.g.solovev5.m.task231.application.strategies">CellPickingStrategy</a> - Interface in <a href="ru/nsu/g/solovev5/m/task231/application/strategies/package-summary.html">ru.nsu.g.solovev5.m.task231.application.strategies</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/CellPickingStrategy.html" class="type-name-link" title="interface in ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking">CellPickingStrategy</a> - Interface in <a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/package-summary.html">ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking</a></dt>
 <dd>
 <div class="block">A strategy for picking a cell from given.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckBorderCollisionsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CheckBorderCollisionsUseCase</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
+<dd>
+<div class="block">Checks for border collisions.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckBorderCollisionsUseCase.html#%3Cinit%3E()" class="member-name-link">CheckBorderCollisionsUseCase()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckBorderCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckBorderCollisionsUseCase</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckDeadCollisionsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CheckDeadCollisionsUseCase</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
 <dd>
 <div class="block">Checks if there is any collision.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html#%3Cinit%3E()" class="member-name-link">CheckCollisionsUseCase()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckDeadCollisionsUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.CheckBorderCollisionsUseCase,ru.nsu.g.solovev5.m.task231.application.CheckSelfCollisionsUseCase,ru.nsu.g.solovev5.m.task231.application.CheckEnemiesCollisions)" class="member-name-link">CheckDeadCollisionsUseCase(CheckBorderCollisionsUseCase, CheckSelfCollisionsUseCase, CheckEnemiesCollisions)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckDeadCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckDeadCollisionsUseCase</a></dt>
+<dd>
+<div class="block">Creates a new CheckDeadCollisionsUseCase.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckEnemiesCollisions.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CheckEnemiesCollisions</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
+<dd>
+<div class="block">Checks for collisions with enemies.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckEnemiesCollisions.html#%3Cinit%3E()" class="member-name-link">CheckEnemiesCollisions()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckEnemiesCollisions.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckEnemiesCollisions</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckSelfCollisionsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">CheckSelfCollisionsUseCase</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
+<dd>
+<div class="block">Checks for collisions with own body.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckSelfCollisionsUseCase.html#%3Cinit%3E()" class="member-name-link">CheckSelfCollisionsUseCase()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckSelfCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckSelfCollisionsUseCase</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/FigureType.html#CIRCLE" class="member-name-link">CIRCLE</a> - Enum constant in enum class ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/FigureType.html" title="enum class in ru.nsu.g.solovev5.m.task231.presentation.renderer.figures">FigureType</a></dt>
 <dd>&nbsp;</dd>
@@ -128,9 +148,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/config/GameConfig.html#param-columns"><code>columns</code></a> record component.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#columns()" class="member-name-link">columns()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#columns()" class="member-name-link">columns()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#param-columns"><code>columns</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#param-columns"><code>columns</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/entities/GameState.html#columns()" class="member-name-link">columns()</a> - Method in record class ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/GameState.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">GameState</a></dt>
 <dd>
@@ -170,7 +190,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Handles food eating.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.CheckCollisionsUseCase)" class="member-name-link">EatFoodUseCase(CheckCollisionsUseCase)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">EatFoodUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.GetCollidingFoodUseCase)" class="member-name-link">EatFoodUseCase(GetCollidingFoodUseCase)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">EatFoodUseCase</a></dt>
 <dd>
 <div class="block">Creates a new EatFoodUseCase.</div>
 </dd>
@@ -182,15 +202,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
 </dd>
@@ -267,21 +287,21 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates a new Food.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/application/transport/package-summary.html">ru.nsu.g.solovev5.m.task231.application.transport</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/application/dto/package-summary.html">ru.nsu.g.solovev5.m.task231.application.dto</a></dt>
 <dd>
 <div class="block">A transferable copy of food.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType)" class="member-name-link">FoodRecord(Point2D, FoodType)</a> - Constructor for record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,ru.nsu.g.solovev5.m.task231.domain.valueobjects.FoodType)" class="member-name-link">FoodDto(Point2D, FoodType)</a> - Constructor for record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a></dt>
 <dd>
-<div class="block">Creates an instance of a <code>FoodRecord</code> record class.</div>
+<div class="block">Creates an instance of a <code>FoodDto</code> record class.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#foods()" class="member-name-link">foods()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#foods()" class="member-name-link">foods()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#param-foods"><code>foods</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#param-foods"><code>foods</code></a> record component.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#foodType()" class="member-name-link">foodType()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#foodType()" class="member-name-link">foodType()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#param-foodType"><code>foodType</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#param-foodType"><code>foodType</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/valueobjects/FoodType.html" class="type-name-link" title="enum class in ru.nsu.g.solovev5.m.task231.domain.valueobjects">FoodType</a> - Enum Class in <a href="ru/nsu/g/solovev5/m/task231/domain/valueobjects/package-summary.html">ru.nsu.g.solovev5.m.task231.domain.valueobjects</a></dt>
 <dd>
@@ -316,13 +336,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an instance of a <code>GameState</code> record class.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/application/transport/package-summary.html">ru.nsu.g.solovev5.m.task231.application.transport</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/application/dto/package-summary.html">ru.nsu.g.solovev5.m.task231.application.dto</a></dt>
 <dd>
 <div class="block">A transferable copy of the game state.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#%3Cinit%3E(int,int,java.util.List,java.util.List)" class="member-name-link">GameStateRecord(int, int, List&lt;SnakeRecord&gt;, List&lt;FoodRecord&gt;)</a> - Constructor for record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#%3Cinit%3E(int,int,java.util.List,java.util.List)" class="member-name-link">GameStateDto(int, int, List&lt;SnakeDto&gt;, List&lt;FoodDto&gt;)</a> - Constructor for record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
-<div class="block">Creates an instance of a <code>GameStateRecord</code> record class.</div>
+<div class="block">Creates an instance of a <code>GameStateDto</code> record class.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/GameWorker.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GameWorker</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
 <dd>
@@ -336,7 +356,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Generates food items.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/GenerateFoodUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.GetFreeCellsUseCase,ru.nsu.g.solovev5.m.task231.application.strategies.CellPickingStrategy,ru.nsu.g.solovev5.m.task231.application.strategies.FoodTypePickingStrategy)" class="member-name-link">GenerateFoodUseCase(GetFreeCellsUseCase, CellPickingStrategy, FoodTypePickingStrategy)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GenerateFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">GenerateFoodUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/GenerateFoodUseCase.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.application.GetFreeCellsUseCase,ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.CellPickingStrategy,ru.nsu.g.solovev5.m.task231.application.strategies.FoodTypePickingStrategy)" class="member-name-link">GenerateFoodUseCase(GetFreeCellsUseCase, CellPickingStrategy, FoodTypePickingStrategy)</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GenerateFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">GenerateFoodUseCase</a></dt>
 <dd>
 <div class="block">Creates a new GenerateFoodUseCase.</div>
 </dd>
@@ -344,10 +364,12 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns all the snake's segments except the head.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html#getFoodCollisions(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)" class="member-name-link">getFoodCollisions(Player, List&lt;Food&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/GetCollidingFoodUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GetCollidingFoodUseCase</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
 <dd>
-<div class="block">Looks for collisions with food items.</div>
+<div class="block">Gets food items player can eat.</div>
 </dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/GetCollidingFoodUseCase.html#%3Cinit%3E()" class="member-name-link">GetCollidingFoodUseCase()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GetCollidingFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">GetCollidingFoodUseCase</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/GetFreeCellsUseCase.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application">GetFreeCellsUseCase</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a></dt>
 <dd>
 <div class="block">Get free cells.</div>
@@ -409,15 +431,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#hashCode()" class="member-name-link">hashCode()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
@@ -445,9 +467,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a hash code value for this object.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#head()" class="member-name-link">head()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#head()" class="member-name-link">head()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#param-head"><code>head</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#param-head"><code>head</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/FigureShape.html#height()" class="member-name-link">height()</a> - Method in record class ru.nsu.g.solovev5.m.task231.presentation.renderer.figures.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/FigureShape.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer.figures">FigureShape</a></dt>
 <dd>
@@ -472,29 +494,33 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Calculates a new game state based on given.</div>
 </dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckSelfCollisionsUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Player)" class="member-name-link">invoke(Player)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckSelfCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckSelfCollisionsUseCase</a></dt>
+<dd>
+<div class="block">Check if there is a self collision.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckBorderCollisionsUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int)" class="member-name-link">invoke(Player, int, int)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckBorderCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckBorderCollisionsUseCase</a></dt>
+<dd>
+<div class="block">Checks if there is a border collision.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckDeadCollisionsUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int,java.util.List)" class="member-name-link">invoke(Player, int, int, List&lt;Player&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckDeadCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckDeadCollisionsUseCase</a></dt>
+<dd>
+<div class="block">Checks if there is a dead collision.</div>
+</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)" class="member-name-link">invoke(Player, List&lt;Food&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/EatFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">EatFoodUseCase</a></dt>
 <dd>
 <div class="block">Handles the eating process.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/MoveSnakeUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Snake,ru.nsu.g.solovev5.m.task231.domain.strategies.MovementStrategy)" class="member-name-link">invoke(Snake, MovementStrategy)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/MoveSnakeUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">MoveSnakeUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/GetCollidingFoodUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)" class="member-name-link">invoke(Player, List&lt;Food&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/GetCollidingFoodUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">GetCollidingFoodUseCase</a></dt>
 <dd>
-<div class="block">Invokes this use case.</div>
+<div class="block">Looks for collisions with food items.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html#isBorderCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int)" class="member-name-link">isBorderCollision(Player, int, int)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></dt>
-<dd>
-<div class="block">Checks if there is a border collision.</div>
-</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html#isDeadCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,int,int,java.util.List)" class="member-name-link">isDeadCollision(Player, int, int, List&lt;Player&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></dt>
-<dd>
-<div class="block">Checks if there is a dead collision.</div>
-</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html#isOtherSnakeCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)" class="member-name-link">isOtherSnakeCollision(Player, List&lt;Player&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckEnemiesCollisions.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Player,java.util.List)" class="member-name-link">invoke(Player, List&lt;Player&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckEnemiesCollisions.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckEnemiesCollisions</a></dt>
 <dd>
 <div class="block">Checks if there is a collision with other snake.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html#isSelfCollision(ru.nsu.g.solovev5.m.task231.domain.entities.Player)" class="member-name-link">isSelfCollision(Player)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/CheckCollisionsUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">CheckCollisionsUseCase</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/MoveSnakeUseCase.html#invoke(ru.nsu.g.solovev5.m.task231.domain.entities.Snake,ru.nsu.g.solovev5.m.task231.domain.strategies.MovementStrategy)" class="member-name-link">invoke(Snake, MovementStrategy)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.<a href="ru/nsu/g/solovev5/m/task231/application/MoveSnakeUseCase.html" title="class in ru.nsu.g.solovev5.m.task231.application">MoveSnakeUseCase</a></dt>
 <dd>
-<div class="block">Check if there is a self collision.</div>
+<div class="block">Invokes this use case.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:K">K</h2>
@@ -580,12 +606,12 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Picks a food type.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/adapters/picker/RandomCellPickingStrategy.html#pick(java.util.List)" class="member-name-link">pick(List&lt;Point2D&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.adapters.picker.<a href="ru/nsu/g/solovev5/m/task231/adapters/picker/RandomCellPickingStrategy.html" title="class in ru.nsu.g.solovev5.m.task231.adapters.picker">RandomCellPickingStrategy</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/CellPickingStrategy.html#pick(java.util.List)" class="member-name-link">pick(List&lt;Point2D&gt;)</a> - Method in interface ru.nsu.g.solovev5.m.task231.application.strategies.<a href="ru/nsu/g/solovev5/m/task231/application/strategies/CellPickingStrategy.html" title="interface in ru.nsu.g.solovev5.m.task231.application.strategies">CellPickingStrategy</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/CellPickingStrategy.html#pick(java.util.List)" class="member-name-link">pick(List&lt;Point2D&gt;)</a> - Method in interface ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.<a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/CellPickingStrategy.html" title="interface in ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking">CellPickingStrategy</a></dt>
 <dd>
 <div class="block">Picks a cell from given.</div>
 </dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/RandomCellPickingStrategy.html#pick(java.util.List)" class="member-name-link">pick(List&lt;Point2D&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.<a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/RandomCellPickingStrategy.html" title="class in ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking">RandomCellPickingStrategy</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/entities/Player.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/domain/entities/package-summary.html">ru.nsu.g.solovev5.m.task231.domain.entities</a></dt>
 <dd>
 <div class="block">Represents a player.</div>
@@ -622,9 +648,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Removes the tail of this snake.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#position()" class="member-name-link">position()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#position()" class="member-name-link">position()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#param-position"><code>position</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#param-position"><code>position</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/entities/Food.html#position()" class="member-name-link">position()</a> - Method in record class ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/Food.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Food</a></dt>
 <dd>
@@ -641,23 +667,23 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
-<dt><a href="ru/nsu/g/solovev5/m/task231/adapters/picker/RandomCellPickingStrategy.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.adapters.picker">RandomCellPickingStrategy</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/adapters/picker/package-summary.html">ru.nsu.g.solovev5.m.task231.adapters.picker</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/RandomCellPickingStrategy.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking">RandomCellPickingStrategy</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/package-summary.html">ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking</a></dt>
 <dd>
 <div class="block">Picks a cell using random.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/adapters/picker/RandomCellPickingStrategy.html#%3Cinit%3E()" class="member-name-link">RandomCellPickingStrategy()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.adapters.picker.<a href="ru/nsu/g/solovev5/m/task231/adapters/picker/RandomCellPickingStrategy.html" title="class in ru.nsu.g.solovev5.m.task231.adapters.picker">RandomCellPickingStrategy</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/RandomCellPickingStrategy.html#%3Cinit%3E()" class="member-name-link">RandomCellPickingStrategy()</a> - Constructor for class ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking.<a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/RandomCellPickingStrategy.html" title="class in ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking">RandomCellPickingStrategy</a></dt>
 <dd>
 <div class="block">Creates a new RandomCellPickingStrategy.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html#render(ru.nsu.g.solovev5.m.task231.application.transport.FoodRecord)" class="member-name-link">render(FoodRecord)</a> - Method in class ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html#render(ru.nsu.g.solovev5.m.task231.application.dto.FoodDto)" class="member-name-link">render(FoodDto)</a> - Method in class ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></dt>
 <dd>
 <div class="block">Renders the given food item.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html#render(ru.nsu.g.solovev5.m.task231.application.transport.SnakeRecord)" class="member-name-link">render(SnakeRecord)</a> - Method in class ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html#render(ru.nsu.g.solovev5.m.task231.application.dto.SnakeDto)" class="member-name-link">render(SnakeDto)</a> - Method in class ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></dt>
 <dd>
 <div class="block">Renders the given snake.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html#renderAll(java.util.List,java.util.List)" class="member-name-link">renderAll(List&lt;SnakeRecord&gt;, List&lt;FoodRecord&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html#renderAll(java.util.List,java.util.List)" class="member-name-link">renderAll(List&lt;SnakeDto&gt;, List&lt;FoodDto&gt;)</a> - Method in class ru.nsu.g.solovev5.m.task231.presentation.renderer.<a href="ru/nsu/g/solovev5/m/task231/presentation/renderer/GameRenderer.html" title="class in ru.nsu.g.solovev5.m.task231.presentation.renderer">GameRenderer</a></dt>
 <dd>
 <div class="block">Renders all passed game entities.</div>
 </dd>
@@ -673,9 +699,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/config/GameConfig.html#param-rows"><code>rows</code></a> record component.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#rows()" class="member-name-link">rows()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#rows()" class="member-name-link">rows()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#param-rows"><code>rows</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#param-rows"><code>rows</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/entities/GameState.html#rows()" class="member-name-link">rows()</a> - Method in record class ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/GameState.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">GameState</a></dt>
 <dd>
@@ -685,17 +711,17 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/adapters/keyboard/package-summary.html">ru.nsu.g.solovev5.m.task231.adapters.keyboard</a> - package ru.nsu.g.solovev5.m.task231.adapters.keyboard</dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/adapters/picker/package-summary.html">ru.nsu.g.solovev5.m.task231.adapters.picker</a> - package ru.nsu.g.solovev5.m.task231.adapters.picker</dt>
-<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/package-summary.html">ru.nsu.g.solovev5.m.task231.application</a> - package ru.nsu.g.solovev5.m.task231.application</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/config/package-summary.html">ru.nsu.g.solovev5.m.task231.application.config</a> - package ru.nsu.g.solovev5.m.task231.application.config</dt>
+<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/package-summary.html">ru.nsu.g.solovev5.m.task231.application.dto</a> - package ru.nsu.g.solovev5.m.task231.application.dto</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/exceptions/package-summary.html">ru.nsu.g.solovev5.m.task231.application.exceptions</a> - package ru.nsu.g.solovev5.m.task231.application.exceptions</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/package-summary.html">ru.nsu.g.solovev5.m.task231.application.strategies</a> - package ru.nsu.g.solovev5.m.task231.application.strategies</dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/package-summary.html">ru.nsu.g.solovev5.m.task231.application.transport</a> - package ru.nsu.g.solovev5.m.task231.application.transport</dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/strategies/cellpicking/package-summary.html">ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking</a> - package ru.nsu.g.solovev5.m.task231.application.strategies.cellpicking</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/entities/package-summary.html">ru.nsu.g.solovev5.m.task231.domain.entities</a> - package ru.nsu.g.solovev5.m.task231.domain.entities</dt>
 <dd>&nbsp;</dd>
@@ -724,9 +750,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/presentation/renderer/figures/Figure.html#param-scale"><code>scale</code></a> record component.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#segments()" class="member-name-link">segments()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#segments()" class="member-name-link">segments()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#param-segments"><code>segments</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#param-segments"><code>segments</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/entities/Player.html#snake()" class="member-name-link">snake()</a> - Method in record class ru.nsu.g.solovev5.m.task231.domain.entities.<a href="ru/nsu/g/solovev5/m/task231/domain/entities/Player.html" title="class in ru.nsu.g.solovev5.m.task231.domain.entities">Player</a></dt>
 <dd>
@@ -744,6 +770,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Create a new snake with given head.</div>
 </dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/application/dto/package-summary.html">ru.nsu.g.solovev5.m.task231.application.dto</a></dt>
+<dd>
+<div class="block">A transferable copy of the snake.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,java.util.List)" class="member-name-link">SnakeDto(Point2D, Point2D, List&lt;Point2D&gt;)</a> - Constructor for record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
+<dd>
+<div class="block">Creates an instance of a <code>SnakeDto</code> record class.</div>
+</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/SnakeGame.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231">SnakeGame</a> - Class in <a href="ru/nsu/g/solovev5/m/task231/package-summary.html">ru.nsu.g.solovev5.m.task231</a></dt>
 <dd>
 <div class="block">The main program class.</div>
@@ -754,17 +788,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/config/PlayerConfig.html#param-snakeHead"><code>snakeHead</code></a> record component.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task231/application/transport/package-summary.html">ru.nsu.g.solovev5.m.task231.application.transport</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#snakes()" class="member-name-link">snakes()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
-<div class="block">A transferable copy of the snake.</div>
-</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#%3Cinit%3E(ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,ru.nsu.g.solovev5.m.task231.domain.valueobjects.Point2D,java.util.List)" class="member-name-link">SnakeRecord(Point2D, Point2D, List&lt;Point2D&gt;)</a> - Constructor for record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
-<dd>
-<div class="block">Creates an instance of a <code>SnakeRecord</code> record class.</div>
-</dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#snakes()" class="member-name-link">snakes()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
-<dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#param-snakes"><code>snakes</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#param-snakes"><code>snakes</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/domain/exceptions/SnakeZeroLengthException.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task231.domain.exceptions">SnakeZeroLengthException</a> - Exception in <a href="ru/nsu/g/solovev5/m/task231/domain/exceptions/package-summary.html">ru.nsu.g.solovev5.m.task231.domain.exceptions</a></dt>
 <dd>
@@ -791,9 +817,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#tail()" class="member-name-link">tail()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#tail()" class="member-name-link">tail()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
 <dd>
-<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#param-tail"><code>tail</code></a> record component.</div>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#param-tail"><code>tail</code></a> record component.</div>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task231/application/config/GameConfig.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.config.<a href="ru/nsu/g/solovev5/m/task231/application/config/GameConfig.html" title="class in ru.nsu.g.solovev5.m.task231.application.config">GameConfig</a></dt>
 <dd>
@@ -803,15 +829,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/FoodRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">FoodRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/FoodDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">FoodDto</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/GameStateRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">GameStateRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/GameStateDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">GameStateDto</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.transport.<a href="ru/nsu/g/solovev5/m/task231/application/transport/SnakeRecord.html" title="class in ru.nsu.g.solovev5.m.task231.application.transport">SnakeRecord</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html#toString()" class="member-name-link">toString()</a> - Method in record class ru.nsu.g.solovev5.m.task231.application.dto.<a href="ru/nsu/g/solovev5/m/task231/application/dto/SnakeDto.html" title="class in ru.nsu.g.solovev5.m.task231.application.dto">SnakeDto</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
 </dd>
