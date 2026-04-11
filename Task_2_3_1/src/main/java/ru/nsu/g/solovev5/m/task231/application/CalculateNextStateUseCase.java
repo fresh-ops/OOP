@@ -8,28 +8,29 @@ import ru.nsu.g.solovev5.m.task231.application.exceptions.NoFreeCellsException;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
+import ru.nsu.g.solovev5.m.task231.domain.services.FoodGenerator;
 
 /**
  * Calculates the next game state.
  */
 public class CalculateNextStateUseCase {
-    private final GenerateFoodUseCase generateFoodUseCase;
+    private final FoodGenerator foodGenerator;
     private final MoveSnakeUseCase moveSnakeUseCase;
     private final EatFoodUseCase eatFoodUseCase;
 
     /**
      * Creates a new CalculateNextStateUseCase.
      *
-     * @param generateFoodUseCase the use case to generate food
+     * @param foodGenerator the use case to generate food
      * @param moveSnakeUseCase    the use case to move snake
      * @param eatFoodUseCase      the use case to eat food
      */
     public CalculateNextStateUseCase(
-        GenerateFoodUseCase generateFoodUseCase,
+        FoodGenerator foodGenerator,
         MoveSnakeUseCase moveSnakeUseCase,
         EatFoodUseCase eatFoodUseCase
     ) {
-        this.generateFoodUseCase = generateFoodUseCase;
+        this.foodGenerator = foodGenerator;
         this.moveSnakeUseCase = moveSnakeUseCase;
         this.eatFoodUseCase = eatFoodUseCase;
     }
@@ -65,7 +66,7 @@ public class CalculateNextStateUseCase {
 
         try {
             while (newFood.size() < state.maxFoodItems()) {
-                newFood.add(generateFoodUseCase.invoke(
+                newFood.add(foodGenerator.generate(
                     state.rows(), state.columns(), state.players(), newFood)
                 );
             }
