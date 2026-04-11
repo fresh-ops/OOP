@@ -4,10 +4,10 @@ import static ru.nsu.g.solovev5.m.task231.domain.services.CollisionService.deadC
 
 import java.util.ArrayList;
 import java.util.List;
-import ru.nsu.g.solovev5.m.task231.domain.exceptions.NoFreeCellsException;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
 import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
 import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
+import ru.nsu.g.solovev5.m.task231.domain.exceptions.NoFreeCellsException;
 
 /**
  * Calculates the next game state.
