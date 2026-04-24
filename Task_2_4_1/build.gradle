@@ -18,6 +18,17 @@ dependencies {
     implementation 'org.apache.groovy:groovy-all:5.0.0'
 }
 
+sourceSets {
+    main {
+        java.srcDirs = []
+        groovy.srcDirs = ['src/main/java', 'src/main/groovy']
+    }
+    test {
+        java.srcDirs = []
+        groovy.srcDirs = ['src/test/java', 'src/test/groovy']
+    }
+}
+
 test {
     useJUnitPlatform()
 }
