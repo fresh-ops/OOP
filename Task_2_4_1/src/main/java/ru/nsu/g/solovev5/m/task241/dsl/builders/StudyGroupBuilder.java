@@ -9,27 +9,34 @@ import ru.nsu.g.solovev5.m.task241.core.models.StudyGroup;
  * A study group builder.
  */
 public class StudyGroupBuilder {
-    private final String id;
+    private String id;
     private final List<StudentBuilder> builders;
 
     /**
      * Creates a new study group builder.
-     *
-     * @param id the id of a new study group
      */
-    public StudyGroupBuilder(String id) {
-        this.id = id;
+    public StudyGroupBuilder() {
         this.builders = new ArrayList<>();
+    }
+
+    /**
+     * Sets the id for a new group.
+     *
+     * @param id the new group id
+     * @return this study group builder
+     */
+    public StudyGroupBuilder id(String id) {
+        this.id = id;
+        return this;
     }
 
     /**
      * Registers a new student in this group builder.
      *
-     * @param name the name of a new student
      * @return a student builder to customize a new student
      */
-    public StudentBuilder student(String name) {
-        var builder = new StudentBuilder().name(name);
+    public StudentBuilder student() {
+        var builder = new StudentBuilder();
         builders.add(builder);
         return builder;
     }

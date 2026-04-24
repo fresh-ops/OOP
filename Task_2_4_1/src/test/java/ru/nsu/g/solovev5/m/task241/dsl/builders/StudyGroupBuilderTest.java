@@ -17,9 +17,11 @@ class StudyGroupBuilderTest {
             new Student("John Smith", "John", URI.create("https://github.com/John"))
         );
 
-        var builder = new StudyGroupBuilder(id);
+        var builder = new StudyGroupBuilder();
+        builder.id(id);
         for (var student : students) {
-            builder.student(student.name())
+            builder.student()
+                .name(student.name())
                 .aka(student.nickname())
                 .submitsAt(student.repository().toString());
         }
