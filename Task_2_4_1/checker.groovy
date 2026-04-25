@@ -1,5 +1,3 @@
-include "test.groovy"
-
 studyGroup("24213") {
     student "Matvey" aka "fresh" submitsAt "https://github.com/fresh-ops/OOP"
 }

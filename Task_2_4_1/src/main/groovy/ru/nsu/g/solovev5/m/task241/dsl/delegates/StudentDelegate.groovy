@@ -3,15 +3,17 @@ package ru.nsu.g.solovev5.m.task241.dsl.delegates
 import groovy.transform.CompileStatic
 import ru.nsu.g.solovev5.m.task241.dsl.builders.StudentBuilder
 
+import java.util.function.Supplier
+
 @CompileStatic
 class StudentDelegate {
-    private final StudentBuilder builder
+    private final Supplier<StudentBuilder> supplier
 
-    protected StudentDelegate(StudentBuilder builder) {
-        this.builder = builder
+    protected StudentDelegate(Supplier<StudentBuilder> supplier) {
+        this.supplier = supplier
     }
 
     StudentBuilder student(String name) {
-        builder.name(name)
+        supplier.get().name(name)
     }
 }

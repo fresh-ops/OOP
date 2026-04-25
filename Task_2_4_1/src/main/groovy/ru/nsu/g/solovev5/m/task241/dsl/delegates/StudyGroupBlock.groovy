@@ -15,7 +15,7 @@ class StudyGroupBlock implements Statement {
             ) Closure closure
     ) {
         var builder = new StudyGroupBuilder().id(id)
-        var delegate = new StudentDelegate(builder.student())
+        var delegate = new StudentDelegate(() -> builder.student())
         closure.rehydrate(delegate, this, this).call()
         acceptor.accept(builder.build())
     }
