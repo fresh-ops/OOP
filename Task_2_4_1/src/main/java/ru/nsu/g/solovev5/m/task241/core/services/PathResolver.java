@@ -49,4 +49,13 @@ public class PathResolver {
     public Path resolveTask(Student student, Task task) {
         return resolveRepository(student).resolve(task.path());
     }
+
+    /**
+     * Returns the working directory.
+     *
+     * @return the working directory
+     */
+    public Path workingDirectory() {
+        return this.workingPath;
+    }
 }

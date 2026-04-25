@@ -2,6 +2,8 @@ package ru.nsu.g.solovev5.m.task241;
 
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
+import ru.nsu.g.solovev5.m.task241.cli.CleanCommand;
+import ru.nsu.g.solovev5.m.task241.cli.FetchCommand;
 import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
 
 @CommandLine.Command(
@@ -9,6 +11,8 @@ import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
     mixinStandardHelpOptions = true,
     description = "Helps to check OOP tasks",
     subcommands = {
+        FetchCommand.class,
+        CleanCommand.class,
         StyleCommand.class
     }
 )
