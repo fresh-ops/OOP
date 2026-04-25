@@ -10,15 +10,15 @@ import ru.nsu.g.solovev5.m.task241.core.models.Student;
  * A service for repository management.
  */
 public class RepositoryService {
-    private final Path workingPath;
+    private final PathResolver resolver;
 
     /**
      * Creates a new repository service.
      *
-     * @param workingPath the path containing students personal paths
+     * @param resolver the path resolver
      */
-    public RepositoryService(Path workingPath) {
-        this.workingPath = workingPath;
+    public RepositoryService(PathResolver resolver) {
+        this.resolver = resolver;
     }
 
     /**
@@ -36,7 +36,7 @@ public class RepositoryService {
             return;
         }
 
-        var path = workingPath.resolve(student.personalPath());
+        var path = resolver.resolvePersonalPath(student);
         createIfNotExist(path);
         var processBuilder = new ProcessBuilder("git", "clone", "-v", student.git().toString())
             .redirectErrorStream(true)
@@ -69,7 +69,7 @@ public class RepositoryService {
 
         var processBuilder = new ProcessBuilder("git", "pull", "-v")
             .redirectErrorStream(true)
-            .directory(resolveRepository(student).toFile());
+            .directory(resolver.resolveRepository(student).toFile());
 
         var process = processBuilder.start();
 
@@ -91,7 +91,7 @@ public class RepositoryService {
      */
     public void deleteRepository(Student student) throws IOException {
         if (isRepositoryLoaded(student)) {
-            try (var stream = Files.walk(resolveRepository(student))) {
+            try (var stream = Files.walk(resolver.resolveRepository(student))) {
                 stream.sorted(Comparator.reverseOrder())
                     .forEach(p -> {
                             try {
@@ -106,11 +106,7 @@ public class RepositoryService {
     }
 
     public boolean isRepositoryLoaded(Student student) {
-        return Files.exists(resolveRepository(student));
-    }
-
-    public Path resolveRepository(Student student) {
-        return workingPath.resolve(student.repositoryPath());
+        return Files.exists(resolver.resolveRepository(student));
     }
 
     private void createIfNotExist(Path path) throws IOException {

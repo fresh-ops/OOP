@@ -1,6 +1,5 @@
 package ru.nsu.g.solovev5.m.task241.core.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,15 +13,6 @@ import ru.nsu.g.solovev5.m.task241.core.models.Student;
 
 class RepositoryServiceTest {
     @Test
-    void resolveRepository_should_appendPathToWorkingDirectory(@TempDir Path workingDirectory) {
-        var student = new Student("Ivanov Ivan", "Ivan", URI.create("https://github.com/Ivan/OOP"));
-        var service = new RepositoryService(workingDirectory);
-
-        var resolved = service.resolveRepository(student);
-        assertEquals(workingDirectory.resolve(student.repositoryPath()), resolved);
-    }
-
-    @Test
     void repositoryManagementMethods_should_workWithRepository(
         @TempDir Path workingDirectory
     ) throws IOException, InterruptedException {
@@ -31,9 +21,10 @@ class RepositoryServiceTest {
             "Ivan",
             URI.create("https://github.com/sarcasticadmin/empty-repo")
         );
-        var service = new RepositoryService(workingDirectory);
+        var resolver = new PathResolver(workingDirectory);
+        var service = new RepositoryService(resolver);
 
-        assertFalse(Files.exists(workingDirectory.resolve(student.repositoryPath())));
+        assertFalse(Files.exists(resolver.resolveRepository(student)));
         assertFalse(
             service.isRepositoryLoaded(student),
             "isRepositoryLoaded should return false if there is no repository"
@@ -41,7 +32,7 @@ class RepositoryServiceTest {
 
         service.loadRepositoryIfNotLoaded(student);
         assertTrue(
-            Files.exists(workingDirectory.resolve(student.repositoryPath())),
+            Files.exists(resolver.resolveRepository(student)),
             "loadRepositoryIfNotLoaded should create a new directory"
         );
         assertTrue(
@@ -51,7 +42,7 @@ class RepositoryServiceTest {
 
         service.deleteRepository(student);
         assertFalse(
-            Files.exists(workingDirectory.resolve(student.repositoryPath())),
+            Files.exists(resolver.resolveRepository(student)),
             "deleteRepository should delete the directory"
         );
         assertFalse(
