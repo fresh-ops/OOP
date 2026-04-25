@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task241.core.models;
 
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.Objects;
 
 /**
@@ -23,5 +24,35 @@ public record Student(String name, String nickname, URI repository) {
         Objects.requireNonNull(name, "Name must not be null");
         Objects.requireNonNull(nickname, "Nickname must not be null");
         Objects.requireNonNull(repository, "RepoUrl must not be null");
+    }
+
+    /**
+     * Returns the suffix of personal path.
+     *
+     * @return the suffix of personal path
+     */
+    public Path personalPath() {
+        return Path.of(nickname.replaceAll(" ", "_"));
+    }
+
+    /**
+     * Returns the suffix of repository path.
+     *
+     * @return the suffix of repository path
+     */
+    public Path repositoryPath() {
+        var path = repository.getPath();
+        var repositoryName = path.substring(path.lastIndexOf('/') + 1);
+
+        return personalPath().resolve(repositoryName);
+    }
+
+    /**
+     * Returns the URI of clonable git repository.
+     *
+     * @return the URI of clonable git repository
+     */
+    public URI git() {
+        return URI.create(repository + ".git");
     }
 }
