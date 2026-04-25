@@ -32,6 +32,7 @@ public class FetchCommand extends Command {
     }
 
     private void fetchStudent(Student student) throws InterruptedException {
+        System.out.println("Fetching student " + student.name());
         var service = new RepositoryService(resolver);
 
         try {
