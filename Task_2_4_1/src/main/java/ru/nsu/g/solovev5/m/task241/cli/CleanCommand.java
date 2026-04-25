@@ -2,6 +2,7 @@ package ru.nsu.g.solovev5.m.task241.cli;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Comparator;
 import picocli.CommandLine;
 
 @CommandLine.Command(
@@ -12,7 +13,8 @@ public class CleanCommand extends Command {
     @Override
     public Integer call() throws Exception {
         try (var paths = Files.walk(resolver.workingDirectory())) {
-            paths.forEach(p -> {
+            paths.sorted(Comparator.reverseOrder())
+                .forEach(p -> {
                 try {
                     Files.delete(p);
                 } catch (IOException e) {
