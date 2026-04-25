@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import ru.nsu.g.solovev5.m.task241.core.models.Config;
 import ru.nsu.g.solovev5.m.task241.core.models.StudyGroup;
+import ru.nsu.g.solovev5.m.task241.core.models.Task;
 import ru.nsu.g.solovev5.m.task241.dsl.builders.ConfigBuilder;
 import ru.nsu.g.solovev5.m.task241.dsl.delegates.PartsAcceptor;
 import ru.nsu.g.solovev5.m.task241.dsl.delegates.Statement;
@@ -38,6 +39,8 @@ public class ExecutionContext implements PartsAcceptor {
     public <T> void accept(T part) {
         if (part.getClass() == StudyGroup.class) {
             builder.studyGroup((StudyGroup) part);
+        } else if (part.getClass() == Task.class) {
+            builder.task((Task) part);
         } else {
             throw new IllegalStateException("Unsupported type: " + part.getClass());
         }

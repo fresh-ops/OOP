@@ -6,6 +6,10 @@ import java.util.List;
  * An application config object.
  *
  * @param studyGroups the list of study groups
+ * @param tasks       the list of course tasks
  */
-public record Config(List<StudyGroup> studyGroups) {
+public record Config(
+    List<StudyGroup> studyGroups,
+    List<Task> tasks
+) {
 }

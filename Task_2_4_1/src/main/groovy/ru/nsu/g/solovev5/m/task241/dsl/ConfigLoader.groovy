@@ -1,6 +1,7 @@
 package ru.nsu.g.solovev5.m.task241.dsl
 
 import ru.nsu.g.solovev5.m.task241.core.models.Config
+import ru.nsu.g.solovev5.m.task241.dsl.delegates.CourseBlock
 import ru.nsu.g.solovev5.m.task241.dsl.delegates.Statement
 import ru.nsu.g.solovev5.m.task241.dsl.delegates.StudyGroupBlock
 
@@ -8,7 +9,8 @@ import java.nio.file.Path
 
 class ConfigLoader {
     private final List<Statement> SUPPORTED_STATEMENTS = [
-            new StudyGroupBlock()
+            new StudyGroupBlock(),
+            new CourseBlock(),
     ]
 
     Config loadFrom(Path path) {
