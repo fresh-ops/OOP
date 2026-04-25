@@ -30,7 +30,11 @@ public class StyleCommand extends Command {
         System.out.println("Checking " + student.name());
         var repository = resolver.resolveRepository(student);
         if (Files.notExists(repository)) {
-            System.err.println("Cannot find a repository path for " + student.name() + ". Try load repositories again");
+            System.err.println(
+                "Cannot find a repository path for "
+                    + student.name()
+                    + ". Try load repositories again"
+            );
             return;
         }
 
