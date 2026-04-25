@@ -1,5 +1,6 @@
 package ru.nsu.g.solovev5.m.task241.core.services;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,6 +39,9 @@ class RepositoryServiceTest {
         assertTrue(
             service.isRepositoryLoaded(student),
             "isRepositoryLoaded should return true if there is a repository"
+        );
+        assertDoesNotThrow(
+            () -> service.updateRepository(student)
         );
 
         service.deleteRepository(student);
