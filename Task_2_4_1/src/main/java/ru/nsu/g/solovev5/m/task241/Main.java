@@ -1,14 +1,26 @@
 package ru.nsu.g.solovev5.m.task241;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import ru.nsu.g.solovev5.m.task241.dsl.ConfigLoader;
+import java.util.concurrent.Callable;
+import picocli.CommandLine;
+import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
-        var loader = new ConfigLoader();
+@CommandLine.Command(
+    name = "checker",
+    mixinStandardHelpOptions = true,
+    description = "Helps to check OOP tasks",
+    subcommands = {
+        StyleCommand.class
+    }
+)
+public class Main implements Callable<Integer> {
+    public static void main(String[] args) {
+        int exitCode = new CommandLine(new Main()).execute(args);
+        System.exit(exitCode);
+    }
 
-        var config = loader.loadFrom(Path.of("checker.groovy"));
-        System.out.println(config);
+    @Override
+    public Integer call() {
+        System.out.println("Use -h or --help to get help");
+        return 0;
     }
 }
