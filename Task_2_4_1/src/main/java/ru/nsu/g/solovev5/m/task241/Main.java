@@ -7,6 +7,9 @@ import ru.nsu.g.solovev5.m.task241.cli.CoverageCommand;
 import ru.nsu.g.solovev5.m.task241.cli.FetchCommand;
 import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
 
+/**
+ * The application composition point.
+ */
 @CommandLine.Command(
     name = "checker",
     mixinStandardHelpOptions = true,
@@ -19,6 +22,11 @@ import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
     }
 )
 public class Main implements Callable<Integer> {
+    /**
+     * The application entry point.
+     *
+     * @param args a command-line arguments
+     */
     public static void main(String[] args) {
         int exitCode = new CommandLine(new Main()).execute(args);
         System.exit(exitCode);

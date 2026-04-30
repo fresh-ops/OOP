@@ -6,6 +6,9 @@ import ru.nsu.g.solovev5.m.task241.core.models.Student;
 import ru.nsu.g.solovev5.m.task241.core.models.StudyGroup;
 import ru.nsu.g.solovev5.m.task241.core.services.RepositoryService;
 
+/**
+ * A CLI command for fetching students' repository.
+ */
 @CommandLine.Command(
     name = "fetch",
     description = "fetches all repositories"
@@ -24,6 +27,12 @@ public class FetchCommand extends Command {
         return 0;
     }
 
+    /**
+     * Fetches repositories of a study group.
+     *
+     * @param group a group of repository owners
+     * @throws InterruptedException if the fetching process was interrupted
+     */
     private void fetchGroup(StudyGroup group) throws InterruptedException {
         System.out.println("Fetching group " + group.id());
         for (var student : group.students()) {
@@ -31,6 +40,12 @@ public class FetchCommand extends Command {
         }
     }
 
+    /**
+     * Fetches the student's repository.
+     *
+     * @param student a repository owner
+     * @throws InterruptedException if the fetching process was interrupted
+     */
     private void fetchStudent(Student student) throws InterruptedException {
         System.out.println("Fetching student " + student.name());
         var service = new RepositoryService(resolver);

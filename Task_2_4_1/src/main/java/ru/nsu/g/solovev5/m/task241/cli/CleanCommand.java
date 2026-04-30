@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.util.Comparator;
 import picocli.CommandLine;
 
+/**
+ * A CLI command for cleaning working directory.
+ */
 @CommandLine.Command(
     name = "clean",
     description = "cleans the working directory"
@@ -15,12 +18,12 @@ public class CleanCommand extends Command {
         try (var paths = Files.walk(resolver.workingDirectory())) {
             paths.sorted(Comparator.reverseOrder())
                 .forEach(p -> {
-                try {
-                    Files.delete(p);
-                } catch (IOException e) {
-                    System.err.println("Failed to delete " + p);
-                }
-            });
+                    try {
+                        Files.delete(p);
+                    } catch (IOException e) {
+                        System.err.println("Failed to delete " + p);
+                    }
+                });
         }
         return 0;
     }

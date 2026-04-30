@@ -12,7 +12,20 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+/**
+ * A service for checking projects' test coverage.
+ */
 public class TestCoverageService {
+    /**
+     * Checks a project for test coverage.
+     *
+     * @param project a path to project
+     * @return percent of code covered with tests
+     * @throws InterruptedException         if the task was interrupted
+     * @throws ParserConfigurationException if failed apply a configuration
+     * @throws IOException                  if an I/O error occurred
+     * @throws SAXException                 if a parsing error occurred
+     */
     public double check(
         Path project
     ) throws IOException, InterruptedException, ParserConfigurationException, SAXException {
@@ -25,6 +38,12 @@ public class TestCoverageService {
         return readCoverage(project);
     }
 
+    /**
+     * Creates a new Gradle runner process builder.
+     *
+     * @param project a path to project
+     * @return a new process builder
+     */
     private ProcessBuilder processBuilder(Path project) {
         var isWindows = System.getProperty("os.name").toLowerCase().contains("win");
 
@@ -41,6 +60,15 @@ public class TestCoverageService {
             .redirectErrorStream(true);
     }
 
+    /**
+     * Reads the test coverage percent for the project.
+     *
+     * @param project a path to the project
+     * @return percent of code covered with tests
+     * @throws ParserConfigurationException if failed apply a configuration
+     * @throws IOException                  if an I/O error occurred
+     * @throws SAXException                 if a parsing error occurred
+     */
     private double readCoverage(
         Path project
     ) throws IOException, ParserConfigurationException, SAXException {
@@ -77,6 +105,15 @@ public class TestCoverageService {
         return total == 0 ? 0.0 : (covered * 100.0) / total;
     }
 
+    /**
+     * Loads the JaCoCo report document.
+     *
+     * @param report a path to the report document
+     * @return a JaCoCo report
+     * @throws ParserConfigurationException if failed apply a configuration
+     * @throws IOException                  if an I/O error occurred
+     * @throws SAXException                 if a parsing error occurred
+     */
     private Document loadReport(
         Path report
     ) throws ParserConfigurationException, IOException, SAXException {

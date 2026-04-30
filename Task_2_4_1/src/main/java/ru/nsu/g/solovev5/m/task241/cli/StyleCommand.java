@@ -8,6 +8,9 @@ import ru.nsu.g.solovev5.m.task241.core.models.StudyGroup;
 import ru.nsu.g.solovev5.m.task241.core.models.Task;
 import ru.nsu.g.solovev5.m.task241.core.services.StyleCheckService;
 
+/**
+ * A CLI command for checking tasks' style.
+ */
 @CommandLine.Command(name = "style", description = "checks the styles")
 public class StyleCommand extends Command {
     @Override
@@ -19,6 +22,11 @@ public class StyleCommand extends Command {
         return 0;
     }
 
+    /**
+     * Checks a group for tasks' style.
+     *
+     * @param group a study group
+     */
     private void checkGroup(StudyGroup group) {
         System.out.println("Checking group " + group.id());
         for (var student : group.students()) {
@@ -26,6 +34,11 @@ public class StyleCommand extends Command {
         }
     }
 
+    /**
+     * Checks a student for tasks' style.
+     *
+     * @param student a task submitter
+     */
     private void checkStudent(Student student) {
         System.out.println("Checking " + student.name());
         var repository = resolver.resolveRepository(student);
@@ -43,6 +56,12 @@ public class StyleCommand extends Command {
         }
     }
 
+    /**
+     * Checks a task for style.
+     *
+     * @param student a task submitter
+     * @param task    a checking task
+     */
     private void checkTask(Student student, Task task) {
         System.out.println("Checking " + task.name());
         var taskPath = resolver.resolveTask(student, task);
