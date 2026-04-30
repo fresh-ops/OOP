@@ -18,7 +18,7 @@ dependencies {
     implementation 'org.apache.groovy:groovy-all:5.0.0'
     implementation 'info.picocli:picocli:4.7.7'
     annotationProcessor 'info.picocli:picocli-codegen:4.7.7'
-    implementation 'com.puppycrawl.tools:checkstyle:13.4.0'
+    implementation 'com.puppycrawl.tools:checkstyle:12.3.1'
 }
 
 compileJava {
