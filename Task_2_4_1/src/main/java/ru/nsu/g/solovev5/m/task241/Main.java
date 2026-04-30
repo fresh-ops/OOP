@@ -3,6 +3,7 @@ package ru.nsu.g.solovev5.m.task241;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 import ru.nsu.g.solovev5.m.task241.cli.CleanCommand;
+import ru.nsu.g.solovev5.m.task241.cli.CoverageCommand;
 import ru.nsu.g.solovev5.m.task241.cli.FetchCommand;
 import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
 
@@ -13,6 +14,7 @@ import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
     subcommands = {
         FetchCommand.class,
         CleanCommand.class,
+        CoverageCommand.class,
         StyleCommand.class
     }
 )
