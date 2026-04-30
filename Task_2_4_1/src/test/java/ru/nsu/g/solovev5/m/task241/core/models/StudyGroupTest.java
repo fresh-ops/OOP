@@ -64,7 +64,9 @@ class StudyGroupTest {
 
     @ParameterizedTest
     @MethodSource("validArguments")
-    void contains_should_returnFalse_when_studentIsNotInGroup(String id, Set<Student> students) throws URISyntaxException {
+    void contains_should_returnFalse_when_studentIsNotInGroup(
+        String id, Set<Student> students
+    ) throws URISyntaxException {
         var group = new StudyGroup(id, students);
         var absentStudent = new Student(
             "Mitrphan Prostakov",
