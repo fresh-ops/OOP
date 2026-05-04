@@ -9,6 +9,7 @@ import ru.nsu.g.solovev5.m.task241.core.models.Task;
  */
 public class TaskBuilder {
     private String name;
+    private String id;
     private LocalDate softDeadline;
     private LocalDate hardDeadline;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -25,13 +26,24 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the id for a new task.
+     *
+     * @param id the new task id
+     * @return this builder
+     */
+    public TaskBuilder id(String id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Sets the soft deadline for a new task.
      *
      * @param softDeadline the new task soft deadline
      * @return this builder
      */
     public TaskBuilder softDeadline(String softDeadline) {
-        this.softDeadline = LocalDate.parse(softDeadline,  formatter);
+        this.softDeadline = LocalDate.parse(softDeadline, formatter);
         return this;
     }
 
@@ -52,6 +64,6 @@ public class TaskBuilder {
      * @return a new task
      */
     public Task build() {
-        return new Task(name, softDeadline, hardDeadline);
+        return new Task(name, id, softDeadline, hardDeadline);
     }
 }
