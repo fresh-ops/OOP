@@ -8,6 +8,8 @@ import ru.nsu.g.solovev5.m.task241.core.models.Task;
  * A working path resolver.
  */
 public class PathResolver {
+    private static final Path STUDENTS_PATH = Path.of("students");
+    private static final Path REPORTS_PATH = Path.of("reports");
     private final Path workingPath;
 
     /**
@@ -26,7 +28,7 @@ public class PathResolver {
      * @return a path to the repository
      */
     public Path resolveRepository(Student student) {
-        return workingPath.resolve(student.repositoryPath());
+        return studentsPath().resolve(student.repositoryPath());
     }
 
     /**
@@ -36,7 +38,7 @@ public class PathResolver {
      * @return a path to the personal directory
      */
     public Path resolvePersonalPath(Student student) {
-        return workingPath.resolve(student.personalPath());
+        return studentsPath().resolve(student.personalPath());
     }
 
     /**
@@ -57,5 +59,14 @@ public class PathResolver {
      */
     public Path workingDirectory() {
         return this.workingPath;
+    }
+
+    /**
+     * Returns the location of students personal paths.
+     *
+     * @return the location of students personal paths
+     */
+    public Path studentsPath() {
+        return workingPath.resolve(STUDENTS_PATH);
     }
 }

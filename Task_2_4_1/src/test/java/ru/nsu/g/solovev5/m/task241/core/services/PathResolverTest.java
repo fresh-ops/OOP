@@ -12,33 +12,43 @@ import ru.nsu.g.solovev5.m.task241.core.models.Task;
 
 class PathResolverTest {
     @Test
-    void resolveRepository_should_appendPathToWorkingDirectory(@TempDir Path workingDirectory) {
+    void resolveRepository_should_appendPathToStudentsDirectory(@TempDir Path workingDirectory) {
         var student = new Student("Ivanov Ivan", "Ivan", URI.create("https://github.com/Ivan/OOP"));
         var resolver = new PathResolver(workingDirectory);
 
         var resolved = resolver.resolveRepository(student);
-        assertEquals(workingDirectory.resolve(student.repositoryPath()), resolved);
+        assertEquals(resolver.studentsPath().resolve(student.repositoryPath()), resolved);
     }
 
     @Test
-    void resolvePersonalPath_should_appendToWorkingDirectory(@TempDir Path workingDirectory) {
+    void resolvePersonalPath_should_appendToStudentsDirectory(@TempDir Path workingDirectory) {
         var student = new Student("Ivanov Ivan", "Ivan", URI.create("https://github.com/Ivan/OOP"));
         var resolver = new PathResolver(workingDirectory);
 
         var resolved = resolver.resolvePersonalPath(student);
-        assertEquals(workingDirectory.resolve(student.personalPath()), resolved);
+        assertEquals(resolver.studentsPath().resolve(student.personalPath()), resolved);
     }
 
     @Test
-    void resolveTask_should_appendPathToWorkingDirectory(@TempDir Path workingDirectory) {
+    void resolveTask_should_appendPathToStudentsDirectory(@TempDir Path workingDirectory) {
         var student = new Student("Ivanov Ivan", "Ivan", URI.create("https://github.com/Ivan/OOP"));
         var task = new Task("My Task", "Task 1 1 1", LocalDate.now(), LocalDate.now().plusDays(1));
         var resolver = new PathResolver(workingDirectory);
 
         var resolved = resolver.resolveTask(student, task);
         assertEquals(
-            workingDirectory.resolve(student.repositoryPath()).resolve(task.path()),
+            resolver.studentsPath().resolve(student.repositoryPath()).resolve(task.path()),
             resolved
+        );
+    }
+
+    @Test
+    void studentsPath_should_beInWorkingDirectory(@TempDir Path workingDirectory) {
+        var resolver = new PathResolver(workingDirectory);
+
+        assertEquals(
+            workingDirectory.resolve("students"),
+            resolver.studentsPath()
         );
     }
 }
