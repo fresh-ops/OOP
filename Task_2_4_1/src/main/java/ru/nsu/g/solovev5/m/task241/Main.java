@@ -6,6 +6,7 @@ import ru.nsu.g.solovev5.m.task241.cli.BuildCommand;
 import ru.nsu.g.solovev5.m.task241.cli.CleanCommand;
 import ru.nsu.g.solovev5.m.task241.cli.CoverageCommand;
 import ru.nsu.g.solovev5.m.task241.cli.FetchCommand;
+import ru.nsu.g.solovev5.m.task241.cli.ReportCommand;
 import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
 
 /**
@@ -20,7 +21,8 @@ import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
         CleanCommand.class,
         CoverageCommand.class,
         StyleCommand.class,
-        BuildCommand.class
+        BuildCommand.class,
+        ReportCommand.class
     },
     subcommandsRepeatable = true
 )
