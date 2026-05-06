@@ -1,6 +1,8 @@
 package ru.nsu.g.solovev5.m.task241.core.services;
 
+import com.google.common.base.Objects;
 import java.nio.file.Path;
+import ru.nsu.g.solovev5.m.task241.core.models.ReportEntry;
 import ru.nsu.g.solovev5.m.task241.core.models.Student;
 import ru.nsu.g.solovev5.m.task241.core.models.Task;
 
@@ -53,6 +55,29 @@ public class PathResolver {
     }
 
     /**
+     * Resolves the path to the task checking report.
+     *
+     * @param student the task submitter
+     * @param task the submitting task
+     * @return a path to the report entry
+     */
+    public Path resolveReport(Student student, Task task) {
+        var name = Integer.toString(Objects.hashCode(student.name(), task.id()));
+        return reportsPath().resolve(name);
+    }
+
+    /**
+     * Resolves the path to the task checking report.
+     *
+     * @param entry the report entry
+     * @return a path to the report entry
+     */
+    public Path resolveReport(ReportEntry entry) {
+        var name = Integer.toString(Objects.hashCode(entry.studentName(),entry.taskId()));
+        return reportsPath().resolve(name);
+    }
+
+    /**
      * Returns the working directory.
      *
      * @return the working directory
@@ -68,5 +93,14 @@ public class PathResolver {
      */
     public Path studentsPath() {
         return workingPath.resolve(STUDENTS_PATH);
+    }
+
+    /**
+     * Returns the location of reports.
+     *
+     * @return path to reports
+     */
+    public Path reportsPath() {
+        return workingPath.resolve(REPORTS_PATH);
     }
 }

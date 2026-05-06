@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import ru.nsu.g.solovev5.m.task241.core.models.ReportEntry;
 import ru.nsu.g.solovev5.m.task241.core.models.Student;
 import ru.nsu.g.solovev5.m.task241.core.models.Task;
 
@@ -49,6 +50,39 @@ class PathResolverTest {
         assertEquals(
             workingDirectory.resolve("students"),
             resolver.studentsPath()
+        );
+    }
+
+    @Test
+    void reportsPath_should_beInWorkingDirectory(@TempDir Path workingDirectory) {
+        var resolver = new PathResolver(workingDirectory);
+        assertEquals(
+            workingDirectory.resolve("reports"),
+            resolver.reportsPath()
+        );
+    }
+
+    @Test
+    void resolveReport_should_returnSamePath_when_differentVariantsCalled(
+        @TempDir Path workingDirectory
+    ) {
+        var student = new Student(
+            "Ivan Ivanov",
+            "Ivan",
+            URI.create("path.to.github.repo")
+        );
+        var task = new Task(
+            "My Task",
+            "Task 1 1 1",
+            LocalDate.now(),
+            LocalDate.now().plusDays(1)
+        );
+        var entry = new ReportEntry(task.id(), student.name(), true, true, false);
+        var resolver = new PathResolver(workingDirectory);
+
+        assertEquals(
+            resolver.resolveReport(entry),
+            resolver.resolveReport(student, task)
         );
     }
 }
