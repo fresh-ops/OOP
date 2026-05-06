@@ -1,5 +1,6 @@
 package ru.nsu.g.solovev5.m.task241;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 import ru.nsu.g.solovev5.m.task241.cli.BuildCommand;
@@ -15,7 +16,7 @@ import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
 @CommandLine.Command(
     name = "checker",
     mixinStandardHelpOptions = true,
-    description = "Helps to check OOP tasks",
+    description = "Helps to check OOP tasks. Run without parameters to make full check + report",
     subcommands = {
         FetchCommand.class,
         CleanCommand.class,
@@ -39,7 +40,21 @@ public class Main implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        System.out.println("Use -h or --help to get help");
+        var commands = List.of(
+            new FetchCommand(),
+            new BuildCommand(),
+            new StyleCommand(),
+            new CoverageCommand(),
+            new ReportCommand()
+        );
+
+        int exitCode = 0;
+        for (var  command : commands) {
+            exitCode = new CommandLine(command).execute();
+            if (exitCode != 0) break;
+        }
+        System.exit(exitCode);
+
         return 0;
     }
 }
