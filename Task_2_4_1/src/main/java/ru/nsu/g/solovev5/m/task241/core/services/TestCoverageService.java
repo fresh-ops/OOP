@@ -4,10 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.gradle.tooling.GradleConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -28,36 +27,26 @@ public class TestCoverageService {
      */
     public double check(
         Path project
-    ) throws IOException, InterruptedException, ParserConfigurationException, SAXException {
-        var process = processBuilder(project).start();
-        try (var inputStream = process.getInputStream()) {
-            inputStream.transferTo(System.out);
-        }
-
-        process.waitFor();
+    ) throws IOException, ParserConfigurationException, SAXException {
+        runTests(project);
         return readCoverage(project);
     }
 
     /**
-     * Creates a new Gradle runner process builder.
+     * Run projects tests.
      *
-     * @param project a path to project
-     * @return a new process builder
+     * @param project a path to the testing project
      */
-    private ProcessBuilder processBuilder(Path project) {
-        var isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+    private void runTests(Path project) {
+        var connector = GradleConnector.newConnector();
+        connector.forProjectDirectory(project.toFile());
 
-        var commands = new ArrayList<String>();
-        if (isWindows) {
-            commands.addAll(List.of("cmd", "/c", "gradlew.bat"));
-        } else {
-            commands.add("./gradlew");
+        try (var connection = connector.connect()) {
+            var launcher = connection.newBuild();
+
+            launcher.forTasks("test", "jacocoTestReport");
+            launcher.run();
         }
-
-        commands.addAll(List.of("test", "jacocoTestReport", "-Djacoco.xml=true"));
-        return new ProcessBuilder(commands)
-            .directory(project.toFile())
-            .redirectErrorStream(true);
     }
 
     /**
