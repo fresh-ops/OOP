@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -24,9 +25,8 @@ public class HtmlReportGenerator {
     public void generate(List<ReportEntry> reports) throws IOException {
         var templateEngine = getTemplateEngine();
         var context = new Context();
-        var groupedTasks = reports.stream()
-            .collect(Collectors.groupingBy(ReportEntry::taskId));
-        context.setVariable("tasks", groupedTasks);
+        context.setVariable("tasks", groupTasks(reports));
+        context.setVariable("grades", calculateGrades(reports));
         context.setVariable("reportDate", LocalDateTime.now());
 
         var html = templateEngine.process("report", context);
@@ -47,5 +47,20 @@ public class HtmlReportGenerator {
         templateEngine.setTemplateResolver(resolver);
 
         return templateEngine;
+    }
+
+    private Map<String, List<ReportEntry>> groupTasks(List<ReportEntry> reports) {
+        return reports.stream()
+            .collect(Collectors.groupingBy(ReportEntry::taskId));
+    }
+
+    private Map<String, Integer> calculateGrades(List<ReportEntry> reports) {
+        return reports.stream()
+            .collect(
+                Collectors.groupingBy(
+                    ReportEntry::studentName,
+                    Collectors.summingInt(ReportEntry::grade)
+                )
+            );
     }
 }

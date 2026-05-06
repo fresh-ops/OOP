@@ -33,6 +33,15 @@ public record ReportEntry(
     }
 
     /**
+     * Returns a grade for the task.
+     *
+     * @return {@code 1} if all checks are passed, {@code 0} otherwise
+     */
+    public int grade() {
+        return buildPassed && stylePassed && coveragePassed ? 1 : 0;
+    }
+
+    /**
      * A flexible chain builder.
      */
     public static class Builder {

@@ -61,6 +61,7 @@
             <th>Build</th>
             <th>Style</th>
             <th>Coverage</th>
+            <th>Grade</th>
         </tr>
         </thead>
         <tbody>
@@ -75,6 +76,25 @@
             <td>
                 <input type="checkbox" th:checked="${entry.coveragePassed}">
             </td>
+            <td th:text="${entry.grade()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="task">
+    <h2>Grades</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Student</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="grade : ${grades}">
+            <td th:text="${grade.key}"></td>
+            <td th:text="${grade.value}"></td>
         </tr>
         </tbody>
     </table>
