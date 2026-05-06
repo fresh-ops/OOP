@@ -119,7 +119,7 @@ public record ReportEntry(
         }
 
         /**
-         * Build a new report entry with passed parameters
+         * Build a new report entry with passed parameters.
          *
          * @return a new report entry
          */

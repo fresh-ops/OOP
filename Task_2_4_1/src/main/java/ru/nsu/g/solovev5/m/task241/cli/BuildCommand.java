@@ -21,6 +21,9 @@ public class BuildCommand extends Command {
     private final BuildService buildService;
     private final ReportsRepository reportsRepository;
 
+    /**
+     * Creates a new build command.
+     */
     public BuildCommand() {
         super();
         this.buildService = new BuildService();

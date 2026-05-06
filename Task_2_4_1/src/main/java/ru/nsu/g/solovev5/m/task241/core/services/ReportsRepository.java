@@ -12,9 +12,17 @@ import ru.nsu.g.solovev5.m.task241.core.models.ReportEntry;
 import ru.nsu.g.solovev5.m.task241.core.models.Student;
 import ru.nsu.g.solovev5.m.task241.core.models.Task;
 
+/**
+ * A repository of report entries.
+ */
 public class ReportsRepository {
     private final PathResolver resolver;
 
+    /**
+     * Creates a new reports' repository.
+     *
+     * @param resolver the path resolver
+     */
     public ReportsRepository(PathResolver resolver) {
         this.resolver = resolver;
     }
@@ -55,6 +63,12 @@ public class ReportsRepository {
         return emptyEntry(student, task);
     }
 
+    /**
+     * Loads all previously stored entries.
+     *
+     * @return previously stored entries
+     * @throws IOException if an I/O error occurred
+     */
     public List<ReportEntry> loadAll() throws IOException {
         var path = resolver.reportsPath();
         if (Files.notExists(path)) {

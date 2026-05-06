@@ -58,7 +58,7 @@ public class PathResolver {
      * Resolves the path to the task checking report.
      *
      * @param student the task submitter
-     * @param task the submitting task
+     * @param task    the submitting task
      * @return a path to the report entry
      */
     public Path resolveReport(Student student, Task task) {
@@ -73,7 +73,7 @@ public class PathResolver {
      * @return a path to the report entry
      */
     public Path resolveReport(ReportEntry entry) {
-        var name = Integer.toString(Objects.hashCode(entry.studentName(),entry.taskId()));
+        var name = Integer.toString(Objects.hashCode(entry.studentName(), entry.taskId()));
         return reportsPath().resolve(name);
     }
 
