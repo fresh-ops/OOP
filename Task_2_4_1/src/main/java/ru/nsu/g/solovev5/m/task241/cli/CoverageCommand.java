@@ -30,13 +30,8 @@ public class CoverageCommand extends Command {
 
     @Override
     public Integer call() {
-        try {
-            for (var group : config.studyGroups()) {
-                testGroup(group);
-            }
-        } catch (InterruptedException e) {
-            System.err.println("Interrupted");
-            return 1;
+        for (var group : config.studyGroups()) {
+            testGroup(group);
         }
         return 0;
     }
@@ -45,9 +40,8 @@ public class CoverageCommand extends Command {
      * Tests a whole group for tasks test coverage.
      *
      * @param group a checking group
-     * @throws InterruptedException if the checking process was interrupted
      */
-    private void testGroup(StudyGroup group) throws InterruptedException {
+    private void testGroup(StudyGroup group) {
         System.out.println("Testing group " + group.id());
         for (var student : group.students()) {
             testStudent(student);
@@ -58,9 +52,8 @@ public class CoverageCommand extends Command {
      * Tests a student for tasks test coverage.
      *
      * @param student a checking student
-     * @throws InterruptedException if the checking process was interrupted
      */
-    private void testStudent(Student student) throws InterruptedException {
+    private void testStudent(Student student) {
         System.out.println("Testing student " + student.name());
         for (var task : config.tasks()) {
             testTask(student, task);
@@ -68,13 +61,12 @@ public class CoverageCommand extends Command {
     }
 
     /**
-     * Tests a task for tes coverage.
+     * Tests a task for test coverage.
      *
      * @param student a task submitter
-     * @param task a checking task
-     * @throws InterruptedException if the checking process was interrupted
+     * @param task    a checking task
      */
-    private void testTask(Student student, Task task) throws InterruptedException {
+    private void testTask(Student student, Task task) {
         System.out.println("Testing task " + task.name());
         var taskPath = resolver.resolveTask(student, task);
         if (Files.notExists(taskPath)) {
