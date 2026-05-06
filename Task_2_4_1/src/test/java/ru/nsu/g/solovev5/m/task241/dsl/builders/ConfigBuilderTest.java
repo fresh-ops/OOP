@@ -35,7 +35,7 @@ class ConfigBuilderTest {
         var config = builder.build();
         assertTrue(config.tasks().isEmpty());
 
-        var task = new Task("My Task", "12345", LocalDate.of(2025, 1, 1),  LocalDate.of(2025, 1, 2));
+        var task = new Task("My Task", "12345", LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 2));
         builder.task(task);
 
         config = builder.build();

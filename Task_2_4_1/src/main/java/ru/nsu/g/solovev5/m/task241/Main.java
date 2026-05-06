@@ -51,7 +51,9 @@ public class Main implements Callable<Integer> {
         int exitCode = 0;
         for (var  command : commands) {
             exitCode = new CommandLine(command).execute();
-            if (exitCode != 0) break;
+            if (exitCode != 0) {
+                break;
+            }
         }
         System.exit(exitCode);
 
