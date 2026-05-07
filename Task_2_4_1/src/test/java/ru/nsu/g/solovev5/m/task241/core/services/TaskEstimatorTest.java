@@ -1,6 +1,6 @@
 package ru.nsu.g.solovev5.m.task241.core.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import ru.nsu.g.solovev5.m.task241.core.models.ReportEntry;
