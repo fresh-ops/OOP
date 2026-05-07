@@ -12,6 +12,7 @@ class ReportEntryBuilderTest {
         var buildPassed = true;
         var stylePassed = true;
         var coveragePassed = true;
+        var grade = 1;
 
         var entry = new ReportEntry.Builder()
             .taskId(taskId)
@@ -19,6 +20,7 @@ class ReportEntryBuilderTest {
             .buildPassed(buildPassed)
             .stylePassed(stylePassed)
             .coveragePassed(coveragePassed)
+            .grade(grade)
             .build();
 
         assertEquals(taskId, entry.taskId());
@@ -26,11 +28,12 @@ class ReportEntryBuilderTest {
         assertEquals(buildPassed, entry.buildPassed());
         assertEquals(stylePassed, entry.stylePassed());
         assertEquals(coveragePassed, entry.coveragePassed());
+        assertEquals(grade, entry.grade());
     }
 
     @Test
     void from_should_copyEntryFields() {
-        var entry = new ReportEntry("Task 1 1 1", "Ivan Ivanov", true, true, false);
+        var entry = new ReportEntry("Task 1 1 1", "Ivan Ivanov", true, true, false, 0);
         var builtEntry = new ReportEntry.Builder()
             .from(entry)
             .build();

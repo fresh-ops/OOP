@@ -26,7 +26,8 @@ class ReportsRepositoryTest {
             "Ivan Ivanov",
             true,
             true,
-            false
+            false,
+            0
         );
         var repository = new ReportsRepository(
             new PathResolver(workingPath)
@@ -45,7 +46,8 @@ class ReportsRepositoryTest {
             "Ivan Ivanov",
             true,
             true,
-            false
+            false,
+            0
         );
         var resolver = new PathResolver(workingPath);
         var repository = new ReportsRepository(resolver);
@@ -78,6 +80,7 @@ class ReportsRepositoryTest {
         assertFalse(entry.buildPassed());
         assertFalse(entry.stylePassed());
         assertFalse(entry.coveragePassed());
+        assertEquals(0, entry.grade());
     }
 
     @Test
@@ -98,7 +101,8 @@ class ReportsRepositoryTest {
             student.name(),
             true,
             true,
-            false
+            false,
+            0
         );
         var repository = new ReportsRepository(new PathResolver(workingPath));
 
@@ -126,14 +130,16 @@ class ReportsRepositoryTest {
             student.name(),
             true,
             true,
-            false
+            false,
+            0
         );
         var updatedEntry = new ReportEntry(
             entry.taskId(),
             entry.studentName(),
             entry.buildPassed(),
             entry.stylePassed(),
-            !entry.coveragePassed()
+            !entry.coveragePassed(),
+            entry.grade()
         );
         var repository = new ReportsRepository(new PathResolver(workingPath));
 
@@ -147,9 +153,9 @@ class ReportsRepositoryTest {
     @Test
     void loadAll_should_returnAllStoredEntries(@TempDir Path workingPath) throws IOException {
         var entries = List.of(
-            new ReportEntry("Task 1 1 1", "Ivan Ivanov", true, true, true),
-            new ReportEntry("Task 1 1 1", "Petr Petrov", true, false, true),
-            new ReportEntry("Task 1 1 2", "Ivan Ivanov", true, true, false)
+            new ReportEntry("Task 1 1 1", "Ivan Ivanov", true, true, true, 1),
+            new ReportEntry("Task 1 1 1", "Petr Petrov", true, false, true, 0),
+            new ReportEntry("Task 1 1 2", "Ivan Ivanov", true, true, false, 0)
         );
 
         var repository = new ReportsRepository(new PathResolver(workingPath));

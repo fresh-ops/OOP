@@ -77,7 +77,7 @@ class PathResolverTest {
             LocalDate.now(),
             LocalDate.now().plusDays(1)
         );
-        var entry = new ReportEntry(task.id(), student.name(), true, true, false);
+        var entry = new ReportEntry(task.id(), student.name(), true, true, false, 0);
         var resolver = new PathResolver(workingDirectory);
 
         assertEquals(

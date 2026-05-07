@@ -6,6 +6,7 @@ import picocli.CommandLine;
 import ru.nsu.g.solovev5.m.task241.cli.BuildCommand;
 import ru.nsu.g.solovev5.m.task241.cli.CleanCommand;
 import ru.nsu.g.solovev5.m.task241.cli.CoverageCommand;
+import ru.nsu.g.solovev5.m.task241.cli.EstimateCommand;
 import ru.nsu.g.solovev5.m.task241.cli.FetchCommand;
 import ru.nsu.g.solovev5.m.task241.cli.ReportCommand;
 import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
@@ -23,6 +24,7 @@ import ru.nsu.g.solovev5.m.task241.cli.StyleCommand;
         CoverageCommand.class,
         StyleCommand.class,
         BuildCommand.class,
+        EstimateCommand.class,
         ReportCommand.class
     },
     subcommandsRepeatable = true
@@ -45,6 +47,7 @@ public class Main implements Callable<Integer> {
             new BuildCommand(),
             new StyleCommand(),
             new CoverageCommand(),
+            new EstimateCommand(),
             new ReportCommand()
         );
 

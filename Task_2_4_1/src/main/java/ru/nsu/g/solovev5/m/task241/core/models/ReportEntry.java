@@ -10,13 +10,15 @@ import java.util.Objects;
  * @param buildPassed    the successful build flag
  * @param stylePassed    the successful style check flag
  * @param coveragePassed the enough test coverage flag
+ * @param grade          the solution grade
  */
 public record ReportEntry(
     String taskId,
     String studentName,
     boolean buildPassed,
     boolean stylePassed,
-    boolean coveragePassed
+    boolean coveragePassed,
+    int grade
 ) {
     /**
      * Creates a new checker report entry.
@@ -26,19 +28,11 @@ public record ReportEntry(
      * @param buildPassed    the successful build flag
      * @param stylePassed    the successful style check flag
      * @param coveragePassed the enough test coverage flag
+     * @param grade          the solution grade
      */
     public ReportEntry {
         Objects.requireNonNull(taskId);
         Objects.requireNonNull(studentName);
-    }
-
-    /**
-     * Returns a grade for the task.
-     *
-     * @return {@code 1} if all checks are passed, {@code 0} otherwise
-     */
-    public int grade() {
-        return buildPassed && stylePassed && coveragePassed ? 1 : 0;
     }
 
     /**
@@ -50,6 +44,7 @@ public record ReportEntry(
         private boolean buildPassed;
         private boolean stylePassed;
         private boolean coveragePassed;
+        private int grade;
 
         /**
          * Sets all fields from the passed entry.
@@ -63,6 +58,7 @@ public record ReportEntry(
             this.buildPassed = entry.buildPassed();
             this.stylePassed = entry.stylePassed();
             this.coveragePassed = entry.coveragePassed();
+            this.grade = entry.grade();
 
             return this;
         }
@@ -128,12 +124,26 @@ public record ReportEntry(
         }
 
         /**
+         * Set the grade.
+         *
+         * @param grade the new entry grade
+         * @return this builder
+         */
+        public Builder grade(int grade) {
+            this.grade = grade;
+
+            return this;
+        }
+
+        /**
          * Build a new report entry with passed parameters.
          *
          * @return a new report entry
          */
         public ReportEntry build() {
-            return new ReportEntry(taskId, studentName, buildPassed, stylePassed, coveragePassed);
+            return new ReportEntry(
+                taskId, studentName, buildPassed, stylePassed, coveragePassed, grade
+            );
         }
     }
 }

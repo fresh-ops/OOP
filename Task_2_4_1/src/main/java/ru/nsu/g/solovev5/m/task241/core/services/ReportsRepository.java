@@ -129,7 +129,8 @@ public class ReportsRepository {
             student.name(),
             false,
             false,
-            false
+            false,
+            0
         );
     }
 }
