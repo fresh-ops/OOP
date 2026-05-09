@@ -15,7 +15,11 @@
 <script type="text/javascript" src="../../../../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="package-declaration-page">
-<script type="text/javascript">var pathtoroot = "../../../../../../../../";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "../../../../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -63,13 +67,22 @@ loadScripts(document, 'script');</script>
 <ul class="summary-list">
 <li>
 <div id="class-summary">
-<div class="caption"><span>Record Classes</span></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab4" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab4', 2)" class="table-tab">Record Classes</button></div>
+<div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color class-summary class-summary-tab4"><a href="Config.html" title="class in ru.nsu.g.solovev5.m.task241.core.models">Config</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">An application config object.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="ReportEntry.html" title="class in ru.nsu.g.solovev5.m.task241.core.models">ReportEntry</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">Represents a checker report entry.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="ReportEntry.Builder.html" title="class in ru.nsu.g.solovev5.m.task241.core.models">ReportEntry.Builder</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">A flexible chain builder.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Student.html" title="class in ru.nsu.g.solovev5.m.task241.core.models">Student</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab4">
@@ -86,6 +99,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color class-summary class-summary-tab4"><a href="Task.html" title="class in ru.nsu.g.solovev5.m.task241.core.models">Task</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">A task model.</div>
+</div>
 </div>
 </div>
 </div>
