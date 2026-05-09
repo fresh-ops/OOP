@@ -24,6 +24,12 @@ public class ConfigBuilder {
         return this;
     }
 
+    /**
+     * Adds a new task to a new config.
+     *
+     * @param task a new config task
+     * @return this config builder
+     */
     public ConfigBuilder task(Task task) {
         tasks.add(task);
         return this;

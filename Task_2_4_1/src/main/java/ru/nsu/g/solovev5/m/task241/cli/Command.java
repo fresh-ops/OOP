@@ -10,7 +10,13 @@ import ru.nsu.g.solovev5.m.task241.dsl.ConfigLoader;
  * A base command class with predefined environment properties.
  */
 public abstract class Command implements Callable<Integer> {
+    /**
+     * Preloaded application configuration.
+     */
     protected final Config config;
+    /**
+     * Application path resolver.
+     */
     protected final PathResolver resolver;
 
     /**

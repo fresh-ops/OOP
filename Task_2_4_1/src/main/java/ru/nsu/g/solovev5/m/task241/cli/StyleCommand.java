@@ -17,6 +17,9 @@ import ru.nsu.g.solovev5.m.task241.core.services.StyleCheckService;
 public class StyleCommand extends Command {
     private final ReportsRepository reportsRepository;
 
+    /**
+     * Creates a new StyleCommand.
+     */
     public StyleCommand() {
         super();
         this.reportsRepository = new ReportsRepository(resolver);

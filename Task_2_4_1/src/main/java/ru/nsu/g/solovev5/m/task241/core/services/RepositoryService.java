@@ -105,6 +105,12 @@ public class RepositoryService {
         }
     }
 
+    /**
+     * Checks if the repository of given student is loaded.
+     *
+     * @param student the repository owner
+     * @return {@code true} if the repository is loaded, {@code false} otherwise
+     */
     public boolean isRepositoryLoaded(Student student) {
         return Files.exists(resolver.resolveRepository(student));
     }

@@ -20,6 +20,9 @@ import ru.nsu.g.solovev5.m.task241.core.services.TaskEstimator;
 public class EstimateCommand extends Command {
     private final ReportsRepository reportsRepository;
 
+    /**
+     * Creates a new EstimateCommand.
+     */
     public EstimateCommand() {
         super();
         this.reportsRepository = new ReportsRepository(resolver);

@@ -20,7 +20,6 @@ public class TestCoverageService {
      *
      * @param project a path to project
      * @return percent of code covered with tests
-     * @throws InterruptedException         if the task was interrupted
      * @throws ParserConfigurationException if failed apply a configuration
      * @throws IOException                  if an I/O error occurred
      * @throws SAXException                 if a parsing error occurred

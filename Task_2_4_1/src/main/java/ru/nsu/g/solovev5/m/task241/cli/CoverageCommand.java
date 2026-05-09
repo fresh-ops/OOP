@@ -23,6 +23,9 @@ public class CoverageCommand extends Command {
     private static final double PASS_THRESHOLD = 80;
     private final ReportsRepository reportsRepository;
 
+    /**
+     * Creates a new CoverageCommand.
+     */
     public CoverageCommand() {
         super();
         this.reportsRepository = new ReportsRepository(resolver);
