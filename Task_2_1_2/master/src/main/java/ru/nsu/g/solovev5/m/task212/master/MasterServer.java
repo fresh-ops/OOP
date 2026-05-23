@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import ru.nsu.g.solovev5.m.task212.master.network.SlaveConnector;
 import ru.nsu.g.solovev5.m.task212.master.network.SlaveSession;
+import ru.nsu.g.solovev5.m.task212.models.requests.PingRequest;
+import ru.nsu.g.solovev5.m.task212.models.requests.RequestOutputStream;
+import ru.nsu.g.solovev5.m.task212.models.responses.ResponseInputStream;
 
 public class MasterServer implements Runnable {
     private final ServerSocket server;
@@ -26,13 +29,17 @@ public class MasterServer implements Runnable {
 
     private void handleNewSession(SlaveSession session) {
         try (session) {
-            session.out.write("ping\n".getBytes());
-            session.out.flush();
-            System.out.println("Send ping request");
-            var response = session.in.readLine();
-            System.out.println("New session message received: " + response);
+            System.out.println("New connection");
+            var out = new RequestOutputStream(session.out);
+            out.writeRequest(new PingRequest());
+            out.flush();
+            var in = new ResponseInputStream(session.in);
+            var response = in.readResponse();
+            System.out.println("Received response: " + response.toString());
         } catch (IOException e) {
-            System.err.println("Failed to send ping request: " + e.getMessage());
+            System.err.println("Ping request failed: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("Class not found");
         }
     }
 
