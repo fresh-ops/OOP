@@ -27,14 +27,9 @@ public class MasterServer implements Runnable {
 
     private void handleNewSession(SlaveSession session) {
         try (session) {
-            session.requests.writeRequest(new PingRequest());
-            session.requests.flush();
-            var response = session.responses.readResponse();
-            System.out.println(response);
+            session.performHandshake();
         } catch (IOException e) {
             System.err.println("Ping request failed: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.err.println("Class not found");
         }
     }
 
