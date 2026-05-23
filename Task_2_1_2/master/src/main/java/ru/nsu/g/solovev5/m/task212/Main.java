@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             var server = new MasterServer();
+            System.out.println("Starting server...");
             server.run();
         } catch (IOException e) {
             System.err.println("Failed to start server: " + e.getMessage());

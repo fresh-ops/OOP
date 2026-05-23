@@ -2,14 +2,13 @@ package ru.nsu.g.solovev5.m.task212.master.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.function.Consumer;
 
 public class SlaveConnector implements Runnable {
     private final ServerSocket server;
-    private final Consumer<Socket> consumer;
+    private final Consumer<SlaveSession> consumer;
 
-    public SlaveConnector(ServerSocket server, Consumer<Socket> consumer) {
+    public SlaveConnector(ServerSocket server, Consumer<SlaveSession> consumer) {
         this.server = server;
         this.consumer = consumer;
     }
@@ -18,7 +17,8 @@ public class SlaveConnector implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                var slave = server.accept();
+                var socket = server.accept();
+                var slave = new SlaveSession(socket);
                 consumer.accept(slave);
             }
         } catch (IOException e) {
