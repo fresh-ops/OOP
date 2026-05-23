@@ -5,8 +5,6 @@ import java.net.ServerSocket;
 import ru.nsu.g.solovev5.m.task212.master.network.SlaveConnector;
 import ru.nsu.g.solovev5.m.task212.master.network.SlaveSession;
 import ru.nsu.g.solovev5.m.task212.models.requests.PingRequest;
-import ru.nsu.g.solovev5.m.task212.models.requests.RequestOutputStream;
-import ru.nsu.g.solovev5.m.task212.models.responses.ResponseInputStream;
 
 public class MasterServer implements Runnable {
     private final ServerSocket server;
@@ -29,13 +27,10 @@ public class MasterServer implements Runnable {
 
     private void handleNewSession(SlaveSession session) {
         try (session) {
-            System.out.println("New connection");
-            var out = new RequestOutputStream(session.out);
-            out.writeRequest(new PingRequest());
-            out.flush();
-            var in = new ResponseInputStream(session.in);
-            var response = in.readResponse();
-            System.out.println("Received response: " + response.toString());
+            session.requests.writeRequest(new PingRequest());
+            session.requests.flush();
+            var response = session.responses.readResponse();
+            System.out.println(response);
         } catch (IOException e) {
             System.err.println("Ping request failed: " + e.getMessage());
         } catch (ClassNotFoundException e) {
