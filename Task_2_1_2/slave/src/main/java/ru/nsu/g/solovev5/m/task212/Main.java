@@ -10,6 +10,7 @@ public class Main {
         try (var client = new SlaveClient(new Socket("localhost", 2120))) {
             System.out.println("Connected");
             client.performHandshake();
+            client.runLoop();
         } catch (UnknownHostException e) {
             System.err.println("Unknown host");
         } catch (IOException e) {

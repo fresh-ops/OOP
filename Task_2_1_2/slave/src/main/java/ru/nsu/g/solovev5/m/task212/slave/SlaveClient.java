@@ -2,9 +2,11 @@ package ru.nsu.g.solovev5.m.task212.slave;
 
 import java.io.IOException;
 import java.net.Socket;
+import ru.nsu.g.solovev5.m.task212.models.requests.Request;
 import ru.nsu.g.solovev5.m.task212.models.requests.RequestInputStream;
 import ru.nsu.g.solovev5.m.task212.models.requests.RequestType;
 import ru.nsu.g.solovev5.m.task212.models.responses.HandshakeResponse;
+import ru.nsu.g.solovev5.m.task212.models.responses.PingResponse;
 import ru.nsu.g.solovev5.m.task212.models.responses.ResponseOutputStream;
 
 public class SlaveClient implements AutoCloseable {
@@ -23,7 +25,7 @@ public class SlaveClient implements AutoCloseable {
         try {
             var request = requests.readRequest();
             if (request.getType() != RequestType.HANDSHAKE) {
-                throw new IOException("Invalid request type: " +  request.getType());
+                throw new IOException("Invalid request type: " + request.getType());
             }
         } catch (ClassNotFoundException e) {
             throw new IOException(e);
@@ -31,6 +33,29 @@ public class SlaveClient implements AutoCloseable {
 
         responses.writeResponse(new HandshakeResponse());
         responses.flush();
+    }
+
+    public void runLoop() throws IOException {
+        while (true) {
+            Request request;
+            try {
+                request = requests.readRequest();
+            } catch (ClassNotFoundException e) {
+                throw new IOException(e);
+            }
+
+            if (request == null) {
+                break;
+            }
+
+            switch (request.getType()) {
+                case PING -> responses.writeResponse(new PingResponse());
+                default -> {
+                    return;
+                }
+            }
+            responses.flush();
+        }
     }
 
     public void close() throws IOException {
