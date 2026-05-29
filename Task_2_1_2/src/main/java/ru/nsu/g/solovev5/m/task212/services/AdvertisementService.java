@@ -22,7 +22,7 @@ public class AdvertisementService implements Runnable {
     /**
      * Creates a new AdvertisementService.
      *
-     * @param ip a multicast address to send messages.
+     * @param ip   a multicast address to send messages.
      * @param port a to send messages.
      */
     public AdvertisementService(String ip, int port) {
@@ -100,7 +100,7 @@ public class AdvertisementService implements Runnable {
             localMessage = message;
         }
 
-        try  {
+        try {
             var discoveryAddress = new InetSocketAddress(InetAddress.getByName(ip), port);
 
             var buffer = ByteBuffer.wrap(localMessage);

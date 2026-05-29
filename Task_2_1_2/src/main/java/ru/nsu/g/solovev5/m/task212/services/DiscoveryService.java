@@ -9,6 +9,7 @@ import java.net.StandardSocketOptions;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.MembershipKey;
+import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
 
 /**
  * A service that receives multicast discovery messages.
@@ -93,9 +94,9 @@ public class DiscoveryService {
     /**
      * Receives next multicast message.
      *
-     * @return received bytes, or {@code null} if service is not alive
+     * @return received advertisement message, or {@code null} on error
      */
-    public byte[] receive() {
+    public AdvertisementMessage receive() {
         final DatagramChannel localChannel;
 
         synchronized (this) {
@@ -115,7 +116,7 @@ public class DiscoveryService {
             byte[] data = new byte[buffer.remaining()];
             buffer.get(data);
 
-            return data;
+            return AdvertisementMessage.fromBytes(data);
         } catch (IOException e) {
             System.err.println("Discovery service failed: " + e.getMessage());
             return null;

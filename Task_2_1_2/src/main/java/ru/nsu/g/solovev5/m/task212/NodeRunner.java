@@ -1,12 +1,11 @@
 package ru.nsu.g.solovev5.m.task212;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
 import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
 
@@ -39,8 +38,10 @@ public class NodeRunner implements Runnable {
             DISCOVERY_IP,
             DISCOVERY_PORT
         );
-        var message =  UUID.randomUUID().toString();
-        advertisement.setMessage(message.getBytes(StandardCharsets.UTF_8));
+        var message = new AdvertisementMessage(
+            UUID.randomUUID()
+        );
+        advertisement.setMessage(message.toBytes());
         try {
             advertisement.open();
         } catch (IOException e) {
@@ -77,9 +78,8 @@ public class NodeRunner implements Runnable {
     private void scheduleServices() {
         scheduler.scheduleAtFixedRate(advertisement, 0, 1, TimeUnit.SECONDS);
         scheduler.scheduleAtFixedRate(() -> {
-            var bytes = discovery.receive();
-            if (bytes != null) {
-                var message =  new String(bytes, StandardCharsets.UTF_8);
+            var message = discovery.receive();
+            if (message != null) {
                 System.out.println(message);
             }
         }, 0, 1, TimeUnit.SECONDS);
