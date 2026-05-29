@@ -2,10 +2,13 @@ package ru.nsu.g.solovev5.m.task212;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
+import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
 
 /**
  * A main class that controls services communication and lifecycle.
@@ -16,6 +19,7 @@ public class NodeRunner implements Runnable {
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final AdvertisementService advertisement;
+    private final DiscoveryService discovery;
 
     /**
      * Starts up the node.
@@ -35,27 +39,50 @@ public class NodeRunner implements Runnable {
             DISCOVERY_IP,
             DISCOVERY_PORT
         );
-        scheduler.scheduleAtFixedRate(advertisement, 0, 1, TimeUnit.SECONDS);
-    }
-
-    @Override
-    public void run() {
-        var message = "Hello World!";
+        var message =  UUID.randomUUID().toString();
         advertisement.setMessage(message.getBytes(StandardCharsets.UTF_8));
-
         try {
             advertisement.open();
         } catch (IOException e) {
             System.err.println("Advertisement start failed");
         }
 
+        discovery = new DiscoveryService(
+            DISCOVERY_IP,
+            DISCOVERY_PORT
+        );
         try {
-            Thread.sleep(3_000);
+            discovery.open();
+        } catch (IOException e) {
+            System.err.println("Discovery start failed");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void run() {
+        scheduleServices();
+        try {
+            Thread.sleep(5_000);
         } catch (InterruptedException e) {
             System.err.println("Thread interrupted");
         }
 
         cleanUpResources();
+    }
+
+    /**
+     * Schedules services.
+     */
+    private void scheduleServices() {
+        scheduler.scheduleAtFixedRate(advertisement, 0, 1, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(() -> {
+            var bytes = discovery.receive();
+            if (bytes != null) {
+                var message =  new String(bytes, StandardCharsets.UTF_8);
+                System.out.println(message);
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     /**
@@ -69,6 +96,13 @@ public class NodeRunner implements Runnable {
                 advertisement.close();
             } catch (IOException e) {
                 System.err.println("Advertisement shutdown failed");
+            }
+        }
+        if (discovery.isAlive()) {
+            try {
+                discovery.close();
+            } catch (IOException e) {
+                System.err.println("Discovery shutdown failed");
             }
         }
     }
