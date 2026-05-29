@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
 import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
+import ru.nsu.g.solovev5.m.task212.services.ElectionService;
 
 /**
  * A main class that controls services communication and lifecycle.
@@ -19,6 +20,7 @@ public class NodeRunner implements Runnable {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final AdvertisementService advertisement;
     private final DiscoveryService discovery;
+    private final ElectionService election;
 
     /**
      * Starts up the node.
@@ -58,13 +60,15 @@ public class NodeRunner implements Runnable {
             System.err.println("Discovery start failed");
             e.printStackTrace();
         }
+
+        election =  new ElectionService(message);
     }
 
     @Override
     public void run() {
         scheduleServices();
         try {
-            Thread.sleep(5_000);
+            Thread.sleep(15_000);
         } catch (InterruptedException e) {
             System.err.println("Thread interrupted");
         }
@@ -79,10 +83,24 @@ public class NodeRunner implements Runnable {
         scheduler.scheduleAtFixedRate(advertisement, 0, 1, TimeUnit.SECONDS);
         scheduler.scheduleAtFixedRate(() -> {
             var message = discovery.receive();
-            if (message != null) {
-                System.out.println(message);
+            if (election.elect(message)) {
+                onMasterElected(message);
             }
         }, 0, 1, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Runs when a new master is elected.
+     *
+     * @param message the advertisement message of a new master
+     */
+    private void onMasterElected(AdvertisementMessage message) {
+        try {
+            discovery.close();
+        } catch (IOException e) {
+            System.err.println("Discovery start failed");
+        }
+        System.err.println("MasterElected: " + message.toString());
     }
 
     /**
