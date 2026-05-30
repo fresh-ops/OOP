@@ -43,7 +43,7 @@ public class MessageChannel implements AutoCloseable {
     }
 
     /**
-     * Reads the next TCP message from the connected slave.
+     * Reads the next TCP message from the connected socket.
      *
      * @return a received message
      * @throws IOException            if an I/O error occurred
@@ -53,6 +53,14 @@ public class MessageChannel implements AutoCloseable {
         return input.readMessage();
     }
 
+    /**
+     * Reads the next TCP message from connected socket till timeout.
+     *
+     * @param timeout the specified timeout, in milliseconds
+     * @return a received message
+     * @throws IOException            if an I/O error occurred
+     * @throws ClassNotFoundException if a class of a serialized object cannot be found
+     */
     public TcpMessage receive(int timeout) throws IOException, ClassNotFoundException {
         int previousTimeout = socket.getSoTimeout();
         try {

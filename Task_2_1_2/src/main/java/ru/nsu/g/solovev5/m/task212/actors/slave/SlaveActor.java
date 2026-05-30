@@ -6,12 +6,8 @@ import ru.nsu.g.solovev5.m.task212.actors.Actor;
 import ru.nsu.g.solovev5.m.task212.actors.Role;
 import ru.nsu.g.solovev5.m.task212.models.DiscoveredNode;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionApprovedMessage;
-import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRefusedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRequestMessage;
-import ru.nsu.g.solovev5.m.task212.models.messages.TcpMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
-import ru.nsu.g.solovev5.m.task212.models.messages.io.TcpMessageInputStream;
-import ru.nsu.g.solovev5.m.task212.models.messages.io.TcpMessageOutputStream;
 
 /**
  * An actor that accepts tasks from master.
@@ -39,21 +35,13 @@ public class SlaveActor implements Actor {
             var socket = new Socket(master.ip(), master.port());
             var channel = new MessageChannel(socket);
         ) {
-            System.out.println("Connecting to master...");
-            channel.send(new ConnectionRequestMessage(master.uuid()));
-
-            TcpMessage response = channel.receive();
-            if (response instanceof ConnectionApprovedMessage) {
+            if (authorizeConnection(channel)) {
                 System.out.println("Connected to " + master.ip() + ":" + master.port());
-            } else if (response instanceof ConnectionRefusedMessage refused) {
-                System.err.println("Connection refused: " + refused.reason());
             } else {
-                System.err.println("Unexpected connection response: " + response.getClass().getName());
+                System.err.println("Failed to connect to " + master.ip() + ":" + master.port());
             }
         } catch (IOException e) {
             System.err.println("Can't connect to master.");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Can't read connection response from master.");
         } finally {
             System.out.println("Disconnected");
         }
@@ -62,5 +50,17 @@ public class SlaveActor implements Actor {
     @Override
     public void stop() {
 
+    }
+
+    private boolean authorizeConnection(MessageChannel channel) throws IOException {
+        try {
+            channel.send(new ConnectionRequestMessage(master.uuid()));
+
+            var response = channel.receive(5_0000);
+            return response instanceof ConnectionApprovedMessage;
+        } catch (ClassNotFoundException e) {
+            System.err.println("Can't read connection response from master.");
+            return false;
+        }
     }
 }
