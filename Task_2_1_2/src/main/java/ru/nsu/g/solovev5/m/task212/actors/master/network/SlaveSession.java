@@ -26,4 +26,13 @@ public class SlaveSession implements AutoCloseable {
     public void close() throws IOException {
         socket.close();
     }
+
+    /**
+     * Tests if this session is closed.
+     *
+     * @return {@code true} if this session is closed, {@code false} otherwise
+     */
+    public boolean isClosed() {
+        return socket.isClosed();
+    }
 }

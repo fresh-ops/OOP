@@ -56,13 +56,13 @@ public class MasterActor implements Actor {
         running = true;
         var connector = new SlaveConnector(serverSocket, this::onConnectionRequest);
         threadPool.submit(connector);
-        readTasks();
+        threadPool.submit(this::readTasks);
     }
 
     @Override
     public void stop() {
         running = false;
-        threadPool.shutdown();
+        threadPool.shutdownNow();
         try {
             serverSocket.close();
         } catch (IOException e) {

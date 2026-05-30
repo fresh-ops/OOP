@@ -27,9 +27,14 @@ public class SlaveEventLoop implements Runnable {
     public void run() {
         running = true;
         try {
-            while (running && !Thread.interrupted()) {
+            while (running && !Thread.interrupted() && !session.isClosed()) {
                 if (events.isEmpty()) {
                     ping();
+                }
+                try {
+                    Thread.sleep(1_000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
             }
         } catch (IOException e) {

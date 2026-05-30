@@ -7,6 +7,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import ru.nsu.g.solovev5.m.task212.actors.Actor;
 import ru.nsu.g.solovev5.m.task212.actors.master.MasterActor;
+import ru.nsu.g.solovev5.m.task212.actors.slave.SlaveActor;
 import ru.nsu.g.solovev5.m.task212.models.DiscoveredNode;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
 import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
@@ -19,7 +20,7 @@ public class NodeRunner implements Runnable {
     public static final String DISCOVERY_IP = "230.0.0.1";
     public static final int DISCOVERY_PORT = 4446;
 
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
     private final AdvertisementService advertisement;
     private final DiscoveryService discovery;
     private final ElectionService election;
@@ -57,9 +58,7 @@ public class NodeRunner implements Runnable {
     @Override
     public void run() {
         try {
-            setActor(new MasterActor());
-            startAdvertisement();
-            startElection();
+            becomeMaster();
         } catch (IOException e) {
             System.err.println("Failed to set actor");
             cleanUpResources();
@@ -75,8 +74,33 @@ public class NodeRunner implements Runnable {
         cleanUpResources();
     }
 
-    private void setActor(Actor actor) {
-        this.actor = actor;
+    private void becomeMaster() throws IOException {
+        System.out.println("Change actor to master");
+        if (actor != null) {
+            actor.stop();
+        }
+        actor = new MasterActor();
+        startAdvertisement();
+        startElection();
+        scheduler.execute(actor);
+    }
+
+    private void becomeSlave(DiscoveredNode master) {
+        System.out.println("Change actor to slave");
+        if (actor != null) {
+            actor.stop();
+        }
+        try {
+            discovery.close();
+            if (electionHandle != null) {
+                electionHandle.cancel(false);
+                electionHandle = null;
+            }
+        } catch (IOException e) {
+            System.err.println("Discovery start failed");
+        }
+        actor = new SlaveActor(master);
+        scheduler.execute(actor);
     }
 
     /**
@@ -116,35 +140,20 @@ public class NodeRunner implements Runnable {
         electionHandle = scheduler.scheduleAtFixedRate(() -> {
             var discovered = discovery.discover();
             if (election.elect(discovered)) {
-                onMasterElected(discovered);
+                becomeSlave(discovered);
             }
         }, 0, 1, TimeUnit.SECONDS);
-    }
-
-    /**
-     * Runs when a new master is elected.
-     *
-     * @param node the new master
-     */
-    private void onMasterElected(DiscoveredNode node) {
-        try {
-            discovery.close();
-            if (electionHandle != null) {
-                electionHandle.cancel(false);
-                electionHandle = null;
-            }
-        } catch (IOException e) {
-            System.err.println("Discovery start failed");
-        }
-        System.err.println("MasterElected: " + node.toString());
     }
 
     /**
      * Finishes threads and cleans up resources.
      */
     private void cleanUpResources() {
-        scheduler.shutdown();
+        scheduler.shutdownNow();
 
+        if (actor != null) {
+            actor.stop();
+        }
         if (advertisement.isAlive()) {
             try {
                 advertisement.close();
