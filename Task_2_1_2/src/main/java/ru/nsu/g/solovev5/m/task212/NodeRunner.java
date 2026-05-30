@@ -6,7 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import ru.nsu.g.solovev5.m.task212.actors.Actor;
-import ru.nsu.g.solovev5.m.task212.actors.MasterActor;
+import ru.nsu.g.solovev5.m.task212.actors.master.MasterActor;
 import ru.nsu.g.solovev5.m.task212.models.DiscoveredNode;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
 import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
