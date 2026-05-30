@@ -1,0 +1,10 @@
+ru.nsu.g.solovev5.m.task212
+ru.nsu.g.solovev5.m.task212.actors
+ru.nsu.g.solovev5.m.task212.actors.master
+ru.nsu.g.solovev5.m.task212.actors.master.events
+ru.nsu.g.solovev5.m.task212.actors.master.network
+ru.nsu.g.solovev5.m.task212.actors.slave
+ru.nsu.g.solovev5.m.task212.models
+ru.nsu.g.solovev5.m.task212.models.messages
+ru.nsu.g.solovev5.m.task212.models.messages.io
+ru.nsu.g.solovev5.m.task212.services
