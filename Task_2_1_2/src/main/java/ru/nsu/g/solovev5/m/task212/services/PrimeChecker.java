@@ -1,19 +1,21 @@
 package ru.nsu.g.solovev5.m.task212.services;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * A service that checks numbers primality.
  */
 public class PrimeChecker {
     /**
-     * Checks if passed list contains non-prime number.
+     * Checks if passed numbers contain a non-prime number.
      *
-     * @param numbers list of numbers to check
+     * @param numbers numbers to check
      * @return {@code true} if there is non-prime number, {@code false} otherwise
      */
-    public boolean hasNonPrime(List<Integer> numbers) {
-        return numbers.stream()
+    public boolean hasNonPrime(int[] numbers) {
+        return Arrays.stream(numbers)
             .anyMatch(number -> !isPrime(number));
     }
 

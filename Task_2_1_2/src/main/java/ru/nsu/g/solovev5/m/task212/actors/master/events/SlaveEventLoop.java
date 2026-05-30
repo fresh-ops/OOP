@@ -9,6 +9,8 @@ import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionApprovedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRefusedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRequestMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.PingMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.ProcessMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.ProcessResultMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.TcpMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 
@@ -17,7 +19,7 @@ import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
  */
 public class SlaveEventLoop implements Runnable {
     private final MessageChannel channel;
-    private final Queue<Event> events = new ConcurrentLinkedQueue<>();
+    private final Queue<ProcessFrame> processQueue = new ConcurrentLinkedQueue<>();
     private final UUID uuid;
 
     private volatile boolean running = false;
@@ -38,12 +40,30 @@ public class SlaveEventLoop implements Runnable {
             if (authorizeConnection()) {
                 running = true;
             }
-
             while (running && !Thread.interrupted() && !channel.isClosed()) {
-                if (events.isEmpty()) {
+                if (processQueue.isEmpty()) {
                     System.out.println("Ping");
                     if (!ping()) {
                         System.out.println("No response");
+                        break;
+                    }
+                } else {
+                    var frame = processQueue.poll();
+                    var request = new ProcessMessage(
+                        frame.numbers()
+                    );
+                    channel.send(request);
+                    try {
+                        var response = channel.receive();
+                        if (response instanceof ProcessResultMessage resultMessage) {
+                            if (resultMessage.hasNonPrime()) {
+                                frame.onSuccess().accept(frame.id());
+                            } else {
+                                frame.onFail().accept(frame.id());
+                            }
+                        }
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("Unable to parse response");
                         break;
                     }
                 }
@@ -73,12 +93,12 @@ public class SlaveEventLoop implements Runnable {
     }
 
     /**
-     * Adds a new event to loop.
+     * Adds a new frame to queue.
      *
-     * @param event a new event
+     * @param frame a frame to process
      */
-    public void addEvent(Event event) {
-        events.add(event);
+    public void addFrame(ProcessFrame frame) {
+        processQueue.add(frame);
     }
 
     /**
