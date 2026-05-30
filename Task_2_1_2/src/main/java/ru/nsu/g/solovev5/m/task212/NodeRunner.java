@@ -173,19 +173,15 @@ public class NodeRunner implements Runnable {
         if (actor != null) {
             actor.stop();
         }
-        if (advertisement.isAlive()) {
-            try {
-                advertisement.close();
-            } catch (IOException e) {
-                System.err.println("Advertisement shutdown failed");
-            }
+        try {
+            advertisement.close();
+        } catch (IOException e) {
+            System.err.println("Advertisement shutdown failed");
         }
-        if (discovery.isAlive()) {
-            try {
-                discovery.close();
-            } catch (IOException e) {
-                System.err.println("Discovery shutdown failed");
-            }
+        try {
+            discovery.close();
+        } catch (IOException e) {
+            System.err.println("Discovery shutdown failed");
         }
     }
 }
