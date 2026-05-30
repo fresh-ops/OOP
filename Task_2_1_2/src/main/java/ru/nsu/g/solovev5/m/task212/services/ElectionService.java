@@ -42,7 +42,7 @@ public class ElectionService {
             candidateRounds = 1;
             return false;
         }
-        
+
         var compare = node.uuid().compareTo(candidate.uuid());
         if (compare < 0) {
             candidateRounds = 1;

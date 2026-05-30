@@ -13,9 +13,8 @@ public record AdvertisementMessage(
     UUID uuid,
     int port
 ) {
-    private static final int BYTES_LENGTH = Long.BYTES * 2 + // UUID
-        Integer.BYTES // Port
-        ;
+    // UUID + Port
+    private static final int BYTES_LENGTH = Long.BYTES * 2 + Integer.BYTES;
 
     /**
      * Serialize this object into a byte array.

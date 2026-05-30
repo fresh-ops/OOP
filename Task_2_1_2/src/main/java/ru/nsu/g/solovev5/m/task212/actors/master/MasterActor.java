@@ -10,8 +10,6 @@ import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import ru.nsu.g.solovev5.m.task212.actors.Actor;
-import ru.nsu.g.solovev5.m.task212.actors.Role;
-import ru.nsu.g.solovev5.m.task212.actors.master.events.Chunk;
 import ru.nsu.g.solovev5.m.task212.actors.master.events.SlaveEventLoop;
 import ru.nsu.g.solovev5.m.task212.actors.master.events.Task;
 import ru.nsu.g.solovev5.m.task212.actors.master.network.SlaveConnector;
@@ -46,11 +44,6 @@ public class MasterActor implements Actor {
             uuid,
             serverSocket.getLocalPort()
         );
-    }
-
-    @Override
-    public Role getRole() {
-        return Role.MASTER;
     }
 
     @Override

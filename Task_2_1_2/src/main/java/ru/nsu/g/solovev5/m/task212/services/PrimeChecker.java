@@ -1,8 +1,6 @@
 package ru.nsu.g.solovev5.m.task212.services;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * A service that checks numbers primality.
