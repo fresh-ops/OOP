@@ -7,27 +7,18 @@ import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
  */
 public class ElectionService {
     private static final int ELECTION_THRESHOLD = 5;
-    private final AdvertisementMessage localMessage;
+    private AdvertisementMessage localMessage;
 
     private AdvertisementMessage candidateMessage;
     private int candidateRounds = 0;
 
     /**
-     * Creates a new ElectionService.
-     *
-     * @param localMessage a local service message to ignore
-     */
-    public ElectionService(AdvertisementMessage localMessage) {
-        this.localMessage = localMessage;
-        candidateMessage = localMessage;
-    }
-
-    /**
      * Resets this service.
      */
-    public void reset() {
+    public void reset(AdvertisementMessage localMessage) {
         candidateRounds = 0;
         candidateMessage = localMessage;
+        this.localMessage = localMessage;
     }
 
     /**

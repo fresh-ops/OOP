@@ -1,10 +1,12 @@
 package ru.nsu.g.solovev5.m.task212;
 
 import java.io.IOException;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import ru.nsu.g.solovev5.m.task212.actors.Actor;
+import ru.nsu.g.solovev5.m.task212.actors.MasterActor;
 import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
 import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
@@ -21,6 +23,9 @@ public class NodeRunner implements Runnable {
     private final AdvertisementService advertisement;
     private final DiscoveryService discovery;
     private final ElectionService election;
+
+    private ScheduledFuture<?> electionHandle = null;
+    private Actor actor;
 
     /**
      * Starts up the node.
@@ -40,33 +45,27 @@ public class NodeRunner implements Runnable {
             DISCOVERY_IP,
             DISCOVERY_PORT
         );
-        var message = new AdvertisementMessage(
-            UUID.randomUUID()
-        );
-        advertisement.setMessage(message.toBytes());
-        try {
-            advertisement.open();
-        } catch (IOException e) {
-            System.err.println("Advertisement start failed");
-        }
 
         discovery = new DiscoveryService(
             DISCOVERY_IP,
             DISCOVERY_PORT
         );
-        try {
-            discovery.open();
-        } catch (IOException e) {
-            System.err.println("Discovery start failed");
-            e.printStackTrace();
-        }
 
-        election =  new ElectionService(message);
+        election = new ElectionService();
     }
 
     @Override
     public void run() {
-        scheduleServices();
+        try {
+            setActor(new MasterActor());
+            startAdvertisement();
+            startElection();
+        } catch (IOException e) {
+            System.err.println("Failed to set actor");
+            cleanUpResources();
+            return;
+        }
+
         try {
             Thread.sleep(15_000);
         } catch (InterruptedException e) {
@@ -76,15 +75,48 @@ public class NodeRunner implements Runnable {
         cleanUpResources();
     }
 
+    private void setActor(Actor actor) {
+        this.actor = actor;
+    }
+
     /**
-     * Schedules services.
+     * Starts advertisement process.
      */
-    private void scheduleServices() {
+    private void startAdvertisement() {
+        if (!(actor instanceof MasterActor)) {
+            throw new IllegalArgumentException("Cannot create advertisement for non-master");
+        }
+
+        var message = ((MasterActor) actor).getAdvertisementMessage();
+        advertisement.setMessage(message.toBytes());
+        try {
+            advertisement.open();
+        } catch (IOException e) {
+            System.err.println("Advertisement start failed");
+        }
         scheduler.scheduleAtFixedRate(advertisement, 0, 1, TimeUnit.SECONDS);
-        scheduler.scheduleAtFixedRate(() -> {
-            var message = discovery.receive();
-            if (election.elect(message)) {
-                onMasterElected(message);
+    }
+
+    /**
+     * Starts election process.
+     */
+    private void startElection() {
+        if (!(actor instanceof MasterActor)) {
+            throw new IllegalArgumentException("Cannot election for non-master");
+        }
+
+        var message = ((MasterActor) actor).getAdvertisementMessage();
+        try {
+            discovery.open();
+        } catch (IOException e) {
+            System.err.println("Discovery start failed");
+        }
+        election.reset(message);
+
+        electionHandle = scheduler.scheduleAtFixedRate(() -> {
+            var received = discovery.receive();
+            if (election.elect(received)) {
+                onMasterElected(received);
             }
         }, 0, 1, TimeUnit.SECONDS);
     }
@@ -97,6 +129,10 @@ public class NodeRunner implements Runnable {
     private void onMasterElected(AdvertisementMessage message) {
         try {
             discovery.close();
+            if (electionHandle != null) {
+                electionHandle.cancel(false);
+                electionHandle = null;
+            }
         } catch (IOException e) {
             System.err.println("Discovery start failed");
         }
