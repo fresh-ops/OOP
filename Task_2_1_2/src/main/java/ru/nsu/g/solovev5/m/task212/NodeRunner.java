@@ -71,7 +71,18 @@ public class NodeRunner implements Runnable {
             System.err.println("Thread interrupted");
         }
 
-        System.out.println("Time is up");
+        System.out.println("Topology freeze");
+        if (actor instanceof MasterActor master) {
+            master.readTasks();
+        } else {
+            while (actor.isAlive()) {
+                try {
+                    Thread.sleep(1_000);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        }
         cleanUpResources();
     }
 

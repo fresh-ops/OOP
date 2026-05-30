@@ -42,7 +42,6 @@ public class SlaveEventLoop implements Runnable {
             }
             while (running && !Thread.interrupted() && !channel.isClosed()) {
                 if (processQueue.isEmpty()) {
-                    System.out.println("Ping");
                     if (!ping()) {
                         System.out.println("No response");
                         break;

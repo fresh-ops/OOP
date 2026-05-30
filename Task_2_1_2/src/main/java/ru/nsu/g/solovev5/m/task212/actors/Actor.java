@@ -12,6 +12,13 @@ public interface Actor extends Runnable {
     Role getRole();
 
     /**
+     * Tests if this actor is alive.
+     *
+     * @return {@code true} if this actor is alive, {@code false} otherwise
+     */
+    boolean isAlive();
+
+    /**
      * Stops the actor work.
      */
     void stop();

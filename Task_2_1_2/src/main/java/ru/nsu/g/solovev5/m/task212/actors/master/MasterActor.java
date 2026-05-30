@@ -3,6 +3,7 @@ package ru.nsu.g.solovev5.m.task212.actors.master;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class MasterActor implements Actor {
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
     private final List<SlaveEventLoop> loops = new ArrayList<>();
 
-    private volatile boolean running = false;
+    private volatile boolean alive = false;
 
     /**
      * Creates a new MasterActor.
@@ -53,15 +54,19 @@ public class MasterActor implements Actor {
 
     @Override
     public void run() {
-        running = true;
+        alive = true;
         var connector = new SlaveConnector(serverSocket, this::onConnectionRequest);
         threadPool.submit(connector);
-        threadPool.submit(this::readTasks);
+    }
+
+    @Override
+    public boolean isAlive() {
+        return alive;
     }
 
     @Override
     public void stop() {
-        running = false;
+        alive = false;
         threadPool.shutdownNow();
         try {
             serverSocket.close();
@@ -73,12 +78,24 @@ public class MasterActor implements Actor {
     /**
      * Reads tasks from standard input.
      */
-    private void readTasks() {
+    public void readTasks() {
         var scanner = new Scanner(System.in);
-        while (running && !Thread.interrupted()) {
+        System.out.println("Enter numbers separated by spaces(or empty to quit)");
+        while (alive && !Thread.interrupted()) {
             var task = scanner.nextLine();
-            System.out.println("New task: " + task);
+            if (task.isEmpty()) {
+                break;
+            }
+            try {
+                var numbers = Arrays.stream(task.replaceAll("\\s+", " ").split(" "))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+                System.out.println("New task: " + Arrays.toString(numbers));
+            } catch (NumberFormatException e) {
+                System.err.println("Wrong number format");
+            }
         }
+        scanner.close();
     }
 
     private void onConnectionRequest(MessageChannel channel) {

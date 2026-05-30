@@ -25,6 +25,8 @@ import ru.nsu.g.solovev5.m.task212.services.PrimeChecker;
 public class SlaveActor implements Actor {
     private final DiscoveredNode master;
 
+    private boolean alive = false;
+
     /**
      * Creates a new SlaveActor.
      *
@@ -41,6 +43,7 @@ public class SlaveActor implements Actor {
 
     @Override
     public void run() {
+        alive = true;
         try (
             var socket = new Socket(master.ip(), master.port());
             var channel = new MessageChannel(socket);
@@ -68,7 +71,13 @@ public class SlaveActor implements Actor {
             e.printStackTrace();
         } finally {
             System.out.println("Disconnected");
+            alive = false;
         }
+    }
+
+    @Override
+    public boolean isAlive() {
+        return alive;
     }
 
     @Override
