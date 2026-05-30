@@ -16,6 +16,8 @@ import ru.nsu.g.solovev5.m.task212.models.messages.AdvertisementMessage;
  * A service that receives multicast discovery messages.
  */
 public class DiscoveryService {
+    private static final int MESSAGE_BUFFER_CAPACITY = 2048;
+
     private final String ip;
     private final int port;
 
@@ -108,7 +110,7 @@ public class DiscoveryService {
         }
 
         try {
-            var buffer = ByteBuffer.allocate(2048);
+            var buffer = ByteBuffer.allocate(MESSAGE_BUFFER_CAPACITY);
             buffer.clear();
             var address = localChannel.receive(buffer);
 

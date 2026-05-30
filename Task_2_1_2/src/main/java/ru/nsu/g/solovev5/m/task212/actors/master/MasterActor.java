@@ -20,6 +20,8 @@ import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
  * An actor that accepts tasks and distributes them between slaves.
  */
 public class MasterActor implements Actor {
+    private static final int LOOP_POLL_DELAY = 100;
+
     private final ServerSocket serverSocket = new ServerSocket(0);
     private final UUID uuid = UUID.randomUUID();
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
@@ -103,7 +105,7 @@ public class MasterActor implements Actor {
                 }
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(LOOP_POLL_DELAY);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }

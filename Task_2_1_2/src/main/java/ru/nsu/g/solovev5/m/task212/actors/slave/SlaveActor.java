@@ -18,6 +18,8 @@ import ru.nsu.g.solovev5.m.task212.services.PrimeChecker;
  * An actor that accepts tasks from master.
  */
 public class SlaveActor implements Actor {
+    private static final int MESSAGE_RECEIVE_TIMEOUT = 5_000;
+
     private final DiscoveredNode master;
 
     private boolean alive = false;
@@ -46,7 +48,7 @@ public class SlaveActor implements Actor {
             }
             while (!Thread.interrupted() && !channel.isClosed()) {
                 try {
-                    var request = channel.receive(5_000);
+                    var request = channel.receive(MESSAGE_RECEIVE_TIMEOUT);
                     var response = generateResponse(request);
                     if (response == null) {
                         break;
@@ -78,7 +80,7 @@ public class SlaveActor implements Actor {
         try {
             channel.send(new ConnectionRequestMessage(master.uuid()));
 
-            var response = channel.receive(5_0000);
+            var response = channel.receive(MESSAGE_RECEIVE_TIMEOUT);
             return response instanceof ConnectionApprovedMessage;
         } catch (ClassNotFoundException e) {
             System.err.println("Can't read connection response from master.");

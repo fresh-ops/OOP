@@ -18,6 +18,9 @@ import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
  * A connection event loop.
  */
 public class SlaveEventLoop implements Runnable {
+    private static final int CHUNK_POLL_DELAY = 1_000;
+    private static final int PING_TIMEOUT = 2_000;
+
     private final MessageChannel channel;
     private final Queue<Chunk> chunkQueue = new ConcurrentLinkedQueue<>();
     private final UUID uuid;
@@ -59,7 +62,7 @@ public class SlaveEventLoop implements Runnable {
                     busy = false;
                 }
                 try {
-                    Thread.sleep(1_000);
+                    Thread.sleep(CHUNK_POLL_DELAY);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -131,7 +134,7 @@ public class SlaveEventLoop implements Runnable {
     private boolean ping() throws IOException {
         channel.send(new PingMessage());
         try {
-            var response = channel.receive(2_000);
+            var response = channel.receive(PING_TIMEOUT);
             return response instanceof PingMessage;
         } catch (ClassNotFoundException | SocketTimeoutException e) {
             return false;

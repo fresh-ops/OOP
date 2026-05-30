@@ -19,6 +19,8 @@ import ru.nsu.g.solovev5.m.task212.services.ElectionService;
 public class NodeRunner implements Runnable {
     public static final String DISCOVERY_IP = "230.0.0.1";
     public static final int DISCOVERY_PORT = 4446;
+    public static final int TOPOLOGY_CREATION_DELAY = 15_000;
+    public static final int SLAVE_ALIVE_POLL_DELAY = 1_000;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
     private final AdvertisementService advertisement;
@@ -66,7 +68,7 @@ public class NodeRunner implements Runnable {
         }
 
         try {
-            Thread.sleep(15_000);
+            Thread.sleep(TOPOLOGY_CREATION_DELAY);
         } catch (InterruptedException e) {
             System.err.println("Thread interrupted");
         }
@@ -77,7 +79,7 @@ public class NodeRunner implements Runnable {
         } else {
             while (actor.isAlive()) {
                 try {
-                    Thread.sleep(1_000);
+                    Thread.sleep(SLAVE_ALIVE_POLL_DELAY);
                 } catch (InterruptedException e) {
                     break;
                 }
