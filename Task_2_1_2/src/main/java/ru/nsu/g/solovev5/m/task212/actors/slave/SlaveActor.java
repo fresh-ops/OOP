@@ -2,11 +2,13 @@ package ru.nsu.g.solovev5.m.task212.actors.slave;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import ru.nsu.g.solovev5.m.task212.actors.Actor;
 import ru.nsu.g.solovev5.m.task212.actors.Role;
 import ru.nsu.g.solovev5.m.task212.models.DiscoveredNode;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionApprovedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRequestMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.PingMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 
 /**
@@ -39,9 +41,21 @@ public class SlaveActor implements Actor {
                 System.out.println("Connected to " + master.ip() + ":" + master.port());
             } else {
                 System.err.println("Failed to connect to " + master.ip() + ":" + master.port());
+                return;
+            }
+            while (!Thread.interrupted() && !channel.isClosed()) {
+                try {
+                    var request = channel.receive(5_000);
+                    if (request instanceof PingMessage) {
+                        channel.send(new PingMessage());
+                    }
+                } catch (ClassNotFoundException | SocketTimeoutException e) {
+                    break;
+                }
             }
         } catch (IOException e) {
-            System.err.println("Can't connect to master.");
+            System.err.println("Connection interrupted: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             System.out.println("Disconnected");
         }

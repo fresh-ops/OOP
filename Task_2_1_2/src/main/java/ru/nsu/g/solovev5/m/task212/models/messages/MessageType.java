@@ -4,4 +4,5 @@ public enum MessageType {
     CONNECTION_REQUEST,
     CONNECTION_APPROVED,
     CONNECTION_REFUSED,
+    PING,
 }

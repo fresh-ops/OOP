@@ -1,12 +1,14 @@
 package ru.nsu.g.solovev5.m.task212.actors.master.events;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionApprovedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRefusedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRequestMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.PingMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.TcpMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 
@@ -39,7 +41,11 @@ public class SlaveEventLoop implements Runnable {
 
             while (running && !Thread.interrupted() && !channel.isClosed()) {
                 if (events.isEmpty()) {
-                    ping();
+                    System.out.println("Ping");
+                    if (!ping()) {
+                        System.out.println("No response");
+                        break;
+                    }
                 }
                 try {
                     Thread.sleep(1_000);
@@ -106,7 +112,13 @@ public class SlaveEventLoop implements Runnable {
         }
     }
 
-    private void ping() throws IOException {
-        System.out.println("ping");
+    private boolean ping() throws IOException {
+        channel.send(new PingMessage());
+        try {
+            var response = channel.receive(2_000);
+            return response instanceof PingMessage;
+        } catch (ClassNotFoundException | SocketTimeoutException e) {
+            return false;
+        }
     }
 }

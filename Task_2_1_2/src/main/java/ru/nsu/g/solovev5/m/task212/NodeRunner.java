@@ -71,6 +71,7 @@ public class NodeRunner implements Runnable {
             System.err.println("Thread interrupted");
         }
 
+        System.out.println("Time is up");
         cleanUpResources();
     }
 
