@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.util.Queue;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import ru.nsu.g.solovev5.m.task212.actors.master.network.SlaveSession;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionApprovedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRefusedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRequestMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.TcpMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 
 /**
  * A connection event loop.
  */
 public class SlaveEventLoop implements Runnable {
-    private final SlaveSession session;
+    private final MessageChannel channel;
     private final Queue<Event> events = new ConcurrentLinkedQueue<>();
     private final UUID uuid;
 
@@ -23,10 +23,10 @@ public class SlaveEventLoop implements Runnable {
     /**
      * Creates a new SlaveEventLoop.
      *
-     * @param session a session for message exchanging.
+     * @param channel a message channel
      */
-    public SlaveEventLoop(SlaveSession session, UUID uuid) {
-        this.session = session;
+    public SlaveEventLoop(MessageChannel channel, UUID uuid) {
+        this.channel = channel;
         this.uuid = uuid;
     }
 
@@ -37,7 +37,7 @@ public class SlaveEventLoop implements Runnable {
                 running = true;
             }
 
-            while (running && !Thread.interrupted() && !session.isClosed()) {
+            while (running && !Thread.interrupted() && !channel.isClosed()) {
                 if (events.isEmpty()) {
                     ping();
                 }
@@ -82,26 +82,26 @@ public class SlaveEventLoop implements Runnable {
      */
     public void close() throws IOException {
         running = false;
-        session.close();
+        channel.close();
     }
 
     private boolean authorizeConnection() throws IOException {
         try {
-            TcpMessage message = session.receive();
+            TcpMessage message = channel.receive();
             if (!(message instanceof ConnectionRequestMessage request)) {
-                session.send(new ConnectionRefusedMessage("Unexpected connection message"));
+                channel.send(new ConnectionRefusedMessage("Unexpected connection message"));
                 return false;
             }
 
             if (uuid.equals(request.expectedUuid())) {
-                session.send(new ConnectionApprovedMessage());
+                channel.send(new ConnectionApprovedMessage());
                 return true;
             }
 
-            session.send(new ConnectionRefusedMessage("Master UUID mismatch"));
+            channel.send(new ConnectionRefusedMessage("Master UUID mismatch"));
             return false;
         } catch (ClassNotFoundException e) {
-            session.send(new ConnectionRefusedMessage("Invalid connection request"));
+            channel.send(new ConnectionRefusedMessage("Invalid connection request"));
             return false;
         }
     }

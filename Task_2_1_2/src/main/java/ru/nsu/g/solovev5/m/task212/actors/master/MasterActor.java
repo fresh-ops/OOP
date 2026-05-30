@@ -12,8 +12,8 @@ import ru.nsu.g.solovev5.m.task212.actors.Actor;
 import ru.nsu.g.solovev5.m.task212.actors.Role;
 import ru.nsu.g.solovev5.m.task212.actors.master.events.SlaveEventLoop;
 import ru.nsu.g.solovev5.m.task212.actors.master.network.SlaveConnector;
-import ru.nsu.g.solovev5.m.task212.actors.master.network.SlaveSession;
 import ru.nsu.g.solovev5.m.task212.models.messages.AdvertisementMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 
 /**
  * An actor that accepts tasks and distributes them between slaves.
@@ -81,8 +81,8 @@ public class MasterActor implements Actor {
         }
     }
 
-    private void onConnectionRequest(SlaveSession session) {
-        var loop = new SlaveEventLoop(session, uuid);
+    private void onConnectionRequest(MessageChannel channel) {
+        var loop = new SlaveEventLoop(channel, uuid);
         loops.add(loop);
         threadPool.submit(loop);
     }

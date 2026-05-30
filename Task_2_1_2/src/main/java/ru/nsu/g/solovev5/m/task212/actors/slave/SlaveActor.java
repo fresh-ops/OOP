@@ -9,6 +9,7 @@ import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionApprovedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRefusedMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.ConnectionRequestMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.TcpMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.TcpMessageInputStream;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.TcpMessageOutputStream;
 
@@ -36,14 +37,12 @@ public class SlaveActor implements Actor {
     public void run() {
         try (
             var socket = new Socket(master.ip(), master.port());
-            var output = new TcpMessageOutputStream(socket.getOutputStream());
-            var input = new TcpMessageInputStream(socket.getInputStream());
+            var channel = new MessageChannel(socket);
         ) {
             System.out.println("Connecting to master...");
-            output.writeMessage(new ConnectionRequestMessage(master.uuid()));
-            output.flush();
+            channel.send(new ConnectionRequestMessage(master.uuid()));
 
-            TcpMessage response = input.readMessage();
+            TcpMessage response = channel.receive();
             if (response instanceof ConnectionApprovedMessage) {
                 System.out.println("Connected to " + master.ip() + ":" + master.port());
             } else if (response instanceof ConnectionRefusedMessage refused) {

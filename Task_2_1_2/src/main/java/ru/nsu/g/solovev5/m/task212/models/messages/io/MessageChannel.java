@@ -1,27 +1,25 @@
-package ru.nsu.g.solovev5.m.task212.actors.master.network;
+package ru.nsu.g.solovev5.m.task212.models.messages.io;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import ru.nsu.g.solovev5.m.task212.models.messages.TcpMessage;
-import ru.nsu.g.solovev5.m.task212.models.messages.io.TcpMessageInputStream;
-import ru.nsu.g.solovev5.m.task212.models.messages.io.TcpMessageOutputStream;
 
 /**
  * A connection object for message exchanging.
  */
-public class SlaveSession implements AutoCloseable {
+public class MessageChannel implements AutoCloseable {
     private final Socket socket;
     private final TcpMessageInputStream input;
     private final TcpMessageOutputStream output;
 
     /**
-     * Creates a new SlaveSession.
+     * Creates a new MessageChanel.
      *
      * @param socket a socket connection
      */
-    public SlaveSession(Socket socket) {
+    public MessageChannel(Socket socket) {
         this.socket = socket;
         try {
             OutputStream socketOutput = socket.getOutputStream();
@@ -53,6 +51,16 @@ public class SlaveSession implements AutoCloseable {
      */
     public TcpMessage receive() throws IOException, ClassNotFoundException {
         return input.readMessage();
+    }
+
+    public TcpMessage receive(int timeout) throws IOException, ClassNotFoundException {
+        int previousTimeout = socket.getSoTimeout();
+        try {
+            socket.setSoTimeout(timeout);
+            return input.readMessage();
+        } finally {
+            socket.setSoTimeout(previousTimeout);
+        }
     }
 
     /**
