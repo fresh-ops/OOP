@@ -11,10 +11,11 @@ import java.util.UUID;
  */
 public record AdvertisementMessage(
     UUID uuid,
+    int priority,
     int port
 ) {
-    // UUID + Port
-    private static final int BYTES_LENGTH = Long.BYTES * 2 + Integer.BYTES;
+    // UUID + Priority + Port
+    private static final int BYTES_LENGTH = Long.BYTES * 2 + Integer.BYTES + Integer.BYTES;
 
     /**
      * Serialize this object into a byte array.
@@ -26,7 +27,8 @@ public record AdvertisementMessage(
 
         buffer.putLong(uuid.getMostSignificantBits());
         buffer.putLong(uuid.getLeastSignificantBits());
-        buffer.putInt(BYTES_LENGTH - Integer.BYTES, port);
+        buffer.putInt(priority);
+        buffer.putInt(port);
         return buffer.array();
     }
 
@@ -42,8 +44,9 @@ public record AdvertisementMessage(
         }
         var buffer = ByteBuffer.wrap(bytes);
         var uuid = new UUID(buffer.getLong(), buffer.getLong());
+        var priority = buffer.getInt();
         var port = buffer.getInt(BYTES_LENGTH - Integer.BYTES);
 
-        return new AdvertisementMessage(uuid, port);
+        return new AdvertisementMessage(uuid, priority, port);
     }
 }

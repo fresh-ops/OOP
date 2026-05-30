@@ -22,6 +22,7 @@ import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
 public class MasterActor implements Actor {
     private static final int LOOP_POLL_DELAY = 100;
 
+    private final int priority;
     private final ServerSocket serverSocket = new ServerSocket(0);
     private final UUID uuid = UUID.randomUUID();
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
@@ -33,7 +34,8 @@ public class MasterActor implements Actor {
      *
      * @throws IOException if an I/O error occurred
      */
-    public MasterActor() throws IOException {
+    public MasterActor(int priority) throws IOException {
+        this.priority = priority;
     }
 
     /**
@@ -44,6 +46,7 @@ public class MasterActor implements Actor {
     public AdvertisementMessage getAdvertisementMessage() {
         return new AdvertisementMessage(
             uuid,
+            priority,
             serverSocket.getLocalPort()
         );
     }

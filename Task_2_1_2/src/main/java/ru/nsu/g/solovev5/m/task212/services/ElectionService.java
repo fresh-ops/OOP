@@ -33,7 +33,8 @@ public class ElectionService {
             return false;
         }
 
-        if (node.uuid().compareTo(localMessage.uuid()) >= 0) {
+        if (node.uuid().compareTo(localMessage.uuid()) >= 0
+            || node.priority() >= localMessage.priority()) {
             return false;
         }
 
@@ -44,12 +45,14 @@ public class ElectionService {
         }
 
         var compare = node.uuid().compareTo(candidate.uuid());
-        if (compare < 0) {
+        if (node.priority() < candidate.priority()
+            || (node.priority() == candidate.priority() && compare < 0)) {
             candidateRounds = 1;
             candidate = node;
-        } else if (compare == 0) {
+        } else if (node.priority() == candidate.priority() && compare == 0) {
             candidateRounds++;
         }
+        System.out.println(candidate);
         return candidateRounds >= ELECTION_THRESHOLD;
     }
 }

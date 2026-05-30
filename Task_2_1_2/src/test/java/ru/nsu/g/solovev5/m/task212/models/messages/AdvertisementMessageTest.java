@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class AdvertisementMessageTest {
     @Test
     void serialization_shouldNot_changeFields() {
-        var advertisement = new AdvertisementMessage(UUID.randomUUID(), 0);
+        var advertisement = new AdvertisementMessage(UUID.randomUUID(), 0, 0);
         var bytes = advertisement.toBytes();
         var restored = AdvertisementMessage.fromBytes(bytes);
 

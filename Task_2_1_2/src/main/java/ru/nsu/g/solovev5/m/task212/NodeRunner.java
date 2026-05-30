@@ -21,7 +21,9 @@ public class NodeRunner implements Runnable {
     public static final int DISCOVERY_PORT = 4446;
     public static final int TOPOLOGY_CREATION_DELAY = 15_000;
     public static final int SLAVE_ALIVE_POLL_DELAY = 1_000;
+    public static final int DEFAULT_PRIORITY = 3000;
 
+    private final int priority;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
     private final AdvertisementService advertisement;
     private final DiscoveryService discovery;
@@ -36,14 +38,24 @@ public class NodeRunner implements Runnable {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-        var runner = new NodeRunner();
+        var priority = DEFAULT_PRIORITY;
+        if (args.length == 1) {
+            try {
+                priority = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid argument for priority: " + args[0]);
+                System.exit(1);
+            }
+        }
+        var runner = new NodeRunner(priority);
         runner.run();
     }
 
     /**
      * Creates a new NodeRunner.
      */
-    public NodeRunner() {
+    public NodeRunner(int priority) {
+        this.priority = priority;
         advertisement = new AdvertisementService(
             DISCOVERY_IP,
             DISCOVERY_PORT
@@ -93,7 +105,7 @@ public class NodeRunner implements Runnable {
         if (actor != null) {
             actor.stop();
         }
-        actor = new MasterActor();
+        actor = new MasterActor(priority);
         startAdvertisement();
         startElection();
         scheduler.execute(actor);
