@@ -38,7 +38,7 @@ public class Task {
      *
      * @return {@code true} if this task is done, {@code false} otherwise
      */
-    public boolean isDone() {
+    public synchronized boolean isDone() {
         return done;
     }
 
@@ -47,7 +47,7 @@ public class Task {
      *
      * @return {@code true} if found a non-prime number in given numbers, {@code false} otherwise
      */
-    public boolean getResult() {
+    public synchronized boolean getResult() {
         return result;
     }
 
@@ -57,7 +57,7 @@ public class Task {
      * @return a new chunk of numbers
      */
     public Chunk nextChunk() {
-        updateNextChunkIndexAndDoneFlag();
+        updateNextChunkIndex();
         var chunk = new Chunk(
             nextChunkIndex,
             chunks[nextChunkIndex++],
@@ -79,12 +79,23 @@ public class Task {
         }
         doneChunks[chunk.chunkIndex()] = true;
         this.result |= result;
+        updateDoneFlag();
     }
 
     /**
-     * Updates the index of next chunk and done flag.
+     * Updates the done flag.
      */
-    private synchronized void updateNextChunkIndexAndDoneFlag() {
+    private synchronized void updateDoneFlag() {
+        done = true;
+        for (var chunk : doneChunks) {
+            done &= chunk;
+        }
+    }
+
+    /**
+     * Updates the index of next chunk.
+     */
+    private synchronized void updateNextChunkIndex() {
         if (done) {
             return;
         }
@@ -101,7 +112,5 @@ public class Task {
                 return;
             }
         }
-
-        done = true;
     }
 }

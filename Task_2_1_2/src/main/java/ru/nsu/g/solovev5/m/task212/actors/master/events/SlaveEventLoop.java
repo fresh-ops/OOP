@@ -103,6 +103,7 @@ public class SlaveEventLoop implements Runnable {
      */
     public void close() throws IOException {
         running = false;
+        busy = false;
         channel.close();
     }
 

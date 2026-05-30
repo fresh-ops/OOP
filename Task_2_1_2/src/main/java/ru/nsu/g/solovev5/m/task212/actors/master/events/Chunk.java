@@ -1,5 +1,6 @@
 package ru.nsu.g.solovev5.m.task212.actors.master.events;
 
+import java.util.Arrays;
 import java.util.function.BiConsumer;
 
 /**
@@ -14,4 +15,16 @@ public record Chunk(
     int[] numbers,
     BiConsumer<Chunk, Boolean> onResult
 ) {
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Chunk other) {
+            return Arrays.equals(numbers, other.numbers) && chunkIndex == other.chunkIndex;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(numbers) ^ chunkIndex;
+    }
 }
