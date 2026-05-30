@@ -11,7 +11,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import ru.nsu.g.solovev5.m.task212.actors.Actor;
 import ru.nsu.g.solovev5.m.task212.actors.Role;
+import ru.nsu.g.solovev5.m.task212.actors.master.events.Chunk;
 import ru.nsu.g.solovev5.m.task212.actors.master.events.SlaveEventLoop;
+import ru.nsu.g.solovev5.m.task212.actors.master.events.Task;
 import ru.nsu.g.solovev5.m.task212.actors.master.network.SlaveConnector;
 import ru.nsu.g.solovev5.m.task212.models.messages.AdvertisementMessage;
 import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
@@ -24,7 +26,6 @@ public class MasterActor implements Actor {
     private final UUID uuid = UUID.randomUUID();
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
     private final List<SlaveEventLoop> loops = new ArrayList<>();
-
     private volatile boolean alive = false;
 
     /**
@@ -82,20 +83,38 @@ public class MasterActor implements Actor {
         var scanner = new Scanner(System.in);
         System.out.println("Enter numbers separated by spaces(or empty to quit)");
         while (alive && !Thread.interrupted()) {
-            var task = scanner.nextLine();
-            if (task.isEmpty()) {
+            var line = scanner.nextLine();
+            if (line.isEmpty()) {
                 break;
             }
             try {
-                var numbers = Arrays.stream(task.replaceAll("\\s+", " ").split(" "))
+                var numbers = Arrays.stream(line.replaceAll("\\s+", " ").split(" "))
                     .mapToInt(Integer::parseInt)
                     .toArray();
-                System.out.println("New task: " + Arrays.toString(numbers));
+                loops.removeIf(loop -> !loop.isRunning());
+                var task = new Task(numbers, loops.size());
+                executeTask(task);
+                System.out.println("Has non-prime numbers: " + task.getResult());
             } catch (NumberFormatException e) {
-                System.err.println("Wrong number format");
+                System.err.println("Wrong number format: " + e.getMessage());
             }
         }
         scanner.close();
+    }
+
+    private void executeTask(Task task) {
+        while (!task.isDone() && !Thread.interrupted()) {
+            for (var loop : loops) {
+                if (loop.isRunning() && !loop.isBusy()) {
+                    loop.addChunk(task.nextChunk());
+                }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     private void onConnectionRequest(MessageChannel channel) {

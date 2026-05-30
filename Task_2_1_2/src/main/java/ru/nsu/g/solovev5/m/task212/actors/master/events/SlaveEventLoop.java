@@ -19,10 +19,11 @@ import ru.nsu.g.solovev5.m.task212.models.messages.io.MessageChannel;
  */
 public class SlaveEventLoop implements Runnable {
     private final MessageChannel channel;
-    private final Queue<ProcessFrame> processQueue = new ConcurrentLinkedQueue<>();
+    private final Queue<Chunk> chunkQueue = new ConcurrentLinkedQueue<>();
     private final UUID uuid;
 
     private volatile boolean running = false;
+    private volatile boolean busy = false;
 
     /**
      * Creates a new SlaveEventLoop.
@@ -41,30 +42,21 @@ public class SlaveEventLoop implements Runnable {
                 running = true;
             }
             while (running && !Thread.interrupted() && !channel.isClosed()) {
-                if (processQueue.isEmpty()) {
+                if (chunkQueue.isEmpty()) {
                     if (!ping()) {
                         System.out.println("No response");
                         break;
                     }
                 } else {
-                    var frame = processQueue.poll();
-                    var request = new ProcessMessage(
-                        frame.numbers()
-                    );
-                    channel.send(request);
+                    busy = true;
+                    var chunk = chunkQueue.poll();
                     try {
-                        var response = channel.receive();
-                        if (response instanceof ProcessResultMessage resultMessage) {
-                            if (resultMessage.hasNonPrime()) {
-                                frame.onSuccess().accept(frame.id());
-                            } else {
-                                frame.onFail().accept(frame.id());
-                            }
-                        }
+                        handleChunk(chunk);
                     } catch (ClassNotFoundException e) {
-                        System.out.println("Unable to parse response");
+                        System.err.println("Corrupted response");
                         break;
                     }
+                    busy = false;
                 }
                 try {
                     Thread.sleep(1_000);
@@ -91,13 +83,17 @@ public class SlaveEventLoop implements Runnable {
         return running;
     }
 
+    public boolean isBusy() {
+        return busy;
+    }
+
     /**
-     * Adds a new frame to queue.
+     * Adds a new chunk to queue.
      *
-     * @param frame a frame to process
+     * @param chunk a chunk to process
      */
-    public void addFrame(ProcessFrame frame) {
-        processQueue.add(frame);
+    public void addChunk(Chunk chunk) {
+        chunkQueue.add(chunk);
     }
 
     /**
@@ -138,6 +134,17 @@ public class SlaveEventLoop implements Runnable {
             return response instanceof PingMessage;
         } catch (ClassNotFoundException | SocketTimeoutException e) {
             return false;
+        }
+    }
+
+    private void handleChunk(Chunk chunk) throws IOException, ClassNotFoundException {
+        var request = new ProcessMessage(
+            chunk.numbers()
+        );
+        channel.send(request);
+        var response = channel.receive();
+        if (response instanceof ProcessResultMessage resultMessage) {
+            chunk.onResult().accept(chunk, resultMessage.hasNonPrime());
         }
     }
 }
