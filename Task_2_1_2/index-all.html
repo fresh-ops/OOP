@@ -68,7 +68,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">A message with data for server connection.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task212/models/messages/AdvertisementMessage.html#%3Cinit%3E(java.util.UUID,int)" class="member-name-link">AdvertisementMessage(UUID, int)</a> - Constructor for record class ru.nsu.g.solovev5.m.task212.models.messages.<a href="ru/nsu/g/solovev5/m/task212/models/messages/AdvertisementMessage.html" title="class in ru.nsu.g.solovev5.m.task212.models.messages">AdvertisementMessage</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task212/models/messages/AdvertisementMessage.html#%3Cinit%3E(java.util.UUID,int,int)" class="member-name-link">AdvertisementMessage(UUID, int, int)</a> - Constructor for record class ru.nsu.g.solovev5.m.task212.models.messages.<a href="ru/nsu/g/solovev5/m/task212/models/messages/AdvertisementMessage.html" title="class in ru.nsu.g.solovev5.m.task212.models.messages">AdvertisementMessage</a></dt>
 <dd>
 <div class="block">Creates an instance of a <code>AdvertisementMessage</code> record class.</div>
 </dd>
@@ -148,6 +148,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
+<dt><a href="ru/nsu/g/solovev5/m/task212/NodeRunner.html#DEFAULT_PRIORITY" class="member-name-link">DEFAULT_PRIORITY</a> - Static variable in class ru.nsu.g.solovev5.m.task212.<a href="ru/nsu/g/solovev5/m/task212/NodeRunner.html" title="class in ru.nsu.g.solovev5.m.task212">NodeRunner</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task212/services/DiscoveryService.html#discover()" class="member-name-link">discover()</a> - Method in class ru.nsu.g.solovev5.m.task212.services.<a href="ru/nsu/g/solovev5/m/task212/services/DiscoveryService.html" title="class in ru.nsu.g.solovev5.m.task212.services">DiscoveryService</a></dt>
 <dd>
 <div class="block">Receives next multicast message.</div>
@@ -156,7 +158,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Represents discovered node with necessary information for connection.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html#%3Cinit%3E(java.util.UUID,java.net.InetAddress,int)" class="member-name-link">DiscoveredNode(UUID, InetAddress, int)</a> - Constructor for record class ru.nsu.g.solovev5.m.task212.models.<a href="ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html" title="class in ru.nsu.g.solovev5.m.task212.models">DiscoveredNode</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html#%3Cinit%3E(java.util.UUID,int,java.net.InetAddress,int)" class="member-name-link">DiscoveredNode(UUID, int, InetAddress, int)</a> - Constructor for record class ru.nsu.g.solovev5.m.task212.models.<a href="ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html" title="class in ru.nsu.g.solovev5.m.task212.models">DiscoveredNode</a></dt>
 <dd>
 <div class="block">Creates an instance of a <code>DiscoveredNode</code> record class.</div>
 </dd>
@@ -362,7 +364,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">An actor that accepts tasks and distributes them between slaves.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task212/actors/master/MasterActor.html#%3Cinit%3E()" class="member-name-link">MasterActor()</a> - Constructor for class ru.nsu.g.solovev5.m.task212.actors.master.<a href="ru/nsu/g/solovev5/m/task212/actors/master/MasterActor.html" title="class in ru.nsu.g.solovev5.m.task212.actors.master">MasterActor</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task212/actors/master/MasterActor.html#%3Cinit%3E(int)" class="member-name-link">MasterActor(int)</a> - Constructor for class ru.nsu.g.solovev5.m.task212.actors.master.<a href="ru/nsu/g/solovev5/m/task212/actors/master/MasterActor.html" title="class in ru.nsu.g.solovev5.m.task212.actors.master">MasterActor</a></dt>
 <dd>
 <div class="block">Creates a new MasterActor.</div>
 </dd>
@@ -389,7 +391,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">A main class that controls services communication and lifecycle.</div>
 </dd>
-<dt><a href="ru/nsu/g/solovev5/m/task212/NodeRunner.html#%3Cinit%3E()" class="member-name-link">NodeRunner()</a> - Constructor for class ru.nsu.g.solovev5.m.task212.<a href="ru/nsu/g/solovev5/m/task212/NodeRunner.html" title="class in ru.nsu.g.solovev5.m.task212">NodeRunner</a></dt>
+<dt><a href="ru/nsu/g/solovev5/m/task212/NodeRunner.html#%3Cinit%3E(int)" class="member-name-link">NodeRunner(int)</a> - Constructor for class ru.nsu.g.solovev5.m.task212.<a href="ru/nsu/g/solovev5/m/task212/NodeRunner.html" title="class in ru.nsu.g.solovev5.m.task212">NodeRunner</a></dt>
 <dd>
 <div class="block">Creates a new NodeRunner.</div>
 </dd>
@@ -443,6 +445,14 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ru/nsu/g/solovev5/m/task212/services/PrimeChecker.html#%3Cinit%3E()" class="member-name-link">PrimeChecker()</a> - Constructor for class ru.nsu.g.solovev5.m.task212.services.<a href="ru/nsu/g/solovev5/m/task212/services/PrimeChecker.html" title="class in ru.nsu.g.solovev5.m.task212.services">PrimeChecker</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html#priority()" class="member-name-link">priority()</a> - Method in record class ru.nsu.g.solovev5.m.task212.models.<a href="ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html" title="class in ru.nsu.g.solovev5.m.task212.models">DiscoveredNode</a></dt>
+<dd>
+<div class="block">Returns the value of the <a href="./ru/nsu/g/solovev5/m/task212/models/DiscoveredNode.html#param-priority"><code>priority</code></a> record component.</div>
+</dd>
+<dt><a href="ru/nsu/g/solovev5/m/task212/models/messages/AdvertisementMessage.html#priority()" class="member-name-link">priority()</a> - Method in record class ru.nsu.g.solovev5.m.task212.models.messages.<a href="ru/nsu/g/solovev5/m/task212/models/messages/AdvertisementMessage.html" title="class in ru.nsu.g.solovev5.m.task212.models.messages">AdvertisementMessage</a></dt>
+<dd>
+<div class="block">Returns the value of the <code>priority</code> record component.</div>
+</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task212/models/messages/MessageType.html#PROCESS" class="member-name-link">PROCESS</a> - Enum constant in enum class ru.nsu.g.solovev5.m.task212.models.messages.<a href="ru/nsu/g/solovev5/m/task212/models/messages/MessageType.html" title="enum class in ru.nsu.g.solovev5.m.task212.models.messages">MessageType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/g/solovev5/m/task212/models/messages/ProcessMessage.html" class="type-name-link" title="class in ru.nsu.g.solovev5.m.task212.models.messages">ProcessMessage</a> - Record Class in <a href="ru/nsu/g/solovev5/m/task212/models/messages/package-summary.html">ru.nsu.g.solovev5.m.task212.models.messages</a></dt>

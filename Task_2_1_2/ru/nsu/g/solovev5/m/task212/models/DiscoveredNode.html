@@ -79,11 +79,12 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Record Components:</dt>
 <dd><code><span id="param-uuid">uuid</span></code> - the service uuid</dd>
+<dd><code><span id="param-priority">priority</span></code> - the node priority</dd>
 <dd><code><span id="param-ip">ip</span></code> - the node ip</dd>
 <dd><code><span id="param-port">port</span></code> - the node port</dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">DiscoveredNode</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/InetAddress.html" title="class or interface in java.net" class="external-link">InetAddress</a>&nbsp;ip, int&nbsp;port)
+<div class="type-signature"><span class="modifiers">public record </span><span class="element-name type-name-label">DiscoveredNode</span>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid, int&nbsp;priority, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/InetAddress.html" title="class or interface in java.net" class="external-link">InetAddress</a>&nbsp;ip, int&nbsp;port)
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" title="class or interface in java.lang" class="external-link">Record</a></span></div>
 <div class="block">Represents discovered node with necessary information for connection.</div>
 </section>
@@ -97,7 +98,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.UUID,java.net.InetAddress,int)" class="member-name-link">DiscoveredNode</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.UUID,int,java.net.InetAddress,int)" class="member-name-link">DiscoveredNode</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid,
+ int&nbsp;priority,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/InetAddress.html" title="class or interface in java.net" class="external-link">InetAddress</a>&nbsp;ip,
  int&nbsp;port)</code></div>
 <div class="col-last even-row-color">
@@ -142,14 +144,19 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-port"><code>port</code></a> record component.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#priority()" class="member-name-link">priority</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the value of the <a href="#param-priority"><code>priority</code></a> record component.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation of this record class.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#uuid()" class="member-name-link">uuid</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#uuid()" class="member-name-link">uuid</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the value of the <a href="#param-uuid"><code>uuid</code></a> record component.</div>
 </div>
 </div>
@@ -183,15 +190,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(java.util.UUID,java.net.InetAddress,int)">
+<section class="detail" id="&lt;init&gt;(java.util.UUID,int,java.net.InetAddress,int)">
 <h3>DiscoveredNode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DiscoveredNode</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;uuid,
+ int&nbsp;priority,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/InetAddress.html" title="class or interface in java.net" class="external-link">InetAddress</a>&nbsp;ip,
  int&nbsp;port)</span></div>
 <div class="block">Creates an instance of a <code>DiscoveredNode</code> record class.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>uuid</code> - the value for the <a href="#param-uuid"><code>uuid</code></a> record component</dd>
+<dd><code>priority</code> - the value for the <a href="#param-priority"><code>priority</code></a> record component</dd>
 <dd><code>ip</code> - the value for the <a href="#param-ip"><code>ip</code></a> record component</dd>
 <dd><code>port</code> - the value for the <a href="#param-port"><code>port</code></a> record component</dd>
 </dl>
@@ -254,6 +263,17 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the value of the <a href="#param-uuid"><code>uuid</code></a> record component</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="priority()">
+<h3>priority</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">priority</span>()</div>
+<div class="block">Returns the value of the <a href="#param-priority"><code>priority</code></a> record component.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the value of the <a href="#param-priority"><code>priority</code></a> record component</dd>
 </dl>
 </section>
 </li>
