@@ -92,13 +92,18 @@ public class NodeRunner implements Runnable {
             actor.stop();
         }
         try {
+            advertisement.close();
+        } catch (IOException e) {
+            System.err.println("Advertisement close failed");
+        }
+        try {
             discovery.close();
             if (electionHandle != null) {
                 electionHandle.cancel(false);
                 electionHandle = null;
             }
         } catch (IOException e) {
-            System.err.println("Discovery start failed");
+            System.err.println("Discovery close failed");
         }
         actor = new SlaveActor(master);
         scheduler.execute(actor);
