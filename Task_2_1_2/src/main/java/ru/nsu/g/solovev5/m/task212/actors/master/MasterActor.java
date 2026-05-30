@@ -82,7 +82,7 @@ public class MasterActor implements Actor {
     }
 
     private void onConnectionRequest(SlaveSession session) {
-        var loop = new SlaveEventLoop(session);
+        var loop = new SlaveEventLoop(session, uuid);
         loops.add(loop);
         threadPool.submit(loop);
     }
