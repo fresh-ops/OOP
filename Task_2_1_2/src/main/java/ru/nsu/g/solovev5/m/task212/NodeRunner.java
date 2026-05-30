@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import ru.nsu.g.solovev5.m.task212.actors.Actor;
 import ru.nsu.g.solovev5.m.task212.actors.MasterActor;
-import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
+import ru.nsu.g.solovev5.m.task212.models.DiscoveredNode;
 import ru.nsu.g.solovev5.m.task212.services.AdvertisementService;
 import ru.nsu.g.solovev5.m.task212.services.DiscoveryService;
 import ru.nsu.g.solovev5.m.task212.services.ElectionService;
@@ -114,9 +114,9 @@ public class NodeRunner implements Runnable {
         election.reset(message);
 
         electionHandle = scheduler.scheduleAtFixedRate(() -> {
-            var received = discovery.receive();
-            if (election.elect(received)) {
-                onMasterElected(received);
+            var discovered = discovery.discover();
+            if (election.elect(discovered)) {
+                onMasterElected(discovered);
             }
         }, 0, 1, TimeUnit.SECONDS);
     }
@@ -124,9 +124,9 @@ public class NodeRunner implements Runnable {
     /**
      * Runs when a new master is elected.
      *
-     * @param message the advertisement message of a new master
+     * @param node the new master
      */
-    private void onMasterElected(AdvertisementMessage message) {
+    private void onMasterElected(DiscoveredNode node) {
         try {
             discovery.close();
             if (electionHandle != null) {
@@ -136,7 +136,7 @@ public class NodeRunner implements Runnable {
         } catch (IOException e) {
             System.err.println("Discovery start failed");
         }
-        System.err.println("MasterElected: " + message.toString());
+        System.err.println("MasterElected: " + node.toString());
     }
 
     /**

@@ -3,7 +3,7 @@ package ru.nsu.g.solovev5.m.task212.actors;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.UUID;
-import ru.nsu.g.solovev5.m.task212.messages.AdvertisementMessage;
+import ru.nsu.g.solovev5.m.task212.models.messages.AdvertisementMessage;
 
 /**
  * An actor that accepts tasks and distributes them between slaves.
@@ -28,7 +28,6 @@ public class MasterActor implements Actor {
     public AdvertisementMessage getAdvertisementMessage() {
         return new AdvertisementMessage(
             uuid,
-            serverSocket.getInetAddress(),
             serverSocket.getLocalPort()
         );
     }
