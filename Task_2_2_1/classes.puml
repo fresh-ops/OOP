@@ -1,0 +1,145 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+class CommandLineArguments {
+    + {static} parse(args: String[]): CommandLineArguments
+    + getConfigPath(): String
+    + toString(): String
+}
+
+interface OrderLogger {
+    + log(order: Order): void
+}
+
+class ConsoleOrderLogger {
+    + log(order: Order): void
+}
+
+class PizzeriaConfiguration <<record>> {
+    + workingTime(): int
+    + warehouseCapacity(): int
+    + bakersCookingSpeeds(): List<Integer>
+    + couriersBagCapacities(): List<Integer>
+    + {static} loadDefault(): PizzeriaConfiguration
+}
+
+enum PizzaInMenu {
+    + getCookingTime(): int
+}
+
+class Pizza {
+    + {static} fromMenu(menu: PizzaInMenu): Pizza
+    + isCooked(): boolean
+    + cookFor(time: int): void
+}
+
+enum OrderStatus {
+    + next(): OrderStatus
+}
+
+class Order {
+    + promoteStatus(): void
+    + getStatus(): OrderStatus
+    + getId(): int
+    + getPizzaType(): PizzaInMenu
+    + getPizza(): Pizza
+}
+
+class OrderQueue {
+    + collect(): List<Order>
+    + put(order: Order): void
+    + take(): Order
+    + isEmpty(): boolean
+}
+
+class OrderingService {
+    + start(): void
+    + stop(): void
+}
+
+interface Reapable {
+    + collect(): List<Order>
+}
+
+class OrderReaper {
+    + reap(reapable: Reapable): void
+    + getCollected(): List<Order>
+}
+
+class PizzaWarehouse {
+    + collect(): List<Order>
+    + put(order: Order): void
+    + takeAtMost(amount: int): List<Order>
+}
+
+class Baker {
+    + collect(): List<Order>
+    + run(): void
+    + getCookingSpeed(): int
+    + hasInterruptedOrder(): boolean
+    + getInterruptedOrder(): Order
+}
+
+class Courier {
+    + run(): void
+    + getBagCapacity(): int
+}
+
+class ActorsFactory {
+    + createBakers(bakersCookingSpeeds: List<Integer>): List<Baker>
+    + createCouriers(courierBagCapacities: List<Integer>): List<Courier>
+}
+
+class Pizzeria {
+    + work(): void
+    + stop(): void
+    + isStopped(): boolean
+}
+
+' Inheritance / realization
+ConsoleOrderLogger ..|> OrderLogger
+OrderQueue ..|> Reapable
+PizzaWarehouse ..|> Reapable
+Baker ..|> Reapable
+Baker ..|> Runnable
+Courier ..|> Runnable
+
+' Composition
+Order *-- Pizza
+Pizzeria *-- OrderingService
+
+' Aggregation
+Pizzeria o-- OrderQueue
+Pizzeria o-- PizzaWarehouse
+Pizzeria o-- OrderLogger
+ActorsFactory o-- OrderQueue
+ActorsFactory o-- PizzaWarehouse
+ActorsFactory o-- OrderLogger
+
+' Association
+Order --> OrderStatus
+Order --> PizzaInMenu
+Baker --> OrderQueue
+Baker --> PizzaWarehouse
+Baker --> OrderLogger
+Baker --> Order
+Courier --> PizzaWarehouse
+Courier --> OrderLogger
+Courier --> Order
+
+' Dependency
+Pizza ..> PizzaInMenu : fromMenu()
+OrderingService ..> OrderQueue
+OrderingService ..> OrderLogger
+OrderingService ..> Order
+OrderingService ..> PizzaInMenu
+ActorsFactory ..> Baker
+ActorsFactory ..> Courier
+OrderReaper ..> Reapable
+OrderReaper ..> Order
+
+
+@enduml
