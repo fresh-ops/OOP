@@ -1,0 +1,105 @@
+package ru.nsu.g.solovev5.m.task231.domain.services;
+
+import static ru.nsu.g.solovev5.m.task231.domain.services.CollisionService.deadCollision;
+
+import java.util.ArrayList;
+import java.util.List;
+import ru.nsu.g.solovev5.m.task231.domain.entities.Food;
+import ru.nsu.g.solovev5.m.task231.domain.entities.GameState;
+import ru.nsu.g.solovev5.m.task231.domain.entities.Player;
+import ru.nsu.g.solovev5.m.task231.domain.exceptions.NoFreeCellsException;
+
+/**
+ * Calculates the next game state.
+ */
+public class GameTickService {
+    private final FoodGenerator foodGenerator;
+    private final MoveSnakeService moveSnakeService;
+    private final EatFoodService eatFoodService;
+
+    /**
+     * Creates a new CalculateNextStateUseCase.
+     *
+     * @param foodGenerator    the use case to generate food
+     * @param moveSnakeService the use case to move snake
+     * @param eatFoodService   the use case to eat food
+     */
+    public GameTickService(
+        FoodGenerator foodGenerator,
+        MoveSnakeService moveSnakeService,
+        EatFoodService eatFoodService
+    ) {
+        this.foodGenerator = foodGenerator;
+        this.moveSnakeService = moveSnakeService;
+        this.eatFoodService = eatFoodService;
+    }
+
+    /**
+     * Calculates a new game state based on given.
+     *
+     * @param state the previous game state
+     * @return a new game state
+     */
+    public GameState tick(GameState state) {
+        var food = generateFood(state);
+        var alivePlayers = movePlayersAndHandleCollisions(
+            state.rows(), state.columns(), state.players(), food
+        );
+
+        return new GameState(
+            state.rows(), state.columns(),
+            state.maxFoodItems(),
+            List.copyOf(food),
+            List.copyOf(alivePlayers)
+        );
+    }
+
+    /**
+     * Generates new food items until the limit exceed or no free cell found.
+     *
+     * @param state the game state
+     * @return a new list of food items
+     */
+    private List<Food> generateFood(GameState state) {
+        var newFood = new ArrayList<>(state.food());
+
+        try {
+            while (newFood.size() < state.maxFoodItems()) {
+                newFood.add(foodGenerator.generate(
+                    state.rows(), state.columns(), state.players(), newFood)
+                );
+            }
+        } catch (NoFreeCellsException ignored) {
+            return newFood;
+        }
+
+        return newFood;
+    }
+
+    /**
+     * Moves players and handles collisions.
+     *
+     * @param rows    the number of rows on the board
+     * @param columns the number of columns on the board
+     * @param players alive players
+     * @param food    food items on the board
+     * @return a list of alive players
+     */
+    private List<Player> movePlayersAndHandleCollisions(
+        int rows, int columns, List<Player> players, List<Food> food
+    ) {
+        var alivePlayers = new ArrayList<Player>();
+
+        for (var player : players) {
+            moveSnakeService.move(player.snake(), player.strategy());
+            var eatenFood = eatFoodService.eat(player, food);
+            food.removeAll(eatenFood);
+
+            if (!deadCollision(player, rows, columns, players)) {
+                alivePlayers.add(player);
+            }
+        }
+
+        return alivePlayers;
+    }
+}
