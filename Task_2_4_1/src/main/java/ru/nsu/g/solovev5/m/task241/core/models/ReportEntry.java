@@ -1,0 +1,149 @@
+package ru.nsu.g.solovev5.m.task241.core.models;
+
+import java.util.Objects;
+
+/**
+ * Represents a checker report entry.
+ *
+ * @param taskId         the checking task report
+ * @param studentName    the name of task submitter
+ * @param buildPassed    the successful build flag
+ * @param stylePassed    the successful style check flag
+ * @param coveragePassed the enough test coverage flag
+ * @param grade          the solution grade
+ */
+public record ReportEntry(
+    String taskId,
+    String studentName,
+    boolean buildPassed,
+    boolean stylePassed,
+    boolean coveragePassed,
+    int grade
+) {
+    /**
+     * Creates a new checker report entry.
+     *
+     * @param taskId         the checking task report
+     * @param studentName    the name of task submitter
+     * @param buildPassed    the successful build flag
+     * @param stylePassed    the successful style check flag
+     * @param coveragePassed the enough test coverage flag
+     * @param grade          the solution grade
+     */
+    public ReportEntry {
+        Objects.requireNonNull(taskId);
+        Objects.requireNonNull(studentName);
+    }
+
+    /**
+     * A flexible chain builder.
+     */
+    public static class Builder {
+        private String taskId;
+        private String studentName;
+        private boolean buildPassed;
+        private boolean stylePassed;
+        private boolean coveragePassed;
+        private int grade;
+
+        /**
+         * Sets all fields from the passed entry.
+         *
+         * @param entry the fields owner
+         * @return this builder
+         */
+        public Builder from(ReportEntry entry) {
+            this.taskId = entry.taskId();
+            this.studentName = entry.studentName();
+            this.buildPassed = entry.buildPassed();
+            this.stylePassed = entry.stylePassed();
+            this.coveragePassed = entry.coveragePassed();
+            this.grade = entry.grade();
+
+            return this;
+        }
+
+        /**
+         * Set the task id.
+         *
+         * @param taskId the new entry task id
+         * @return this builder
+         */
+        public Builder taskId(String taskId) {
+            this.taskId = taskId;
+
+            return this;
+        }
+
+        /**
+         * Set the student name.
+         *
+         * @param studentName the new entry student name
+         * @return this builder
+         */
+        public Builder studentName(String studentName) {
+            this.studentName = studentName;
+
+            return this;
+        }
+
+        /**
+         * Set the build flag.
+         *
+         * @param buildPassed the new entry build flag
+         * @return this builder
+         */
+        public Builder buildPassed(boolean buildPassed) {
+            this.buildPassed = buildPassed;
+
+            return this;
+        }
+
+        /**
+         * Set the style flag.
+         *
+         * @param stylePassed the new entry style flag
+         * @return this builder
+         */
+        public Builder stylePassed(boolean stylePassed) {
+            this.stylePassed = stylePassed;
+
+            return this;
+        }
+
+        /**
+         * Set the coverage flag.
+         *
+         * @param coveragePassed the new entry coverage flag
+         * @return this builder
+         */
+        public Builder coveragePassed(boolean coveragePassed) {
+            this.coveragePassed = coveragePassed;
+
+            return this;
+        }
+
+        /**
+         * Set the grade.
+         *
+         * @param grade the new entry grade
+         * @return this builder
+         */
+        public Builder grade(int grade) {
+            this.grade = grade;
+
+            return this;
+        }
+
+        /**
+         * Build a new report entry with passed parameters.
+         *
+         * @return a new report entry
+         */
+        public ReportEntry build() {
+            return new ReportEntry(
+                taskId, studentName, buildPassed, stylePassed, coveragePassed, grade
+            );
+        }
+    }
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Report</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 2rem;
+            background: #fafafa;
+        }
+
+        .task {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.3rem;
+            color: #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        input[type="checkbox"] {
+            opacity: 1;
+            cursor: default;
+            accent-color: #009a63;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Checker Report</h1>
+
+<p>Generated: <span th:text="${#temporals.format(reportDate, 'yyyy-MM-dd HH:mm')}"></span></p>
+
+<div th:each="task : ${tasks}" class="task">
+    <h3 th:text="${task.key}"></h3>
+    <table th:if="${not #lists.isEmpty(task.value)}">
+        <thead>
+        <tr>
+            <th>Student</th>
+            <th>Build</th>
+            <th>Style</th>
+            <th>Coverage</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${task.value}">
+            <td th:text="${entry.studentName}"></td>
+            <td>
+                <input type="checkbox" th:checked="${entry.buildPassed}">
+            </td>
+            <td>
+                <input type="checkbox" th:checked="${entry.stylePassed}">
+            </td>
+            <td>
+                <input type="checkbox" th:checked="${entry.coveragePassed}">
+            </td>
+            <td th:text="${entry.grade()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="task">
+    <h2>Grades</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Student</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="grade : ${grades}">
+            <td th:text="${grade.key}"></td>
+            <td th:text="${grade.value}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
